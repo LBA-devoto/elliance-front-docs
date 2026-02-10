@@ -1,0 +1,28 @@
+<mat-sidenav-container autosize="true">
+    <div class="page">
+        <header>
+            <app-header-user></app-header-user>
+        </header>
+        <main>
+            <section class="image-fond">
+                <div class="text-center bienvenue">
+                    <p class="mx-auto">Bienvenue {{name}} sur Elliance !</p>
+                </div>
+            </section>
+        </main>
+
+        <div class="card container" #searchProduct>
+            <app-recherche-produit></app-recherche-produit>
+        </div>
+
+        <div class="container tableau px-0 mb-5">
+            <app-dashboard-user></app-dashboard-user>
+        </div>
+
+        <div class="actualites py-3" *ngIf="hasNews!=false">
+            <app-news (hasNews)="setNews($event)"></app-news>
+        </div>
+        <app-footer-user></app-footer-user>
+    </div>
+    <!-- </mat-sidenav-content> -->
+</mat-sidenav-container>

@@ -1,0 +1,61 @@
+.title {
+    background-color: #0373bc;
+    color: white;
+}
+
+.item-list {
+    list-style: none;
+    max-width: 800px;
+    max-height: 500px;
+    overflow: auto;
+}
+
+.item-list li {
+    padding: 3px;
+    border: 1px solid lightgray;
+    color: #0373bc;
+    font-weight: bold;
+    min-width: 500px;
+}
+
+.item-sub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-btn {
+    color: white;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+
+
+@media (max-width:550px) {
+    .item-list li {
+        min-width: 0;
+    }
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

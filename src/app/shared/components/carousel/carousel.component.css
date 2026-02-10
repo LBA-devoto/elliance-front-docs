@@ -1,0 +1,117 @@
+.carousel-inner {
+    padding: 1rem;
+}
+
+.card {
+    min-width: 300px;;
+}
+
+.actus {
+    max-width: 300px;
+    margin: 10px;
+    box-shadow: 0 0 1px grey;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.descr {
+    background-color: #fff;
+    max-height: 240px;
+    margin-bottom: 2rem;
+    padding: 10px;
+}
+
+.detail {
+    color: #0373bc;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    height: 65px;
+    white-space: pre-wrap;
+}
+
+.ref {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+    white-space: pre-wrap;
+}
+
+.image {
+    height: 150px;
+    background-size: cover;
+    overflow: hidden;
+    margin: auto;
+}
+
+.card-img-top {
+    height: inherit;
+    object-fit: cover;
+}
+
+.read-more {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 100%;
+    margin: 0.5rem auto;
+    color: black;
+}
+
+.invisible-div {
+    visibility: hidden;
+    height: inherit;
+    width: 0;
+}
+
+.carousel-inner {
+    display: flex;
+}
+
+.carousel-item {
+    display: block;
+    flex: 0 0 calc(100%);
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 50px;
+    margin: 15px;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    height: 50px;
+    width: 50px;
+    outline: black;
+    background-size: 100%, 100%;
+    background-color: #0373bc;
+    border-radius: 30%;
+}
+
+@media (min-width: 576px) {
+    .carousel-inner {
+        display: flex;
+    }
+
+    .carousel-item {
+        display: block;
+        flex: 0 0 calc(100%/2);
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-item {
+        flex: 0 0 calc(100%/3);
+    }
+}
+
+@media (min-width: 992px) {
+    .carousel-item {
+        flex: 0 0 calc(100%/4);
+    }
+}

@@ -1,0 +1,88 @@
+:host {
+  height: -webkit-fill-available;
+  display: flex;
+}
+
+ .card {
+  max-height: 50vh;
+  overflow: auto;
+  border: 2px solid #047ea4;
+  border-radius: 2px;
+}
+
+.cha {
+  padding-left: 10px;
+  font-size: 13px !important;
+  font-family: "Roboto", sans-serif !important;
+  border-bottom: solid 1px #ccc;
+  min-height: 25px;
+  background: white;
+  display: block;
+}
+
+.example-box {
+  padding: 5px 10px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 14px;
+}
+
+.example-container {
+  width: 100%;
+  max-width: 100%;
+  overflow-y: auto;
+  display: inline-block;
+  vertical-align: top;
+  height: -webkit-fill-available;
+  max-height: 50vh;
+}
+
+.example-list {
+  min-height: 200px;
+  background: white;
+  overflow: hidden;
+  display: block;
+  height: -webkit-fill-available;
+}
+
+.visu-list-label {
+  min-width: 220px;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-height: 750px) {
+  .container-fluid {
+    overflow: auto;
+  }
+}

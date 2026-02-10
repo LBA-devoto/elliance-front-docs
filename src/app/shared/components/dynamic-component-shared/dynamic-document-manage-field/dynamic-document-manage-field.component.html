@@ -1,0 +1,63 @@
+<div class="container p-4">
+    <form [formGroup]="form">
+
+        <div class="row">
+            <div class="col-12 col-sm-6">
+                <div class="form-field">
+                    <label for="fieldName">{{'Nom du champ'}}</label>
+                    <input type="text" formControlName="fieldName" id="fieldName">
+                </div>
+
+                <div class="form-field">
+                    <label for="fieldType">{{'Type du champ'}}</label>
+                    <select formControlName="fieldType" id="fieldType">
+                        <option *ngFor="let type of getTypes" [value]="type" [selected]="type==data.field?.type">
+                            {{type}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-field" *ngIf="isLink">
+                    <label for="fieldLink">{{'Lien vers document'}}</label>
+                    <input type="text" formControlName="fieldLink" id="fieldLink">
+                </div>
+                
+                <div class="form-field" *ngIf="isLink">
+                    <label for="fieldColumns">{{'Colonnes affichées'}}</label>
+                    <input type="text" formControlName="fieldColumns" id="fieldColumns">
+                </div>
+
+                <div class="form-field" *ngIf="isDocLink">
+                    <label for="fieldLinkRef">{{'Champ de référence pour autocomplete'}}</label>
+                    <input type="text" formControlName="fieldLinkRef" id="fieldLinkRef">
+                </div>
+
+                <div class="form-field">
+                    <label for="fieldLabelFR">{{'Libellé FR'}}</label>
+                    <input type="text" formControlName="fieldLabelFR" id="fieldLabelFR" placeholder="Libellé FR">
+                    <label for="fieldLabelEN">{{'Libellé EN'}}</label>
+                    <input type="text" formControlName="fieldLabelEN" id="fieldLabelEN" placeholder="Libellé EN">
+                    <label for="fieldLabelES">{{'Libellé ES'}}</label>
+                    <input type="text" formControlName="fieldLabelES" id="fieldLabelES" placeholder="Libellé ES">
+                    <label for="fieldLabelDE">{{'Libellé DE'}}</label>
+                    <input type="text" formControlName="fieldLabelDE" id="fieldLabelDE" placeholder="Libellé DE">
+                </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="form-field" *ngFor="let control of booleanControls">
+                    <label for="{{control.key}}">{{control.label}}</label>
+                    <mat-slide-toggle [checked]="form.get(control.formControl)?.value" (click)="toggle(control)"
+                        id="{{control.key}}"></mat-slide-toggle>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="editMode" class="mt-4 d-flex justify-content-around">
+            <button mat-raised-button class="mx-2 btn" (click)="cancel()">ANNULER</button>
+            <button mat-raised-button class="mx-2 btn-primary" (click)="submit()"
+                [disabled]="form.invalid">VALIDER</button>
+        </div>
+
+    </form>
+
+</div>

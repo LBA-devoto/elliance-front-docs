@@ -1,0 +1,11 @@
+<ng-container>
+
+              <ng-container *ngIf="templateService.getIsPrix(config?.columnName); else defaultValue">
+            {{ config?.value | number:'1.2-2':'fr' }}
+          </ng-container>
+        
+          <ng-template #defaultValue>
+              {{ config?.value |booleanToFrench }}
+          </ng-template>
+
+</ng-container>

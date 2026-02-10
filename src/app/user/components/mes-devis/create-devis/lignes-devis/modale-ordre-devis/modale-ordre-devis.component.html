@@ -1,0 +1,23 @@
+<div class="container-fluid p-0" style="position: relative;">
+    <h5 class="title p-2">Modifier l'ordre du devis</h5>
+    <mat-icon class="close-btn" (click)="closePopup()">close</mat-icon>
+</div>
+<div class="container d-flex flex-column align-items-center">
+    <h5 class="my-2">glisser/déposer</h5>
+    <ul class="item-list w-100 p-0 m-0">
+        <li *ngFor="let item of itemList; let i = index" class="row text-center"
+            draggable="true" (dragstart)="onDragStart($event, i)"
+            (dragover)="onDragOver($event)" (dragend)="onDragEnd($event)"
+            (drop)="onDrop($event, i)">
+            <div class="item-sub col-2">{{i+1}}</div>
+            <div class="item-sub col-8">{{getItemText(i)}}</div>
+            <div class="item-sub col-2" (click)="itemList.splice(i,1)"><mat-icon>cancel</mat-icon></div>
+        </li>
+    </ul>
+    <div class="row">
+        <button mat-raised-button class="col btn m-2" (click)="addSeparator()">{{'+ séparateur'|uppercase}}</button>
+        <button mat-raised-button class="col btn m-2" (click)="addSubtotal()">{{'+ sous-total'|uppercase}}</button>
+    </div>
+    
+    <button mat-raised-button class="btn-primary btn-valid my-2" (click)="validate()">VALIDER</button>
+</div>

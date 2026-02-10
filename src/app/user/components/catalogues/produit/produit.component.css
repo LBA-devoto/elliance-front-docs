@@ -1,0 +1,117 @@
+.card {
+    position: relative;
+    border: none;
+    margin: auto;
+    max-width: 300px;
+    min-width: 300px;
+    width: 300px;
+    box-shadow: 0 0 5px gray;
+    border-radius: 10px;
+}
+
+.top-icons {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    z-index: 999;
+}
+
+.card-img-top {
+    height: 160px;
+    object-fit: contain;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all 0.5s ease-out;
+}
+
+.card-img-top:hover {
+    transform: scale(0.9);
+
+}
+
+.card-body {
+    border-radius: 0 0 10px 10px;
+}
+
+.card-body,
+.devis-input {
+    background-color: #ebf9ff;
+}
+
+.card-title {
+    height: 75px;
+    cursor: pointer;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    white-space: pre-wrap;
+}
+
+.card-title:hover {
+    text-decoration: underline;
+}
+
+.card-title,
+.price {
+    color: #0373bc;
+    font-weight: 600;
+}
+
+.card-text,
+.price {
+    margin: 0;
+
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    white-space: pre-wrap;
+    word-break:break-all
+}
+
+.price {
+    font-size: 1.4em;
+}
+
+.line {
+    border-bottom: 1px solid #0373bc;
+}
+
+.controls mat-icon,
+.devis-input {
+    color: #0373bc;
+    box-shadow: 0 0 3px #0373bc;
+    height: 36px;
+    width: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 2px;
+    outline: none;
+}
+
+.devis-input {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.controls mat-icon {
+    padding: 6px;
+    width: 36px;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.controls mat-icon:hover {
+    opacity: 1;
+}
+
+.add-devis {
+    color: #fff !important;
+    background-color: #0373bc !important;
+}
+
+.add-devis:hover {
+    color: #0373bc !important;
+    background-color: #fff !important;
+}

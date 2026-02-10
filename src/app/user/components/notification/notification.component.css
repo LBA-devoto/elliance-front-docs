@@ -1,0 +1,25 @@
+.stack {
+    position: absolute;
+    bottom: 0;
+}
+
+
+.mat-list-item.active {
+    /*  color:orange;*/
+    /* background-color: #4D3535;*/
+    background-color: #047EA4;
+}
+
+button .mat-icon {
+    font-size: 0.8em;
+}
+
+.titre {
+    margin-top: 20px;
+}
+
+/*.notification{
+    border-bottom: 1px silver solid;
+    margin-top: 15px;
+    width: 100%;
+}*/

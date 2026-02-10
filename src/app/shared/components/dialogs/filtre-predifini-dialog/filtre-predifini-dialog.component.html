@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="col-lg-12">
+    <mat-form-field appearance="outline" class="col">
+      <mat-label>Nom de la visualisation</mat-label>
+      <input matInput type="text" name="noteprivee" placeholder="Nom de la visualisation" required [(ngModel)]="nom" />
+    </mat-form-field>
+  </div>
+  <div class="row d-flex align-items-center" *ngFor="let condition of conditions">
+    <mat-form-field appearance="outline" class="col visu-form-field">
+      <mat-label>Nom du champ</mat-label>
+      <mat-select name="champ" [(ngModel)]="condition.champ" (selectionChange)="populerCondition($event)">
+        <mat-option *ngFor="let champ of listdechamps;" [value]="champ.code">{{champ.label}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col visu-form-field">
+      <mat-label>Conditions</mat-label>
+      <mat-select name="condition" [(ngModel)]="condition.condition">
+        <mat-option *ngFor="let choixCondition of choixConditions" [value]="choixCondition.value">{{
+          choixCondition.label }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="col visu-form-field" [ngStyle]="{
+          visibility:
+            condition.condition !== 'IS_EMPTY' &&
+            condition.condition !== 'IS_NOT_EMPTY'
+              ? 'visible'
+              : 'hidden'
+        }">
+      <mat-label>Valeur du champ</mat-label>
+      <input matInput #input [(ngModel)]="condition.valeur" />
+    </mat-form-field>
+    <div class="col">
+      <a id="delete-btn" class="btn btn-danger d-flex justify-content-center" matTooltip="Supprimer" matTooltipPosition="left"
+        (click)="supprimerCondition(condition.id)">
+        <mat-icon>delete</mat-icon>
+      </a>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col">
+      <a class="btn-secondary" mat-raised-button style="font-size: 10px;" (click)="ajouterCondition()">AJOUTER UN
+        FIlTRE</a>
+    </div>
+  </div>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-2">
+      <button type="button" class="btn-secondary-light" mat-raised-button (click)="fermer()">
+        RETOUR
+      </button>
+    </div>
+    <div class="col-10 text-end">
+      <button type="button" class="btn-secondary" mat-raised-button (click)="rechercher()"
+        [disabled]="boutonrechercherdesactive()">
+        VALIDER
+      </button>
+      <button id="delete-filter-btn" *ngIf="peuxEffacerRecherche" type="button" class="btn-danger" mat-raised-button
+        (click)="effacerFiltres()">
+        EFFACER LES FIlTRES
+      </button>
+    </div>
+  </div>
+</div>

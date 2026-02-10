@@ -1,0 +1,694 @@
+<div class="full-page">
+  <app-loading-spinner></app-loading-spinner>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between">
+      <!-- <app-menu [pageMode]="pageOption" (MenuActions)="processUserAction($event)"></app-menu> -->
+      <div class="menu">
+        <div *ngIf="edition">
+          <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left">
+            <mat-icon (click)="enregistrer()">save</mat-icon>
+          </a><br>
+          <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Rafraichir" matTooltipPosition="left">
+            <mat-icon (click)="rafraichir()">refresh</mat-icon>
+          </a><br>
+          <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left">
+            <mat-icon (click)="annuler()">close</mat-icon>
+          </a><br>
+        </div>
+        <div *ngIf="lecture">
+          <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left">
+            <mat-icon (click)="modeEdition()">edit</mat-icon>
+          </a><br>
+          <a class="btn btn-danger" #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left">
+            <mat-icon (click)="supprimer()">delete</mat-icon>
+          </a><br>
+        </div>
+      </div>
+
+      <div *ngIf="edition">
+        <div class="container-fluid">
+          <form ngNativeValidate #form>
+            <div class="d-flex justify-content-between">
+              <div class="part card">
+                <div>
+                  <label>Nom du tiers</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nom du tiers </mat-label>
+                    <input matInput name="raisonsociale" type="text" [(ngModel)]="personnemorale.raisonsociale"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Nom alternatif</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nom alternatif</mat-label>
+                    <input matInput name="Nom alternatif" type="text" [(ngModel)]="personnemorale.raisonsociale"
+                      required>
+                  </mat-form-field>
+                </div>
+
+                
+
+
+                <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                  <label>Code client</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code client</mat-label>
+                    <input matInput name="Codeclient" type="text" [(ngModel)]="personnemorale.codeclient" required>
+                  </mat-form-field>
+                </div> 
+                <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                  <label>Code fournisseur</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code fournisseur</mat-label>
+                    <input matInput name="Codefournisseur" type="text" [(ngModel)]="personnemorale.codefournisseur" required>
+                  </mat-form-field>
+                </div> 
+
+                <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                  <label>Code comptable client</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code comptable client</mat-label>
+                    <input matInput name="Codecomptableclient" type="text" [(ngModel)]="personnemorale.codecomptableclient" required>
+                  </mat-form-field>
+                </div> 
+
+                <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                  <label>Code comptable fournisseur</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code comptable fournisseur</mat-label>
+                    <input matInput name="Codecomptablefournisseur" type="text" [(ngModel)]="personnemorale.codecomptablefournisseur" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                  <label>Code client</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code client</mat-label>
+                    <input matInput name="Codeclient" type="text" [(ngModel)]="personnemorale.codeclient" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                  <label>Code fournisseur</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code fournisseur</mat-label>
+                    <input matInput name="Codefournisseur" type="text" [(ngModel)]="personnemorale.codefournisseur" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                  <label>Code comptable fournisseur</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code comptable fournisseur</mat-label>
+                    <input matInput name="Codecomptablefournisseur" type="text" [(ngModel)]="personnemorale.codecomptablefournisseur" required>
+                  </mat-form-field>
+                </div>
+               
+
+                <div class="titre" *ngIf="personnemorale.type?.nom==='FOURNISSEUR'">
+                  <label>Code client</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code client</mat-label>
+                    <input matInput name="Codeclient" type="text" [(ngModel)]="personnemorale.codeclient" required>
+                  </mat-form-field>
+                </div>
+
+
+                <!-- <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                  <label>Code associé</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code associé</mat-label>
+                    <input matInput name="Codeassocié" type="text" [(ngModel)]="personnemorale.code" required>
+                  </mat-form-field>
+                </div> -->
+                <!-- <div class="titre">
+                  <label *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='ASSOCIE'">Code
+                    Interne</label>
+                  <label *ngIf="personnemorale.type?.nom ==='FOURNISSEUR'">Code fournisseur</label>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='ASSOCIE'">Code
+                      Interne:</mat-label>
+                    <mat-label *ngIf="personnemorale.type?.nom ==='FOURNISSEUR'">Code fournisseur</mat-label>
+                    <input matInput name="codefour" type="text" [(ngModel)]="personnemorale.codefour" required>
+                  </mat-form-field>
+                </div> -->
+                <div>
+                  <label>Adresse</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Adresse </mat-label>
+                    <input matInput name="adresseligne" type="text" [(ngModel)]="adresseligne" required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Ville</label><br>
+
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ville</mat-label>
+                    <mat-select name="ville" [(ngModel)]="villeDto.nom">
+                      <mat-option *ngFor="let ville of villeList" [value]="ville.nom" (click)="changeVille(ville.nom)">{{ville.nom}}</mat-option>
+                      <mat-option>other</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+
+                  <label>Code postal</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code postal</mat-label>
+                    <input matInput type="text" name="codepostal" [(ngModel)]="villeDto.codepostal" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Département</label>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Département</mat-label>
+                    <mat-select name="tier" [(ngModel)]="departementDto.titre" (selectionChange)="changeDepartment($event)"  #department >
+                      <mat-option *ngFor="let department of departmentList" [value]="department.titre"  >{{department.titre}}</mat-option>
+                      
+                    </mat-select>
+                    <!-- <input matInput type="text" name="département" [(ngModel)]="departement" required> -->
+                  </mat-form-field><br>
+                </div>
+                <div class="titre">
+                  <label>Pays</label>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Pays</mat-label>
+                    <input matInput type="text" name="pays" [(ngModel)]="personnemorale.nompays" required>
+                  </mat-form-field><br>
+                </div>
+                <div>
+                  <label>Téléphones </label><mat-icon style="font-size: 15px;" (click)="ajoutTel()"
+                    #tooltip="matTooltip" matTooltip="Ajouter Téléphone">add_circle</mat-icon><br>
+                  <div *ngFor="let tel of personnemorale.tels; index as i">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Téléphone</mat-label>
+                      <input type="tel" name="numero" matInput [(ngModel)]="tel.numero" required>
+                    </mat-form-field><mat-icon *ngIf="i > 0" #tooltip="matTooltip" matTooltip="Rétirer"
+                      matTooltipPosition="right" style="font-size: 15px;" (click)="retirerTel(i)">close</mat-icon>
+
+                  </div>
+                </div>
+                <div>
+                  <label>Fax </label><mat-icon style="font-size: 15px;" (click)="ajoutTel()" #tooltip="matTooltip"
+                    matTooltip="Ajouter Téléphone">add_circle</mat-icon><br>
+                  <div *ngFor="let fax of personnemorale.faxes; index as i">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Fax</mat-label>
+                      <input type="fax" name="fax" matInput [(ngModel)]="fax.numero" required>
+                    </mat-form-field><mat-icon *ngIf="i > 0" #tooltip="matTooltip" matTooltip="Rétirer"
+                      matTooltipPosition="right" style="font-size: 15px;" (click)="retirerTel(i)">close</mat-icon>
+
+                  </div>
+                </div>
+                <div>
+                  <Label>Emails</Label><mat-icon style="font-size: 15px;" (click)="ajoutEmail()" #tooltip="matTooltip"
+                    matTooltip="Ajouter Email">add_circle</mat-icon><br>
+                  <div *ngFor="let email of personnemorale.emails; index as i">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Emails</mat-label>
+                      <input type="email" name="email" matInput [(ngModel)]="email.valeur" required>
+                    </mat-form-field><mat-icon *ngIf="i > 0" #tooltip="matTooltip" matTooltip="Rétirer"
+                      matTooltipPosition="right" style="font-size: 15px;" (click)="retirerEmail(i)">close</mat-icon>
+                  </div>
+                </div>
+                <div>
+                  <label>Web</label>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Web</mat-label>
+                    <input matInput type="text" name="web" [(ngModel)]="personnemorale.siteweb" required>
+                  </mat-form-field><br>
+                </div>
+
+                <div class="titre">
+                  <label>Contact-Client</label>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Contact-Client</mat-label>
+                    <mat-select name="tier" multiple>
+                      <mat-option *ngFor="let client of clientResult$ | async" [value]="client.nom">{{client.nom}}
+                        {{client.prenom}}</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="part card">
+
+                <!-- <div class="titre">
+                  <label>Type de personne morale</label>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Type de personne morale</mat-label>
+                    <input matInput type="text" name="nom" [(ngModel)]="personnemorale.type?.nom" required>
+                  </mat-form-field><br>
+                </div> -->
+                <div>
+                  <label>État</label><br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>État</mat-label>
+                    <mat-select [(ngModel)]="personnemorale.statut" name="statut">
+                      <mat-option *ngFor="let sta of statut" [value]="sta">{{sta}}</mat-option>
+
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Type d'entité légale</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="personnemoraletypeentiteLegale"
+                      [(ngModel)]="personnemorale.typeentiteLegale" required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Capital</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="personnemoralecapital" [(ngModel)]="personnemorale.capital"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Id.prof.1(Siren)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="siren" [(ngModel)]="personnemorale.siren" required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Id.prof.2(Siret)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="siret" [(ngModel)]="personnemorale.siret" required>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Id.prof.2(Siret)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="siret" [(ngModel)]="personnemorale.siret" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Id.prof.3(NAF-APE)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="NAF-APE" [(ngModel)]="personnemorale.nafape" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Id.prof.4(RCS/RM)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="RCS/RM" [(ngModel)]="personnemorale.nafape" required>
+                  </mat-form-field>
+                </div>
+
+                <div class="titre">
+                  <label>Assujetti à la TVA</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="assujettialatva" [(ngModel)]="personnemorale.assujettialatva"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Numéro de TVA</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="tva" [(ngModel)]="personnemorale.tva" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Logistique</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="logistique" [(ngModel)]="personnemorale.logistique.logistique1"
+                      required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Effectif </label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="effectif" [(ngModel)]="personnemorale.effectif" required>
+                  </mat-form-field>
+                </div>
+                <!-- <div class="titre"
+                  *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='FOURNISSEUR'">
+                  <label>Code comptable client</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="codecomptable" [(ngModel)]="personnemorale.codecomptable"
+                      required>
+                  </mat-form-field>
+                </div> -->
+                <!-- <div class="titre" *ngIf="personnemorale.type?.nom==='FOURNISSEUR'">
+                  <label>Code comptable fournisseur</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="codecomptablefournisseur"
+                      [(ngModel)]="personnemorale.codecomptablefournisseur" required>
+                  </mat-form-field>
+                </div> -->
+                <div class="titre">
+                  <label>Informations complémentaires</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="complémentaires" [(ngModel)]="personnemorale.rcsrm" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Note(privée)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="privée" [(ngModel)]="personnemorale.rcsrm" required>
+                  </mat-form-field>
+                </div>
+                <div class="titre">
+                  <label>Note(publique)</label><br>
+                  <mat-form-field appearance="outline">
+                    <input matInput type="text" name="publique" [(ngModel)]="personnemorale.rcsrm" required>
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="article" style="width: 100%">
+        <div class="d-flex justify-content-between" style="width: 100%">
+
+          <div class="container-fluid" *ngIf="lecture" style="width: 100%">
+            <div class="container-fluid">
+              <div class="container-fluid">
+                <div class="d-flex justify-content-between">
+                  <div class="part card">
+
+                    <div class="titre">
+                      <label><strong>Nom du tiers:</strong></label><br>
+                      <label>{{personnemorale.raisonsociale}}</label>
+                      <label *ngIf="!personnemorale.raisonsociale">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Nom alternatif:</strong></label><br>
+                      <label>{{personnemorale.raisonsociale}}</label>
+                      <label *ngIf="!personnemorale.raisonsociale">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                      <label>
+                        <strong>Code client:</strong></label>
+                      <br> <label>{{personnemorale.codeclient}}</label>
+                      <label *ngIf="!personnemorale.codeclient">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                      <label>
+                        <strong>Code fournisseur:</strong></label>
+                      <br> <label>{{personnemorale.codefournisseur}}</label>
+                      <label *ngIf="!personnemorale.codefournisseur">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                      <label>
+                        <strong>Code comptable client:</strong></label>
+                      <br> <label>{{personnemorale.codecomptableclient}}</label>
+                      <label *ngIf="!personnemorale.codecomptableclient">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='ASSOCIE'">
+                      <label>
+                        <strong>Code comptable fournisseur:</strong></label>
+                      <br> <label>{{personnemorale.codecomptablefournisseur}}</label>
+                      <label *ngIf="!personnemorale.codecomptablefournisseur">-</label>
+                    </div>
+
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                      <label>
+                        <strong>Code client:</strong></label>
+                      <br> <label>{{personnemorale.codeclient}}</label>
+                      <label *ngIf="!personnemorale.codeclient">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                      <label>
+                        <strong>Code fournisseur:</strong></label>
+                      <br> <label>{{personnemorale.codefournisseur}}</label>
+                      <label *ngIf="!personnemorale.codefournisseur">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='CLIENT'">
+                      <label>
+                        <strong>Code comptable fournisseur:</strong></label>
+                      <br> <label>{{personnemorale.codecomptablefournisseur}}</label>
+                      <label *ngIf="!personnemorale.codecomptablefournisseur">-</label>
+                    </div>
+
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='FOURNISSEUR'">
+                      <label>
+                        <strong>Code client:</strong></label>
+                      <br> <label>{{personnemorale.codeclient}}</label>
+                      <label *ngIf="!personnemorale.codeclient">-</label>
+                    </div>
+
+
+                    <div class="titre">
+                      <label *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='ASSOCIE'">Code
+                        Interne:</label>
+                      <label *ngIf="personnemorale.type?.nom ==='FOURNISSEUR'"><strong>Code fournisseur:</strong></label>
+                      <br> <label>{{personnemorale.codefour}}</label>
+                      <label *ngIf="!personnemorale.codefour">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Adresse: </strong></label><br>
+                      <label>{{adresseligne}}</label>
+                      <label *ngIf="!adresseligne">-</label>
+                    </div>
+                    
+                    <div class="titre">
+                      <label><strong>Code postal:</strong> </label><br>
+                      <label>{{codepostaldto.valeur}}</label>
+                      <label *ngIf="!codepostaldto.valeur">- </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Ville:</strong> </label><br>
+                      <label>{{villeDto.nom}}</label>
+                      <label *ngIf="!villeDto.nom">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Département:</strong> </label><br>
+                      <label>{{personnemorale.departement?.titre}}</label>
+                      <label *ngIf="!personnemorale.departement?.titre">- </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Pays:</strong></label><br>
+                      <label>{{personnemorale.nompays}}</label>
+                      <label *ngIf="!personnemorale.nompays"> - </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Téléphone(s):</strong></label><br>
+                      <label>
+                        <span *ngFor="let tel of personnemorale.tels">
+                          <span *ngIf="tel">{{tel.numero}}</span>
+                          <span *ngIf="!tel.numero">-</span>
+                        </span>
+                      </label>
+                      <label *ngIf="!personnemorale.tels">- </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Fax:</strong></label><br>
+                      <label>
+                        <span *ngFor="let fax of personnemorale.faxes">
+                          <span *ngIf="fax">{{fax.numero}}</span>
+                          <span *ngIf="!fax.numero">-</span>
+                        </span>
+                      </label>
+                      <label *ngIf="!personnemorale.faxes">- </label>
+                    </div>
+                    <div class="titre">
+                      <label> <strong>Web</strong></label><br>
+                      <label><a target="_blank" href="http://{{personnemorale.siteweb}}"
+                          rel="noopener noreferrer">{{personnemorale.siteweb}}</a></label>
+                      <label *ngIf="!personnemorale.siteweb">- </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Email(s):</strong></label><br>
+                      <label>
+                        <span *ngFor="let email of personnemorale.emails">
+                          <a href="mailto:{{email.valeur}}"><span *ngIf="email">{{email.valeur}}</span></a><br>
+                        </span>
+                      </label>
+                      <label *ngIf="!personnemorale.emails">
+                        -
+                      </label>
+                    </div>
+                    <div class="titre">
+                      <label *ngIf="personnemorale.type?.nom ==='CLIENT'"><strong>Contacts du
+                          clients:</strong></label><br>
+                      <label *ngIf="personnemorale.type?.nom ==='FOURNISSEUR'"><strong>Contacts du
+                          fournisseur:</strong></label><br>
+                      <label *ngIf="personnemorale.type?.nom==='ASSOCIE'"><strong>Contacts de
+                          l'associé:</strong></label><br>
+
+                      <mat-paginator #personphysique [pageSizeOptions]="[10,30,50,70,90,120]"
+                        aria-label="select page"></mat-paginator>
+
+                      <div>
+                        <table style="margin-top: 15px;" mat-table [dataSource]="datasource" matSort matSortActive="nom"
+                          matSortDisableClear matSortDirection="desc" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="prenom">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                              sortActionDescription="Sort by prenom">
+                              <strong>Prénom</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.prenom}}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="nom">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nom">
+                              <strong>Nom</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.nom}}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="statut">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                              sortActionDescription="Sort by statut">
+                              <strong>État</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.statut}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns : displayedColumns;" (click)="selection.toggle(row)"
+                            (dblclick)="ouvrirpersonPhysique(row)"></tr>
+                        </table>
+                      </div>
+                      <br>
+                    </div>
+                    <div class="titre" style="float: left;"
+                      *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='ASSOCIE'">
+                      <label *ngIf="personnemorale.type?.nom ==='CLIENT'"><strong>Lien vers
+                          l'associé:</strong></label><br>
+                      <label *ngIf="personnemorale.type?.nom==='ASSOCIE'"><strong>Lien vers les
+                          clients:</strong></label><br>
+
+                      <div>
+                        <mat-paginator #personmorale [pageSizeOptions]="[10,30,50,70,90,120]"
+                          aria-label="Select page"></mat-paginator>
+
+                        <table style="margin-top: 15px;" mat-table [dataSource]="datasourceClient" matSort
+                          matSortActive="nom" matSortDisableClear matSortDirection="desc" class="mat-elevation-z8">
+
+                          <ng-container matColumnDef="prenom">
+
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                              sortActionDescription="Sort by prenom">
+                              <strong>Prénom</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.surnnom}}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="nom">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nom">
+                              <strong>Nom</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element">{{element.nom}}</td>
+                          </ng-container>
+                          <ng-container matColumnDef="statut">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header
+                              sortActionDescription="Sort by statut">
+                              <strong>État</strong>
+                            </th>
+                            <td mat-cell *matCellDef="let element"> {{element.statut}} </td>
+                          </ng-container>
+
+                          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                          <tr mat-row (dblclick)="ouvrirpersonMorale(row)"
+                            *matRowDef="let row; columns : displayedColumns;" (click)="selection.toggle(row)"></tr>
+                        </table>
+                      </div>
+
+                      <br>
+                    </div>
+                  </div>
+                  <div class="part card">
+                  <!--div class="titre">
+                      <label><strong>Type de personne morale:</strong></label><br>
+                      <label>{{personnemorale.type.nom}}</label>
+                    </div-->
+                    <div class="titre">
+                      <label><strong>État:</strong></label><br>
+                      <label>{{personnemorale.statutpp}}</label>
+                      <label *ngIf="!personnemorale.statutpp"> - </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Type d’entité légale: </strong></label>
+                      <br><label>{{personnemorale.typeentiteLegale}} </label>
+                      <label *ngIf="!personnemorale.typeentiteLegale"></label>
+                      <label *ngIf="!personnemorale.typeentiteLegale"> - </label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Capital:</strong></label><br>
+                      <label>{{personnemorale.capital}}</label>
+                      <label *ngIf="!personnemorale.capital">-</label>
+
+                    </div>
+                    <div class="titre">
+                      <label><strong>Id.prof.1(Siren):</strong></label><br>
+                      <label>{{personnemorale.siren}}</label>
+                      <label *ngIf="!personnemorale.siren">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Id.prof.2(Siret):</strong></label><br>
+                      <label>{{personnemorale.siret}}</label>
+                      <label *ngIf="!personnemorale.siret">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Id.prof.3(NAF-APE):</strong> </label><br>
+                      <label>{{personnemorale.nafape}}</label>
+                      <label *ngIf="!personnemorale.nafape">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Id.prof.4(RCS/RM):</strong></label><br>
+                      <label>{{personnemorale.nafape}}</label>
+                      <label *ngIf="!personnemorale.nafape">-</label>
+                    </div>
+
+                    <div class="titre">
+                      <label><strong>Assujetti à la TVA:</strong></label><br>
+                      <label>{{personnemorale.assujettialatva}}</label>
+                      <label *ngIf="!personnemorale.assujettialatva">-</label>
+
+                    </div>
+                    <div class="titre">
+                      <label><strong>Numéro de TVA:</strong></label><br>
+                      <label>{{personnemorale.tva}}</label>
+                      <label *ngIf="!personnemorale.tva">-</label>
+
+                    </div>
+                    <div class="titre">
+                      <label><strong>Logistique:</strong></label><br>
+                      <label *ngIf="personnemorale.logistique">{{personnemorale.logistique.logistique1}}</label>
+                      <label *ngIf="!personnemorale.logistique">-</label>
+
+                    </div>
+                    <div class="titre">
+                      <label><strong>Effectif:</strong> </label><br>
+                      <label>{{personnemorale.effectif}}</label>
+                      <label *ngIf="!personnemorale.effectif">-</label>
+                    </div>
+                    <div class="titre"
+                      *ngIf="personnemorale.type?.nom ==='CLIENT' || personnemorale.type?.nom==='FOURNISSEUR'">
+                      <label><strong>Code comptable client:</strong></label><br>
+                      <label>{{personnemorale.codecomptable}}</label>
+                      <label *ngIf="!personnemorale.codecomptable">-</label>
+                    </div>
+                    <div class="titre" *ngIf="personnemorale.type?.nom==='FOURNISSEUR'">
+                      <label><strong>Code comptable fournisseur:</strong></label><br>
+                      <label>{{personnemorale.codecomptablefournisseur}}</label>
+                      <label *ngIf="!personnemorale.codecomptablefournisseur">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Informations complémentaires:</strong></label><br>
+                      <label><strong>{{personnemorale.rcsrm}} </strong></label>
+                      <label *ngIf="!personnemorale.rcsrm">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Note(privée):</strong></label><br>
+                      <label>{{personnemorale.rcsrm}}</label>
+                      <label *ngIf="!personnemorale.rcsrm">-</label>
+                    </div>
+                    <div class="titre">
+                      <label><strong>Note(publique):</strong></label><br>
+                      <label>{{personnemorale.rcsrm}}</label>
+                      <label *ngIf="!personnemorale.rcsrm">-</label>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    
+</div>

@@ -1,0 +1,64 @@
+<ng-container>
+  <div class="row">
+    <!-- Prametre drop down -->
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"><strong>{{ config.label }}</strong></label> </ng-container><br />
+
+      <ng-container *ngIf="config.editMode && userService.userHasChampViewPermissionAccess(config.name,typeName)">
+        <div *ngIf="!simpleMode">
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+            <mat-select *ngIf="!simpleMode" [disabled]="config.disabled"  [(value)]="config.value" [(ngModel)]="config.value" [compareWith]="compareValeurs">
+              <mat-option [value]="null">Veuillez sélectionner</mat-option>
+              <mat-option *ngFor="let item of config.dropdownList" [value]="item" >
+                <div *ngIf="!config.entiteClassSelection && item?.mapLocalLibelle">
+                  <!-- <label *ngIf="config?.isMultiLangue">
+                    {{ item?.valeur }}-{{
+                    item?.mapLocalLibelle[config.labelLocal]
+                    }}</label> -->
+                    <label *ngIf="config?.isMultiLangue">
+                      {{
+                      item?.mapLocalLibelle[config.labelLocal]
+                      }}</label>
+                  <label *ngIf="!config.isMultiLangue">{{ item.valeur }}</label>
+                </div>
+                <div *ngIf="config.entiteClassSelection">
+                  <label *ngIf="config.displayProperty">{{ item[config.displayProperty]}}</label>
+                </div>
+               
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div *ngIf="simpleMode">
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+            <mat-select [disabled]="config.disabled" [(ngModel)]="config.value" [(value)]="config.value" >
+              <mat-option [value]="null">Veuillez sélectionner</mat-option>
+              <mat-option [value]="true">Oui</mat-option>
+              <mat-option [value]="false">Non</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="(!config.editMode &&!simpleMode )|| (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+        <div *ngIf="!config.entiteClassSelection">
+          <div *ngIf="config.isMultiLangue && value?.mapLocalLibelle">
+            <span *ngIf="value?.valeurHexa !== null" style="display:inline-block;width:12px;height:12px;border-radius:50%;" [ngStyle]="{ 'background-color': value?.valeurHexa }"></span>
+            <!-- {{ value?.valeur }}-{{ value?.mapLocalLibelle[config.labelLocal] }} -->
+            {{ value?.mapLocalLibelle[config.labelLocal] }}
+          </div>
+          <div *ngIf="!config.isMultiLangue">{{ value?.valeur }}</div>
+        </div>
+        <div *ngIf="config.entiteClassSelection">
+          <div *ngIf="config.displayProperty">{{ value[config.displayProperty] }}</div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!config.editMode &&simpleMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode &&simpleMode">
+        <div>{{ config.value | booleanToFrench}}</div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

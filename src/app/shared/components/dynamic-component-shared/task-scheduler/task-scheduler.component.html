@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <form>
+        <ng-container>
+            <div class="form-group">
+                <label for="scheduleType">Type</label>
+                <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+                    <mat-select id="scheduleType" [(ngModel)]="scheduleType" name="scheduleType">
+                        <mat-option value="daily">
+                            Tous les jours
+                        </mat-option>
+                        <mat-option value="weekly">Par jours de la semaine</mat-option>
+                        <mat-option value="monthly">Par mois</mat-option>
+                    </mat-select>
+
+
+                </mat-form-field>
+            </div>
+
+            <div *ngIf="scheduleType === 'weekly'" class="form-group">
+                <label>Jour de la semaine</label>
+                <div *ngFor="let day of daysOfWeek">
+                    <input type="checkbox" [id]="day" [value]="day" [(ngModel)]="selectedDays[day]" name="selectedDays" (change)="updateSelectedDays(day)">
+                    <label [for]="day">{{ day }}</label>
+                </div>
+            </div>
+            
+
+            <div *ngIf="scheduleType !== 'daily' && scheduleType !== 'weekly'" class="form-group">
+                <label for="dayOfMonth">Day of the Month</label>
+
+               <!-- Your existing HTML code -->
+
+            <input type="number" id="dayOfMonth" [(ngModel)]="dayOfMonth" name="dayOfMonth" (input)="validateDayOfMonth()">
+
+<!-- Your existing HTML code -->
+
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="time">Heure(s) d'exécution </label>
+                <input type="time" id="time" [(ngModel)]="executionTime" name="executionTime">
+            </div>
+            <div class="row" style="margin-top:30px">
+                <div class="col-lg-5 text-end">
+                    <a class="btn-secondary" mat-raised-button  (click)="scheduleTask()">CONFIRMER</a>
+                </div>
+                <div class="col-lg-5" style="margin-left: 40px;">
+                    <button class="btn-secondary-light" mat-raised-button (click)="annuler()">ANNULER</button>
+                </div>
+            </div>
+        </ng-container>
+
+    </form>
+</div>

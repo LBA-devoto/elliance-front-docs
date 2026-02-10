@@ -1,0 +1,170 @@
+<div class="container">
+  <div class="row" style="padding-top: 30px;">
+    <div class="menu col-lg-1">
+      <div *ngIf="edition">
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Enregistrer"
+          matTooltipPosition="left"
+        >
+          <!-- <mat-icon (click)="form.checkValidity() ? enregistrer() : null"
+                >save</mat-icon
+              > </a
+            ><br /> -->
+          <mat-icon type="submit" (click)="enregistrer()">save</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Rafraichir"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="rafraichir()">refresh</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Annuler"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="annuler()">close</mat-icon> </a
+        ><br />
+      </div>
+      <div *ngIf="lecture">
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Modifier"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="modeEdition()">edit</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-danger"
+          #tooltip="matTooltip"
+          matTooltip="Supprimer"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="supprimer()">delete</mat-icon> </a
+        ><br />
+      </div>
+    </div>
+    <div class="col-lg-7" *ngIf="edition">
+      <div class="titre">
+        <label>Titre</label><br />
+        <mat-form-field appearance="outline" style="width: 650px">
+          <input matInput name="departement" [(ngModel)]="actualite.titre" type="text" />
+        </mat-form-field>
+      </div>
+      <div class="titre">
+        <label>Lien Externe</label><br />
+        <mat-form-field appearance="outline">
+          <input matInput name="extern" [(ngModel)]="actualite.lienExtern" type="text" />
+        </mat-form-field>
+      </div>
+      <app-text-editor #appTextEditor [content]="actualite.content"></app-text-editor>
+    </div>
+    <div class="col-lg-4" *ngIf="edition">
+      <div class="col-lg-11 offset-1">
+        <label>Statut</label><br />
+        <mat-form-field appearance="outline" style="width: 350px">
+          <mat-label>Statut</mat-label>
+          <mat-select name="Statut" [(ngModel)]="actualite.statut" required>
+            <mat-option *ngFor="let statut of status" [value]="statut"
+              >{{ statut }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <label class="col-lg-11 offset-1">Sites</label>
+        <section>
+          <div *ngFor="let site of actualite.siteEnables" class="example-section col-lg-11 offset-1">
+            <p><mat-checkbox [name]="site.nom" [checked]="site.enabled" [(ngModel)]="site.enabled"> {{site.nom}}</mat-checkbox></p>
+          </div>
+        </section>
+      </div>
+      <div class="row">
+        <div class="col-lg-11 offset-1 card">
+          <div>
+            <button mat-raised-button class="btn-primary" for="image" style="cursor: pointer;" (click)="fileInput.click()">Téléverser une image</button>
+            <input #fileInput (change)="uploadFile($event)" type="file" id="image" style="display:none"><br>
+          </div>
+          <div *ngIf="actualite.image?.url">
+            <div>
+              <img [src]="actualite.image?.url">
+            </div>
+          </div>
+          <div
+            style="
+              width: 50%;
+              border: 0px solid;
+              overflow: hidden;
+              position: relative;
+            "
+            appDragDrop
+          >
+            <div *ngIf="notEmpty">
+              <mat-icon
+                style="
+                  opacity: 0.6;
+                  position: absolute;
+                  right: 3px;
+                  cursor: pointer;
+                "
+                >close
+              </mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!------------------------------- lecture ---------------------------------------------->
+    <div  class="col-lg-7" *ngIf="lecture">
+      <div class="titre-lg">
+        <label><strong>Titre:</strong></label><br>
+        <label>{{actualite.titre}}</label>
+        <label *ngIf="!actualite.titre">-</label>
+      </div>
+      <div class="titre-lg">
+        <label><strong>Lien Externe:</strong></label><br>
+        <label>{{actualite.lienExtern}}</label>
+        <label *ngIf="!actualite.lienExtern">-</label>
+      </div>
+      <div class="titre-lg">
+        <label><strong>Contenue:</strong></label><br>
+        <div *ngIf="actualite.content" [innerHTML]="actualite.content" style="height: 200px; width: 85%; background-color: #fff; padding: 5px; overflow-y: auto;">
+        </div>
+        <div *ngIf="!actualite.content">
+          <label>-</label>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4" *ngIf="lecture">
+      <div class="titre-lg">
+        <label><strong>Statut:</strong></label><br>
+        <label>{{actualite.statut}}</label>
+        <label *ngIf="!actualite.statut">-</label>
+      </div>
+      <div class="titre-lg">
+        <label><strong>Sites:</strong></label><br>
+        <div *ngIf="actualite.siteEnables">
+          <div *ngFor="let site of actualite.siteEnables">
+            <label *ngIf="site.enabled">{{site.nom}} </label>
+          </div>
+        </div>
+        
+      </div>
+      <div class="titre-lg">
+        <label><strong>Image:</strong></label><br>
+        <div *ngIf="actualite.image" style="width: 300px; overflow: hidden; background-size: cover;">
+          <img [src]="actualite.image.url">
+        </div>
+        <div *ngIf="!actualite.image">
+          <label>Aucune Image</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

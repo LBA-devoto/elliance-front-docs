@@ -1,0 +1,79 @@
+[
+    {
+        "ref": "accueil",
+        "title": "Accueil",
+        "route": "/accueil"
+    },
+    {
+        "ref": "product",
+        "title": "Produit",
+        "subMenu": [
+            {
+                "ref": "catalogue",
+                "title": "Catalogue"
+            },
+            {
+                "ref": "rays",
+                "title": "Rayons"
+            },
+            {
+                "ref": "new-product",
+                "title": "New product"
+            },
+            {
+                "ref": "gestion-articles",
+                "title": "Brands",
+                "subMenu": [
+                    {
+                        "ref": "is",
+                        "title": "Ironside"
+                    },
+                    {
+                        "ref": "isg",
+                        "title": "Ironside Garden"
+                    },
+                    {
+                        "ref": "tx",
+                        "title": "Tooxem"
+                    },
+                    {
+                        "ref": "isw",
+                        "title": "Ironside Wear"
+                    },
+                    {
+                        "ref": "hvdt",
+                        "title": "Heavy Duty"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "ref": "fournisseurs",
+        "title": "Fournisseurs"
+    },
+    {
+        "ref": "partners",
+        "title": "Partenaires"
+    },
+    {
+        "ref": "chiffre",
+        "title": "Chiffre d'affaires"
+    },
+    {
+        "ref": "download",
+        "title": "Téléchargement"
+    },
+    {
+        "ref": "showroom",
+        "title": "Showroom"
+    },
+    {
+        "ref": "yellow-focus",
+        "title": "Yellow Focus"
+    },
+    {
+        "ref": "contact",
+        "title": "Contact"
+    }
+]

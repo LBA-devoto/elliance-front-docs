@@ -1,0 +1,42 @@
+<div class="head-desktop">
+    <div class="head">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="main-logo">
+                <img src="/assets/images/HEADER/Logo_client-eurochef.svg" width="150" cols="6" class="logo">
+            </div>
+            <div class="associate-logo">
+                <!-- <img src="/assets/images/HEADER/Logo CIDS.png" cols="6" class="logo"> -->
+            </div>
+            <div class="options d-flex justify-content-around">
+                <div class="option" *ngFor="let opt of headerOptions" [matTooltip]="opt.title ? opt.title : ''"
+                    (click)="opt.action ? opt.action() : null" [routerLink]="opt.route ? opt.route : null">
+                    <mat-icon>{{opt.icon}}</mat-icon>
+                    <!-- <span class="additional-text" *ngIf="opt.title">{{opt.title}}</span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navs">
+        <ul class="row d-flex justify-content-center p-0">
+            <li class="nav-item col-3 text-center mx-0 my-1 p-0 " *ngFor="let nav of navOptions"
+                [routerLink]="nav.route" routerLinkActive="active">
+                <div>{{nav.title}}</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="head-resp">
+    <div class="head d-flex justify-content-between align-items-center">
+        <div class="burger">
+            <mat-icon (click)="openBurger()">menu</mat-icon>
+        </div>
+        <div class="options d-flex justify-content-around">
+            <div class="option" *ngFor="let opt of headerOptions" [matTooltip]="opt.title ? opt.title : ''"
+                (click)="opt.action ? opt.action() : null" [routerLink]="opt.route ? opt.route : null">
+                <mat-icon>{{opt.icon}}</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,239 @@
+.card {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  width: 150px;
+  min-height: 150px;
+  margin: 10px;
+  border-color: orange;
+  background-color: rgb(249, 248, 248);
+}
+
+.full-page {
+  width: 100%;
+  overflow-y: auto;
+  position: relative;
+
+}
+
+.card {
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-bottom: 40px;
+  border-radius: 10px;
+  width: 150px;
+  min-height: 150px;
+  margin: 10px;
+  border-color: orange;
+  background-color: rgb(249, 248, 248);
+}
+
+.full-page {
+  min-height: 100% !important;
+  /*add*/
+}
+
+.left {
+  position: relative;
+  width: 60vw;
+  background-color: #f6f6f6;
+  padding: 15px;
+  max-height: 60vh;
+  padding-bottom: 20px;
+}
+
+.right {
+  position: relative;
+  width: 40vw;
+  padding: 15px;
+  margin: 10px;
+  font-size: 12px;
+  max-height: 60vh;
+  /*width: 39%;*/
+}
+
+.titre {
+  color: orange;
+  font-size: 1.3em;
+  padding-left: 5px;
+}
+
+.line {
+  border-bottom: 1px solid orange;
+  width: 95%;
+
+}
+
+.btn {
+  margin-left: 10px;
+}
+
+.head {
+  margin-bottom: 10px;
+}
+
+th {
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  font-size: 7px;
+  margin-top: 10px;
+}
+
+.section {
+  margin-bottom: 15px;
+  padding: 5px;
+  background-color: rgb(140, 8, 8);
+}
+
+.section div div button mat-icon {
+  font-size: 15px;
+  color: orange;
+}
+
+.stack {
+  position: fixed;
+  bottom: 1vh;
+  left: 0;
+
+}
+
+
+.hello {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 1.3em;
+  color: orange;
+}
+
+.btn {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif !important;
+  border-radius: 3px;
+  width: 48px;
+  height: 30px;
+  border-width: thin;
+}
+
+.side {
+  height: 100%;
+  position: fixed;
+}
+
+thead {
+  border-bottom: 1px solid #87929a;
+  background-color: #e6e6e6;
+}
+
+td {
+  vertical-align: middle;
+  font-size: 12px;
+  padding: 0;
+}
+
+tr {
+  padding: 0;
+  font-size: 15px;
+}
+
+table {
+  width: 100%;
+}
+
+.card {
+  background-size: cover;
+}
+
+.info {
+  background-color: #e6e6e6;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 2px;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  padding: 0 16px !important;
+}
+
+
+::ng-deep .mat-expansion-panel-body {
+  padding: 0 !important
+}
+
+::ng-deep .mat-menu-panel {
+  max-width: none !important;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  height: 48px !important;
+}
+
+::ng-deep .mat-expansion-panel .mat-list-item {
+  padding-left: 15px !important;
+
+}
+
+::ng-deep .mat-nav-list .is-active {
+  background-color: rgb(204, 204, 204) !important;
+  border-left: 8px solid rgb(139, 137, 133);
+  width: calc(100% - 8px) !important;
+  ;
+}
+
+::ng-deep .mat-list-base {
+  padding-top: 0 !important;
+}
+
+::ng-deep .mat-nav-list .mat-list-item.is-active .mat-list-item-content {
+  padding: 0 8px;
+}
+
+::ng-deep .mat-drawer-inner-container {
+  width: 95% !important;
+  height: 100%;
+  z-index: 5;
+
+  box-shadow: 0 8px 10px -5px rgb(0 0 0 / 20%), 0 16px 24px 2px rgb(0 0 0 / 14%), 0 6px 30px 5px rgb(0 0 0 / 12%);
+}
+
+
+::ng-deep .mat-tab-header {
+  width: 95% !important;
+}
+
+.burger {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 36px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.close-all-tabs {
+  margin: 5px;
+  text-align: center;
+  color: #ff3030;
+  border: 1px solid #ff3030;
+  border-radius: 10px;
+}
+
+.close-all-tabs:hover {
+  color: #fff;
+  background-color: #ff3030;
+}
+
+.mat-tab-body {
+  margin-bottom: 250%;
+}
+
+::ng-deep.lds-ring div {
+  border: 8px solid #0373bc !important;
+  border-color: #0373bc transparent transparent transparent !important;
+}

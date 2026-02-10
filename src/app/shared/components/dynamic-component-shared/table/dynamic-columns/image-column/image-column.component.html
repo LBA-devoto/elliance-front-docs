@@ -1,0 +1,25 @@
+<ng-container>
+    <div class="row">
+      <div class="col-lg-11">
+        <ng-container>
+          <div class="d-flex align-items-start" style="margin: 2px">
+            <div *ngIf="config.isList">
+              <div *ngFor="let image of imagesMap | keyvalue">
+                <div *ngIf="image.value">
+                  <img [src]="image.value.url" width="80" />
+                </div>
+              </div>
+            </div>
+            <div *ngIf="!config.isList">
+              <div *ngIf="config.value.url">
+                <img [src]="config.value.url" width="80" />
+              </div>
+            </div>
+  
+  
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
+  <br />

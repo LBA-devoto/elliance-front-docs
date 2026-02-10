@@ -1,0 +1,61 @@
+<!-- Import Angular Material modules in your HTML file -->
+<mat-nav-list *ngIf="menuList">
+  <mat-list-item mat-list-icon>
+    <img src="/assets/logo/logo_geolane.png" style="width: 40px" />
+  </mat-list-item>
+  <ng-container *ngFor="let menu of menuList; index as i">
+    <div *ngIf="menu.children" class="menu-w-children">
+      <mat-list-item *ngIf="!isExpaned && hasMenuAccess(menu.text)"  [routerLink]="menu.routerLink" [routerLinkActive]="['active']" mat-icon-button
+        [matMenuTriggerFor]="submenu" >
+        <mat-icon mat-list-icon *ngIf="menu.is_custom_icon" [svgIcon]="menu.icon"></mat-icon>
+        <span class="mgrn" *ngIf="isExpaned && menu.is_custom_icon">{{menu.text}}</span>
+
+        <mat-icon>{{ menu.icon }}</mat-icon>
+        <span class="mgrn" *ngIf="isExpaned && !menu.is_custom_icon">{{ menu.text}}</span>
+
+        <mat-menu #submenu="matMenu" class="menu-children">
+          <button mat-menu-item *ngIf="!isExpaned" style="color: #0373bc">
+            <span>{{ menu.text }}</span>
+          </button>
+          <hr style="margin: 0px !important" />
+          <ng-container *ngFor="let submenu of menu.children; let i = index">
+            <button *ngIf="hasMenuAccess(submenu.text)"  class="panel-menu" mat-menu-item [routerLinkActive]="['active']"
+              aria-label="Example icon-button with a menu" (click)="openOnglet(submenu)">
+              <span>{{ submenu.text }}</span>
+            </button>
+          </ng-container>
+        </mat-menu>
+      </mat-list-item>
+      <ng-container *ngIf="isExpaned && hasMenuAccess(menu.text)">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header class="mat-elevation-z0">
+            <!-- Cabeceras del submenu -->
+            <div fxLayout="row" fxLayoutAlign="space-between center">
+              <mat-icon mat-list-icon *ngIf="menu.is_custom_icon" [svgIcon]="menu.icon"></mat-icon><span class="mgrn"
+                *ngIf="isExpaned && menu.is_custom_icon" style="width: 250px">{{ menu.text }}</span>
+              <!-- <mat-icon  >{{menu.icon}}</mat-icon><span class="mgrn" *ngIf="isExpaned && !menu.is_custom_icon">{{menu.text}}bbb</span> -->
+            </div>
+          </mat-expansion-panel-header>
+
+          <ng-container *ngFor="let submenu of menu.children">
+            <mat-list-item (click)="openOnglet(submenu)" *ngIf="hasMenuAccess(submenu.text )" >
+              <!-- Entradas de cada submenú  -->
+              <div fxLayout="row" fxLayoutAlign="space-between center">
+                <!-- <mat-icon mat-list-icon>home</mat-icon> -->
+                <span class="menu-item">{{ submenu.text }}</span>
+              </div>
+            </mat-list-item>
+          </ng-container>
+        </mat-expansion-panel>
+      </ng-container>
+    </div>
+    <div *ngIf="!menu.children" class="menu-wo-children">
+      <mat-list-item *ngIf="hasMenuAccess(menu.text)" (click)="openOnglet(menu)" [routerLink]="menu.routerLink" [routerLinkActive]="['active']">
+        <mat-icon mat-list-icon *ngIf="menu.is_custom_icon" [svgIcon]="menu.icon" class="align"></mat-icon><span
+          class="text" *ngIf="isExpaned && menu.is_custom_icon" style="text-align: left">{{ menu.text }}</span>
+        <mat-icon>{{ menu.icon }}</mat-icon><span (click)="openOnglet(menu)" class="mgrn"
+          *ngIf="isExpaned && !menu.is_custom_icon">{{ menu.text }}</span>
+      </mat-list-item>
+    </div>
+  </ng-container>
+</mat-nav-list>

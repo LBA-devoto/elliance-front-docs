@@ -1,0 +1,24 @@
+<div *ngIf="config.isList">
+  <div *ngFor="let picto of config.value">
+    <ng-container *ngIf="config.type==='picto'">
+      <img src="/assets/images/pictos/{{picto.icon?.picto}}.png"
+        height="30" />&nbsp;{{pictoNameToLabel(picto.icon?.picto)}}
+    </ng-container>
+    <ng-container *ngIf="config.type==='icon'">
+      <img src="/assets/images/pictos/{{picto.icon?.picto}}.png"
+        height="30" />&nbsp;{{pictoNameToLabel(picto.icon.picto)}}
+    </ng-container>
+  </div>
+</div>
+<div *ngIf="!config.isList">
+  <div>
+    <ng-container *ngIf="config.type==='picto'">
+      <img src="/assets/images/pictos/{{config.value}}.png"
+        height="30" />&nbsp;{{pictoNameToLabel(config.value)}}
+    </ng-container>
+    <ng-container *ngIf="config.type==='icon'">
+      <img src="/assets/images/pictos/{{config.value.picto}}.png"
+        height="30" />&nbsp;{{pictoNameToLabel(config.value.picto)}}
+    </ng-container>
+  </div>
+</div>

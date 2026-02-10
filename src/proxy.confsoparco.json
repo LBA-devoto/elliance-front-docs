@@ -1,0 +1,209 @@
+{
+  "/contrat/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnephysique/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/entite/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/categorie/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnemorale/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/image/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/images/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/email/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/ville/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/produit/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnemorale/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnephysique/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/monnaie/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auth/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/user/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/role/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/task/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/w2p/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pictos/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/picto/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pictocatalogue/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/catalog/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/viewchamps/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/view/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/menu/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/droit/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/template/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/actualite/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/variablelogistique/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/parametre/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auditLog/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pdf/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/idml/*": {
+    "target": "https://soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

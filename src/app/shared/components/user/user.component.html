@@ -1,0 +1,660 @@
+<div class="container">
+  <!-- <form ngNativeValidate #form> -->
+  <div class="row">
+    <div class="menu col-lg-1">
+      <div *ngIf="edition">
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Enregistrer"
+          matTooltipPosition="left"
+          (click)="enregistrer()"
+        >
+          <!-- <mat-icon (click)="form.checkValidity() ? enregistrer() : null"
+              >save</mat-icon
+            > </a
+          ><br /> -->
+          <mat-icon type="submit">save</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Rafraichir"
+          matTooltipPosition="left"
+          (click)="rafraichir()"
+        >
+          <mat-icon>refresh</mat-icon> </a
+        ><br />
+        <!-- <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Annuler"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="annuler()">close</mat-icon> </a
+        ><br /> -->
+      </div>
+      <div *ngIf="lecture">
+        <a
+         *ngIf="userService.userHasRight('Modification',this.tab.droitTitle)"
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Modifier"
+          matTooltipPosition="left"
+          (click)="modeEdition()"
+        >
+          <mat-icon>edit</mat-icon> </a
+        ><br />
+        <a
+        *ngIf="userService.userHasRight('Suppression unitaire',this.tab.droitTitle)"
+          class="btn btn-danger"
+          #tooltip="matTooltip"
+          matTooltip="Supprimer"
+          matTooltipPosition="left"
+          (click)="suppressiondemasse()"
+        >
+          <mat-icon>delete</mat-icon> </a
+        ><br />
+      </div>
+    </div>
+
+    <div class="col-lg-5 card" style="margin-right: 60px">
+      <div *ngIf="lecture">
+        <div class="titre">
+          <label><strong> Nom :</strong></label
+          ><br />
+          <label *ngIf="user.lastname">{{ user.lastname }}</label>
+          <label *ngIf="!user.lastname"> - </label>
+        </div>
+        <div class="titre">
+          <label><strong> Prénom :</strong></label
+          ><br />
+          <label *ngIf="user.firstname">{{ user.firstname }} </label>
+          <label *ngIf="!user.firstname"> - </label>
+          <br />
+        </div>
+        <div class="titre">
+          <label><strong> Adresse e-mail:</strong></label
+          ><br />
+          <label>{{ user.email }} </label>
+          <label *ngIf="!user.email"> - </label>
+          <br />
+        </div>
+        <div class="titre">
+          <div *ngFor="let tel of user.tels; index as i">
+            <mat-label
+              ><strong>Téléphone {{ i + 1 }}</strong> <br /><label>{{
+                tel.numero
+              }}</label></mat-label
+            >
+            <br />
+          </div>
+        </div>
+        <div class="titre">
+          <label><strong> Fonction:</strong></label
+          ><br />
+          <!--<label>{{ user.fonction.valeur }} </label>-->
+          <label *ngIf="user.fonction!==null && user.fonction.valeur!==null"> {{ user.fonction.valeur }} </label>
+          <label *ngIf="user.fonction!==null  && !user.fonction.valeur"> - </label>
+          <br />
+        </div>
+        <div class="titre">
+          <label><strong> Statut:</strong></label
+          ><br />
+          <label>{{ user.statut }} </label>
+          <label *ngIf="!user.statut"> - </label>
+          <br />
+        </div>
+        <div class="titre">
+          <label><strong>Contact associé:</strong></label
+          ><br />
+          <div *ngIf="personnePhysique">
+            <div class="table-responsive">
+              <table
+                mat-table
+                [dataSource]="[personnePhysique]"
+                class="mat-elevation-z8"
+              >
+                <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef>Email</th>
+                  <td mat-cell *matCellDef="let element"> {{element?.emails?.[0]?.valeur}} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="nom">
+                  <th mat-header-cell *matHeaderCellDef>Nom</th>
+                  <td mat-cell *matCellDef="let element"> {{element?.nom}} </td>
+                </ng-container>
+
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="['email', 'nom']; sticky: true"
+                ></tr>
+                <tr
+                  mat-row
+                  (click)="clickSelection.add(row)"
+                  (click)="ouvrirOngletUser(row)"
+                  *matRowDef="let row; columns: ['email', 'nom']"
+                ></tr>
+              </table>
+            </div>
+          </div>
+          <label *ngIf="!personnePhysique">Aucun</label>
+          <br />
+        </div>
+
+        <!-- <div class="titre">
+            <label><strong>Description/commentaire:</strong></label
+            ><br />
+            <label>{{ role.commentaire }} </label>
+            <label *ngIf="!role.commentaire"> - </label>
+            <br />
+          </div> -->
+        <br />
+        <div class="container-fluid">
+          <div class="un"></div>
+        </div>
+      </div>
+
+      <div *ngIf="edition">
+        <div>
+          <label>Nom</label><br />
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{ 'error-class': errorMessages.lastname }"
+          >
+            <mat-label>Nom</mat-label>
+            <input
+              matInput
+              type="text"
+              name="Nom"
+              placeholder="Nom"
+              required
+              [(ngModel)]="user.lastname"
+            />
+          </mat-form-field>
+
+          <mat-error *ngIf="errorMessages.lastname"
+            >This field is mandatory.</mat-error
+          >
+        </div>
+        <div>
+          <label>Prénom</label><br />
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{ 'error-class': errorMessages.firstname }"
+          >
+            <mat-label>Prénom</mat-label>
+            <input
+              matInput
+              type="text"
+              name="Prénom"
+              placeholder="Prénom"
+              required
+              [(ngModel)]="user.firstname"
+            />
+          </mat-form-field>
+          <mat-error *ngIf="errorMessages.firstname"
+            >This field is mandatory.</mat-error
+          >
+        </div>
+        <div>
+          <label>Adresse e-mail</label><br />
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{ 'error-class': errorMessages.email }"
+          >
+            <mat-label>Adresse e-mail</mat-label>
+            <input
+              matInput
+              type="text"
+              name="Adresse Email"
+              placeholder="Adresse Email"
+              required
+              [(ngModel)]="user.email"
+            />
+          </mat-form-field>
+          <mat-error *ngIf="errorMessages.email"
+            >This field is mandatory.</mat-error
+          >
+        </div>
+        <div>
+          <label>Téléphones</label
+          ><mat-icon
+            style="font-size: 15px"
+            (click)="ajoutTel()"
+            #tooltip="matTooltip"
+            matTooltip="Ajouter Numéro"
+            >add_circle</mat-icon
+          ><br />
+          <div *ngFor="let tel of user.tels; index as i">
+            <mat-form-field appearance="outline">
+              <mat-label>Téléphone {{ i + 1 }}</mat-label>
+              <input
+                matInput
+                type="text"
+                name="Tel"
+                [(ngModel)]="tel.numero"
+                placeholder="Téléphone"
+              />
+            </mat-form-field>
+
+            <mat-icon
+              (click)="retirerTel(i)"
+              *ngIf="i > 0"
+              style="font-size: 15px; cursor: pointer"
+              #tooltip="matTooltip"
+              matTooltip="Rétirer le numéro"
+              >close</mat-icon
+            >
+          </div>
+        </div>
+        <!-- <div class="titre">
+                <label>Login de dérnier mis à jour</label><br />
+                <label>{{ role.dernieremiseajour }} </label>
+                <label *ngIf="!role.dernieremiseajour"> - </label>
+                <br />
+              </div> -->
+        <div>
+          <label>Fonction</label><br />
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{ 'error-class': errorMessages.fonction }"
+          >
+            <mat-label>Fonction</mat-label>
+            <input
+              matInput
+              type="text"
+              name="Fonction"
+              placeholder="Fonction"
+              required
+              [(ngModel)]="user.fonction.valeur"
+            />
+          </mat-form-field>
+          <mat-error *ngIf="errorMessages.fonction"
+            >This field is mandatory.</mat-error
+          >
+        </div>
+        <br />
+        <div class="container-fluid">
+          <div class="un"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-5 card">
+      <div *ngIf="lecture">
+        <div class="row mt-4">Statut : {{user.statut ? user.statut : '-'}}</div>
+        <div class="row mt-4">Accès : {{user.adminAccess ? 'Admin' : 'Extranet'}}</div>
+        <!-- <div class="titre">
+          <label><strong> Login :</strong></label
+          ><br />
+          <label>{{ user.username }}</label>
+          <label *ngIf="!user.username"> - </label>
+        </div> -->
+        <!-- <div class="titre">
+          <label><strong> Mot de passe :</strong></label
+          ><br />
+          <label>****** </label>
+          <label *ngIf="!user.password"> - </label>
+          <br />
+        </div> -->
+        <div class="row mt-4">
+          <div class="col-lg-12">
+            <mat-tab-group>
+              <mat-tab label="Droit d'accès">
+                <div class="col-lg-12">
+                  <div class="col-lg-12">
+                    <div class="col-lg-12">
+                      <br />
+                      <!-- <div><span>Groupe</span></div> -->
+                      <br />
+                      <div class="row">
+                        <div
+                          class="col-lg-9"
+                          style="padding-left: 0px"
+                          *ngIf="edition"
+                        >
+                          <mat-form-field
+                            appearance="outline"
+                            style="font-size: 10px; width: 400px"
+                          >
+                            <mat-label
+                              >Recherche un(e) groupe utilisateur</mat-label
+                            >
+                            <input
+                              matInput
+                              placeholder="Ex. Mia"
+                              #input
+                              (keyup)="filtreMotCles($event)"
+                              [(ngModel)]="motCle"
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-lg-2" *ngIf="edition">
+                          <a
+                            class="btn btn-outline-warning"
+                            #tooltip="matTooltip"
+                            matTooltip="Créer"
+                            matTooltipPosition="left"
+                            style="margin-left: 57px"
+                          >
+                            <mat-icon (click)="add()">add</mat-icon> </a
+                          ><br />
+                        </div>
+                        <div class="table-responsive">
+                          <table
+                            mat-table
+                            [dataSource]="datasource"
+                            class="mat-elevation-z8"
+                          >
+                            <ng-container matColumnDef="select">
+                              <th mat-header-cell *matHeaderCellDef>
+                                <mat-checkbox
+                                  (change)="masterToggle($event)"
+                                  [checked]="userHasRole && isAllSelected()"
+                                  [indeterminate]="
+                                    userHasRole && !isAllSelected()
+                                  "
+                                  [disabled]="true"
+                                  [aria-label]="checkboxLabel()"
+                                >
+                                </mat-checkbox>
+                              </th>
+
+                              <td mat-cell *matCellDef="let row">
+                                <mat-checkbox
+                                  (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="isSelected(row)"
+                                  [disabled]="true"
+                                  [aria-label]="checkboxLabel(row)"
+                                >
+                                </mat-checkbox>
+                              </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="name">
+                              <th mat-header-cell *matHeaderCellDef>Nom du groupe</th>
+                              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                            </ng-container>
+
+                            <tr
+                              mat-header-row
+                              *matHeaderRowDef="nomsDeChamps; sticky: true"
+                            ></tr>
+                            <tr
+                              mat-row
+                              (click)="clickSelection.add(row)"
+                              (click)="ouvrirOnglet(row)"
+                              *matRowDef="let row; columns: nomsDeChamps"
+                            ></tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Restrictions Extranet">
+                <div *ngIf="noRestriction" class="text-center">Aucune restriction de l'Extranet pour cet utilisateur</div>
+                <div *ngIf="!noRestriction">
+                  <div *ngIf="extranetRestrictions.menu.length>0" class="mb-3">
+                    <h4>Menu</h4>
+                    <div *ngFor="let m of extranetRestrictions.menu">
+                      <div>{{m}}</div>
+                    </div>
+                  </div>
+                  <div *ngIf="extranetRestrictions.champs.length>0" class="mb-3">
+                    <h4>Champs</h4>
+                    <div *ngFor="let c of extranetRestrictions.champs">
+                      <div>{{c}}</div>
+                    </div>
+                  </div>
+                  <div *ngIf="extranetRestrictions.fonctions.length>0" class="mb-3">
+                    <h4>Fonctionnalités</h4>
+                    <div *ngFor="let f of extranetRestrictions.fonctions">
+                      <div>{{f}}</div>
+                    </div>
+                  </div>
+                </div>               
+              </mat-tab>
+              <!-- <mat-tab label="Workflow">
+                <div><span>Workflow</span></div>
+                <div>
+                  <table></table>
+                </div>
+              </mat-tab> -->
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="edition">
+        <!-- <div>
+          <label>Login</label><br />
+          <mat-form-field appearance="outline">
+            <mat-label>Login</mat-label>
+            <input
+              matInput
+              type="text"
+              name="Login"
+              placeholder="Login"
+              required
+              [(ngModel)]="user.username"
+            />
+          </mat-form-field>
+        </div> -->
+        <div>
+          <label>Statut</label><br />
+          <mat-form-field
+            appearance="outline"
+            [ngClass]="{ 'error-class': errorMessages.statut }"
+          >
+            <mat-label>Statut</mat-label>
+            <mat-select name="Statut" [(ngModel)]="user.statut" required>
+              <mat-option *ngFor="let statut of status" [value]="statut"
+                >{{ statut }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error *ngIf="errorMessages.statut"
+            >This field is mandatory.</mat-error
+          >
+        </div>
+        <div>
+          <mat-radio-group name="adminAccess" [(ngModel)]="user.adminAccess" class="d-flex flex-column">
+            <mat-radio-button [value]="true" class="my-1">Accès Admin</mat-radio-button>
+            <mat-radio-button [value]="false" class="my-1">Accès Extranet</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <!-- <div>
+          <label>Mot de passe </label><br />
+          <mat-form-field appearance="outline">
+            <mat-label>Mot de passe </mat-label>
+            <input
+              matInput
+              type="text"
+              name="Mot de passe "
+              placeholder="Mot de passe "
+              required
+              [(ngModel)]="user.password"
+            />
+          </mat-form-field>
+        </div> -->
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-12">
+            <mat-tab-group>
+              <mat-tab label="Droit d'accès">
+                <div class="col-lg-12">
+                  <div class="col-lg-12">
+                    <div class="col-lg-12">
+                      <br />
+                      <!-- <div><span>Groupe</span></div> -->
+                      <br />
+                      <div class="row">
+                        <div
+                          class="col-lg-9"
+                          style="padding-left: 0px"
+                          *ngIf="edition"
+                        >
+                          <mat-form-field
+                            appearance="outline"
+                            style="font-size: 10px; width: 400px"
+                          >
+                            <mat-label
+                              >Recherche un(e) groupe utilisateur</mat-label
+                            >
+                            <input
+                              matInput
+                              placeholder="Ex. Mia"
+                              #input
+                              (keyup)="filtreMotCles($event)"
+                              [(ngModel)]="motCle"
+                            />
+                          </mat-form-field>
+                        </div>
+                        <div class="col-lg-2" *ngIf="edition">
+                          <a
+                            class="btn btn-outline-warning"
+                            #tooltip="matTooltip"
+                            matTooltip="Créer"
+                            matTooltipPosition="left"
+                            style="margin-left: 57px"
+                          >
+                            <mat-icon (click)="add()">add</mat-icon> </a
+                          ><br />
+                        </div>
+                        <table
+                          mat-table
+                          [dataSource]="datasource"
+                          class="mat-elevation-z8"
+                        >
+                          <!-- <ng-container
+                            *ngFor="let column of nomsDeChamps"
+                            [matColumnDef]="column"
+                          >
+                            <th
+                              mat-header-cell
+                              *matHeaderCellDef
+                              mat-sort-header
+                              sortActionDescription="Sort by code"
+                            >
+                              {{ test(column) }}
+                              <div *ngIf="column === 'select'" class="test">
+                                <mat-checkbox
+                                  (change)="$event ? masterToggle() : null"
+                                  [checked]="
+                                    selection.hasValue() && isAllSelected()
+                                  "
+                                  [indeterminate]="
+                                    selection.hasValue() && !isAllSelected()
+                                  "
+                                  [aria-label]="checkboxLabel()"
+                                >
+                                </mat-checkbox>
+                              </div>
+                              <div *ngIf="column === 'name'" class="test">
+                                Nom du groupe
+                              </div>
+                            </th>
+
+                            <td mat-cell *matCellDef="let element">
+                              <div *ngIf="column === 'select'" class="test">
+                                <mat-checkbox
+                                  (click)="$event.stopPropagation()"
+                                  #selectAfterAdding
+                                  (change)="
+                                    $event ? selection.toggle(element) : null
+                                  "
+                                  [checked]="selection.isSelected(element)"
+                                  [aria-label]="checkboxLabel(element)"
+                                >
+                                </mat-checkbox>
+                              </div>
+                              <div *ngIf="column === 'name'">
+                                <span>{{ element.name }} </span>
+                              </div>
+                            </td>
+                          </ng-container> -->
+
+                          <ng-container matColumnDef="select">
+                            <th mat-header-cell *matHeaderCellDef>
+                              <mat-checkbox
+                                (change)="masterToggle($event)"
+                                [checked]="userHasRole && isAllSelected()"
+                                [indeterminate]="
+                                  userHasRole && !isAllSelected()
+                                "
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </th>
+
+                            <td mat-cell *matCellDef="let row">
+                              <mat-checkbox
+                                (click)="$event.stopPropagation()"
+                                (change)="handleSelectRole($event, row)"
+                                [checked]="isSelected(row)"
+                                [aria-label]="checkboxLabel(row)"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Name</th>
+                            <td mat-cell *matCellDef="let element">
+                              {{ element.name }}
+                            </td>
+                          </ng-container>
+
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="nomsDeChamps; sticky: true"
+                          ></tr>
+                          <tr
+                            mat-row
+                            (click)="clickSelection.add(row)"
+                            (click)="ouvrirOnglet(row)"
+                            *matRowDef="let row; columns: nomsDeChamps"
+                          ></tr>
+                        </table>
+
+                        <mat-error
+                          style="margin-top: 16px"
+                          *ngIf="errorMessages.roles"
+                          >Select atleast one role.</mat-error
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Restrictions Extranet">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Menu</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.menu.join(' - ')" (keyup)="setExtranetRestrictions('menu', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Champs</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.champs.join(' - ')" (keyup)="setExtranetRestrictions('champs', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Fonctionnalités</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.fonctions.join(' - ')" (keyup)="setExtranetRestrictions('fonctions', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <a style="cursor: pointer;" (click)="openRestrictions()">Modifier les restrictions</a>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </form> -->
+</div>

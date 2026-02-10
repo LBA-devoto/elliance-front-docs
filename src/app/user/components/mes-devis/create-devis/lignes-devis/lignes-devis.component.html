@@ -1,0 +1,253 @@
+<div>
+    <div class="row">
+        <div class="col lignes-title">
+            <div *ngIf="alert" class="alert alert-{{alert.type}}" role="alert">
+                {{alert.message}}
+            </div>
+            <mat-form-field appearance="outline" class="form-field w-100" id="ac-input">
+                <mat-label>{{"Saisie rapide de l'article"}}</mat-label>
+                <input class="w-100" matInput type="text" [(ngModel)]="ref" placeholder="Référence / Titre"
+                    (keyup)="search($event)">
+                <ul *ngIf="autocompleteSearchList.length>0" id="ac-list">
+                    <li *ngFor="let prod of autocompleteSearchList" class="ac-item" (click)="selectProduct(prod)">
+                        {{prod.nom}}</li>
+                </ul>
+            </mat-form-field>
+            <div class="d-flex justify-content-around align-items-center controls">
+                <mat-icon (click)="add(-1)">remove</mat-icon>
+                <input type="number" [value]="quantity" [(ngModel)]="quantity" class="devis-qtt-input text-center"
+                    min="1">
+                <mat-icon (click)="add(1)">add</mat-icon>
+                <button mat-raised-button class="btn-primary"
+                    [disabled]="!selectedProduct || quantity<1 || productIsPresent"
+                    (click)="addProduct()">{{'AJOUTER'}}</button>
+            </div>
+            <button *ngIf="hasData" class="head-btn" style="margin-left: auto;" mat-raised-button
+                (click)="scrollDown()">{{'Totaux'|uppercase}}
+                <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="hasData">
+        <section class="table-container">
+            <table mat-table [dataSource]="dataSource.data" class="my-2" cdkDropList
+                (cdkDropListDropped)="dropRow($event)">
+                <!-- Check Column -->
+                <ng-container matColumnDef="check" sticky>
+                    <th mat-header-cell *matHeaderCellDef>
+                        <input *ngIf="!switch" type="checkbox" [checked]="allSelected" (click)="selectAll()">
+                        <mat-icon *ngIf="switch" class="switch-all-btn" matTooltip="Modifier l'ordre du devis"
+                            (click)="openDevisOrden()">drag_indicator</mat-icon>
+                    </th>
+                    <td mat-cell *matCellDef="let element; let index = index">
+                        <input *ngIf="!switch" type="checkbox" [checked]="lineChecked(index)">
+                        <mat-icon *ngIf="switch">drag_indicator</mat-icon>
+                    </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="num" sticky>
+                    <th mat-header-cell *matHeaderCellDef>{{'N°'}}</th>
+                    <td id="num-cell" mat-cell *matCellDef="let element; let i = index"
+                        style="position: relative; z-index: 2 !important;">
+
+                        <mat-icon class="insert-btn" *ngIf="selectedProduct && !productIsPresent"
+                            (click)="addProduct(i)" matTooltip="Insérer ici le produit sélectionné">add</mat-icon>
+                        <span>{{i+1}}</span>
+                        <div style="color: #0373bc; font-size: smaller;" *ngIf="!switch">{{element.num}}</div>
+                        <mat-icon style="height: 16px;" *ngIf="switch">arrow_right_alt</mat-icon>
+                        <input class="num-input" *ngIf="switch" type="number" [value]="i+1" min="1"
+                            [max]="dataSource.data.length" (focusout)="move(i+1, $event)">
+                        <!-- <div *ngIf="isSeparator(i+1)">bru</div> -->
+                    </td>
+                </ng-container>
+
+                <!-- Products Column -->
+                <ng-container matColumnDef="prod" sticky>
+                    <th mat-header-cell *matHeaderCellDef class="prod">{{'Produits'}}</th>
+                    <td mat-cell *matCellDef="let element" class="prod" style="max-width: 300px;">
+                        <div class="d-flex align-items-center">
+                            <img [src]="element.image" alt="" width="50" height="50">
+                            <div class="prod-infos">
+                                <div class="row normal-font" style="font-size: x-small; text-decoration: underline;">
+                                    {{element.ref}}</div>
+                                <div class="row prod-title" (click)="goToProduct(element)">{{element.titre}}</div>
+                                <div class="row descr normal-font">{{element.description}}</div>
+                            </div>
+                        </div>
+                        <mat-icon id="comment-icon" *ngIf="element.commentaire"
+                            [matTooltip]="element.commentaire">comment</mat-icon>
+                    </td>
+                </ng-container>
+
+                <!-- Purchased Price Column -->
+                <ng-container matColumnDef="prixAchat">
+                    <th mat-header-cell *matHeaderCellDef>{{"Prix d'achat"}}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div>
+                            <div>{{element.prixAchat|number:'0.2'}}€</div>
+                            <div class="row" *ngIf="element.approche">
+                                <span class="normal-font">{{'Approche : '|uppercase}}</span>{{element.approche}}
+                            </div>
+                            <div class="row" *ngIf="element.coefMarge && element.coefMarge !== 1">
+                                <span class="normal-font">{{'coef marge : '|uppercase}}</span>{{element.coefMarge}}
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <!-- Selling price Column -->
+                <ng-container matColumnDef="prixVente">
+                    <th mat-header-cell *matHeaderCellDef>{{"Prix de vente"}}</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div>
+                            <!-- <div class="row">
+                                <span class="normal-font">{{'Prix public :
+                                    '|uppercase}}</span>{{element.prixPublic|number:'0.2'}}€
+                            </div>
+                            <div class="row">
+                                <span class="normal-font">{{'Prix coef :
+                                    '|uppercase}}</span>{{element.prixCoef|number:'0.2'}}€
+                            </div> -->
+                            <div class="row">
+                                {{element.prixVente ? (element.prixVente|number:'0.2') + '€' : '-'}}
+                                <!-- <span class="normal-font">{{'Prix vente :
+                                    '|uppercase}}</span>{{element.prixVente|number:'0.2'}}€ -->
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+                <!-- Quantity Column -->
+                <ng-container matColumnDef="qte">
+                    <th mat-header-cell *matHeaderCellDef>{{'Qté'}}</th>
+                    <td mat-cell *matCellDef="let element" class="text-center"> {{element.quantite}} </td>
+                </ng-container>
+                <!-- Discount Column -->
+                <ng-container matColumnDef="remises">
+                    <th mat-header-cell *matHeaderCellDef>{{'Remises'}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <div *ngIf="element.remises.taux">{{element.remises.taux}}%</div>
+                        <div *ngIf="element.remises.montant">{{element.remises.montant|number:'0.2'}}€</div>
+                        <div *ngIf="!(element.remises.taux || element.remises.montant)">-</div>
+                        <!-- <div [matTooltip]="'Total des remises pour une unité'">Total :
+                            {{getTotalRemises(i)|number:'0.2'}}€</div> -->
+                    </td>
+                </ng-container>
+                <!-- Ecopart Column -->
+                <ng-container matColumnDef="ecoPart">
+                    <th mat-header-cell *matHeaderCellDef>{{'Eco-part.'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.ecoPart*element.quantite|number:'0.2'}}€ </td>
+                </ng-container>
+                <!-- Total price Column -->
+                <ng-container matColumnDef="prixHT">
+                    <th mat-header-cell *matHeaderCellDef>{{'Total HT'}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{getTotalPrixHT(i)|number:'0.2'}}€ </td>
+                </ng-container>
+                <!-- TVA Column -->
+                <ng-container matColumnDef="tva">
+                    <th mat-header-cell *matHeaderCellDef>{{'TVA'}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <div>{{element.tva|number:'0.1'}}%</div>
+                        <div class="normal-font" [matTooltip]="'Montant total de la TVA'">
+                            {{getValeurTVA(i)*element.quantite|number:'0.2'}}€</div>
+                    </td>
+                </ng-container>
+                <!-- Price unit Column -->
+                <ng-container matColumnDef="prixTTC">
+                    <th mat-header-cell *matHeaderCellDef>{{'Total TTC'}}</th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{getTotalPrixTTC(i)|number:'0.2'}}€ </td>
+                </ng-container>
+                <!-- Marge Column -->
+                <ng-container matColumnDef="marge">
+                    <th mat-header-cell *matHeaderCellDef (click)="percentView = !percentView" style="cursor: pointer;">
+                        {{'Marge'}} <span>{{percentView ? '(%)':'(€)'}}</span></th>
+                    <td mat-cell *matCellDef="let element; let i = index">
+                        <div>
+                            <div class="row">
+                                <div *ngIf="!percentView" matTooltip="{{getPercentMarge(i)|number:'0.2'}}%">
+                                    {{getMarge(i)|number:'0.2'}}€</div>
+                                <div *ngIf="percentView" matTooltip="{{getMarge(i)|number:'0.2'}}€">
+                                    {{getPercentMarge(i)|number:'0.2'}}%</div>
+                            </div>
+                        </div>
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" sticky></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns; let i = index" cdkDrag
+                    (click)="selectLine(i)" [cdkDragDisabled]="!switch" [cdkDragData]="i"
+                    [class.dragged-element]="draggedIndex === i" id="table-row-{{i+1}}"
+                    (cdkDragStarted)="draggedIndex = i" (cdkDragEnded)="draggedIndex = null">
+                </tr>
+            </table>
+        </section>
+
+        <div class="row mt-3 d-flex justify-content-between">
+            <div class="col-12 col-lg-7 comment">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{'Commentaires généraux du devis'}}</mat-label>
+                    <textarea matInput placeholder="Ex: Valide pendant 30 jours" [rows]="10" [(ngModel)]="comment"
+                        (focusout)="saveTotals()"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-lg-4 total p-4">
+                <div class="row">
+                    <div class="col-6 normal">{{'Remise taux global :'}}</div>
+                    <div class="col-6 px-2 d-flex align-items-center">
+                        <mat-form-field appearance="outline" class="w-75">
+                            <input matInput type="number" placeholder="0.0" [(ngModel)]="remiseTaux"
+                                (focusout)="saveTotals()">
+                        </mat-form-field>
+                        <div class="w-50">%</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6 normal">{{'Remise montant global :'}}</div>
+                    <div class="col-6 px-2 d-flex align-items-center">
+                        <mat-form-field appearance="outline" class="w-75">
+                            <input matInput type="number" placeholder="0.00" [(ngModel)]="remiseMontant"
+                                (focusout)="saveTotals()">
+                        </mat-form-field>
+                        <div class="w-50">€</div>
+                    </div>
+                </div>
+                <div class="row main">
+                    <div class="col-6">{{'Total HT :'}}</div>
+                    <div class="col-6 px-2">{{totalHT|number:'0.2'}} €</div>
+                </div>
+                <div class="row small">
+                    <div class="col-6">{{'dont éco-participation :'}}</div>
+                    <div class="col-6 px-2">{{totalEcoPart|number:'0.2'}} €</div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-6 normal">{{'Pays TVA :'}}</div>
+                    <div class="col-6 px-2">
+                        <mat-form-field appearance="outline" class="w-100" *ngIf="countriesMap">
+                            <mat-label>{{'Pays'}}</mat-label>
+                            <mat-select placeholder="{{'Séléctionner un pays'}}" floatlLabel="never"
+                                value="{{countriesMap[0][0]}}">
+                                <mat-option *ngFor="let pays of countriesMap; let i = index" [value]="pays[0]"
+                                    (onSelectionChange)="changePays($event)">{{pays[0]|uppercase}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div> -->
+                <div class="row">
+                    <div class="col-6 normal">{{'Total TVA :'}}</div>
+                    <div class="col-6 px-2">{{totalTVA|number:'0.2'}} €</div>
+                    <!-- <div class="col-6 px-2">{{tauxTVA|number:'0.2'}} %</div> -->
+                </div>
+                <div class="row main">
+                    <div class="col-6">{{'Total TTC :'}}</div>
+                    <div class="col-6 px-2">{{totalTTC|number:'0.2'}} €</div>
+                </div>
+                <div class="row">
+                    <div class="col-6 normal">{{'Marge totale :'}}</div>
+                    <div class="col-6 px-2">{{totalMarge|number:'0.2'}} €</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

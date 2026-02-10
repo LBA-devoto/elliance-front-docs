@@ -1,0 +1,265 @@
+version: '3.2'
+services:
+
+
+  nginx:
+    image: nginx-angular
+    container_name: nginx-angular
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx-angular/conf/:/etc/nginx/conf.d/
+      - /etc/localtime:/etc/localtime:ro
+     # - /etc/timezone:/etc/timezone:ro
+      - ../elliance/images:/home/gadmin/elliance/images
+    depends_on:
+      - elliance-backend
+      - elliance-gateway
+      - eureka-server
+      - mongodb
+    networks:
+      - elliance-network
+
+
+
+  eureka-server:
+    image: eureka-server
+    container_name: eureka-server
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - elliance-network
+
+  elliance-gateway:
+    image: elliance-gateway
+    container_name: elliance-gateway
+    restart: always
+    ports:
+      - "8081:8080"
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    depends_on:
+      - eureka-server
+      - mongodb
+      - elliance-backend
+    networks:
+      - elliance-network
+
+
+  elliance-email:
+    image: elliance-email
+    container_name: elliance-email
+    restart: always
+    ports:
+      - "8383:8080"
+      - "25:25"
+    volumes:
+      - ../elliance:/home/gadmin/elliance
+      - ../elliance/files:/home/gadmin/elliance/files
+      - ../elliance/images:/home/gadmin/elliance/images
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - elliance-network
+
+#  elliance-webtoprint:
+#    container_name: elliance-webtoprint
+#    image: elliance-webtoprint
+#    restart: always
+#    ports:
+#      - "9080:8080"
+#    volumes:
+#     - ../../elliance:/home/gadmin/elliance
+#    depends_on:
+#     - eureka-server
+#      - mongodb
+#    networks:
+#      - elliance-network
+
+
+  elliance-backend:
+    image: elliance-backend
+    container_name: elliance-backend
+    restart: always
+    ports:
+      - "8083:8080"
+    volumes:
+      - ../elliance:/home/gadmin/elliance
+      - ../elliance/files:/home/gadmin/elliance/files
+      - ../elliance/images:/home/gadmin/elliance/images
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      elliance-network:
+        ipv4_address: 172.19.0.10  # Specify the desired static IP address
+    depends_on:
+      - mongodb
+      - eureka-server      
+      - kafka 
+
+  elliance-workflow:
+    image: elliance-workflow
+    container_name: elliance-workflow
+    restart: always
+    ports:
+      - "8085:8080"
+    volumes:
+      - ../elliance:/home/gadmin/elliance
+      - ../elliance/files:/home/gadmin/elliance/files
+      - ../elliance/images:/home/gadmin/elliance/images
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - elliance-network
+    depends_on:
+      - mongodb
+      - eureka-server      
+      - kafka      
+
+  mongodb:
+    image: mongo:4.4.10
+    container_name: mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo/db:/data/db
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=gadmin
+      - MONGO_INITDB_ROOT_PASSWORD=Admin2022!
+    networks:
+      - elliance-network
+    depends_on:
+      - eureka-server
+     
+
+
+  elasticsearch:
+    image: elasticsearch:7.4.0
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      - ELASTIC_USERNAME=eseluser
+      - LASTIC_PASSWORD=Adahou#2022!
+      - xpack.security.enabled=true
+      - discovery.type=single-node
+#      - cluster.name=my_cluster
+#      - node.name=my_node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - http.cors.enabled=true
+      - http.cors.allow-origin=*
+
+    volumes:
+       - ./elasticsearch/logs:/var/log
+       - ./elasticsearch/data:/usr/share/elasticsearch/data
+       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - elliance-network
+    depends_on:
+      - mongodb
+      - eureka-server
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.2.0
+    container_name: logstash
+    restart: always
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    networks:
+      - elliance-network
+  #  volumes:
+  #     - ./elliance-elk/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
+    depends_on:
+      - mongodb
+      - elasticsearch
+      - eureka-server
+
+
+
+  kafka:
+    image: docker.io/bitnami/kafka:3.1
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+    volumes:
+      - ./kafka/data:/bitnami
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      # - KAFKA_CFG_ZOOKEEPER_CONNECT=localhost:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      #- KAFKA_ADVERTISED_HOST_NAME:localhost  
+     # - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092  
+    depends_on: 
+      - zookeeper
+    networks:
+      - elliance-network
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    restart: always
+    ports:
+      - "8088:8080"
+    environment:
+      - KAFKA_CLUSTERS_0_NAME=local
+      - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka:9092
+      - KAFKA_CLUSTERS_0_ZOOKEEPER=localhost:2181
+    depends_on:
+      - zookeeper
+      - kafka
+    networks:
+      - elliance-network
+
+
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper
+    restart: always
+    ports:
+      - "2181:2181"
+    volumes:
+      - ./zookeeper/data:/bitnami
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    networks:
+      - elliance-network
+    depends_on:
+      - mongodb
+      - eureka-server
+
+#  microservice-prototype:
+#    image: elliance-microservice-prototype
+#    container_name: microservice-prototype
+#    ports:
+#      - "9881:9081"
+#    restart: unless-stopped
+#    depends_on:
+#      - eureka-server
+#      - mongodb
+#      - keycloak
+#    networks:
+#      - elliance-network
+
+
+#  keycloak-test:
+#    image: keycloak-test
+#    container_name: keycloak-test
+#    restart: always
+#    ports:
+#      - "8390:8080"
+#    networks:
+#      - elliance-network
+
+networks:
+  elliance-network:
+    external: true
+    

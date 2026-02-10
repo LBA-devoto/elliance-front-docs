@@ -1,0 +1,79 @@
+.title {
+    font-size: 1.5rem;
+    font-family: Poppins;
+    font-weight: 900 !important;
+    text-align: center;
+    margin-top: 15px;
+}
+
+.lib {
+    padding: 10px;
+    font-weight: 600;
+    font-size: larger;
+}
+
+.minmax .mat-form-field:first-child {
+    padding-right: 5px;
+}
+
+.minmax .mat-form-field:last-child {
+    padding-left: 5px;
+}
+
+.dimensions {
+    border-radius: 10px;
+    margin: auto -8px;
+}
+
+.adv-search {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    cursor: pointer;
+}
+
+::ng-deep .mat-form-field-outline,
+::ng-deep .mat-form-field,
+::ng-deep .mat-form-field-label {
+    color: #0373BCBD !important;
+}
+
+
+::ng-deep .mat-form-field-disabled{
+    opacity: 0.4 !important;
+}
+
+/* Pour les resultats d'autocomplete  */
+
+.autocomplete-list {
+    position: absolute;
+    top: 180px;
+    width: 100%;
+    left: 0;
+    background-color: white;
+    z-index: 99;
+}
+.autocomplete-list ul {
+    list-style: none;
+    max-height: 70vh;
+    overflow: auto;
+    box-shadow: 0 0 6px grey;
+}
+
+.autocomplete-list li {
+    padding: 10px;
+    color: #0373bc;
+    font-weight: bold;
+}
+
+.ac-li:hover {
+    cursor: pointer;
+    background-color: #e7e7e7;
+}
+
+@media (max-width: 768px) {
+    .adv-search {
+        justify-content: center;
+    }
+    
+}

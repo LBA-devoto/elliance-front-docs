@@ -1,0 +1,24 @@
+[
+    {
+        "ref": "compte",
+        "title": "Mon compte",
+        "icon": "person"
+    },
+    {
+        "ref": "notifications",
+        "title": "Notifications",
+        "icon": "notifications"
+    },
+    {
+        "ref": "compare",
+        "title": "Comparateur produit",
+        "icon": "compare"
+    },
+    {
+        "ref": "deconnexion",
+        "title": "Déconnexion",
+        "icon": "exit_to_app",
+        "text": "Déconnexion",
+        "route": "/logout"
+    }
+]

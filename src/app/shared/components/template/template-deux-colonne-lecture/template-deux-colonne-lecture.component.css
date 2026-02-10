@@ -1,0 +1,336 @@
+.menu a {
+    margin-bottom: 10px;
+}
+
+.container {
+    margin-top: 30px;
+    width: 900px;
+    background-color: #F6F6F6;
+
+}
+
+button {
+    margin: 10px;
+}
+
+.card {
+    margin-top: 30px;
+    padding: 20px;
+    width: 600px;
+    margin-bottom: 60px;
+    background-color: #f6f6f6;
+}
+
+.part {
+    width: 49%;
+    background-color: #f6f6f6;
+    padding-top: 15px;
+    padding-left: 20px;
+    padding-bottom: 20px;
+    border-radius: 5px;
+}
+
+.titre {
+    padding-top: 10px;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+    background-color: #fff;
+    border-radius: 5px;
+
+}
+
+.menu .btn {
+    font-size: 8px;
+}
+
+.menu .btn .mat-icon {
+    font-size: 20px;
+}
+
+.btn {
+    font-size: 13px;
+    font-family: "Roboto", sans-serif !important;
+    border-radius: 3px;
+    width: 48px;
+    border-width: thin;
+}
+
+.mat-icon {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.mat-row .mat-cell {
+    /*border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    background-color: #0373BC;*/
+    cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+    background-color: rgba(3, 115, 188, 0.3);
+    color: white;
+    border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+    font-weight: bold;
+}
+
+.espace {
+    background-color: white;
+    height: 20px;
+    margin-left: -20px;
+}
+
+.line {
+    width: 100%;
+    margin: 5px;
+    border-bottom: 1px solid #2C2D5B;
+}
+
+/*label{
+    text-transform: capitalize;
+}*/
+.image {
+    width: 200px;
+}
+
+.flag {
+    margin-right: 10px;
+}
+
+.items-wrapper {
+    max-height: 400px;
+    border: solid 1px #0373bc;
+    border-radius: 4px;
+    overflow: auto;
+}
+
+.items-wrapper ::ng-deep .template-parameter-items {
+    border: none !important;
+    border-radius: none !important;
+}
+
+.template-editor {
+    position: relative;
+}
+
+.template-editor ::ng-deep .mat-tab-label-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.template-editor ::ng-deep .mat-tab-label-content input[type="text"] {
+    border: 1px dashed #0373bc;
+}
+
+.template-editor-wrapper-row {
+    overflow: hidden;
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.template-editor-row {
+    position: relative;
+    padding: 20px 7px 7px 7px;
+    border: dashed 1px #aaa;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.template-editor-wrapper-col {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.template-editor-col {
+    position: relative;
+    padding: 20px 10px 10px 10px;
+    border: dashed 1px #aaa;
+    border-radius: 4px;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.template-editor-col-title {
+    position: absolute;
+    top: -10px;
+    width: auto;
+    padding-left: 4px;
+    padding-right: 4px;
+    background: white;
+    border: dashed 1px #aaa;
+    border-radius: 4px;
+}
+
+.cdk-drag-preview {
+    box-sizing: border-box;
+    border-radius: 4px;
+    background: white;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.template-editor-wrapper-row.cdk-drop-list-dragging .template-editor-row:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.template-editor-wrapper-col.cdk-drop-list-dragging .template-editor-col:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+
+.btn-mini-add-tab {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    padding: 0;
+    width: 25px;
+    height: 25px;
+
+    font-size: 13px;
+    font-family: "Roboto", sans-serif !important;
+    border-radius: 3px;
+    border-width: thin;
+    border: none;
+
+    background: #0373bc;
+    color: white;
+}
+
+.btn-mini-add-tab:hover {
+    background: #04558b;
+}
+
+.btn-mini-add {
+    position: absolute;
+    top: -20px;
+    right: 10px;
+
+    padding: 0;
+    width: 20px;
+    height: 20px;
+
+    font-size: 13px;
+    font-family: "Roboto", sans-serif !important;
+    border-radius: 3px;
+    border-width: thin;
+    border: none;
+
+    background: rgb(70, 80, 170);
+    color: white;
+}
+
+.btn-mini-add:hover {
+    background: rgb(8, 26, 190);
+}
+
+.btn-mini-remove {
+    position: absolute;
+    top: -20px;
+    right: -15px;
+
+    padding: 0;
+    width: 20px;
+    height: 20px;
+
+    font-size: 13px;
+    font-family: "Roboto", sans-serif !important;
+    border-radius: 3px;
+    border-width: thin;
+    border: none;
+
+    background: rgb(216, 40, 40);
+    color: white;
+}
+
+.btn-mini-remove:hover {
+    background: rgb(192, 12, 12);
+}
+
+::ng-deep .mat-tab-label-content .btn-mini-remove {
+    top: 2px;
+    right: 0;
+}
+
+.title {
+    color: #0373bc;
+}
+
+.line {
+    width: 100%;
+    margin: 5px;
+    border-bottom: 1px solid #2C2D5B;
+}
+
+/*label{
+    text-transform: capitalize;
+  }*/
+
+.slide-image {
+    padding-top: 70px;
+    margin: 5px;
+}
+
+td {
+    cursor: pointer;
+}
+
+/*affichage de la liste pour les checkbox*/
+ul {
+    font-size: 13px;
+    list-style: disc;
+    padding-left: 23px;
+}
+
+.languages {
+    position: absolute;
+    top: 0;
+    left: 55px;
+
+    width: 150px;
+
+    padding-top: 10px;
+    padding-left: 10px;
+
+    background: white;
+
+    border: 1px solid #0373bc;
+    border-radius: 3px;
+
+    z-index: 9999;
+}

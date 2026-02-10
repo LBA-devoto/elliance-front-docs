@@ -1,0 +1,1714 @@
+[
+  {
+    "text": "Accueil",
+    "icon": "accueil",
+    "routerLink": "/admin/",
+    "is_custom_icon": true,
+    "entityName": "accueil",
+    "listedechamps": [],
+    "selected": true,
+    "filresappliques": {},
+    "children": [
+      {
+        "isVisible": true,
+        "selected": true,
+        "text": "Lecture/Affichage dans le menu",
+        "parentId": "accueil"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "text": "Création",
+        "parentId": "accueil"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "accueil",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Catégories",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "catégories",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Sous Catégories",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous Catégories",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Sous sous Catégories",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Sous sous catégories",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Produits",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Gestion des visualisations"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Validation des informations marketing"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Validation des informations tarifaires"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Validation des informations techniques"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Produits",
+        "text": "Publier en production"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Articles",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Articles",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Conditionnements",
+    "icon": "arborescence",
+    "parentId": "Conditionnements",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "parentId": "Conditionnements",
+        "selected": true,
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "parentId": "Conditionnements",
+        "selected": true,
+        "isVisible": true,
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Conditionnements",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Picto Catalogue",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Picto Catalogue",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "parentId": "Picto Catalogue",
+        "isVisible": true,
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Picto Catalogue",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Pictos",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Pictos",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Pictos",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Fournisseurs",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Fournisseurs",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Fournisseurs",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Actualités",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Actualités",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Actualités",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Contacts Fournisseurs",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Contacts Fournisseurs",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "parentId": "Contacts Fournisseurs",
+        "isVisible": true,
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Fournisseurs",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Contacts Clients",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Contacts Clients",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Clients",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Contacts Associés",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Contacts Associés",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Contacts Associés",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Table de données",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Table de données",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Table de données",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Champs",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "parentId": "Champs",
+        "isVisible": true,
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Champs",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Parametres techniques",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Parametres techniques",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Utilisateurs",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Utilisateurs",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Rôles et profils",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Rôles et profils",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Extranet",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Suppression unitaire"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Modifier le template"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Génération de PDF"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Suppression en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Extranet",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  },
+  {
+    "selected": true,
+    "text": "Planification des tâches",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Lecture/Affichage dans le menu"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Création"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Modification"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Modifier le template"
+      },
+
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Filtre dans le tableau de visualisation"
+      },
+
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Import"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Export"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Visualisation de fiches en masse"
+      },
+      {
+        "selected": true,
+        "isVisible": true,
+        "parentId": "Planification des tâches",
+        "text": "Gestion des visualisations"
+      }
+    ]
+  }
+]

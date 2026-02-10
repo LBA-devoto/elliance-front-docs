@@ -1,0 +1,10 @@
+<div class="px-2 py-3 container">
+    <div class="close">
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+    <div class="nav">
+        <div *ngFor="let opt of navOptions" [routerLink]="opt.route" (click)="close()">
+            {{opt.title}}
+        </div>
+    </div>
+</div>

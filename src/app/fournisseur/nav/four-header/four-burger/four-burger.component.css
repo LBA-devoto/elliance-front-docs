@@ -1,0 +1,60 @@
+.close mat-icon {
+    color: #0373bc;
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav div {
+    margin: 1rem;
+    font-size: large;
+    font-weight: bold;
+    color: #0373bc;
+    outline: none;
+    border: 1px solid #0373bc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 20px;
+}
+
+.nav div:hover {
+    color: #fff;
+    background-color: #0373bc;
+    cursor: pointer;
+}
+
+
+.sub-menu-list {
+    list-style: none;
+}
+
+.sub-menu-item {
+    display: flex;
+    align-items: center;
+    margin: 10px auto;
+    font-size: 1.3em;
+}
+
+.sub-menu-item img {
+    margin-right: 5px;
+}
+
+.sub-menu-item:hover {
+    color: #0373bc;
+    cursor: pointer;
+}

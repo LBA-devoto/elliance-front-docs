@@ -1,0 +1,61 @@
+
+<div class="full-page">
+    <div class="d-flex justify-content-between">
+        <!--div class="container-flex"-->
+            <div class="col-sm-6" >
+                <img src="/assets/LOGIN/Image_login{{client}}.png" style="height: 100vh; width:55vw;">
+            </div>
+    
+            <div class="col-sm-4"  >
+                <div class="login">
+                    <div class="text-center">	
+                        <img src="/assets/LOGIN/Logo_client{{client}}.svg" style="height: 70%; width:30%;">	
+                        <br><br><br>	
+                        <div class="connect">	
+                      <span><strong>Récupération de mot de passe</strong></span>
+                        </div>
+                        <form ngNativeValidate #form>
+                        <div class="formulaire">
+                            <div>
+                                <mat-form-field appearance="outline" style="border-color: #0373BC; outline-color: #0373BC;">
+                                    <mat-label>Nouveau mot de passe</mat-label>
+                                    <input matInput type="password" [type]="hide ? 'password' : 'text'" name="password" placeholder="Saisir votre mot de passe" [(ngModel)]="password" autocomplete="off" required>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                                </mat-form-field>
+                            </div>
+                            <div>
+                                <mat-form-field appearance="outline" style="border-color: #0373BC; outline-color: #0373BC;">
+                                    <mat-label>Confirmation du mot de passe</mat-label>
+                                    <input matInput type="password" [type]="hide ? 'password' : 'text'" name="password" placeholder="Saisir votre mot de passe" [(ngModel)]="password" autocomplete="off" required>
+                                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                            [attr.aria-pressed]="hide">
+                            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                            </button>
+                                </mat-form-field>
+                            </div>
+                            
+                            <div style="margin-top: 3vh ;">
+                                <!-- <button mat-button  style="color:white; background-color: rgb(21, 113, 189); padding: 8px; border-radius: 5px;"(click)="submit()">SE CONNECTER</button> -->
+                                <button type="submit" class="btn" style="color: white;  background-color: #0373BC; border-radius: 5px; font-size: 15px;" (click)="valider()">
+                                Valider</button>
+                            </div>
+                           
+                        </div>
+                        <div class="footer">	
+                            <div class="text-center">	
+                                <div *ngIf="client === '-eurochef'">
+                                    <span class="mot">&copy;2023 EUROCHEF : Réseau d'installateurs de cuisines professionnelles</span>
+                                  </div>
+                              	
+                            </div>	
+                        </div>
+                    </form>
+                    </div>
+               
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div>
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <!---------------------------- recherche ------------------------------------------------------->
+    <app-search-product (result)="displayResult($event)"></app-search-product>
+    <app-loading-spinner></app-loading-spinner>
+
+    <div class="container">
+        <p>
+            <a routerLink="/accueil">{{'Accueil'}}</a> >
+            <span>{{'Associés'}}</span>
+        </p>
+        <div>
+            <span class="titre">{{'Les Associés'|uppercase}}</span>
+        </div>
+        <div class="line"></div>
+        <div class="d-flex justify-content-between flex-wrap mt-3">
+            <div class="d-flex col-12 col-sm-6 search-input">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{'Raison sociale'}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="recherche" (ngModelChange)="onsearcheFours()"
+                        [matAutocomplete]="auto" placeholder="Rechercher un associé">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let pmorale of results" [value]="pmorale.raisonsociale"
+                            (click)="goTo(pmorale.id)">{{pmorale.raisonsociale}}</mat-option>
+                            <!-- (click)="goTo(pmorale.id, pmorale.raisonsociale)">{{pmorale.raisonsociale}}</mat-option> -->
+                    </mat-autocomplete>
+                </mat-form-field>
+                <!-- <a class="btn search-btn"><mat-icon style="vertical-align: middle;">search</mat-icon> </a> -->
+            </div>
+            <div class="export col-12 col-sm-6 text-end">
+                <button class="btn-primary" mat-raised-button>{{'EXPORTER'}}</button>
+            </div>
+        </div>
+        <div style="border: 1px solid #0373bc; margin-bottom: 1rem; border-radius: 10px; padding: 10px;">
+            <div class="tabs">
+                <mat-paginator [length]="paginatorLength" [pageSize]="paginatorSize"
+                    [pageSizeOptions]="paginatorValues" aria-label="Select page" [pageIndex]="paginatorIndex"
+                    (page)="paginatorChange($event)">
+                </mat-paginator>
+                <div class="d-flex justify-content-around align-items-center flex-wrap">
+                    <div class="p-2" *ngFor="let associe of associes">
+                        <app-fournisseur [fournisseur]="associe" [champs]="champs"></app-fournisseur>
+                    </div>
+                </div>
+                <mat-paginator *ngIf="associes.length>0" [length]="paginatorLength" [pageSize]="paginatorSize"
+                    [pageSizeOptions]="paginatorValues" aria-label="Select page" [pageIndex]="paginatorIndex"
+                    (page)="paginatorChange($event)">
+                </mat-paginator>
+            </div>
+            <div *ngIf="associes.length==0" class="text-center p-2">
+                {{'Pas de résultat'}}
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer-user></app-footer-user>

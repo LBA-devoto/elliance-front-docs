@@ -1,0 +1,121 @@
+<div [ngClass]="{'opacify': loadingError}">
+    <app-loading-spinner></app-loading-spinner>
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <app-search-product></app-search-product>
+    <div *ngIf="loadingError" (click)="loadProduct()" class="text-center my-3" class="loading-err">
+        <button class="btn-primary" mat-raised-button>{{'UNE ERREUR EST SURVENUE, VEUILLEZ RESSAYER EN CLIQUANT ICI'}}</button>
+    </div>
+    <div *ngIf="alert" class="alert alert-{{alert.type}}" role="alert">
+        {{alert.message}}
+    </div>
+    <div class="container-fluid p-0" *ngIf="product">
+        <div class="container">
+            <div>
+                <p class="m-0">
+                    <span routerLink="/accueil">{{'Accueil'}}</span> >
+                    <span routerLink="/catalogues/product&search:">{{'Catalogue'}}</span>
+                </p>
+            </div>
+            <div class="d-flex align-items-center my-3">
+                <img *ngIf="picto" [src]="logoCat" width="33" height="33" style="margin-right: 10px;"
+                    (error)="logoCat='/assets/images/Pas-dimage-disponible.jpg'">
+                <div class="titre">{{name}}</div>
+            </div>
+            <div class="line"></div>
+            <div class="row py-3">
+                <div class="col-12 col-md-6 images my-y" *ngIf="extranetImages">
+                    <div class="row" *ngIf="images.length>0">
+                        <div class="col-2 miniatures d-flex flex-column justify-content-start align-items-center">
+                            <div *ngFor="let mini of images|slice:0:4" class="mini" (click)="mainImage=mini"
+                                [ngClass]="{'selected': mini==mainImage}">
+                                <img [src]="mini" alt="mini">
+                            </div>
+                        </div>
+                        <div class="col-10 main-image">
+                            <!-- <img [src]="mainImage" alt="main-image"> -->
+                            <lib-ngx-image-zoom class="mx-auto img" [thumbImage]="mainImage" [fullImage]="mainImage"
+                                [magnification]="2" [enableScrollZoom]="false" [enableLens]="true" [lensWidth]="100"
+                                [lensHeight]="100" [circularLens]="false"></lib-ngx-image-zoom>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 images my-y" *ngIf="!extranetImages">
+                    <div class="row p-2">
+                        {{extranetTexte}}
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 description my-2">
+                    <div *ngFor="let ch of extranetDroiteChamps" [style]="getChampCSS(ch)">
+                        <div *ngIf="ch == 'sep'" class="line my-3"></div>
+                        <div *ngIf="ch != 'sep' && !isRestricted(ch)">
+                            <span *ngIf="ch.displayLabel">{{getChampLabel(ch)}} : </span><span>{{getChampValue(ch)}} {{getChampExtension(ch)}}</span>
+                        </div>
+                    </div>
+
+                    <!-- <div class="tarif mb-3" *ngIf="publicPrice > 0">
+                        <div>{{'Tarif public : '}}{{publicPrice|number:'0.2'}}{{' € HT'}}</div>
+                        <div>{{'Tarif achat : '}}{{purchasePrice|number:'0.2'}}{{' € HT'}}</div>
+                    </div>
+                    <div>{{'Eco-participation : '}}{{ecoPart|number:'0.2'}}{{' € HT'}}</div>
+                    <div class="mb-3">{{'Dernière mise à jour tarif : '}}{{modificationDate ?
+                        (modificationDate|date:'dd/MM/yyyy') : '-'}}</div>
+
+                    <a class="carac" (click)="scrollDown()">{{'Accéder aux caractéristiques'}}</a>
+
+                    <div class="line my-3"></div>
+
+                    <div class="info">
+                        <label><strong>{{'Marque : '}}</strong>{{marque}}</label><br>
+                        <label><strong>{{'Réference fournisseur : '}}</strong>{{reffournisseur}}</label><br>
+                        <label><strong>{{'Réference interne : '}}</strong>{{reference}}</label><br>
+                    </div>
+
+                    <div class="line my-3"></div> -->
+
+
+                    <div class="estimate d-flex align-items-center justify-content-start">
+                        <div class="controls num-controls">
+                            <mat-icon (click)="add(-1)">remove</mat-icon>
+                            <input type="number" [value]="quantity" [(ngModel)]="quantity"
+                                class="devis-input text-center" min="1">
+                            <mat-icon (click)="add(1)">add</mat-icon>
+                        </div>
+                        <button mat-raised-button class="btn-primary mx-2" [disabled]="quantity<1"
+                            (click)="addDevis()">
+                            {{'AJOUTER AU DEVIS'}}
+                        </button>
+                        <div class="controls">
+                            <mat-icon (click)="setFavorite()" [ngStyle]="{'opacity': isFavorite ? '1' : '0.6'}">
+                                {{isFavorite ? 'favorite' : 'favorite_border'}}
+                            </mat-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="car-content" *ngIf="extranet">
+            <app-carac-product [product]="product" [openTabIndex]="caracOpenTabIndex" [extranet]="extranet" [champs]="champs" [lang]="lang"></app-carac-product>
+        </div>
+
+        <div class="car-content" *ngIf="productsCarousel.length>0">
+            <app-most-consulted [products]="productsCarousel" [champs]="champs"></app-most-consulted>
+        </div>
+
+        <div class="car-content" *ngIf="accessoiresCarousel.length>0">
+            <app-accessories [products]="accessoiresCarousel" [champs]="champs"></app-accessories>
+        </div>
+
+        <div class="car-content" *ngIf="optionsCarousel.length>0">
+            <app-product-options [products]="optionsCarousel" [champs]="champs"></app-product-options>
+        </div>
+    </div>
+
+</div>
+
+
+
+<app-footer-user></app-footer-user>

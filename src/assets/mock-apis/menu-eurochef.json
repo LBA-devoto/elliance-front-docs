@@ -1,0 +1,273 @@
+[
+  {
+    "text": "Accueil",
+    "icon": "accueil",
+    "routerLink": "/admin/",
+    "is_custom_icon": true,
+    "entityName": "accueil",
+    "typeName": "FOURNISSEUR",
+    "listedechamps": []
+  },
+  {
+    "text": "Gestion des contenus ",
+    "icon": "sharing",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Devis",
+        "entityName": "Devis",
+        "listedechamps": ["nom", "code", "surnom"]
+      },
+      {
+        "text": "Demandes de rectification fournisseurs",
+        "routerLink": "/purchases/history",
+        "entityName": "fournisseurs"
+      },
+      {
+        "text": "Validation trames fournisseurs",
+        "entityName": "validfournisseurs",
+        "routerLink": "/purchases/history"
+      },
+      {
+        "text": "Actualités",
+        "entityName": "actualite",
+        "routerLink": "/purchases/history"
+      }
+    ]
+  },
+  {
+    "text": "Bibliothèque multimédia",
+    "icon": "biblo",
+    "is_custom_icon": true,
+    "entityName": "bibliotheque",
+    "listedechamps": ["select", "nom", "prenom", "tels", "emails"]
+  },
+  {
+    "text": "Gestion de l'arborescence",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "isVisible": true,
+        "text": "Catégories",
+        "entityName": "categorie",
+        "id": "",
+        "listedechamps": ["select", "titre", "code", "perecode", "topcode"],
+
+        "routerLink": "/product/category"
+      },
+      {
+        "text": "Produits",
+        "entityName": "produit",
+        "isVisible": true,
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": ""
+      }
+    ]
+  },
+
+  {
+    "text": "Gestion des tiers",
+    "icon": "pers morale_blc",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "text": "Associés",
+        "entityName": "personnemorale",
+        "typeName": "ASSOCIE",
+        "isVisible": true,
+        "filresappliques": [
+          {
+            "champ": "isassocie",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ]
+          }
+        ],
+        "listedechamps": [
+          "select",
+          "nom",
+          "code",
+          "raisonsociale",
+          "tva",
+          "statut",
+          "nompays"
+        ],
+        "id": "6423520670d9db18e703f5b5",
+        "routerLink": "/purchases/new"
+      },
+      {
+        "text": "Clients",
+        "entityName": "personnemorale",
+        "filresappliques": [
+          {
+            "champ": "isclient",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ]
+          }
+        ],
+        "typeName": "CLIENT",
+        "id": "635b95c6b96fd53d382b5d3c",
+        "isVisible": true,
+        "listedechamps": [
+          "select",
+          "nom",
+          "code",
+          "raisonsociale",
+          "tva",
+          "statut",
+          "nompays"
+        ],
+        "routerLink": "/purchases/history"
+      },
+      {
+        "text": "Fournisseurs",
+        "entityName": "personnemorale",
+        "typeName": "FOURNISSEUR",
+        "filresappliques": [
+          {
+            "champ": "isfournisseur",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ]
+          }
+        ],
+        "listedechamps": [
+          "select",
+          "nom",
+          "code",
+          "raisonsociale",
+          "tva",
+          "codefour",
+          "statut",
+          "nompays"
+        ],
+        "id": "635b95c6b96fd53d382b5d39",
+        "routerLink": "/purchases/history"
+      }
+    ]
+  },
+  {
+    "text": "Gestion des contacts",
+    "icon": "003-research_blc",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "typeName": "CONTACT_FOURNISSEUR",
+        "text": "Contacts Fournisseurs",
+        "entityName": "personnephysique",
+
+        "listedechamps": ["select", "nom", "prenom", "tier", "tels", "emails"],
+        "routerLink": "/purchases/new"
+      },
+      {
+        "typeName": "CONTACT_CLIENT",
+        "text": "Contacts Clients",
+        "entityName": "personnephysique",
+        "id": "6363dc3620658c16ed134747",
+        "listedechamps": ["select", "nom", "prenom", "tels", "emails"],
+        "routerLink": "/purchases/history"
+      },
+      {
+        "typeName": "CONTACT_ASSOCIE",
+        "text": "Contacts Associés",
+        "entityName": "personnephysique",
+        "id": "636a35d5fcdb7366fd7ab1ce",
+        "listedechamps": ["select", "nom", "prenom", "tels", "emails"],
+        "routerLink": "/purchases/history"
+      }
+    ]
+  },
+
+  {
+    "text": "Paramètres",
+    "icon": "surface1",
+    "is_custom_icon": true,
+
+    "children": [
+      {
+        "text": "Table de données",
+        "entityName": "datatable",
+        "routerLink": "/purchases/new"
+      },
+      {
+        "text": "Champs",
+        "entityName": "inputs",
+        "routerLink": "/purchases/history"
+      },
+      {
+        "isVisible": true,
+        "listedechamps": ["select", "nomTable", "valeur", "mapLocalLibelle"],
+        "id": "",
+        "text": "Parametres techniques",
+        "entityName": "parametre",
+        "routerLink": "/admin/parametre-technique"
+      },
+      {
+        "text": "Utilisateurs",
+        "listedechamps": ["select", "prénom", "nom", "email", "active"],
+        "entityName": "user",
+        "routerLink": "/purchases/history"
+      },
+      {
+        "text": "Rôles et profils",
+        "listedechamps": ["select", "nom du groupe"],
+        "entityName": "role",
+        "routerLink": "/admin/admin-user-group-parameter"
+      },
+      {
+        "text": "Profile",
+        "listedechamps": ["select"],
+        "entityName": "profile",
+        "routerLink": "/admin/admin-user-group-parameter"
+      },
+
+      {
+        "text": "Page",
+        "listedechamps": ["select"],
+        "entityName": "page",
+        "routerLink": "/admin/admin-user-group-parameter"
+      },
+      {
+        "text": "Extranet",
+        "listedechamps": [],
+        "listeonglets": ["detail", "produit", "fournisseur"],
+        "entityName": "extranet",
+        "routerLink": "/admin/extranet-parameter"
+      }
+    ]
+  },
+  {
+    "text": "Déconnexion",
+    "icon": "deconnexion",
+    "routerLink": "/logout",
+    "entityName": "deconnexion",
+    "is_custom_icon": true
+  }
+]

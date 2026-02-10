@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div>
+        <div class="article">
+            <div *ngIf="edition">
+                <!--ng-container *ngIf="onecolumn">
+                    <app-template-une-colonne-edition [template]="template" (sendTemplate)="getTemplate($event)" ></app-template-une-colonne-edition>
+                </ng-container-->
+                <ng-container *ngIf="twocolumn">
+                    <app-template-deux-colonne-edition [template]="template" [tab]="tab" (sendTemplate)="getTemplate($event)"></app-template-deux-colonne-edition>
+                </ng-container>
+            </div>
+            <div *ngIf="lecture">
+                <!--ng-container *ngIf="viewoncolumn">
+                    <app-template-une-colonne-lecture [template]="template" (sendTemplate)="modeEdition($event)" ></app-template-une-colonne-lecture>
+                </ng-container-->
+                <ng-container *ngIf="viewtwocolumn">
+                    <app-template-deux-colonne-lecture [template]="template" [tab]="tab" (sendTemplate)="modeEdition($event)"></app-template-deux-colonne-lecture>
+                </ng-container>
+            </div>
+           
+        </div >
+    </div>
+</div>
+

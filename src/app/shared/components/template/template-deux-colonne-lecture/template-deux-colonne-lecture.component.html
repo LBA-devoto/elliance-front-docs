@@ -1,0 +1,409 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between row">
+    <div class="menu" [ngClass]="isEditMode ? 'col-3' : 'col-1'">
+      <div class="row">
+        <div class="col">
+          <ng-container *ngIf="!isEditMode">
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left"
+              (click)="modeEdition()">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <br />
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left"
+              (click)="supprimer()">
+              <mat-icon>delete</mat-icon>
+            </a>
+            <br />
+            <div class="position-relative">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Langues"
+                (click)="onOpenLanguages($event)" matTooltipPosition="left">
+                <mat-icon>language</mat-icon>
+              </a>
+              <br />
+              <div #languagesElementRef class="languages" [ngClass]="{ 'd-none': !isOpenLanguages }">
+                <div class="form-check" *ngFor="let language of languages">
+                  <input class="form-check-input" type="checkbox" [id]="language.key" [(ngModel)]="language.selected"
+                    (change)="onChangeLanguage(language)">
+                  <label class="form-check-label" [attr.for]="language.key">{{language.label}}</label>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="tab.entite === 'produit'">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="PDF" matTooltipPosition="left">
+                <mat-icon (click)="downloadPDF()">picture_as_pdf</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+            <ng-container *ngIf="tab.entite === 'catalog'">
+              <a class="btn btn-outline-warning" (click)="onExportIdml()" #tooltip="matTooltip" matTooltip="Catalogue" matTooltipPosition="left">
+                <mat-icon>menu_book</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Editer" matTooltipPosition="left">
+              <mat-icon (click)="editLayout()">flip_to_back</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="isEditMode">
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left"
+              (click)="saveLayout()">
+              <mat-icon>save</mat-icon>
+            </a>
+            <br />
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left">
+              <mat-icon>close</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+        </div>
+        <div class="col-10 px-3" *ngIf="isEditMode">
+          <label class="mb-2">
+            <strong>Rechercher un champ</strong>
+          </label>
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+            <input matInput (keyup)="onSearch($event)" />
+          </mat-form-field>
+          <div class="items-wrapper">
+            <app-template-parameter id="parameters" [parameters]="parameters"
+              [parametersConnection]="parametersConnection"
+              (parameterDropped)="dropParameter($event)"></app-template-parameter>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col article">
+      <ng-container *ngIf="isEditMode">
+        <div class="template-editor">
+          <mat-tab-group>
+            <mat-tab *ngFor="let tab of layout.tabs; let i = index">
+              <ng-template mat-tab-label *ngIf="i === 0">
+                {{ tab.label }}
+              </ng-template>
+              <ng-template mat-tab-label *ngIf="i > 0">
+                <input type="text" matInput [(ngModel)]="tab.label" />
+                <button type="button" class="btn-mini-remove" (click)="onRemoveTab(i)">
+                  X
+                </button>
+              </ng-template>
+              <div cdkDropList class="template-editor-wrapper-row" [cdkDropListData]="tab.rows"
+                (cdkDropListDropped)="dropRows($event, tab.rows)">
+                <div class="template-editor-row mb-2" *ngFor="let row of tab.rows" cdkDrag>
+                  <div cdkDropList cdkDropListOrientation="horizontal" [id]="row.id" class="template-editor-wrapper-col"
+                    (cdkDropListDropped)="dropCols($event, row.cols)">
+                    <div class="template-editor-col m-1" *ngFor="let col of row.cols" cdkDrag>
+                      <app-template-parameter [id]="col.id" class="w-100 h-100" [parameters]="col.parameters"
+                        [parametersConnection]="parametersConnection"
+                        (parameterDropped)="dropParameter($event)"></app-template-parameter>
+                      <input type="text" class="template-editor-col-title" matInput [(ngModel)]="col.title"
+                        placeholder="Titre" />
+                      <button type="button" class="btn-mini-add" (click)="onAddCol(row.cols, col.id)">
+                        +
+                      </button>
+                      <button type="button" class="btn-mini-remove" (click)="onRemoveCol(row.cols, col.id)" *ngIf="
+                            row.cols.length > 1 ||
+                            (col.parameters !== undefined &&
+                              col.parameters !== null &&
+                              col.parameters.length > 0)
+                          ">
+                        x
+                      </button>
+                    </div>
+                  </div>
+                  <input type="text" class="template-editor-col-title" matInput [(ngModel)]="row.title"
+                    placeholder="Titre" />
+                  <button type="button" class="btn-mini-add" (click)="onAddRow(tab.rows, row.id)">
+                    +
+                  </button>
+                  <button type="button" class="btn-mini-remove" (click)="onRemoveRow(tab.rows, row.id)"
+                    *ngIf="tab.rows.length > 1">
+                    x
+                  </button>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+          <button type="button" class="btn-mini-add-tab" (click)="onAddTab()">
+            +
+          </button>
+        </div>
+      </ng-container>
+
+      <div class="row" *ngIf="!isEditMode">
+        <ng-container *ngIf="template.layout !== undefined && template.layout !== null">
+          <mat-tab-group>
+            <mat-tab [label]="tab.label" *ngFor="let tab of template.layout.tabs">
+              <div class="row" *ngFor="let row of tab.rows">
+                <h5 class="mb-0 title" *ngIf="hasTitleOnRow(row)">
+                  {{ row.title }}
+                </h5>
+                <div class="col" *ngFor="let col of row.cols">
+                  <h5 class="mb-0 title" *ngIf="hasTitleOnCols(row.cols)">
+                    {{ col.title === "" ? "&nbsp;" : col.title }}
+                  </h5>
+                  <div *ngFor="let parametre of col.parameters">
+                    <div *ngIf="!parametre.name.toLowerCase().endsWith('id') " class="titre">
+                      <ng-container *ngIf="parametre.label">
+                        <label>
+                          <strong>{{parametre.label}}</strong>
+                        </label>
+                        <br>
+                      </ng-container>
+                      <ng-container *ngIf="!parametre.label">
+                        <label>
+                          <strong>{{parametre.name}}</strong>
+                        </label>
+                        <br>
+                      </ng-container>
+                      <!-- ce bloc sert a l'écriture des text,'password','email','number','search','tel','url''password','email','number','search','tel','url' de type input -->
+                      <div *ngIf="['text','password','email','number','search','tel','url'].includes(parametre.type)">
+                        <label *ngIf="parametre.valeur"> {{parametre.valeur}}</label>
+                        <label *ngIf="!parametre.valeur">-</label>
+                      </div>
+                      <div *ngIf="parametre.type ==='Boolean'">
+                        <label *ngIf="parametre.valeur"> Oui </label>
+                        <label *ngIf="!parametre.valeur">Non</label>
+                      </div>
+                      <div *ngIf="parametre.type ==='Locale'">
+                        <label *ngIf="parametre.valeur"> {{parametre.valeur}} </label>
+                        <label *ngIf="!parametre.valeur">-</label>
+                      </div>
+                      <!-- ce bloc sert a afficher une date -->
+                      <div *ngIf="parametre.type ==='BigDecimal'">
+                        <label *ngIf="parametre.valeur"> {{parametre.valeur}} </label>
+                        <label *ngIf="!parametre.valeur">-</label>
+                      </div>
+                      <!-- ce bloc sert a afficher une date -->
+                      <div *ngIf="parametre.type ==='date'">
+                        <label *ngIf="parametre.valeur">{{parametre.valeur | date :'dd/MM/yyyy HH:mm:ss'}} </label>
+                        <!--label *ngIf="parametre.valeur">{{converterdate(i,'gauche')}} </label-->
+                        <label *ngIf="!parametre.valeur">-</label>
+                      </div>
+                      <!-- ce bloc sert a l'écriture des text,'password','email','number','search','tel','url''password','email','number','search','tel','url' de type input -->
+                      <div *ngIf="parametre.type ==='textarea'">
+                        <div *ngIf="parametre.valeur" style="max-height: 150px; overflow: auto;">
+                          <label *ngIf="parametre.valeur">{{parametre.valeur}}</label>
+                        </div>
+                        <label *ngIf="!parametre.valeur">-</label>
+                      </div>
+                      <!--************************************************************************************************************************************************** -->
+                      <!--- ce bloc sert a afficher une checkbox -->
+                      <div *ngIf="parametre.type ==='Checkbox'">
+                        <div *ngFor="let  param of parametre.parametres">
+                          <ul role="list" *ngFor="let  sousParam of param.parametres">
+                            <li role="listitem" *ngIf="sousParam.label==='valeur'">
+                              {{sousParam.valeur}}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <!--- ce bloc sert a afficher une simple list d'une entite -->
+                      <div *ngIf="parametre.type ==='List'">
+                        <div>
+                          <table style="margin-top: 15px;width: 90%; background-color: #fff;"
+                            class="table table-stripped">
+                            <thead>
+                              <tr>
+                                <th> # Identifiant</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let param of parametre.parametres; let n = index">
+                                <td *ngIf="param.valeur">
+                                  <span (click)="openListLinkid(parametre.entity,param.valeur)">{{param.valeur}} </span>
+                                </td>
+                                <td colspan="2" *ngIf="!param.valeur">
+                                  Aucun enregistrement associé
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <!-- ************************************************************************************************************************************************** -->
+                      <!-- ce bloc sert a afficher les valeurs d'une entite -->
+                      <div *ngIf="parametre.type ==='class'">
+                        <div *ngFor="let param of parametre.parametres">
+                          <div *ngIf="!param.label.endsWith('id')">
+                            <div *ngIf="!['Image','Fichier'].includes(param.type)">
+                              <div *ngIf="['titre','nom','valeur','libelle','famille','code'].includes(param.label)">
+                                <!--label>{{param.label}} : </label><br-->
+                                <table *ngIf="param.valeur && parametre.entity != 'parametre'">
+                                  <tbody style="background-color: #fff;">
+                                    <tr>
+                                      <td style="padding: 2px 15px 2px 4px;" (click)="openClassLink(parametre)">
+                                        {{param.valeur}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                                <ng-container *ngIf="param.valeur && parametre.entity === 'parametre'">
+                                  <ng-container *ngFor="let libelle of parametre.parametres[2].valeur | keyvalue">
+                                    <label>{{param.valeur}}
+                                      <span *ngIf="libelle.value"></span>- {{libelle.value}} </label>
+                                  </ng-container>
+                                </ng-container>
+                                <label *ngIf="!param.valeur">-</label>
+
+                              </div>
+                            </div>
+                            <div *ngIf="['Image','Fichier'].includes(param.type)">
+                              <div *ngIf="param.label ==='photooriginalurl'">
+                                <div *ngIf="param.valeur">
+                                  <img [src]="param.valeur">
+                                </div>
+                                <div *ngIf="!param.valeur">
+                                  <label>Aucune Image disponible</label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ****************************************************************************************************** -->
+                      <div *ngIf="parametre.type ==='class Image'">
+                        <!--ng-image-slider [images]="parametre.parametres" #nav></ng-image-slider-->
+                        <div *ngFor="let param of parametre.parametres">
+                          <div>
+                            <ng-container *ngIf="param.label==='url' && param.valeur">
+                              <div>
+                                <img [src]="param.valeur" style="width: 150px;">
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="param.label==='url' && param.valeur ==null">
+                              Aucune Image disponible
+                            </ng-container>
+                          </div>
+                        </div>
+                      </div>
+                      <div *ngIf="parametre.type ==='Interface Link'">
+                        <div>
+                          <table style="margin-top: 15px;width: 90%; background-color: #fff;"
+                            class="table table-stripped">
+                            <thead>
+                              <tr>
+                                <th *ngFor="let champs of parametre.champs">
+                                  <div *ngIf="champs!='id'">
+                                    {{champs | uppercase}}
+                                  </div>
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let param of parametre.parametres">
+                                <ng-container *ngFor="let param1 of param.parametres; let j = index">
+                                  <td *ngIf="param1.label != 'id' && param1.valeur">
+                                    <div (click)="openInterfaceLink(parametre.entity,param)">
+                                      {{param1.valeur}}
+                                    </div>
+                                  </td>
+                                  <td *ngIf="param1.label === 'id' && !param1.valeur" colspan="3">
+                                    Aucun enregistrement associé
+                                  </td>
+                                </ng-container>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div *ngIf="parametre.type==='Interface'">
+                        <div *ngFor="let param of parametre.parametres">
+                          <div *ngFor="let param1 of param.parametres">
+                            <div *ngIf="['valeur','numero'].includes(param1.label)">
+                              <label *ngIf="param1.valeur">{{param1.valeur}} </label>
+                              <label *ngIf="!param1.valeur">-</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="parametre.type==='Interface Image'">
+                        <div *ngFor="let param of parametre.parametres">
+                          <div *ngFor="let param1 of param.parametres">
+                            <div *ngIf="param1.label ==='photooriginalurl'">
+                              <div *ngIf="!param1.valeur">
+                                Aucunne Image disponible
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div *ngIf="parametre.type==='Interface Class'">
+                        <div *ngFor="let param of parametre.parametres">
+                          <div *ngFor="let sousParam of param.parametres">
+                            <div *ngIf="sousParam.label!='id'">
+                              <ng-container *ngIf="sousParam.type ==='List'">
+                                <div *ngFor="let sousparam1 of sousParam.parametres">
+                                  <label *ngIf="sousparam1.valeur">{{sousparam1.valeur}}</label>
+                                  <label *ngIf="!sousparam1.valeur">-</label>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="sousParam.type ==='class'">
+                                <div *ngFor="let sousParam1 of sousParam.parametres">
+                                  <div *ngIf="sousParam1.label !='id'">
+                                    <label *ngIf="sousParam1.valeur">{{sousParam1.valeur}} </label>
+                                    <label *ngIf="!sousParam1.valeur">-</label>
+                                  </div>
+                                </div>
+                              </ng-container>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ****************************************************************************************************************************** -->
+                      <!-- ce bloc sert a afficher une hashMap -->
+                      <div *ngIf="['HashMap','Map','LinkedHashMap'].includes(parametre.type)">
+                        <div *ngFor="let param of parametre.parametres">
+                          <ng-container *ngIf="parametre.multiLangue && param.visible === true">
+                            <div class="d-flex justify-content-start" style="margin-bottom: 5px;">
+                              <div class="flag">
+                                <img src="/assets/images/Icones/flag/{{param.label}}.svg" width="23" height="18"
+                                  loading="lazy">
+                              </div>
+                              <div class="langue">
+                                <label *ngIf="param.valeur">{{param.valeur}}</label>
+                                <label *ngIf="!param.valeur"> -</label>
+                              </div>
+                            </div>
+                          </ng-container>
+                          <ng-container *ngIf="!parametre.multiLangue">
+                            <label *ngIf="param.valeur">{{param.valeur}}</label>
+                            <label *ngIf="!param.valeur">-</label>
+                          </ng-container>
+                        </div>
+                      </div>
+
+                      <div *ngIf="['HashMap Image','LinkedHashMap Image'].includes(parametre.type)">
+                        <!--ng-image-slider [images]="parametre.parametres" #nav></ng-image-slider-->
+                        <div *ngFor="let param of parametre.parametres">
+                          <div *ngFor="let sousParam of param.parametres" style="margin-bottom: 10px;">
+                            <ng-container *ngIf="sousParam.label==='url' && sousParam.valeur">
+                              <div>
+                                <img [src]="sousParam.valeur" style="width: 150px;">
+                              </div>
+                            </ng-container>
+                            <ng-container *ngIf="sousParam.label==='url' && !sousParam.valeur">
+                              Aucune Image disponible
+                            </ng-container>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </ng-container>
+
+        <div *ngIf="template.layout === undefined || template.layout === null">
+          <ng-container>
+            <div>
+              Veuillez créer une nouvelle template pour la fiche {{template.entite}}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

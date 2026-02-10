@@ -1,0 +1,84 @@
+.titre {
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: "Poppins";
+}
+
+.carac-produit {
+    font-size: 1.2em;
+}
+
+.carac-produit span, .doc-name {
+    font-weight: 600;
+    
+}
+
+.doc {
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: #0373bc;
+    text-decoration: none;
+    max-width: 250px;
+    border: 1px solid #0373bc;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px #D2D2D2;
+    background-color: #fff;
+    opacity: 0.7;
+}
+
+.doc:hover {
+    opacity: 1;
+}
+
+.file-name, .doc-name {
+    color: black;
+    width: 200px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    white-space: pre-wrap;
+    text-overflow: ellipsis;
+
+}
+
+.line {
+    width: 100%;
+    border-bottom: 2px solid #b9b9b9;
+    margin: 10px auto;
+}
+
+::ng-deep .mat-tab-body-wrapper {
+    box-shadow: 0 0 3px #0373bc !important;
+    background-color: #fff;
+}
+
+::ng-deep .mat-tab-label-content {
+    color: #0373bc !important;
+    font-weight: bold !important;
+}
+
+::ng-deep .mat-tab-disabled {
+    opacity: 0.2 !important;
+}
+
+::ng-deep .mat-tab-body-content {
+    white-space: pre-wrap !important;
+    padding: 10px !important;
+    background-color: #fff !important;
+    /* min-height: 200px !important; */
+    overflow: hidden !important;
+}
+
+::ng-deep mat-tab-body.mat-tab-body-active {
+    margin: 0 auto !important;
+}
+
+::ng-deep .mat-ink-bar {
+    background-color: #f8d442 !important;
+    height: 5px !important;
+    visibility: visible !important;
+}

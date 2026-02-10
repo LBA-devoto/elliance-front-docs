@@ -1,0 +1,33 @@
+<ng-container>
+    <div class="row">
+        <div class="col-1 d-flex flex-column align-items-center" *ngIf="!isLecture">
+            <button mat-raised-button class="btn btn-outine" (click)="onSave()">
+                <mat-icon>save</mat-icon>
+            </button>
+            <button mat-raised-button class="btn btn-outine btn-outine-danger my-2" (click)="remove()">
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        <div class="col-1 d-flex flex-column align-items-center" *ngIf="isLecture">
+            <button mat-raised-button class="btn btn-outine" (click)="onEditMode()">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </div>
+        <div class="col-11">
+            <div class="row">
+                <div *ngFor="let cfg of fieldsConfigList"
+                [ngClass]="{'col-6': cfg.type == 'multi-langue', 'col-12': cfg.type != 'multi-langue'}">
+
+                <app-textbox #formField [data]="null" [config]="cfg" *ngIf="cfg.type == 'textbox'"></app-textbox>
+                <app-dropdown #formField [data]="null" [config]="cfg" *ngIf="cfg.type == 'dropdown'"></app-dropdown>
+                <app-multi-langue #formField [languages]="languages" [data]="null" [config]="cfg"
+                    *ngIf="cfg.type == 'multi-langue'"></app-multi-langue>
+                <app-data-table #formField [config]="cfg" *ngIf="cfg.type == 'list'" (addField)="onAddField($event)"
+                    (updateField)="onUpdateField($event)"></app-data-table>
+                <app-date #formField [config]="cfg" *ngIf="cfg.type == 'date'"></app-date>
+            </div>
+            </div>
+
+        </div>
+    </div>
+</ng-container>

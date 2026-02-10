@@ -1,0 +1,346 @@
+<div>
+    <app-loading-spinner></app-loading-spinner>
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <!---------------------------- recherche ---------------------------------->
+    <app-search-product></app-search-product>
+    <div class="container">
+        <!------------------------ title -------------------------->
+        <p><a routerLink="/accueil">{{'Accueil'}}</a>
+            > {{'Gestion'}} > <a routerLink="{{gestionLink}}">{{'Mes articles'}}</a> > {{title}}
+        </p>
+        <div style="height: 50px;" class="d-flex align-items-center justify-content-between">
+            <p style="font-weight: 700;">{{"Création d'un article"|uppercase}}</p>
+            <button mat-raised-button class="btn-primary" (click)="save()" [disabled]="articleForm.invalid">{{'SAUVEGARDER'}}</button>
+        </div>
+        <div class="line my-2"></div>
+
+        <div class="row">
+            <div class="col-12 col-xl-9 p-0 p-xl-2">
+                <!-- BLOC 1 -->
+                <div class="form-container my-3">
+                    <div class="title">
+                        <span>{{'Information article'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <form [formGroup]="articleForm">
+                        <!-- BLOC 1 -->
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Référence'}}</mat-label>
+                                    <input matInput type="text" formControlName="reference" placeholder="168EEF">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Code produit'}}</mat-label>
+                                    <input matInput type="text" formControlName="code" placeholder="168EEF">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Titre'}}</mat-label>
+                                    <input matInput type="text" formControlName="titre" placeholder="D2300042">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-6 p-2 label file-ref">
+                                <mat-label>{{'Photo'}}</mat-label>
+                                <input type="file" #filePicker1 hidden (change)="loadPhoto($event)">
+                                <button class="btn-primary file-picker" mat-raised-button
+                                    (click)="filePicker1.click()">{{'Sélectionner votre fichier'|uppercase}}</button>
+                                <button class="btn-primary file-picker-small" mat-raised-button
+                                    (click)="filePicker1.click()">{{'Sélectionner'|uppercase}}</button>
+                                <span>{{photoFilename}}</span>
+                            </div>
+                            <div class="col-6 p-2 label file-ref">
+                                <mat-label>{{'Fiche Commerciale *'}}</mat-label>
+                                <input type="file" #filePicker2 hidden (change)="loadFiche($event)">
+                                <button class="btn-primary file-picker" mat-raised-button
+                                    (click)="filePicker2.click()">{{'Sélectionner votre fichier'|uppercase}}</button>
+                                <button class="btn-primary file-picker-small" mat-raised-button
+                                    (click)="filePicker2.click()">{{'Sélectionner'|uppercase}}</button>
+                                <span>{{ficheFilename}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Type'}}</mat-label>
+                                    <mat-select placeholder="Etat" formControlName="type">
+                                        <mat-option *ngFor="let type of types" value="{{type}}">
+                                            {{type}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Fournisseur'}}</mat-label>
+                                    <mat-select placeholder="Etat" formControlName="fournisseur">
+                                        <mat-option *ngFor="let etat of ['ACO']" value="{{etat}}">
+                                            {{etat}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Description courte'}}</mat-label>
+                                    <input matInput type="text" formControlName="descriptionCourte"
+                                        placeholder="Description courte">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Description longue'}}</mat-label>
+                                    <input matInput type="text" formControlName="descriptionLongue"
+                                        placeholder="Description longue">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Marque'}}</mat-label>
+                                    <mat-select placeholder="Etat" formControlName="marque">
+                                        <mat-option *ngFor="let etat of etats" value="{{etat}}">
+                                            {{etat}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Statut'}}</mat-label>
+                                    <mat-select formControlName="statut">
+                                        <mat-option *ngFor="let etat of ['ACO']" value="{{etat}}">
+                                            {{etat}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- BLOC 2 -->
+                <div class="form-container my-3">
+                    <div class="title">
+                        <span>{{'Prix'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <form [formGroup]="articleForm">
+                        <div class="row">
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Prix public'}}</mat-label>
+                                    <input matInput type="number" formControlName="prixPublic" placeholder="499.99">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Prix d'achat"}}</mat-label>
+                                    <input matInput type="number" formControlName="prixAchat" placeholder="699.99">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'TVA'}}</mat-label>
+                                    <mat-select formControlName="tva">
+                                        <mat-option *ngFor="let tva of tvas" value="{{tva}}">
+                                            {{tva}}%
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Devise'}}</mat-label>
+                                    <mat-select formControlName="devise">
+                                        <mat-option *ngFor="let devise of devises" value="{{devise}}">
+                                            {{devise}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Taux de remise 1 (en %)"}}</mat-label>
+                                    <input matInput type="number" formControlName="remise1" placeholder="0-100">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Taux de remise 2 (en %)"}}</mat-label>
+                                    <input matInput type="number" formControlName="remise2" placeholder="0-100">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Taux de remise 3 (en %)"}}</mat-label>
+                                    <input matInput type="number" formControlName="remise3" placeholder="0-100">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Eco-participation'}}</mat-label>
+                                    <input matInput type="number" formControlName="ecoPart" placeholder="0.95">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4 p-2 checkbox">
+                                <input type="checkbox" formControlName="promo" [(ngModel)]="promo" placeholder="0.95"
+                                    id="promo" (change)="selectPromo()">
+                                <label class="mx-2 promo-label" for="promo"> {{'Cet article est en promotion'}}</label>
+                            </div>
+                            <div class="col-6 col-md-4"></div>
+                            <div class="col-6 col-md-4" *ngIf="promo">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Date de début'}}</mat-label>
+                                    <input matInput type="date" formControlName="promoDateDebut">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4" *ngIf="promo">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Date de fin'}}</mat-label>
+                                    <input matInput type="date" formControlName="promoDateFin">
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <!-- BLOC 3 -->
+                <div class="form-container my-3">
+                    <div class="title">
+                        <span>{{'Caractéristiques'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <form [formGroup]="articleForm">
+                        <div class="row">
+                            <div class="col-12">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Catégoire'}}</mat-label>
+                                    <mat-select formControlName="categorie">
+                                        <mat-option *ngFor="let cat of cats" value="{{cat}}">
+                                            {{cat}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Hauteur (mm)"}}</mat-label>
+                                    <input matInput type="number" formControlName="hauteur" placeholder="1200">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Longueur (mm)"}}</mat-label>
+                                    <input matInput type="number" formControlName="longueur" placeholder="800">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Profondeur (mm)"}}</mat-label>
+                                    <input matInput type="number" formControlName="largeur" placeholder="800">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Poids (kg)"}}</mat-label>
+                                    <input matInput type="number" formControlName="poids" placeholder="250">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Puissance (W)"}}</mat-label>
+                                    <input matInput type="number" formControlName="puissance" placeholder="240">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{"Alimentation"}}</mat-label>
+                                    <mat-select formControlName="alimentation">
+                                        <mat-option *ngFor="let alim of ['Electrique','Gaz']" value="{{alim}}">
+                                            {{alim}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Caractéristique 1'}}</mat-label>
+                                    <input matInput type="text" formControlName="carac1"
+                                        placeholder="Caractéristique 1">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Caractéristique 2'}}</mat-label>
+                                    <input matInput type="text" formControlName="carac2"
+                                        placeholder="Caractéristique 2">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Caractéristique 3'}}</mat-label>
+                                    <input matInput type="text" formControlName="carac3"
+                                        placeholder="Caractéristique 3">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-12 col-xl-3 p-0 p-xl-2"><!-- BLOC 4 -->
+                <div class="form-container my-3 accessoires">
+                    <div class="title">
+                        <span>{{'Accessoires et options'}}</span>
+                    </div>
+                    <div class="line"></div>
+                    <div class="row">
+                        <div class="col-9">
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>{{'Rechercher un accessoire'}}</mat-label>
+                                <input matInput type="text" placeholder="Rechercher un accessoire">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3 ok-btn">
+                            <button mat-raised-button class="btn-primary">{{'OK'}}</button>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-9">
+                            <mat-form-field appearance="outline" class="form-field">
+                                <mat-label>{{'Rechercher une option'}}</mat-label>
+                                <input matInput type="text" placeholder="Rechercher une option">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-3 ok-btn">
+                            <button mat-raised-button class="btn-primary">{{'OK'}}</button>
+                        </div>
+                    </div>
+                    <div class="row p-2">
+                        <button mat-raised-button class="btn-primary">{{'Créer un accessoire/option'|uppercase}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+
+<app-footer-user></app-footer-user>

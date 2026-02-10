@@ -1,0 +1,21 @@
+<div class="filter">{{'Filtres ajoutés'|uppercase}}</div>
+<div class="d-flex justify-content-between">
+    <mat-form-field class="chip-list" appearance="fill" style="width: 100%;">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let fil of filtres" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(fil)">
+                <span class="chip-content">{{fil}}<mat-icon matChipRemove *ngIf="removable">close</mat-icon></span>
+            </mat-chip>
+        </mat-chip-list>
+    </mat-form-field>
+
+</div>
+<div class="w-100 d-flex justify-content-between" style="min-width: 320px;">
+    <button class="btn-primary mb-3" mat-raised-button (click)="openFilter()">
+        {{filtres.length > 0 ? ('Modifier '|uppercase) : ('Ajouter '|uppercase)}} <mat-icon>filter_alt</mat-icon>
+    </button>
+    <button class="btn mb-3" mat-raised-button (click)="resetFilter()">
+        {{'Réinitialiser '|uppercase}} <mat-icon>filter_alt</mat-icon>
+    </button>
+    
+</div>

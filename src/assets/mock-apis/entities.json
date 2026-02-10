@@ -1,0 +1,20 @@
+{
+  "entities": [
+    {
+      "titre": "PersonMorale",
+      "role": "Admin",
+      "listdechamps":["nom","numerodesouche"]
+
+    },
+    {
+      "titre": "PersonPhysique",
+      "role": "Admin",
+      "listdechamps":["nom","numerodesouche"]
+    },
+    {
+      "titre": "Produit",
+      "role": "Admin",
+      "listdechamps":["nom","numerodesouche"]
+    }
+  ]
+}

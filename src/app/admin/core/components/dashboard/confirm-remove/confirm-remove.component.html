@@ -1,0 +1,21 @@
+<div class="popup text-center">
+    <div class="p-2 mb-3 d-flex justify-content-between align-items-center" style="background-color: #047EA4;">
+        <div style="color: #fff; font-weight: 500;">Fermeture des onglets</div>
+        <div class="d-flex align-items-center"><mat-icon style="color: #fff;cursor: pointer;"
+                (click)="send('CLOSE')">close</mat-icon></div>
+    </div>
+    <div *ngIf="data.length == 1" class="msg unique-element">
+        Souhaitez vous fermer l’onglet :<br> <span class="element">{{data[0]}}</span> ?
+    </div>
+    <div *ngIf="data.length > 1" class="msg several-elements">
+        Souhaitez vous fermer les onglets :<br>
+        <span class="element" *ngFor="let el of data; let i = index">{{el.trim()}}<span class="comas" *ngIf="i<data.length-2">, </span>
+            <span class="comas" *ngIf="i == data.length-2"> et </span>
+        </span> ?
+    </div>
+    <hr class="mx-3">
+    <div class="m-3 d-flex justify-content-between align-items-center">
+        <button mat-raised-button class="btn" (click)="send('CANCEL')">ANNULER</button>
+        <button mat-raised-button class="btn-primary" (click)="send('OK')">VALIDER</button>
+    </div>
+</div>

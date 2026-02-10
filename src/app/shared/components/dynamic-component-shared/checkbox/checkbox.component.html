@@ -1,0 +1,31 @@
+<label [for]="config.id"
+  ><strong>{{ config.label }}</strong></label
+><br />
+<ng-container *ngFor="let option of checkboxOptions">
+  <div class="row">
+    <div [ngClass]="config.styleClass ? config.styleClass : ''">
+      <ng-container *ngIf="config.editMode && userService.userHasChampUpdatePermissionAccess(config.name,typeName)">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          #selectAfterAdding
+          (change)="handleCheckboxChange(option[config.checkBoxValueTitre])"
+          [(ngModel)]="option[config.checkBoxValueTitre]"
+          [aria-label]="option[config.checkBoxValueTitre]"
+        >
+        </mat-checkbox>
+        <ng-container *ngIf="option[config.checkBoxLabelTitre]">
+          <label
+            style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px"
+            [for]="option[config.checkBoxLabelTitre]"
+            >{{ option[config.checkBoxLabelTitre] }}</label
+          >
+        </ng-container>
+      </ng-container>
+      <ng-container
+        *ngIf="!config.editMode && option[config.checkBoxValueTitre] || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode"
+      >
+        <div>{{ option[config.checkBoxLabelTitre] }}</div>
+      </ng-container>
+    </div>
+  </div> </ng-container
+><br />

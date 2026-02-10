@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <ng-container>
+    <div class="row" *ngFor="let condition of conditions">
+      <div class="col">
+        <mat-form-field appearance="outline" style="display:inline-block;width:auto;font-size:10px;">
+          <mat-label>Conditions</mat-label>
+          <mat-select name="condition" [(ngModel)]="condition.condition">
+            <mat-option *ngFor="let choixCondition of choixConditions" [value]="choixCondition.value">{{choixCondition.label}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <ng-container *ngIf="!isParameterField">
+          <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;"
+            [ngStyle]="{ visibility: condition.condition !== 'BETWEEN' && condition.condition !== 'IS_EMPTY' && condition.condition !== 'IS_NOT_EMPTY' ? 'visible' : 'hidden', display: condition.condition === 'BETWEEN' ? 'none' : 'inline-block' }">
+            <mat-label>Valeur du champ</mat-label>
+            <input matInput #input [(ngModel)]="condition.valeur">
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngIf="isParameterField && parameters.length > 0">
+          <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;">
+            <mat-label>Paramètres</mat-label>
+            <mat-select name="parameters" [(ngModel)]="condition.valeur">
+              <mat-option *ngFor="let parameter of parameters" [value]="parameter">{{parameter}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;"
+          [ngStyle]="{ display: condition.condition === 'BETWEEN' ? 'inline-block' : 'none' }">
+          <mat-label>Valeur min du champ</mat-label>
+          <input matInput #input [(ngModel)]="condition.valeurMin">
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;"
+          [ngStyle]="{ display: condition.condition === 'BETWEEN' ? 'inline-block' : 'none' }">
+          <mat-label>Valeur max du champ</mat-label>
+          <input matInput #input [(ngModel)]="condition.valeurMax">
+        </mat-form-field>
+        <button class="btn btn-danger" #tooltip="matTooltip" style="height: 36px; margin-left: 5px; margin-top: -5px;"
+          matTooltip="Supprimer" matTooltipPosition="left" (click)="supprimerCondition(condition.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row my-2">
+      <div class="col text-end">
+        <a class="btn-secondary" mat-raised-button (click)="ajouterCondition()">AJOUTER UNE VALEUR DE RECHERCHE</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <button type="button" class="btn-secondary-light" mat-raised-button (click)="fermer()">ANNULER</button>
+    </div>
+    <div class="col-lg-6 text-end">
+      <button type="button" class="btn-secondary" mat-raised-button (click)="rechercher()"
+        [disabled]="boutonrechercherdesactive()">RECHERCHER</button>
+      <button *ngIf="peuxEffacerRecherche" type="button" class="btn-danger mt-2" mat-raised-button
+        (click)="effacerRecherche()">EFFACER LA RECHERCHE</button>
+    </div>
+  </div>
+</div>

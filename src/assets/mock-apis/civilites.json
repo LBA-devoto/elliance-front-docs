@@ -1,0 +1,26 @@
+[
+		{
+            "id": "6363d03de682a86f944f85eb",
+            "titre": "Madame",
+            "code": null,
+            "maplocaletitre": null,
+            "commentaire": null,
+            "dateajout": 20221103142917,
+            "datepublication": null,
+            "dernieremiseajour": null,
+            "dernierediteurid": null,
+            "addedfields": null
+        },
+		{
+            "id": "6363d15b2383094514f93c49",
+            "titre": "Monsieur",
+            "code": null,
+            "maplocaletitre": null,
+            "commentaire": null,
+            "dateajout": 20221103143403,
+            "datepublication": null,
+            "dernieremiseajour": null,
+            "dernierediteurid": null,
+            "addedfields": null
+        }
+]

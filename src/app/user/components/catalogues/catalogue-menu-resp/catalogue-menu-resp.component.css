@@ -1,0 +1,20 @@
+.mat-chip.mat-standard-chip {
+    background-color: #f8d442;
+    color: white
+}
+
+
+.reset-btn, .edit-btn {
+    font-size: 12px;
+    margin: auto;
+}
+
+.edit-btn, .reset-btn:hover {
+    background-color: #0373bc !important;
+    color: #fff !important;
+}
+
+.edit-btn:hover, .reset-btn {
+    background-color: #fff !important;
+    color: #0373bc !important;
+}

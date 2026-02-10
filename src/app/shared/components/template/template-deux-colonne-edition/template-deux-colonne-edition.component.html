@@ -1,0 +1,391 @@
+<div class="container-fluid">
+    <form>
+        <div class="d-flex justify-content-between row">
+            <div class="menu col-1">
+                <div>
+                    <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left" (click)="enregistrer()">
+                      <mat-icon>save</mat-icon>
+                    </a><br>
+                    <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Rafraichir" matTooltipPosition="left" (click)="rafraichir()">
+                      <mat-icon>refresh</mat-icon>
+                    </a><br>
+                    <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left" (click)="cancel()">
+                        <mat-icon>close</mat-icon>
+                    </a><br>
+                    <!--a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left" >
+                        <mat-icon (click)="annuler()">close</mat-icon>
+                    </a><br-->
+                </div>
+            </div>
+            <div class="col article">
+                <ng-container *ngIf="template.layout !== undefined && template.layout !== null">
+                    <mat-tab-group>
+                        <mat-tab [label]="tab.label" *ngFor="let tab of template.layout.tabs; index as t">
+                            <div class="row" *ngFor="let row of tab.rows ; index as r">
+                                <h5 class="mb-0 title" *ngIf="hasTitleOnRow(row)">{{row.title}}</h5>
+                                <div class="col" *ngFor="let col of row.cols; index as c">
+                                    <h5 class="mb-0 title" *ngIf="hasTitleOnCols(row.cols)">{{col.title === '' ? '&nbsp;' : col.title}}</h5>
+                                    <div *ngFor="let parametre of col.parameters; let i = index;">
+                                        <div *ngIf="!parametre.name.toLowerCase().endsWith('id') && !parametre.type.startsWith('BigDecimal')">
+                                            <ng-container *ngIf="parametre.label">
+                                                <label>
+                                                    <strong>{{parametre.label}}</strong>
+                                                </label>
+                                                <br>
+                                            </ng-container>
+                                            <ng-container *ngIf="!parametre.label">
+                                                <label>
+                                                    <strong>{{parametre.name}}</strong>
+                                                </label>
+                                                <br>
+                                            </ng-container>
+                                            <!-- ce bloc sert a l'écriture des text,'password','email','number','search','tel','url''password','email','number','search','tel','url' de type input -->
+                                            <div *ngIf="['text','password','email','number','search','tel','url','date','textarea','Boolean','Locale'].includes(parametre.type)">
+                                                <ng-container *ngIf="['text','password','email','number','search','tel','url'].includes(parametre.type)">
+                                                    <mat-form-field appearance="outline" *ngIf="parametre.label != 'id'">
+                                                        <mat-label>{{parametre.label}}</mat-label>
+                                                        <input matInput [type]="parametre.type" [name]="parametre.name" [(ngModel)]='parametre.valeur' placeholder='{{parametre.label}}'>
+                                                    </mat-form-field>
+                                                </ng-container>
+                                                <ng-container *ngIf="parametre.type==='date'">
+                                                    <mat-form-field appearance="outline">
+                                                        <mat-label>{{parametre.label}}</mat-label>
+                                                        <input matInput [type]="parametre.type" [name]="parametre.name"  [ngModel]="parametre.valeur |date :'yyyy-MM-dd'"  placeholder='{{parametre.label}}'>
+                                                    </mat-form-field>
+                                                </ng-container>
+
+
+                                                <ng-container *ngIf="parametre.type ==='textarea'">
+                                                    <mat-form-field appearance="outline" *ngIf="parametre.label != 'id'">
+                                                        <mat-label>{{parametre.label}}</mat-label>
+                                                        <textarea matInput [type]="parametre.type" [name]="parametre.name" [(ngModel)]='parametre.valeur' placeholder='{{parametre.label}}'
+                                                            style="height: 100px;"></textarea>
+                                                    </mat-form-field>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="parametre.type ==='Locale'">
+                                                    <mat-form-field appearance="outline" *ngIf="parametre.label != 'id'">
+                                                        <mat-label>{{parametre.label}}</mat-label>
+                                                        <input matInput type="text" [name]="parametre.name" [(ngModel)]='parametre.valeur' placeholder='{{parametre.label}}'>
+                                                    </mat-form-field>
+                                                </ng-container>
+
+                                                <ng-container *ngIf="parametre.type ==='Boolean'">
+                                                    <mat-form-field appearance="outline" *ngIf="parametre.label != 'id'">
+                                                        <mat-select [(ngModel)]="parametre.valeur" [name]='parametre.label'>
+                                                            <mat-option [value]="true">Oui</mat-option>
+                                                            <mat-option [value]="false">Non</mat-option>
+                                                        </mat-select>
+                                                    </mat-form-field>
+                                                </ng-container>
+                                            </div>
+                                            <!-- ****************************************************************************************************************************** -->
+                                             <!-- ce bloc sert a afficher un champ checkbox  -->
+
+                                            <div *ngIf="parametre.type ==='class'">
+                                                <div *ngFor="let param of parametre.parametres">
+                                                    <div *ngIf="!param.label.includes('id') ">
+                                                        <!-- Afficher un text si la valeur attendu est un text -->
+                                                        <ng-container *ngIf="['text','password','email','number','search','tel','url'].includes(param.type)">
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput type="text" [(ngModel)]="param.valeur" [name]="parametre.name" (ngModelChange)="onsearcheRefLayout($event,parametre.request,i,t,r,c)"
+                                                            [matAutocomplete]="auto" [placeholder]="parametre.label">
+                                                            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500">
+                                                                <ng-container *ngIf="param.label ==='nom'">
+                                                                    <mat-option *ngFor="let value of parametre.list" [value]="value.nom" (click)="addParamClassLayout(i,t,r,c,value)">
+                                                                        <ng-container>
+                                                                            {{value.nom}}
+                                                                        </ng-container>
+                                                                    </mat-option>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="param.label ==='titre'">
+                                                                    <mat-option *ngFor="let value of parametre.list" [value]="value.titre" (click)="addParamClassLayout(i,t,r,c,value)">
+                                                                        <ng-container>
+                                                                            {{value.titre}}
+                                                                        </ng-container>
+                                                                    </mat-option>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="param.label ==='famille'">
+                                                                    <mat-option *ngFor="let value of parametre.list" [value]="value.famille" (click)="addParamClassLayout(i,t,r,c,value)">
+                                                                        <ng-container>
+                                                                            {{value.famille}}
+                                                                        </ng-container>
+                                                                    </mat-option>
+                                                                </ng-container>
+                                                                <ng-container *ngIf="param.label ==='code'">
+                                                                    <mat-option *ngFor="let value of parametre.list" [value]="value.code" (click)="addParamClassLayout(i,t,r,c,value)">
+                                                                        <ng-container>
+                                                                            {{value.code}}
+                                                                        </ng-container>
+                                                                    </mat-option>
+                                                                </ng-container>
+                                                            </mat-autocomplete>
+                                                            </mat-form-field>
+                                                            <mat-icon (click)="restoreParamClassLayout(i,t,r,c)">close</mat-icon>
+                                                        </ng-container>
+                                                        <!-- Afficher une liste la valeur attendu vient d'une liste -->
+                                                        <ng-container *ngIf="param.type ==='List'">
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>{{param.label}}</mat-label>
+                                                                <mat-select [(value)]="param.valeur" [disableOptionCentering]="true">
+                                                                    <ng-container  *ngIf="param.label ==='nom'">
+                                                                        <mat-option *ngFor="let type of parametre.list" [value]="type.nom" (click)="selectObjetLayout(i,t,r,c,type, parametre)">
+                                                                            <ng-container >{{type.nom}} </ng-container>
+                                                                        </mat-option>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="param.label ==='titre'">
+                                                                        <mat-option *ngFor="let type of parametre.list" [value]="type.titre" (click)="selectObjetLayout(i,t,r,c,type, parametre)">
+                                                                            <ng-container >{{type.titre}} </ng-container>
+                                                                        </mat-option>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="param.label ==='valeur'">
+                                                                        <mat-option *ngFor="let type of parametre.list" [value]="type.valeur" (click)="selectObjetLayout(i,t,r,c,type, parametre)">
+                                                                            <ng-container >{{type.valeur}} - <span *ngFor="let libelle of type.mapLocalLibelle | keyvalue">{{libelle.value}} </span> </ng-container>
+                                                                        </mat-option>
+                                                                    </ng-container> 
+                                                                </mat-select>
+                                                            </mat-form-field>
+                                                            <mat-icon (click)="restoreParamClassLayout(i,t,r,c)">close</mat-icon>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--------------------------------------------------------------------------------------------------------------------------->
+                                            <div *ngIf="parametre.type==='class Image'" style="margin-bottom: 15px;">
+                                                <ng-container>
+                                                    <div>
+                                                        <label for="{{parametre.name}}" style="cursor: pointer;"><span>Importer une Image </span> <img src="/assets/images/Icones/téléchargement.png" width="15"> </label>
+                                                        <input (change)="uploadImageLayout($event,t,r,c,i,parametre)"  [name]="parametre.name" type="file" id="{{parametre.name}}" style="display:none" multiple><br>
+                                                        <!--button type="button" mat-raised-button (click)="uploadImage(i,'gauche')" [disabled]="!parametre.file">Importer<span *ngIf="parametre.file">{{parametre.file.name}}</span> </button-->
+                                                    </div>
+                                                    <div  class="d-flex align-items-start" style="margin :2px">
+                                                        <div *ngFor="let param of parametre.parametres; index as nb" >
+                                                            <div>
+                                                                <ng-container *ngIf="param.label ==='url' && param.valeur">
+                                                                    <img [src]="param.valeur" width="80"><mat-icon style="font-size: 10px;" (click)="removeImageLayout(i,nb,param,t,r,c)">close</mat-icon>
+                                                                </ng-container>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </ng-container>
+                                            </div>
+                                            <!-- ****************************************************************************************************************************** -->
+                                            <ng-container *ngIf="parametre.type ==='Checkbox'">
+                                                <mat-form-field appearance="outline">
+                                                    <mat-label>{{parametre.label}} </mat-label>
+                                                    <mat-select multiple>
+                                                        <ng-container *ngFor="let value of parametre.list" >
+                                                            <mat-option [value]="value" (click)="addParamInterfaceLinkLayout(i,t,r,c,value)">{{value.valeur}} </mat-option>
+                                                        </ng-container>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </ng-container>
+                                            <!-- ****************************************************************************************************************************** -->
+                                            <div *ngIf="parametre.type==='List'">
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput type="text" [(ngModel)]="parametre.valeur" [name]="parametre.name" (ngModelChange)="onsearcheRefLayout($event,parametre.request,i,t,r,c)"
+                                                    [matAutocomplete]="auto" [placeholder]="parametre.label">
+                                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500">
+                                                        <mat-option *ngFor="let value of parametre.list" [value]="value.titre" (click)="addParamTosimpleListLayout(i,t,r,c,value)">
+                                                            <ng-container *ngIf="value.nom">
+                                                                {{value.nom}}
+                                                            </ng-container>
+                                                            <ng-container *ngIf="value.titre && !value.nom">
+                                                                {{value.titre}}
+                                                            </ng-container>
+                                                            <ng-container *ngIf="!value.titre && !value.nom">
+                                                                {{value.reference}}
+                                                            </ng-container>
+                                                        </mat-option>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+                                                <div>
+                                                    <table style="margin-top: 15px;width: 90%; background-color: #fff;" class="table table-stripped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="2"># Identifiant </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let param of parametre.parametres; let n = index">
+                                                                <td *ngIf="param.valeur">
+                                                                    <mat-icon style="vertical-align: middle;" (click)="retirerSimpleSousParamLayout(i,n,t,r,c)">delete</mat-icon> <span>{{param.valeur}} </span>
+                                                                </td>
+                                                                <td colspan="2" *ngIf="!param.valeur">
+                                                                    Aucun enregistrement associé
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!-- ****************************************************************************************************************************** -->
+                                            <div *ngIf="parametre.type ==='Interface'">
+                                                <div class="d-flex justify-content-end">
+                                                    <mat-icon (click)=" addSousParametre(i,'gauche')">add_circle</mat-icon>
+                                                </div>
+                                                <div *ngFor="let param of parametre.parametres ; let n = index">
+                                                    <div *ngFor="let param1 of param.parametres;">
+                                                        <ng-container *ngIf="['valeur','numero'].includes(param1.label)">
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>{{param1.label}}</mat-label>
+                                                                <input matInput type="text" name="{{param1.label}}" [(ngModel)]="param1.valeur" placeholder='{{param1.label}} {{n+1}}'>
+                                                            </mat-form-field>
+                                                            <mat-icon *ngIf="n!=0" style="font-size: 15px; cursor: pointer;" (click)="retirerSousParam(i, n,'gauche')">close</mat-icon>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                            <!-- ce bloc sert a afficher les interface d'une entité -->
+                                            <div *ngIf="parametre.type ==='Interface Link'">
+                                                <mat-form-field appearance="outline">
+                                                    <input matInput type="text" [(ngModel)]="parametre.valeur" [name]="parametre.name" (ngModelChange)="onsearcheRefLayout($event,parametre.request,i,t,r,c)"
+                                                    [matAutocomplete]="auto" [placeholder]="parametre.label">
+                                                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="500">
+                                                        <mat-option *ngFor="let value of parametre.list" [value]="value.titre" (click)="addParamInterfaceLinkLayout(i,t,r,c,value)">
+                                                            <ng-container *ngIf="value.nom">
+                                                                {{value.nom}}
+                                                            </ng-container>
+                                                            <ng-container *ngIf="value.titre && !value.nom">
+                                                                {{value.titre}}
+                                                            </ng-container>
+                                                            </mat-option>
+                                                    </mat-autocomplete>
+                                                </mat-form-field>
+                                                <div>
+                                                    <table style="margin-top: 15px;width: 90%; background-color: #fff;" class="table table-stripped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th *ngFor="let champs of parametre.champs">
+                                                                    <div *ngIf="champs!='id'"> {{champs | uppercase}} </div>
+                                                                </th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let param of parametre.parametres">
+                                                                <ng-container *ngFor="let param1 of param.parametres; let n = index">
+                                                                    <td *ngIf="param1.label === 'id' && param1.valeur">
+                                                                        <ng-container>
+                                                                            <mat-icon style="vertical-align: middle;" (click)="retirerSousParamInterfaceLinK(i,t,r,c,n)">delete</mat-icon>
+                                                                        </ng-container>
+                                                                    </td>
+                                                                    <td *ngIf="param1.label != 'id' && param1.valeur">
+                                                                        {{param1.valeur}}
+                                                                    </td>
+                                                                    <td *ngIf="param1.label === 'id' && !param1.valeur" colspan="3">
+                                                                        Aucun enregistrement associé
+                                                                    </td>
+                                                                </ng-container>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <!--- ce bloc permet d'afficher les interfaces contenant des entités-->
+                                            <div *ngIf="parametre.type ==='Interface Class'">
+                                                <div *ngFor="let param of parametre.parametres">
+                                                    <div *ngFor="let sousParam of param.parametres">
+                                                        <ng-container *ngIf="sousParam.type ==='class'">
+                                                            <div *ngFor="let sousparam1 of sousParam.parametres">
+                                                                <!--div *ngFor="let sousparam2 of sousparam1.parametres"-->
+                                                                    <ng-container *ngIf="sousparam1.label != 'id'">
+                                                                        <mat-form-field appearance="outline">
+                                                                            <mat-label>{{sousParam.label}}</mat-label>
+                                                                            <input type="text" matInput [name]="sousparam1.label" [(ngModel)]="sousparam1.valeur">
+                                                                        </mat-form-field>
+                                                                    </ng-container>
+                                                                <!--/div-->
+                                                            </div>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="sousParam.type ==='List'">
+                                                            <div *ngFor="let sousparam1 of sousParam.parametres; let k = index">
+                                                                <mat-form-field appearance="outline">
+                                                                    <mat-label>{{sousParam.label}} </mat-label>
+                                                                    <input type="text" matInput [name]="sousparam1.label" [(ngModel)]="sousparam1.valeur">
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ce bloc sert a afficher les interface d'une image -->
+                                            <div *ngIf="parametre.type ==='Interface Image'">
+                                                <div class="d-flex justify-content-end">
+                                                    <mat-icon (click)=" addSousParametre(i,'gauche')">add_circle</mat-icon>
+                                                </div>
+                                                <div *ngFor="let param of parametre.parametres ; let n = index">
+                                                    <div *ngFor="let param1 of param.parametres;">
+                                                        <ng-container *ngIf="['Image'].includes(param1.type)">
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>{{param1.label}}</mat-label>
+                                                                <input matInput type="file" [name]="param.label" [(ngModel)]="param1.valeur" placeholder='{{param1.label}} {{n+1}}'>
+                                                            </mat-form-field>
+                                                            <mat-icon *ngIf="n!=0" style="font-size: 15px; cursor: pointer;" (click)="retirerSousParam(i, n,'gauche')">close</mat-icon>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- ce bloc sert a afficher une hashMap,Map,LinkedHashMap  -->
+                                            <div *ngIf="['HashMap','Map','LinkedHashMap'].includes(parametre.type)">
+                                                <div *ngFor="let param of parametre.parametres ; let n = index">
+                                                    <div *ngIf="parametre.multiLangue === false">
+                                                        <ng-container *ngIf="param.type ==='text'">
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput type="text" name='{{param.label}}' [(ngModel)]="param.valeur" placeholder='{{param.label}}'>
+                                                            </mat-form-field>
+                                                        </ng-container>
+                                                        <ng-container *ngIf="['Image','fichier'].includes(param.type)">
+                                                            <mat-form-field appearance="outline">
+                                                                <input matInput type="file" name='{{param.label}}' [(ngModel)]="param.valeur" placeholder='{{param.label}}'>
+                                                            </mat-form-field>
+                                                        </ng-container>
+                                                    </div>
+                                                    <div *ngIf="parametre.multiLangue === true">
+                                                        <ng-container>
+                                                            <mat-form-field appearance="outline">
+                                                                <mat-label>
+                                                                    <img src="/assets/images/Icones/flag/{{param.label}}.svg" width="23" height="18" loading="lazy">
+                                                                </mat-label>
+                                                                <input matInput type="text" name="{{parametre.label}}_{{param.label}}" [(ngModel)]="param.valeur" [placeholder]="param.label">
+                                                            </mat-form-field>
+                                                        </ng-container>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div *ngIf="['HashMap Image','LinkedHashMap Image'].includes(parametre.type)" style="margin-bottom: 15px;">
+                                                <div>
+                                                    <label for="{{parametre.label}}" style="cursor: pointer;"><span>Importer une Image </span> <img src="/assets/images/Icones/téléchargement.png" width="15"> </label>
+                                                    <input (change)="uploadImageLayout($event,t,r,c,i,parametre)" type="file" multiple id="{{parametre.label}}" style="display:none"><br>
+                                                    <!--button type="button" mat-raised-button (click)=" uploadImageLayout(i,t,r,c)" [disabled]="!file">Importer <span *ngIf="file">{{file.name}}</span></button-->
+                                                </div>
+                                                <div  class="d-flex align-items-start" style="margin :2px">
+                                                    <div *ngFor="let param of parametre.parametres; index as nb" >
+                                                        <div *ngFor="let sousparam of param.parametres ">
+                                                            <ng-container *ngIf="sousparam.label ==='url' && sousparam.valeur">
+                                                                <img [src]="sousparam.valeur" width="80"><mat-icon style="font-size: 10px;" (click)="removeImageLayout(i,nb,param,t,r,c)">close</mat-icon>
+                                                            </ng-container>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </ng-container>
+
+                <div class="row" *ngIf="template.layout === undefined || template.layout === null">
+                    <ng-container>
+                        <div>
+                            Veuillez créer une nouvelle template pour la fiche {{template.entite}}
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

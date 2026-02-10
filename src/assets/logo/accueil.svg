@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="29" height="25.851" viewBox="0 0 29 25.851">
+  <g id="Accueil" transform="translate(-20 -111)">
+    <g id="_001-home" data-name="001-home" transform="translate(20 111)">
+      <g id="Groupe_8" data-name="Groupe 8">
+        <g id="Groupe_7" data-name="Groupe 7" transform="translate(0 0)">
+          <path id="Tracé_14" data-name="Tracé 14" d="M28.691,38.008,14.945,27.943a.753.753,0,0,0-.89,0L.308,38.008a.754.754,0,0,0,.89,1.216l13.3-9.739,13.3,9.739a.753.753,0,0,0,.89-1.216Z" transform="translate(0.001 -27.798)" fill="#082234"/>
+        </g>
+      </g>
+      <g id="Groupe_10" data-name="Groupe 10" transform="translate(3.198 11.597)">
+        <g id="Groupe_9" data-name="Groupe 9" transform="translate(0 0)">
+          <path id="Tracé_15" data-name="Tracé 15" d="M78.3,232.543a.754.754,0,0,0-.753.753V245.29H71.522v-6.547a3.768,3.768,0,1,0-7.535,0v6.547H57.959V233.3a.753.753,0,0,0-1.507,0v12.747a.754.754,0,0,0,.753.753H64.74a.753.753,0,0,0,.751-.695.57.57,0,0,0,0-.059v-7.3a2.261,2.261,0,1,1,4.521,0v7.3a.552.552,0,0,0,0,.058.753.753,0,0,0,.751.7H78.3a.753.753,0,0,0,.753-.753V233.3A.754.754,0,0,0,78.3,232.543Z" transform="translate(-56.452 -232.543)" fill="#082234"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

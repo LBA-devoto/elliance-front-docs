@@ -1,0 +1,4 @@
+::ng-deep .full-page app-tab-content app-table,::ng-deep .full-page app-tab-content app-template-edit {
+    height: inherit;
+    display: block;
+}

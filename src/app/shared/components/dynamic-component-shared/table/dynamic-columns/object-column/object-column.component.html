@@ -1,0 +1,17 @@
+<ng-container *ngIf="!config?.isList">
+    <span *ngIf="config?.labelLocal">
+        {{ config?.value?.[config?.displayProperty] }}-{{ config?.value?.mapLocalLibelle?.[config.labelLocal] }}
+    </span>
+    <span *ngIf="!config?.labelLocal"> {{ config?.value?.[config?.displayProperty] }}</span>
+   
+</ng-container>
+<ng-container *ngIf="config?.isList">
+    <div *ngFor="let obj of config.value">
+        <span *ngIf="config?.labelLocal">
+            {{ obj?.[config?.displayProperty]?.[config?.labelLocal] }}
+
+        </span>
+        <span *ngIf="!config?.labelLocal"> {{ obj?.[config?.displayProperty] }}</span>
+    </div>
+   
+</ng-container>

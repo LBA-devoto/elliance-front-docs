@@ -1,0 +1,47 @@
+<div class="card" *ngIf="extranet && champs">
+    <div class="d-flex justify-content-between align-items-center w-100 top-icons">
+        <img class="mx-2" src='/assets/logo/picto_{{lettreProduit}}.png' width="24" height="24" [ngStyle]="{'visibility': hasPicto ? '' : 'hidden'}">
+        <mat-icon class="mx-2" style="color: #0373bc; cursor: pointer;" (click)="setFavorite()" *ngIf="hasFavoris">
+            {{isFavorite ? 'favorite' : 'favorite_border'}}
+        </mat-icon>
+    </div>
+    <img class="card-img-top p-3" src="{{imgUrl}}" alt="{{'Image Produit'}}" (click)="goToProduct()" *ngIf="hasImage">
+    <div class="card-body">
+        <!-- <h6 class="card-title" (click)="goToProduct()">{{title}}</h6>
+        <p class="card-text">{{'ref. '}}{{reference}}</p>
+        <p class="card-text">{{'Fournisseur : '}}{{supplier}}</p>
+        <div class="line my-2"></div>
+        <p class="price">{{'Tarif public : '}}{{publicPrice|number:'0.2'}}{{' € HT'}}</p>
+        <p class="price">{{'Tarif achat : '}}{{purchasePrice|number:'0.2'}}{{' € HT '}}</p>
+        <div class="mt-2 estimate d-flex justify-content-between" *ngIf="!hideEstim">
+            <div class="d-flex justify-content-around align-items-center controls">
+                <mat-icon (click)="add(-1)">remove</mat-icon>
+                <input type="number" [value]="quantity" [(ngModel)]="quantity" class="devis-input text-center" min="1">
+                <mat-icon (click)="add(1)">add</mat-icon>
+            </div>
+            <button mat-raised-button class="btn-primary" [disabled]="quantity<1" (click)="addProd()">{{'AJOUTER'}}</button>
+        </div> -->
+        <div class="p-2 d-flex flex-column justify-content-center">
+            <div *ngFor="let ch of champsProduit" [style]="ch.css">
+                <div *ngIf="ch == 'sep'">
+                    <hr class="my-1">
+                </div>
+                <div *ngIf="ch != 'sep' && !isRestricted(ch)"><!-- [ngStyle]="{'visibility': getChampValue(ch) == '-' ? 'hidden' : ''}" -->
+                    <span *ngIf="ch.displayLabel">{{getChampLabel(ch)}} : </span><span>{{getChampValue(ch)}} {{ch.extension}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="mt-2 estimate d-flex justify-content-between" *ngIf="!hideEstim">
+            <div class="d-flex justify-content-around align-items-center controls">
+                <mat-icon (click)="add(-1)">remove</mat-icon>
+                <input type="number" [value]="quantity" [(ngModel)]="quantity" class="devis-input text-center" min="1">
+                <mat-icon (click)="add(1)">add</mat-icon>
+            </div>
+            <button mat-raised-button class="btn-primary" [disabled]="quantity<1" (click)="addProd()">{{'AJOUTER'}}</button>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="alert" class="alert alert-{{alert.type}}" role="alert">
+    {{alert.message}}
+</div>

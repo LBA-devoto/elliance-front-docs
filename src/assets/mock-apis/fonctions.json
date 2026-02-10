@@ -1,0 +1,101 @@
+[
+	{
+		"id": "6363d15e2383094514f93d16",
+		"locale": null,
+		"libelle": "Direction Générale"
+		
+	},
+	{
+		"id": "6363d15f2383094514f93d19",
+		"locale": null,
+		"libelle": "Commercial"
+	},
+	 {
+		"id": "6363d03de682a86f944f85ec",
+		"locale": null,
+		"libelle": "Resp. hotellier"
+	},
+	{
+		"id": "6363d15b2383094514f93c50",
+		"locale": null,
+		"libelle": "Gérant"
+	},
+	 {
+		"id": "6363d15b2383094514f93c56",
+		"locale": null,
+		"libelle": "Direction"
+	},
+	{
+		"id": "6363d15b2383094514f93c67",
+		"locale": null,
+		"libelle": "Chef de cuisine"
+	},
+
+	{
+		"id": "6363d15c2383094514f93c91",
+		"locale": null,
+		"libelle": "Propriétaire"
+	},
+	{
+		"id": "6363d15c2383094514f93c96",
+		"locale": null,
+		"libelle": "Directrice"
+	},
+	 {
+		"id": "6363d15c2383094514f93c9c",
+		"locale": null,
+		"libelle": "Responsable communication"
+	},
+	 {
+		"id": "6363d15c2383094514f93cad",
+		"locale": null,
+		"libelle": "Président"
+	},
+	 {
+		"id": "6363d15c2383094514f93cb3",
+		"locale": null,
+		"libelle": "Responsable technique"
+	},
+	{
+		"id": "6363d15d2383094514f93cb9",
+		"locale": null,
+		"libelle": "Directeur adjoint"
+	},
+	{
+		"id": "6363d15d2383094514f93cc3",
+		"locale": null,
+		"libelle": "Fils du Gérant"
+	},
+	 {
+		"id": "6363d15d2383094514f93cdc",
+		"locale": null,
+		"libelle": "Comptable"
+
+	},
+	{
+		"id": "6363d15d2383094514f93ce0",
+		"locale": null,
+		"libelle": "Responsable blanchisserie"
+
+	},
+	{
+		"id": "6363d15d2383094514f93ce9",
+		"locale": null,
+		"libelle": "Responsable restauration"
+		
+	},
+	 {
+		"id": "6363d15d2383094514f93cef",
+		"locale": null,
+		"libelle": "Responsable national"
+
+	},
+	 {
+		"id": "6363d15e2383094514f93cf3",
+		"locale": null,
+		"libelle": "Proprietaire"
+		
+	}
+	
+		
+]

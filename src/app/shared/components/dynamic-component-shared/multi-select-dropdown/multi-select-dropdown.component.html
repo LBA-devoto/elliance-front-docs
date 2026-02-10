@@ -1,0 +1,32 @@
+<ng-container>
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"
+          ><strong>{{ config.label }}</strong></label
+        >
+      </ng-container>
+      <br />
+
+      <ng-container *ngIf="config.editMode && userService.userHasChampViewPermissionAccess(config.name,typeName)">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>{{ config.label }}</mat-label>
+          <mat-select
+            [disabled]="config.disabled"
+            [(ngModel)]="config.value"
+            multiple [compareWith]="compareValeurs"
+          >
+            <mat-option *ngFor="let item of config.dropdownList let i=index" [value]="item">
+              {{ item.valeur }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="!config.editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+        <div *ngFor="let value of config.value">{{ value?.valeur }}</div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

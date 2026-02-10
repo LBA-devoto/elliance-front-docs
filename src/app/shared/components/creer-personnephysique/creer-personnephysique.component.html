@@ -1,0 +1,569 @@
+<div class="container-fluid">
+  <div class="d-flex justify-content-between">
+    <div class="menu">
+      <div *ngIf="edition">
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Enregistrer"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="enregistrer()">save</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Rafraichir"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="rafraichir()">refresh</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Annuler"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="annuler()">close</mat-icon> </a
+        ><br />
+      </div>
+      <div *ngIf="lecture">
+        <a
+          class="btn btn-outline-warning"
+          #tooltip="matTooltip"
+          matTooltip="Modifier"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="modeEdition()">edit</mat-icon> </a
+        ><br />
+        <a
+          class="btn btn-danger"
+          #tooltip="matTooltip"
+          matTooltip="Supprimer"
+          matTooltipPosition="left"
+        >
+          <mat-icon (click)="supprimer()">delete</mat-icon> </a
+        ><br />
+      </div>
+    </div>
+    <div class="article">
+      <div *ngIf="edition">
+        <div class="container-fluid">
+          <form>
+            <div class="d-flex justify-content-between">
+              <div class="part">
+                <div>
+                  <label>Civilité</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Civilité</mat-label>
+                    <mat-select
+                      [(ngModel)]="personnephysique.civilite"
+                      name="civilite"
+                    >
+                      <mat-option
+                        *ngFor="let civilite of civilites | async"
+                        [value]="civilite"
+                        >{{ civilite.titre }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Nom</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Nom</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="nom"
+                      [(ngModel)]="personnephysique.nom"
+                      placeholder="Nom"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Prénom</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Prénom</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="prenom"
+                      [(ngModel)]="personnephysique.prenom"
+                      placeholder="Prénom"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <label>Code</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="code"
+                      [(ngModel)]="personnephysique.code"
+                      placeholder="Code"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Email</label><br />
+                  <div
+                    *ngFor="let email of personnephysique.emails; index as i"
+                  >
+                    <mat-form-field appearance="outline">
+                      <mat-label>Email </mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        name="email"
+                        [(ngModel)]="email.valeur"
+                        placeholder="Email"
+                        required
+                      />
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div>
+                  <label>Fonction</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Fonction</mat-label>
+                    <mat-select>
+                      <mat-option
+                        *ngFor="let fonction of fonctions | async"
+                        [value]="fonction"
+                        >{{ fonction.libelle }}</mat-option
+                      >
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Type</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select [(ngModel)]="personnephysique.type">
+                      <mat-option
+                        *ngFor="let type of types | async"
+                        [value]="type"
+                        >{{ type.nom }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Association Tiers</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Association Tiers</mat-label>
+                    <mat-select [(ngModel)]="personnephysique.tier" name="tier">
+                      <mat-option
+                        *ngFor="let pmorale of personnemorales"
+                        [value]="pmorale.nom"
+                        >{{ pmorale.nom }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="part">
+                <div>
+                  <label>État</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>État</mat-label>
+                    <mat-select>
+                      <mat-option value="Oui">Oui</mat-option>
+                      <mat-option value="Non">Non </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Note (privée)</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Note (privée)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="noteprivee"
+                      placeholder="Note (privée)"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Note (publique)</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Note (publique)</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="notepublique"
+                      placeholder="Note (publique)"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+
+                <div>
+                  <label>Téléphones</label
+                  ><mat-icon
+                    style="font-size: 15px"
+                    (click)="ajoutTel()"
+                    #tooltip="matTooltip"
+                    matTooltip="Ajouter Numéro"
+                    >add_circle</mat-icon
+                  ><br />
+                  <div *ngFor="let tel of personnephysique.tels; index as i">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Téléphone {{ i + 1 }}</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        name="Tel"
+                        [(ngModel)]="tel.numero"
+                        placeholder="Téléphone"
+                        required
+                      />
+                    </mat-form-field>
+                    <mat-icon
+                      (click)="retirerTel(i)"
+                      *ngIf="i > 0"
+                      style="font-size: 15px; cursor: pointer"
+                      #tooltip="matTooltip"
+                      matTooltip="Rétirer le numéro"
+                      >close</mat-icon
+                    >
+                  </div>
+                </div>
+                <div>
+                  <label>Faxes</label
+                  ><mat-icon
+                    style="font-size: 15px"
+                    (click)="ajoutFaxe()"
+                    #tooltip="matTooltip"
+                    matTooltip="Ajouter Faxe"
+                    >add_circle</mat-icon
+                  ><br />
+                  <div *ngFor="let faxe of personnephysique.faxes; index as i">
+                    <mat-form-field appearance="outline">
+                      <mat-label>Faxe {{ i + 1 }}</mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        name="Faxe"
+                        [(ngModel)]="faxe.numero"
+                        placeholder="Faxe"
+                        required
+                      />
+                    </mat-form-field>
+                    <mat-icon
+                      (click)="retirerFaxe(i)"
+                      *ngIf="i > 0"
+                      style="font-size: 15px; cursor: pointer"
+                      #tooltip="matTooltip"
+                      matTooltip="Rétirer le numéro"
+                      >close</mat-icon
+                    >
+                  </div>
+                </div>
+
+                <div>
+                  <label>Adresse</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Adresse</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="adresse"
+                      [(ngModel)]="adresseligne"
+                      placeholder="Adresse"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Code postal</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Code postal</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="code postal"
+                      [(ngModel)]="codepostal"
+                      placeholder="Code postal"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Ville</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Ville</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      placeholder="Ville"
+                      [(ngModel)]="ville"
+                      name="ville"
+                      required
+                    />
+                  </mat-form-field>
+                </div>
+                <div>
+                  <label>Département</label><br />
+                  <mat-form-field appearance="outline">
+                    <mat-label>Département</mat-label>
+                    <mat-select
+                      name="tier"
+                      (selectionChange)="changeDepartment($event)"
+                    >
+                      <mat-option
+                        *ngFor="let department of departments"
+                        [value]="department.titre"
+                        >{{ department.numero }} -
+                        {{ department.titre }}</mat-option
+                      >
+                      <mat-option [value]="'other'">other</mat-option>
+                    </mat-select> </mat-form-field
+                  ><br />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div *ngIf="lecture">
+        <div class="container-fluid">
+          <div>
+            <div class="d-flex justify-content-between">
+              <div class="part">
+                <div>
+                  <div class="titre">
+                    <label><strong>Civilité :</strong> </label><br />
+                  </div>
+                </div>
+                <div class="titre">
+                  <label><strong> Nom :</strong></label> <br /><label>{{
+                    personnephysique.nom
+                  }}</label
+                  ><br />
+                </div>
+                <div class="titre">
+                  <label><strong> Prénom :</strong></label
+                  ><br />
+
+                  <br />
+                </div>
+                <div class="titre">
+                  <label><strong>Etat :</strong> </label><br />
+                  <div>
+                    <label *ngIf="personnephysique.statut === 'Oui'">
+                      Actif</label
+                    >
+                    <label *ngIf="personnephysique.statut === 'Non'"
+                      >Non Actif</label
+                    >
+                  </div>
+                  <label *ngIf="!personnephysique.statut"> - </label>
+                </div>
+
+                <div class="titre">
+                  <label><strong>Email :</strong></label
+                  ><br />
+                  <span *ngFor="let email of personnephysique.emails">
+                    <span *ngIf="!email.valeur">-</span>
+                    <a href="mailto:{{ email.valeur }}" style="cursor: pointer"
+                      ><label>{{ email.valeur }}</label></a
+                    ><br />
+                  </span>
+                  <label *ngIf="!personnephysique.emails"> - </label>
+                </div>
+                <div class="titre">
+                  <label><strong>Fonction :</strong></label
+                  ><br />
+                  <label *ngIf="personnephysique.fonction"></label>
+
+                  <label *ngIf="!personnephysique.fonction"> - </label>
+                  <br />
+                </div>
+                <div class="titre">
+                  <label><strong> Type de personne physique :</strong></label
+                  ><br />
+                  <label *ngIf="tab.typeName">{{ tab.typeName }}</label>
+                  <label *ngIf="!tab.typeName"> - </label>
+                </div>
+
+                <div class="titre">
+                  <label><strong> Association Tiers :</strong></label
+                  ><br />
+
+                  <div *ngIf="personnephysique.personnemorales">
+                    <br />
+                    <table
+                      mat-table
+                      [dataSource]="personnephysique.personnemorales"
+                      matSort
+                      class="mat-elevation-z8"
+                      style="width: 80%"
+                    >
+                      <ng-container matColumnDef="Nom fournisseur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          <div *ngIf="tab.typeName === 'CONTACT-FOURNISSEUR'">
+                            NOM FOURNISSEUR
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-ASSOCIE'">
+                            NOM ASSOCIÉ
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-CLIENT'">
+                            NOM CLIENT
+                          </div>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.nom }}
+                        </td>
+                      </ng-container>
+                      <ng-container matColumnDef="Code fournisseur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          <div *ngIf="tab.typeName === 'CONTACT-FOURNISSEUR'">
+                            CODE FOURNISSEUR
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-ASSOCIE'">
+                            CODE ASSOCIÉ
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-CLIENT'">
+                            CODE CLIENT
+                          </div>
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          <div *ngIf="tab.typeName === 'CONTACT-FOURNISSEUR'">
+                            {{ element.codefour }}
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-ASSOCIE'">
+                            {{ element.code }}
+                          </div>
+                          <div *ngIf="tab.typeName === 'CONTACT-CLIENT'">
+                            {{ element.code }}
+                          </div>
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="columns"></tr>
+                      <tr
+                        mat-row
+                        (click)="ouvrirFournisseur(row)"
+                        *matRowDef="let row; columns: columns"
+                      ></tr>
+                    </table>
+                  </div>
+                  <div *ngIf="!personnephysique.personnemorales">
+                    <br />
+                    <table
+                      mat-table
+                      [dataSource]="personnemoralesDefaut"
+                      matSort
+                      class="mat-elevation-z8"
+                      style="width: 80%"
+                    >
+                      <ng-container matColumnDef="Nom fournisseur">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                          NOM FOURNISSEUR
+                        </th>
+                        <td mat-cell *matCellDef="let element">
+                          {{ element.nom }}
+                        </td>
+                      </ng-container>
+                      <tr mat-header-row *matHeaderRowDef="columnsdefaut"></tr>
+                      <tr
+                        mat-row
+                        (dblclick)="ouvrirFournisseur(row)"
+                        *matRowDef="let row; columns: columnsdefaut"
+                      ></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="part">
+                <div class="titre">
+                  <label><strong>Note (privée) :</strong> </label><br />
+                  <label>{{ noteprivee }}</label>
+                  <label *ngIf="!noteprivee"> - </label>
+                </div>
+                <div class="titre">
+                  <label><strong> Note (publique) :</strong></label
+                  ><br />
+                  <label>{{ notepublique }}</label>
+                  <label *ngIf="!notepublique"> - </label>
+                </div>
+                <div>
+                  <div class="titre" *ngFor="let tel of personnephysique.tels">
+                    <label
+                      ><strong>{{ tel.libelle }} :</strong> </label
+                    ><br />
+                    <span>
+                      <label *ngIf="tel.numero">{{ tel.numero }}</label>
+                      <label *ngIf="!tel.numero">-</label><br />
+                    </span>
+                  </div>
+                  <div *ngIf="!personnephysique.tels">
+                    <label><strong> Téléphones : </strong></label><br />
+                    <label> - </label>
+                  </div>
+                </div>
+                <div class="titre">
+                  <label><strong>Fax :</strong> </label><br />
+                  <strong>
+                    <span *ngFor="let faxe of personnephysique.faxes">
+                      - <span>{{ faxe.numero }} </span><br />
+                    </span>
+                  </strong>
+                  <label *ngIf="!personnephysique.faxes"> - </label>
+                </div>
+
+                <div class="titre">
+                  <div *ngFor="let addresse of personnephysique.addresses">
+                    <label><strong>Adresse :</strong> </label><br />
+                    <label
+                      *ngFor="
+                        let adresseligne of addresse.adresseligne | keyvalue
+                      "
+                      ><strong>{{
+                        adresseligne.value | uppercase
+                      }}</strong></label
+                    >
+                    <label><strong>-</strong></label
+                    ><br />
+                    <label><strong>Code Postal :</strong> </label><br />
+                    <label>{{ codepostal }}</label>
+                    <label><strong>-</strong></label
+                    ><br />
+                    <label><strong> Ville :</strong></label
+                    ><br />
+                    <label>{{ ville }}</label>
+                    <label><strong>-</strong></label
+                    ><br />
+                  </div>
+                </div>
+                <div class="titre">
+                  <label>Département</label>
+
+                  <mat-form-field appearance="outline" *ngIf="showdepartement">
+                    <input
+                      matInput
+                      name="departement"
+                      type="text"
+                      [(ngModel)]="personnephysique.departement"
+                    />
+                  </mat-form-field>
+                  >
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

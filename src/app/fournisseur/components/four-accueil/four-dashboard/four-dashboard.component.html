@@ -1,0 +1,42 @@
+<div class="dashboard">
+    <div class="text-center">
+        <h4 class="title">{{'MON TABLEAU DE BORD'}}</h4>
+    </div>
+
+    <div class="row d-flex flex-wrap justify-content-between dashrow">
+        <div class="col-12 col-lg-7">
+            <div class="dashboard-item ">
+                <label>{{'MES DERNIERS PRODUITS'}}</label><br>
+                <table class="table table-striped px-2" *ngIf="loaded">
+                    <thead>
+                        <tr>
+                            <th *ngFor="let lab of estimateLabels">{{lab}}</th>
+                            <th class="btn-col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let key of estimateEntries|slice:0:5">
+                            <td>{{key[0]}}</td>
+                            <td>{{key[1]['creationDate']}}</td>
+                            <td>{{key[1]['status']}}</td>
+                            <td>{{key[1]['price']|number:'0.2'}}€ </td>
+                            <td class="btn-col"><button mat-raised-button class="btn-primary">{{'VOIR'}}</button></td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+        <div class="col-12 col-lg-5">
+            <div class="dashboard-item">
+                <label>{{'POURCENTAGE DE PRODUITS COMPLétés'|uppercase}}</label><br>
+                <div id="chart" class="p-2">
+                    <apx-chart [series]="chartSeries" [chart]="chartDetails" [labels]="chartLabels"
+                        [dataLabels]="chartDataLabels"></apx-chart>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,200 @@
+<div class="conatiner-fluid">
+  <div class="d-flex justify-content-between">
+      <div class="menu">
+          <div >
+              <a  *ngIf="edition" class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left">
+                <mat-icon (click)="create()">save</mat-icon>
+              </a><br>
+              
+              <a  class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Rafraichir" matTooltipPosition="left" >
+                <mat-icon (click)="refresh()">refresh</mat-icon>
+              </a><br>
+            </div>
+            <div >
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left">
+                <mat-icon (click)="activerModification()">edit</mat-icon>
+              </a><br>
+              <a class="btn btn-danger" #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left">
+                <mat-icon>delete</mat-icon>
+              </a><br>
+            </div>
+      </div>
+      <div class="article">
+          <div *ngIf="edition">
+              <div class="container-fluid">
+                  <form>
+                    <div class="d-flex ">
+                      <div class="part flex-fill">
+                        <div>
+                          <label><strong>Image</strong></label><br>
+                          <button class="btn" type="button" mat-raised-button (click)="fileInput.click()">Choose File</button>
+                          <input hidden (change)="uploadImage($event)" #fileInput type="file">
+
+                          
+
+
+                          <span class="file-name">{{selectedFile?.name}}</span>
+                        </div>
+                        <div>
+                          <label><strong>Code</strong></label><br>
+                          <mat-form-field appearance="outline">
+                              <mat-label>Code</mat-label>
+                              <input matInput type="text" name="code" [(ngModel)]="categorie.code" placeholder="Code" required>
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <label><strong>Ordre d'affichage</strong></label><br>
+                          <mat-form-field appearance="outline">
+                              <mat-label>Ordre d'affichage</mat-label>
+                              <input matInput type="number" name="ordre" [(ngModel)]="categorie.ordre" placeholder="Ordre">
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <label><strong>Titre</strong></label><br>
+                          <div *ngFor="let local of locales ">
+
+                            <div>
+                              
+                              <mat-form-field appearance="outline">
+                                
+
+                                <mat-label><img src="/assets/images/Icones/flag/{{local}}.svg" width="23" height="18" loading="lazy"></mat-label>
+                                                               
+                                <input matInput type="text" name="maplocaletitre" [ngModel]="categorie.maplocaletitre.get(local)" (ngModelChange)="categorie.maplocaletitre.set(local, $event)">
+  
+                              </mat-form-field>
+                              
+                            </div>
+  
+                          </div>
+                        </div>
+                        <div>
+                          <label><strong>Catégorie de rattachement</strong></label><br>
+                          <mat-form-field appearance="outline">
+                              <mat-label>Catégorie de rattachement</mat-label>
+                              <input matInput type="text" name="perecode" [(ngModel)]="categorie.perecode" placeholder="perecode" required>
+                          </mat-form-field>
+                        </div>
+                        
+                      </div>
+                      
+
+                      <div class="part flex-fill">
+                        <div>
+                          <label><strong>Description courte</strong></label><br>
+                          <div *ngFor="let local of locales">
+
+                            <div>
+                              
+                              <mat-form-field appearance="outline">
+                                
+
+                                <mat-label><img src="/assets/images/Icones/flag/{{local}}.svg" width="23" height="18" loading="lazy"></mat-label>
+                                                               
+                                <input matInput type="text" name="mapdescriptioncourte" [ngModel]="categorie.mapdescriptioncourte.get(local)" (ngModelChange)="categorie.mapdescriptioncourte.set(local, $event)">
+  
+                              </mat-form-field>
+                              
+                            </div>
+  
+                          </div>
+                        </div>
+
+                        <div>
+                          <label><strong>Description longue</strong></label><br>
+                          <div *ngFor="let local of locales">
+
+                            <div>
+                              
+                              <mat-form-field appearance="outline">
+                                
+
+                                <mat-label><img src="/assets/images/Icones/flag/{{local}}.svg" width="23" height="18" loading="lazy"></mat-label>
+                                                               
+                                <textarea matInput type="text" name="mapdescriptionlongue" [ngModel]="categorie.mapdescriptionlongue.get(local)" (ngModelChange)="categorie.mapdescriptionlongue.set(local, $event)">
+                                 </textarea>
+                              </mat-form-field>
+                              
+                            </div>
+  
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                     
+                  </form>
+              </div>
+          </div>
+          <div *ngIf="lecture">
+              <div class="container-fluid">
+                  <div >
+
+                   
+                      <div class="d-flex ">
+
+                        <div class="part flex-fill">
+                          <div class="titre">
+                            
+                            <div *ngFor="let images of categorie.imagesmap| keyvalue  ">
+                                                      
+                              
+                              <img src="{{images.value.url}}"  width="100%" height="100%" loading="lazy">
+                              
+                            </div>
+                          </div> 
+                       </div>  
+
+                        <div class="part flex-fill">
+                          
+                          <div class="titre">
+                              <label><strong>Code :</strong> </label><br>
+                              <label>{{categorie.code}}</label>
+                              <label *ngIf="!categorie.code"> - </label>
+                          </div>
+                          <div class="titre">
+                            <label><strong>Ordre d'affichage :</strong> </label><br>
+                            <label>{{categorie.ordre}}</label>
+                            <label *ngIf="!categorie.ordre"> - </label>
+                         </div>
+                          <div class="titre">
+                              <label><strong> Titre :</strong> </label><br><br>
+                              <div *ngFor="let map of categorie.maplocaletitre | keyvalue  ">
+                                                     
+                                    <img src="/assets/images/Icones/flag/{{map.key}}.svg" width="20" height="16" loading="lazy">
+                                    {{map.value}}
+                              </div>
+                          </div>
+                          <div class="titre">
+                            <label><strong> Description courte :</strong> </label><br><br>
+                            <div *ngFor="let map of categorie.mapdescriptioncourte | keyvalue  ">
+                                                     
+                              <img src="/assets/images/Icones/flag/{{map.key}}.svg" width="20" height="16" loading="lazy">
+                              {{map.value}}
+                            </div>
+                        </div>
+                        <div class="titre">
+                          <label><strong> Description longue :</strong> </label>
+                          <br>
+                          <br>
+                          <div *ngFor="let map of categorie.mapdescriptionlongue   | keyvalue  ">
+                                                     
+                            <img src="/assets/images/Icones/flag/{{map.key}}.svg" width="20" height="16" loading="lazy">
+                            {{map.value}}
+                          </div>
+                      </div>  
+                          <div class="titre">
+                            <label><strong>Catégorie de rattachement :</strong></label><br>
+                            <label>{{categorie.perecode}}</label>
+                            <label *ngIf="!categorie.perecode"> - </label>
+                          </div>
+                                                    
+                      </div>
+                      <br>
+                    </div>
+              </div>
+          </div>
+         
+      </div >
+  </div>
+</div>
+

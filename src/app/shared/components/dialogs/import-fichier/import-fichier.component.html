@@ -1,0 +1,111 @@
+<div class="container-fluid">
+  <ng-container *ngIf="records === null">
+    <div class="row">
+      <p>Vous allez effectuer un import dans la table des données des <b>{{tab.entite}}</b></p>
+      <br><br>
+      <hr>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Avant de réaliser votre import veuillez exporter la trame d'une visualisation avant d'importer</p>
+        <p>
+          <mat-form-field appearance="outline" style="display:inline-block;width:auto;font-size:10px; ">
+            <mat-label>Nom de la visualisation</mat-label>
+            <mat-select name="selectedView" [(ngModel)]="selectedView" disableOptionCentering >
+              <mat-option *ngFor="let view of views" [value]="view.value">{{ view.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;">
+            <mat-label>Type de fichier</mat-label>
+            <mat-select name="selectedType" [(ngModel)]="selectedType" disableOptionCentering >
+              <mat-option *ngFor="let type of types" [value]="type.value">{{ type.label }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <a class="btn-secondary" style="margin-left: 10px;" mat-raised-button
+            (click)="exportertramefichier()">EXPORTER LA TRAME</a>
+        </p>
+      </div>
+      <br>
+      <hr>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p>Choisissez un fichier CSV, XLS ou XLSX</p>
+        <p>
+          <input #filePicker type="file" ng-file-select [hidden]="true" (change)="importerfichier($event)" accept=".csv,.xls,.xlsx">
+          <button class="btn-secondary" mat-raised-button (click)="filePicker.click()">
+            SÉLECTIONNER VOTRE FICHIER
+          </button>
+          <label class="mx-2" *ngIf="file !== null">{{file.name}}</label>
+        </p>
+      </div>
+      <br>
+      <hr>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-6">
+        <button type="button" class="btn-secondary-light" mat-raised-button (click)="fermer()">ANNULER</button>
+      </div>
+      <div class="col-lg-6 text-end">
+        <button [disabled]="!file || inProgress" type="button" class="btn-secondary" mat-raised-button (click)="enregistrer()">
+          <span *ngIf="inProgress"><mat-spinner [diameter]="14" style="display:inline-block;"></mat-spinner>&nbsp;&nbsp;</span>IMPORTER
+        </button>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="records !== null">
+    <div class="row">
+      <p>L'import des données de la table <b>{{tab.entite}}</b> est terminé</p>
+      <br><br>
+      <hr>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <p class="mb-0">Nombre de lignes traitées = {{nbTotal}}</p>
+        <p class="mb-0 record-ignored"><b>Nombre de lignes ignorées = {{nbIgnored}}</b></p>
+        <p class="mb-0 record-success"><b>Nombre de lignes validées = {{nbSuccess}}</b></p>
+        <p class="mb-0 record-warning"><b>Nombre de lignes avec alerte = {{nbWarnings}}</b></p>
+        <p class="mb-0 record-error"><b>Nombre de lignes en erreur = {{nbErrors}}</b></p>
+        <br>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="records-wrapper">
+          <div *ngFor="let record of records">
+            <div *ngIf="record.type === 'IGNORED'">
+              <p class="mb-0 record-ignored">{{record.row}} : IGNORE</p>
+            </div>
+            <div *ngIf="record.type === 'WARNING'">
+              <p class="mb-0 record-warning">ALERTE [LIGNE {{record.row}} - COLONNE {{record.column}}]
+                {{record.message}}</p>
+            </div>
+            <div *ngIf="record.type === 'ERROR'">
+              <p class="mb-0 record-error">ERREUR [LIGNE {{record.row}} - COLONNE {{record.column}}] {{record.message}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <br>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-3">
+        <button type="button" class="btn btn-outline-primary" mat-raised-button (click)="fermer()">FERMER</button>
+      </div>
+      <div class="col-lg-9">
+        <p style="float:right;">
+          <button type="button" class="btn-secondary" mat-raised-button (click)="telechargerRapport()">TÉLÉCHARGER LE RAPPORT</button>
+          <button type="button" class="btn-secondary" mat-raised-button style="margin-left: 10px;" (click)="fermer()">VALIDER</button>
+        </p>
+      </div>
+    </div>
+  </ng-container>
+</div>

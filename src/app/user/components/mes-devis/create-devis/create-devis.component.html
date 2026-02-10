@@ -1,0 +1,81 @@
+<div class="mb-3">
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <!---------------------------- recherche ---------------------------------->
+    <app-search-product (result)="displayResult($event)"></app-search-product>
+    <app-loading-spinner></app-loading-spinner>
+
+    <div class="container">
+        <p>
+            <a routerLink="/accueil">{{'Accueil'}}</a> >
+            <a routerLink="/devis">{{'Mes devis'}}</a> >
+            <span>{{'Créer un devis'}}</span>
+        </p>
+        <div class="title-row d-flex justify-content-between">
+            <div class="head-title d-flex align-items-center">
+                <span class="titre">{{'Titre du devis : '|uppercase}}</span>
+                <form [formGroup]="devisForm" class="w-100">
+                    <mat-form-field appearance="outline" class="form-field px-2">
+                        <mat-label>{{'Titre / Numéro'}}</mat-label>
+                        <input #title matInput type="text" formControlName="titre" placeholder="Test-000198 / 3.0">
+                    </mat-form-field>
+                </form>
+            </div>
+            <div class="head-actions d-flex">
+                <span [ngClass]="{'btn': title.value.length > 0}" (click)="saveDevis()" [ngStyle]="{'opacity': title.value.length > 0 ? '1' : '0.4'}">
+                    <mat-icon class="">print</mat-icon>
+                </span>
+                <span class="btn ">
+                    <mat-icon class="">add</mat-icon>
+                </span>
+                <span class="btn-danger" (click)="cancelDevis()">
+                    <mat-icon>remove_shopping_cart</mat-icon>
+                </span>
+            </div>
+        </div>
+
+        <div class="line"></div>
+
+        <app-infos-devis (infos)="saveInfos($event)"></app-infos-devis>
+        <div class="d-flex">
+            <div style="min-width: 170px;" class="tools">
+                <app-outils-devis class="text-center" [selectedLines]="selectedLines" [lines]="lines"
+                    (delete)="deleteLines()" [resetpp]="resetpp" (qtt)="changeQtt($event)" (num)="changeNum($event)"
+                    (separatorIndex)="addSeparator($event)" (subTotalIndex)="addSubTotal($event)"
+                    (commentChange)="changeCommentaire($event)" (discountChange)="changeRemises($event)"
+                    (switch)="switch()" (priceChange)="changePrix($event)" (newArticle)="addArticle($event)"
+                    (hidePriceEvent)="hidePrice()" [status]="status" (vatChange)="changeTVA($event)"
+                    (multiPriceChange)="changeMultiCoefPrice($event)" (publicPriceChange)="changePublicPrice()"
+                    (statusChange)="changeStatus($event)"></app-outils-devis>
+            </div>
+            <div class="tools-btn">
+                <button class="btn-primary" mat-raised-button (click)="displayTools=!displayTools"><mat-icon>build</mat-icon></button>
+            </div>
+
+            <div *ngIf="displayTools" class="responsive-tools">
+                <div class="close-btn" (click)="displayTools=!displayTools">
+                    <mat-icon>close</mat-icon>{{'FERMER'}}
+                </div>
+                <app-outils-devis class="text-center" [selectedLines]="selectedLines" [lines]="lines"
+                    (delete)="deleteLines()" [resetpp]="resetpp" (qtt)="changeQtt($event)" (num)="changeNum($event)"
+                    (separatorIndex)="addSeparator($event)" (subTotalIndex)="addSubTotal($event)"
+                    (commentChange)="changeCommentaire($event)" (discountChange)="changeRemises($event)"
+                    (switch)="switch(); displayTools=!displayTools" (priceChange)="changePrix($event)"
+                    (hidePriceEvent)="hidePrice()" [status]="status" (newArticle)="addArticle($event)"
+                    (vatChange)="changeTVA($event)" (multiPriceChange)="changeMultiCoefPrice($event)"
+                    (publicPriceChange)="changePublicPrice()" (statusChange)="changeStatus($event)"></app-outils-devis>
+            </div>
+            <div class="vert-line"></div>
+            <div class="w-100">
+                <app-lignes-devis class="text-center" (linesOutput)="saveLines($event)" [switch]="switchLines"
+                    [separatorsEvent]="sepEmitter" [subTotalsEvent]="subsEmitter"
+                    (separatorsEventOut)="refreshSeparators($event)" (subTotalsEventOut)="refreshSubTotals($event)"
+                    (totalsEventOut)="refreshTotals($event)" (selectedLines)="saveSelectedLines($event)"
+                    [linesInput]="lines$"></app-lignes-devis>
+            </div>
+        </div>
+
+    </div>
+</div>
+<app-footer-user></app-footer-user>

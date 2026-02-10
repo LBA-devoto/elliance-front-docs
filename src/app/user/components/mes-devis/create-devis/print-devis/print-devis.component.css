@@ -1,0 +1,56 @@
+.print-form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.print-form-section {
+    margin: 15px 0;
+    padding: 5px;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+}
+
+.print-form-section h2 {
+    margin: 15px;
+    display: flex;
+    justify-content: space-between;
+    color: #0373bc;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.print-form-section mat-form-field, .print-form-section mat-checkbox, .print-form-section mat-radio-group {
+    width: 50%;
+    padding: 10px;
+}
+
+.print-form-section mat-radio-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.print-form-section mat-radio-button {
+    margin: 10px 0;
+}
+
+::ng-deep .mat-form-field-disabled {
+    opacity: 0.6 !important;
+}
+
+::ng-deep .mat-radio-outer-circle, ::ng-deep .mat-radio-inner-circle {
+    color: #0373bc !important;
+    border-color: #0373bc !important;
+}
+
+::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+    background-color: #0373bc;
+}
+
+@media (max-width: 780px) {
+    .print-form-section mat-form-field, .print-form-section mat-checkbox, .print-form-section mat-radio-group {
+        width: 100%;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,30 @@
+<ng-container>
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id">
+          <strong>{{ config.label }}</strong>
+        </label>
+      </ng-container>
+
+      <br />
+
+      <ng-container *ngIf="config.editMode && userService.userHasChampUpdatePermissionAccess(config.name,typeName)">
+        <mat-form-field appearance="outline" style="font-size: 10px; width: 100%" *ngIf="pictos !== null">
+          <mat-select [(ngModel)]="config.value" [(value)]="config.value">
+            <mat-option *ngFor="let picto of pictos" [value]="picto">
+              <img src="/assets/images/pictos/{{picto}}.png" height="20" />&nbsp;{{pictoNameToLabel(picto)}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="!config.editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+        <div style="margin-top: 5px;" *ngIf="picto !== null">
+          <img src="/assets/images/pictos/{{picto}}.png" height="40" />&nbsp;{{pictoNameToLabel(picto)}}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

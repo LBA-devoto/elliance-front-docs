@@ -1,0 +1,7 @@
+<!-- Your Angular component template -->
+<button class="custom-button" (click)="executeAction()" [disabled]="isExecuting"  [attr.name]="config.elementdata?.nom">
+  {{ isExecuting ? "En cours d'execution" : "Executer"}}
+</button>
+
+<!-- Optionally, show a loading indicator -->
+

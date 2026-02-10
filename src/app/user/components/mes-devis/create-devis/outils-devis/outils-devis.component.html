@@ -1,0 +1,244 @@
+<div class="outils">
+    <div class="row">
+        <div class="col-7">
+            <button mat-raised-button class="status-btn px-1" title="{{status}}" [disabled]="!noLines"
+                [matMenuTriggerFor]="menu"><span>{{'Statut'|uppercase}}</span><span class="color"
+                    [ngStyle]="{'background-color': colors[indexOfStatus]}"></span></button>
+            <mat-menu #menu="matMenu" class="menu">
+                <button class="status d-flex justify-content-between align-items-center" mat-menu-item
+                    *ngFor="let stat of allStatus; let i = index" (click)="this.status=stat; statusChange.emit(stat)">
+                    <span>{{stat}}</span>
+                    <span class="color mx-1" [ngStyle]="{'background-color': colors[i]}"></span>
+                </button>
+            </mat-menu>
+        </div>
+        <div class="col-5">
+            <button mat-raised-button [disabled]="initialLinesCount <= 1 || !noLines"
+                (click)="switchTool=!switchTool; switchPosition()" [ngClass]="{'selected': switchTool}">
+                <mat-icon style="scale:0.7; margin-left:-5px;">arrow_downward</mat-icon>
+                <mat-icon style="scale:0.7; margin-left:-5px;">arrow_upward</mat-icon></button>
+        </div>
+    </div>
+    <div class="outils-bloc mt-3">
+        <div class="outil-cat">{{'Modifier la ligne'}}</div>
+        <div class="row">
+            <div class="col-7 rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayNumChange=!displayNumChange">{{'Numéro'|uppercase}}</button>
+                <div *ngIf="displayNumChange" class="change-popup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Numéro'}}</mat-label>
+                        <input matInput type="number" [(ngModel)]="numero" min="1">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateNum()" [disabled]="uncorrectNum">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayNumChange=!displayNumChange">close</mat-icon>
+                </div>
+            </div>
+            <div class="col-5 rel">
+                <button mat-raised-button [disabled]="!oneLine"
+                    (click)="resetPopups();displayPriceChange=!displayPriceChange">{{'Prix'|uppercase}}</button>
+                <div *ngIf="displayPriceChange && oneLine" class="change-popup d-flex flex-column">
+                    <div class="price-section px-1 d-flex justify-content-between w-100">
+                        <div>{{"Prix d'achat"|uppercase}}</div>
+                        <div>{{prixAchat}}</div>
+                    </div>
+                    <div class="row">
+                        <mat-form-field appearance="outline" class="w-50 px-1">
+                            <mat-label>{{'Approche'|uppercase}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="prixApproche" min="0">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" class="w-50 px-1">
+                            <mat-label>{{'Coef Marge'|uppercase}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="coefMarge" min="0">
+                        </mat-form-field>
+                    </div>
+                    <div class="line"></div>
+                    <div class="price-section px-1">
+                        {{'Prix de vente'|uppercase}}
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="pointers col-6 text-start px-1" (click)="prixVenteType=0"
+                            [ngStyle]="{'opacity':prixVenteType!=0 ? '0.2' : '1'}">{{"Prix public"|uppercase}}</div>
+                        <div class="pointers col-6 text-start px-1" (click)="prixVenteType=1"
+                            [ngStyle]="{'opacity':prixVenteType!=1 ? '0.2' : '1'}">{{"Prix Coef"|uppercase}}</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <div class="pointers col-6 text-start px-1" (click)="prixVenteType=0"
+                            [ngStyle]="{'opacity':prixVenteType!=0 ? '0.2' : '1'}">{{prixPublic}}</div>
+                        <div class="pointers col-6 text-start px-1" (click)="prixVenteType=1"
+                            [ngStyle]="{'opacity':prixVenteType!=1 ? '0.2' : '1'}">{{prixCoef}}</div>
+                    </div>
+                    <div class="row d-flex justify-content-between">
+                        <mat-form-field appearance="outline" class="pointers w-50 px-1" (click)="prixVenteType=2"
+                            [ngStyle]="{'opacity':prixVenteType!=2 ? '0.2' : '1'}">
+                            <mat-label>{{'Prix de vente'|uppercase}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="prixVente" min="0">
+                        </mat-form-field>
+                        <button mat-raised-button (click)="validatePrice()" class="w-50 px-1 m-0 mt-2"
+                            [disabled]="uncorrectPrice">{{'VALIDER'}}</button>
+                    </div>
+
+                    <mat-icon (click)="displayPriceChange=!displayPriceChange">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7 rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayQttChange=!displayQttChange">{{'Quantité'|uppercase}}</button>
+                <div *ngIf="displayQttChange" class="change-popup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Quantité'}}</mat-label>
+                        <input matInput type="number" [(ngModel)]="quantity" min="1">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateQtt()" [disabled]="uncorrectQtt">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayQttChange=!displayQttChange">close</mat-icon>
+                </div>
+            </div>
+            <div class="col-5 rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayVATChange=!displayVATChange">{{'TVA'|uppercase}}</button>
+                <div *ngIf="displayVATChange" class="change-popup">
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>{{'TVA'}}</mat-label>
+                        <input matInput type="number" [(ngModel)]="vat" min="0">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateVAT()" [disabled]="uncorrectVAT">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayVATChange=!displayVATChange">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7 rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayDiscountChange=!displayDiscountChange">{{'Remises'|uppercase}}</button>
+                <div *ngIf="displayDiscountChange" class="change-popup d-flex flex-column">
+                    <div [ngStyle]="{'opacity': discountModeTaux ? '1' : '0.4'}" (click)="discountModeTaux=true">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'Taux de la remise (%)'}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="discountTaux" min="0">
+                        </mat-form-field>
+                    </div>
+                    <div [ngStyle]="{'opacity': !discountModeTaux ? '1' : '0.4'}" (click)="discountModeTaux=false">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'Montant de la remise (€)'}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="discount" min="0">
+                        </mat-form-field>
+                    </div>
+
+                    <button mat-raised-button (click)="validateDiscount()" [disabled]="uncorrectDiscount"
+                        class="mx-0">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayDiscountChange=!displayDiscountChange">close</mat-icon>
+                </div>
+            </div>
+            <div class="col-5">
+                <button mat-raised-button [disabled]="noLines" class="red-btn" (click)="deleteLines()"><mat-icon>delete</mat-icon></button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button mat-raised-button [disabled]="noLines" (click)="hidePrice()">
+                    {{'Masquer le prix'|uppercase}}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- <button mat-raised-button [disabled]="noLines">{{'Commentaire'|uppercase}}</button> -->
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayComment=!displayComment">{{'Commentaire'|uppercase}}</button>
+                <div *ngIf="displayComment" class="change-popup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Commentaire'}}</mat-label>
+                        <textarea matInput name="" id="" rows="3" [(ngModel)]="comment"></textarea>
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateComment()">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayComment=!displayComment">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayCoefPrice=!displayCoefPrice">{{'PRIX COEF'|uppercase}}</button>
+                <div *ngIf="displayCoefPrice" class="change-popup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{"Coefficient à appliquer au prix d'achat"}}</mat-label>
+                        <input matInput type="number" [(ngModel)]="multiLinesCoef">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateCoefPrice()">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayCoefPrice=!displayCoefPrice">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col rel">
+                <button mat-raised-button [disabled]="noLines"
+                    (click)="resetPopups();displayPublicPrice=!displayPublicPrice">{{'PRIX PUBLIC'|uppercase}}</button>
+                <div *ngIf="displayPublicPrice" class="change-popup">
+                    <p style="width: 250px">Appliquer le prix public aux articles sélectionnés</p>
+                    <button mat-raised-button (click)="validatePublicPrice()">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displayPublicPrice=!displayPublicPrice">close</mat-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="structure my-3">
+        <div class="outil-cat">{{'Modifier la structure'}}</div>
+        <div class="row">
+            <div class="col-12 rel">
+                <button mat-raised-button [disabled]="lines.length==0"
+                    (click)="displaySeparator=!displaySeparator"><mat-icon>add</mat-icon>{{'Séparateur'|uppercase}}</button>
+                <div *ngIf="displaySeparator" class="change-popup">
+                    <div class="d-flex flex-column">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'Index précédent le séparateur'}}</mat-label>
+                            <input matInput type="number" [(ngModel)]="separator" min="0" [max]="lines.length">
+                        </mat-form-field>
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'Texte'}}</mat-label>
+                            <textarea matInput rows="4" [(ngModel)]="separatorText"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button (click)="validateSeparator()"
+                        [disabled]="uncorrectIndex">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displaySeparator=!displaySeparator">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 rel">
+                <button mat-raised-button [disabled]="lines.length==0"
+                    (click)="displaySubTotal=!displaySubTotal"><mat-icon>add</mat-icon>{{'Sous-total'|uppercase}}</button>
+                <div *ngIf="displaySubTotal" class="change-popup">
+                    <mat-form-field appearance="outline">
+                        <mat-label>{{'Index précédent le sous-total'}}</mat-label>
+                        <input matInput type="number" [(ngModel)]="subTotal" min="0" [max]="lines.length">
+                    </mat-form-field>
+                    <button mat-raised-button (click)="validateSubTotal()"
+                        [disabled]="uncorrectSubTotalIndex">{{'VALIDER'}}</button>
+                    <mat-icon (click)="displaySubTotal=!displaySubTotal">close</mat-icon>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <button mat-raised-button (click)="addArticle()"><mat-icon>add</mat-icon>
+                {{'Article manuscrit'|uppercase}}</button>
+        </div>
+    </div>
+    <!-- <div class="type">
+        <div class="outil-cat">{{'Type de devis'}}</div>
+        <div class="row">
+            <div class="col-6">
+                <button mat-raised-button [disabled]="true">{{'Achat'|uppercase}}</button>
+            </div>
+            <div class="col-6">
+                <button mat-raised-button [disabled]="true">{{'Public'|uppercase}}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button mat-raised-button [disabled]="true">{{'Appliquer le tarif'|uppercase}}</button>
+            </div>
+        </div>
+    </div> -->
+</div>

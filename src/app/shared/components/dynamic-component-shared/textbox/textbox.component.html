@@ -1,0 +1,42 @@
+<ng-container *ngIf="config.visible">
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"
+          ><strong>{{ config.label }}</strong></label
+        ></ng-container
+      ><br />
+      <ng-container *ngIf="editMode && userService.userHasChampViewPermissionAccess(config.name,typeName)">
+        <mat-form-field
+          appearance="outline"
+          style="font-size: 10px; width: 100%"
+        >
+          <input
+            [type]="config.type"
+            [id]="config.label"
+            [placeholder]="config.label"
+            [name]="config.name"
+            [(ngModel)]="value"
+            [value]="config.value ? config.value : ''"
+            [disabled]="config.disabled"
+            matInput
+          />
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="!editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& editMode ">
+        <div>
+          <span *ngIf="isColorHexa" style="display:inline-block;width:12px;height:12px;border-radius:50%;" [ngStyle]="{ 'background-color': value }"></span>
+        
+          <ng-container *ngIf="templateService.getIsPrix(config.name); else defaultValue">
+            {{ value | number:'1.2-2':'fr' }}
+          </ng-container>
+        
+          <ng-template #defaultValue>
+            {{ value }}
+          </ng-template>
+        </div>
+        
+      </ng-container>
+    </div>
+  </div> </ng-container
+><br />

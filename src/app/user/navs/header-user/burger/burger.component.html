@@ -1,0 +1,29 @@
+<div class="px-2 py-3 container">
+    <div class="close">
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+    <div class="nav" *ngIf="!(displaySubMenu||displayGestionSubMenu)">
+        <div *ngFor="let opt of navOptions" [routerLink]="opt.ref == 'gestion' ? null : opt.route"
+            (click)="opt.ref == 'gestion' ? openGestionMenu() : close()">
+            {{opt.title}}
+        </div>
+        <!-- [routerLink]="opt.ref == 'catalogues' || opt.ref == 'gestion' ? null : opt.route" -->
+
+        <!-- opt.ref == 'catalogues' ? openMenu() :  -->
+    </div>
+
+    <div class="sub-menu mt-3" *ngIf="displaySubMenu">
+        <ul class="sub-menu-list">
+            <li class="sub-menu-item" *ngFor="let cat of data" (click)="goTo(cat.titre)"><img
+                    [src]="logo(cat)" width="24">
+                {{cat.titre}} </li>
+        </ul>
+    </div>
+    
+    <div class="sub-menu mt-3 nav" *ngIf="displayGestionSubMenu">
+        <ul class="sub-menu-list">
+            <div class="" *ngFor="let gest of navOptions[navOptions.length-1].subMenu" (click)="goToGestion(gest.route)">
+                {{gest.title}} </div>
+        </ul>
+    </div>
+</div>

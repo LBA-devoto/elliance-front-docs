@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <div class="row">
+    <mat-form-field appearance="outline">
+      <mat-label>Champ</mat-label>
+      <mat-select [(ngModel)]="currentField" name="field">
+        <mat-option *ngFor="let field of fields" [value]="field">{{field}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <div style="overflow: auto; max-height: 300px;">
+      <div *ngFor="let al of tab.auditLogs">
+        <ng-container *ngIf="currentField === al.fieldName">
+          <p class="mb-0">Ancienne valeur : {{al.oldValue}}</p>
+          <p class="mb-0">Nouvelle valeur : {{al.newValue}}</p>
+          <p class="mb-0">Modifié par : {{al.username}}</p>
+          <p class="mb-0">Modifié le : {{al.timestamp[3]}}:{{al.timestamp[4]}}:{{al.timestamp[5]}} - {{al.timestamp[2]}}/{{al.timestamp[1]}}/{{al.timestamp[0]}}</p>
+          <hr>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top:30px">
+    <div class="col text-end">
+      <a class="btn-secondary" mat-raised-button (click)="onClose()">Fermer</a>
+    </div>
+  </div>
+</div>

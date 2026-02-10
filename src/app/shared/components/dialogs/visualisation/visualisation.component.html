@@ -1,0 +1,55 @@
+<div class="container-fluid d-flex flex-column" style="padding-bottom: 60px">
+  <div class="row">
+    <div class="col-lg-12 px-2">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{'Nom de la visualisation'}}</mat-label>
+        <input matInput type="text" name="noteprivee" placeholder="Nom de la visualisation" [(ngModel)]="viewdto.nom"
+          required>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row grow" *ngIf="entiteChamps.length==0 && nouveauxChamps.length==0"></div>
+  <div class="row grow" *ngIf="entiteChamps.length>0 || nouveauxChamps.length>0">
+    <div class="col-lg-6 px-2" cdkDropListGroup>
+      <label class="visu-list-label">{{'Champs disponible'}}</label>
+      <div class="card example-container">
+        <div class="example-list" cdkDropList #anciens="cdkDropList" [cdkDropListData]="entiteChamps"
+          [cdkDropListConnectedTo]="[nouvelles]" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let champ of entiteChamps" cdkDrag>
+            {{champ.label !== undefined && champ.label !== null && champ.label.fr_FR !== null && champ.label.fr_FR !== '' ? champ.label.fr_FR : champ.nom}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 px-2">
+      <label class="visu-list-label">{{'Champs contenus dans la visualisation'}}</label>
+      <div class="card example-container">
+        <div class="example-list" cdkDropList #nouvelles="cdkDropList" [cdkDropListData]="nouveauxChamps"
+          [cdkDropListConnectedTo]="[anciens]" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let champ of nouveauxChamps" cdkDrag>
+            {{champ.label !== undefined && champ.label !== null && champ.label.fr_FR !== null && champ.label.fr_FR !== '' ? champ.label.fr_FR : champ.nom}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row px-2 my-3">
+    <label>{{'Visibilite de la visualisation'}}</label>
+    <br>
+    <div class="col-lg-12" style="margin-bottom:20px;margin-top: 10px;">
+      <mat-radio-group [ngModelOptions]="{standalone: true}" aria-label="Select an option" [(ngModel)]="selectedOption">
+        <mat-radio-button [value]=false>{{'Pour moi uniquement'}}</mat-radio-button>
+        <mat-radio-button [value]=true style="margin-left: 10px;">{{'Pour tous les autres'}}</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div class="row px-2">
+    <div class="col-lg-4">
+      <button class="btn-secondary-light" mat-raised-button (click)="annuler()">{{'ANNULER'|uppercase}}</button>
+    </div>
+    <div class="col-lg-8 text-end">
+      <button class="btn-secondary" (click)="ouvrirFiltrePredefinis()" mat-raised-button>{{'FIlTRES PRéDéFINIs'|uppercase}}</button>
+      <button class="btn-secondary" mat-raised-button style="margin-left: 10px;" (click)="enregistrer()" [disabled]="invalidForm">{{'VALIDER'|uppercase}}</button>
+    </div>
+  </div>
+</div>

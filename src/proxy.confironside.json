@@ -1,0 +1,204 @@
+{
+  "/contrat/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnephysique/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/entite/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/dynamic-documents/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/dynamic-document-infos/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/dynamic-view-infos/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/categorie/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnemorale/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/image/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/images/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/email/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/ville/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/produit/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnemorale/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnephysique/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/monnaie/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auth/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/user/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/role/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/w2p/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "http://dev-soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pictos/*": {
+    "target": "http://dev-soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/picto/*": {
+    "target": "http://dev-soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pictocatalogue/*": {
+    "target": "http://dev-soparco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/viewchamps/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/view/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/menu/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/droit/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/template/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/actualite/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/variablelogistique/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/parametre/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auditLog/*": {
+    "target": "https://dev-ironside-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

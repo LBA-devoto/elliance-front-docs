@@ -1,0 +1,112 @@
+p {
+    font-size: 1.4em;
+    margin-bottom: 2px;
+}
+
+p a {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.titre {
+    font-size: 1.6em;
+    font-weight: 600;
+    font-family: "Poppins";
+    white-space: nowrap;
+}
+
+.head-title {
+    width: 100%;
+}
+
+.head-title .form-field {
+    height: 48px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.head-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.head-actions span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #0373bc;
+    border: 1px solid;
+    border-radius: 3px;
+    padding: 5px;
+    height: 40px;
+    width: 40px;
+    margin-left: 2px;
+    cursor: pointer;
+}
+
+.line {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid grey;
+}
+
+.vert-line {
+    margin: 0 1rem;
+    border-right: 1px solid rgb(180, 180, 180);
+}
+
+@media (max-width: 1200px) {
+
+    /* Faire qqchose ici pour le comportement en dessous de ce breakpoint */
+    .tools,
+    .vert-line {
+        display: none
+    }
+
+    .tools-btn {
+        display: flex;
+        position: fixed;
+        bottom: 15px;
+        left: 15px;
+        z-index: 9500;
+    }
+
+    .responsive-tools {
+        overflow: auto;
+        position: fixed;
+        top: 0;
+        left: 0;
+        box-shadow: 0 0 6px grey;
+        height: 100vh;
+        width: 240px;
+        z-index: 9998;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .responsive-tools .close-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #0373bc;
+        margin: 1rem;
+        cursor: pointer;
+    }
+
+    .close-btn:hover {
+        font-weight: bold;
+    }
+}
+
+@media (min-width: 1200px) {
+    .tools-btn, .responsive-tools {
+        display: none;
+    }
+}

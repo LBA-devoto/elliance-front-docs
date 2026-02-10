@@ -1,0 +1,55 @@
+<div class="container p-2">
+    <form [formGroup]="articleForm" class="article-form">
+        <div class="article-form-section">
+            <h2>{{"Ajout d'un article"}}</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Code article"}}</mat-label>
+                <input matInput formControlName="codeArticle">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Libellé"}}</mat-label>
+                <input matInput formControlName="libelle">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Nom du fournisseur"}}</mat-label>
+                <input matInput formControlName="nomFournisseur">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Prix d'achat"}}</mat-label>
+                <input matInput type="number" formControlName="prixAchat">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Prix de vente"}}</mat-label>
+                <input matInput type="number" formControlName="prixVente">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Eco participation"}}</mat-label>
+                <input matInput type="number" formControlName="ecoParticipation">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"TVA"}}</mat-label>
+                <mat-select formControlName="tva">
+                    <mat-option value="20">20%</mat-option>
+                    <mat-option value="10">10%</mat-option>
+                    <mat-option value="5.5">5.5%</mat-option>
+                    <mat-option value="2.1">2.1%</mat-option>
+                    <mat-option value="0">0%</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <span class="w-50 text-center" style="display: inline-block;">
+                <input type="file" #filePicker hidden (change)="loadPhoto($event)">
+                <button mat-raised-button class="btn-primary" (click)="filePicker.click()"
+                    style="position: relative;">{{"Ajouter une photo"|uppercase}}<div class="file-name">
+                        {{photoFilename}}</div></button>
+            </span>
+        </div>
+    </form>
+    <button mat-raised-button type="submit" class="btn-primary w-100"
+        [disabled]="articleForm.invalid" (click)="save()">{{"Enregistrer"|uppercase}}</button>
+</div>

@@ -1,0 +1,35 @@
+.popup {
+    font-size: medium;
+}
+
+.msg {
+    padding: 1.5rem;
+}
+
+.element {
+    font-weight: bold;
+    white-space: pre-wrap;
+}
+
+.comas {
+    font-weight: normal;
+}
+/* 
+.btn {
+    background-color: white;
+}
+
+.btn:last-of-type {
+    background-color: #047EA4;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #047EA4;
+    color: white;
+}
+
+.btn:last-of-type:hover {
+    color: #047EA4;
+    background-color: white;
+} */

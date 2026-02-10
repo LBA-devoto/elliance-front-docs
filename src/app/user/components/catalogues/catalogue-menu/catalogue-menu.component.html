@@ -1,0 +1,231 @@
+<div>
+    <div class="filter">{{'Filtres ajoutés'|uppercase}}</div>
+    <div>
+        <mat-form-field class="chip-list" appearance="fill" style="width: 100%;">
+            <mat-chip-list #chipList>
+                <mat-chip *ngFor="let fil of filtres" [selectable]="selectable" [removable]="removable"
+                    (removed)="remove(fil)">
+                    <span class="chip-content">{{displayChip(fil)}}<mat-icon matChipRemove *ngIf="removable">close</mat-icon></span>
+                </mat-chip>
+            </mat-chip-list>
+        </mat-form-field>
+    </div>
+    <button class="btn-primary mb-3 w-100" mat-raised-button (click)="resetFilter()">
+        {{'Réinitialiser filtres'|uppercase}}
+    </button>
+
+    <!-- <div class="line"></div> -->
+    <!-------------------- CATEGORIE ------------------------------------->
+    <div class="filter-div" (click)="categorie=!categorie">
+        <p class="titre-filtre">{{'CATÉGORIES'}}</p>
+        <mat-icon>{{categorie ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="" *ngIf="categorie">
+        <div *ngFor="let cat of depth1cat">
+            <mat-radio-group aria-labelledby="radio-group-label" class="radio-group depth1">
+                <mat-radio-button class="radio-button" [value]="cat.id" (change)="saveFilter($event, 'Cat')"
+                    [ngClass]="{'opened' : isCatOpened(cat.maplocaletitre[lang]), 'checked' : isCatChecked(cat.id)}"
+                    [checked]="isCatChecked(cat.id)" [title]="cat.maplocaletitre[lang]">
+                    {{cat.maplocaletitre[lang]}}
+                </mat-radio-button>
+                <mat-icon (click)="clickCat(cat.maplocaletitre[lang])">{{isCatOpened(cat.maplocaletitre[lang]) ?
+                    'expand_more':'navigate_next'}}</mat-icon>
+            </mat-radio-group>
+            <div *ngIf="isCatOpened(cat.maplocaletitre[lang])">
+                <div *ngFor="let cat2 of depth2cat(cat.id)">
+                    <mat-radio-group aria-labelledby="radio-group-label" class="radio-group depth2">
+                        <mat-radio-button class="radio-button" [value]="cat2.id" (change)="saveFilter($event, 'Cat')"
+                            [ngClass]="{'opened' : isCatOpened(cat2.maplocaletitre[lang]), 'checked' : isCatChecked(cat2.id)}"
+                            [checked]="isCatChecked(cat2.id)" [title]="cat2.maplocaletitre[lang]">
+                            {{cat2.maplocaletitre[lang]}}
+                        </mat-radio-button>
+                        <mat-icon (click)="clickCat(cat2.maplocaletitre[lang])">{{isCatOpened(cat2.maplocaletitre[lang]) ?
+                            'expand_more':'navigate_next'}}</mat-icon>
+                    </mat-radio-group>
+                    <div *ngIf="isCatOpened(cat2.maplocaletitre[lang])">
+                        <div *ngFor="let cat3 of depth3cat(cat2.id)">
+                            <mat-radio-group aria-labelledby="radio-group-label" class="radio-group depth3">
+                                <mat-radio-button class="radio-button" [value]="cat3.id"
+                                    (change)="saveFilter($event, 'Cat')"
+                                    [ngClass]="{'checked' : isCatChecked(cat3.id)}"
+                                    [checked]="isCatChecked(cat3.id)" [title]="cat3.maplocaletitre[lang]">
+                                    {{cat3.maplocaletitre[lang]}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="line"></div>
+    <!-------------------- FOURNISSEUR ------------------------------------->
+    <div class="filter-div" (click)="fournisseur=!fournisseur" *ngIf="!vueFournisseur">
+        <p class="titre-filtre">{{'FOURNISSEURS'}}</p>
+        <mat-icon>{{fournisseur ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="" *ngIf="fournisseur && !vueFournisseur">
+        <mat-form-field appearance="outline" style="position:relative">
+            <mat-label>{{'Rechercher un fournisseur'}}</mat-label>
+            <input matInput type="text" placeholder="Ex: ACO" [(ngModel)]="searchTerm" (keyup)="onSearchInput()"
+                (focusout)="disableList()">
+
+            <div *ngIf="autocompleteList.length>0" style="position: absolute; top: 40px; left:0; z-index: 999;">
+                <ul class="ac-list">
+                    <li class="ac-item" *ngFor="let prop of autocompleteList" (click)="saveFournisseur(prop.id)">
+                        {{prop.nom|uppercase}}</li>
+                </ul>
+            </div>
+
+        </mat-form-field>
+        <!-- <button class="btn reset-btn" mat-raised-button>OK</button> -->
+    </div>
+    <div class="line" *ngIf="!vueFournisseur"></div>
+    <!-------------------- TARIF PUBLIC ------------------------------------->
+    <div class="filter-div" (click)="tarifPublic=!tarifPublic" *ngIf="!extranetFournisseur">
+        <p class="titre-filtre">{{'TARIFS (€)'}}</p>
+        <mat-icon>{{tarifPublic ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="tarifPublic">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="1" (focusout)="saveFilter($event, 'Prix', 'min', '€')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="500000" (focusout)="saveFilter($event, 'Prix', 'max', '€')">
+        </mat-form-field>
+    </div>
+    <div class="line" *ngIf="!extranetFournisseur"></div>
+    <!-- ------------------ ALIMENTATION -----------------------------------
+    <div class="filter-div" (click)="alimentation=!alimentation">
+        <p class="titre-filtre">{{'ALIMENTATION'}}</p>
+        <mat-icon>{{alimentation ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input flex-column align-items-start" *ngIf="alimentation">
+        <div *ngFor="let alimentation of alimentations">
+            <mat-checkbox [checked]="isAlimChecked(alimentation)" (change)="saveFilter($event, 'Alim')"
+                name="{{alimentation}}">{{alimentation}}</mat-checkbox><br>
+        </div>
+    </div>
+    <div class="line"></div>
+    ------------------ PUISSANCE ------------------------------------
+    <div class="filter-div" (click)="puissance=!puissance">
+        <p class="titre-filtre">{{'PUISSANCE (W)'}}</p>
+        <mat-icon>{{puissance ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="puissance">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="100" (focusout)="saveFilter($event, 'Puissance', 'min', 'W')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="50000" (focusout)="saveFilter($event, 'Puissance', 'max', 'W')">
+        </mat-form-field>
+    </div>
+    <div class="line"></div> -->
+    <!---------------------- POIDS --------------------------------------->
+    <div class="filter-div" (click)="poids=!poids">
+        <p class="titre-filtre">{{'POIDS (KG)'}}</p>
+        <mat-icon>{{poids ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="poids">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="1" (focusout)="saveFilter($event, 'Poids', 'min', 'kg')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="5000" (focusout)="saveFilter($event, 'Poids', 'max', 'kg')">
+        </mat-form-field>
+    </div>
+    <div class="line"></div>
+
+    <!---------------------- MARQUE --------------------------------------->
+    <!-- <div class="filter-div" (click)="marque=!marque" *ngIf="extranetFournisseur">
+        <p class="titre-filtre">{{'MARQUE'}}</p>
+        <mat-icon>{{marque ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="marque">
+        <mat-form-field appearance="outline" class="filter-form-field w-100">
+            <mat-label>{{'Marque'}}</mat-label>
+            <input matInput type="text" (focusout)="saveFilter($event, 'Marque')">
+        </mat-form-field>
+    </div>
+    <div class="line" *ngIf="extranetFournisseur"></div> -->
+
+
+    <!-------------------- TARIF PUBLIC ------------------------------------->
+    <!-- <div class="filter-div" (click)="prixAchat=!prixAchat" *ngIf="extranetFournisseur">
+        <p class="titre-filtre">{{"PRIX D'ACHAT (€)"}}</p>
+        <mat-icon>{{prixAchat ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="prixAchat">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="1" (focusout)="saveFilter($event, 'Prix', 'min', '€')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="500000" (focusout)="saveFilter($event, 'Prix', 'max', '€')">
+        </mat-form-field>
+    </div>
+    <div class="line" *ngIf="extranetFournisseur"></div> -->
+
+    <!---------------------   LONGUEUR --------------------------------------->
+    <div class="filter-div" (click)="longueur=!longueur">
+        <p class="titre-filtre">{{'LONGUEUR (MM)'}}</p>
+        <mat-icon>{{longueur ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="longueur">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="100" (focusout)="saveFilter($event, 'Long', 'min', 'mm')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="50000" (focusout)="saveFilter($event, 'Long', 'max', 'mm')">
+        </mat-form-field>
+    </div>
+    <div class="line"></div>
+    <!-----------------------   LARGEUR ---------------------------------------------->
+    <div class="filter-div" (click)="largeur=!largeur">
+        <p class="titre-filtre">{{'LARGEUR (MM)'}}</p>
+        <mat-icon>{{largeur ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="largeur">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="100" (focusout)="saveFilter($event, 'Larg', 'min', 'mm')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="50000" (focusout)="saveFilter($event, 'Larg', 'max', 'mm')">
+        </mat-form-field>
+    </div>
+    <div class="line"></div>
+    <!----------------------------- HAUTEUR -------------------------------->
+    <div class="filter-div" (click)="hauteur=!hauteur">
+        <p class="titre-filtre">{{'HAUTEUR (MM)'}}</p>
+        <mat-icon>{{hauteur ? 'expand_more':'navigate_next'}}</mat-icon>
+    </div>
+    <div class="filter-input" *ngIf="hauteur">
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Minimum'}}</mat-label>
+            <input matInput type="number" placeholder="100" (focusout)="saveFilter($event, 'H', 'min', 'mm')">
+        </mat-form-field>
+        <span class="separator">-</span>
+        <mat-form-field appearance="outline" class="filter-form-field">
+            <mat-label>{{'Maximum'}}</mat-label>
+            <input matInput type="number" placeholder="50000" (focusout)="saveFilter($event, 'H', 'max', 'mm')">
+        </mat-form-field>
+    </div>
+</div>

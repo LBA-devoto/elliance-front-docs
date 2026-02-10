@@ -1,0 +1,33 @@
+[
+    {
+        "ref": "compte",
+        "title": "Mon compte",
+        "icon": "person",
+        "route": "/mon-compte"
+    },
+    {
+        "ref": "favoris",
+        "title": "Favoris",
+        "icon": "favorite",
+        "route": "/catalogues/favoris"
+    },
+    {
+        "ref": "notifications",
+        "title": "Notifications",
+        "icon": "notifications"
+    },
+    {
+        "ref": "mesdevis",
+        "title": "Mes devis",
+        "icon": "shopping_cart",
+        "text": "",
+        "route": "/devis"
+    },
+    {
+        "ref": "deconnexion",
+        "title": "Déconnexion",
+        "icon": "exit_to_app",
+        "text": "Déconnexion",
+        "route": "/logout"
+    }
+]

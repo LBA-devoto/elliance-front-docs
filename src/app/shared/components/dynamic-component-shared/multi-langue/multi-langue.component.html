@@ -1,0 +1,60 @@
+<ng-container>
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"
+          ><strong>{{ config.label }}</strong></label
+        >
+      </ng-container>
+      <br />
+
+      <ng-container *ngIf="config.editMode && config.multilangueFields && userService.userHasChampUpdatePermissionAccess(config.name,config.typeName)">
+        <div *ngFor="let local of config.multilangueFields">
+          <mat-form-field
+            appearance="outline"
+            style="font-size: 10px; width: 100%"
+          >
+            <mat-label>
+              <img
+                src="/assets/images/Icones/flag/{{ local }}.svg"
+                width="23"
+                height="18"
+                loading="lazy"
+              />
+            </mat-label>
+            <input
+              matInput
+              type="text"
+              [(ngModel)]="multilangueMap && multilangueMap[local]"
+              (ngModelChange)="(multilangueMap && multilangueMap[local])"
+            />
+          </mat-form-field>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="!config.editMode && config.multilangueFields || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+        <div *ngFor="let local of config.multilangueFields">
+          <ng-container *ngIf="isLocal(local)">
+            <div class="d-flex">
+              <div>
+                <img
+                  src="/assets/images/Icones/flag/{{ local }}.svg"
+                  width="23"
+                  height="18"
+                  loading="lazy" />
+              </div>
+              <div class="mx-1">
+                <label *ngIf="local">{{ sanitizeLabel(multilangueMap[local]) }}</label>
+
+                <label *ngIf="!local">-</label>
+              </div>
+            </div>
+            <br />
+          </ng-container>
+        </div>
+        <br />
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

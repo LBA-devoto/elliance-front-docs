@@ -1,0 +1,167 @@
+{
+  "/contrat/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnephysique/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/entite/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/categorie/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnemorale/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/image/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/images/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/email/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/ville/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/produit/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnemorale/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnephysique/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/monnaie/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auth/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/user/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/role/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/w2p/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "http://localhost:8083",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/viewchamps/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/view/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/menu/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/droit/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/template/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/actualite/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/variablelogistique/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/parametre/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auditLog/*": {
+    "target": "https://adisco-elliance.geolane.fr",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

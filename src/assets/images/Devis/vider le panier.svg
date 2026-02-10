@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25.208" height="21.996" viewBox="0 0 25.208 21.996">
+  <g id="vider_le_panier" data-name="vider le panier" transform="translate(-114.792 -212)">
+    <g id="commerce-and-shopping" transform="translate(114.792 214.086)">
+      <path id="Tracé_488" data-name="Tracé 488" d="M7.3,13.274H19.335a.664.664,0,0,0,.638-.481L22.627,3.5a.664.664,0,0,0-.638-.846H5.768L5.293.52A.664.664,0,0,0,4.645,0H.663a.664.664,0,0,0,0,1.327h3.45l2.4,10.783A1.991,1.991,0,0,0,7.3,15.928H19.335a.664.664,0,1,0,0-1.327H7.3a.664.664,0,0,1,0-1.327ZM21.109,3.982l-2.275,7.964h-11L6.063,3.982Zm0,0" transform="translate(0 0)" fill="#c82121"/>
+      <path id="Tracé_489" data-name="Tracé 489" d="M150,361.991A1.991,1.991,0,1,0,151.991,360,1.993,1.993,0,0,0,150,361.991Zm1.991-.664a.664.664,0,1,1-.664.664A.664.664,0,0,1,151.991,361.327Zm0,0" transform="translate(-143.363 -344.072)" fill="#c82121"/>
+      <path id="Tracé_490" data-name="Tracé 490" d="M362,361.991A1.991,1.991,0,1,0,363.991,360,1.993,1.993,0,0,0,362,361.991Zm1.991-.664a.664.664,0,1,1-.664.664A.664.664,0,0,1,363.991,361.327Zm0,0" transform="translate(-345.984 -344.072)" fill="#c82121"/>
+    </g>
+    <g id="Groupe_483" data-name="Groupe 483" transform="translate(0 -14)">
+      <g id="Ellipse_6" data-name="Ellipse 6" transform="translate(129 226)" fill="#fff" stroke="#b00020" stroke-width="1">
+        <circle cx="5.5" cy="5.5" r="5.5" stroke="none"/>
+        <circle cx="5.5" cy="5.5" r="5" fill="none"/>
+      </g>
+      <path id="Tracé_583" data-name="Tracé 583" d="M132.141,231H136" transform="translate(0.359 0.5)" fill="none" stroke="#b00020" stroke-linecap="round" stroke-width="1"/>
+    </g>
+  </g>
+</svg>

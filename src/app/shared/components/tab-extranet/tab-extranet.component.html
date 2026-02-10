@@ -1,0 +1,317 @@
+<div class="container-fluid" style="display: block; height: inherit;">
+    <div class="row">
+        <div class="col-1 menu">
+            <button [disabled]="saving" class="save-btn btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left"
+                (click)="save();">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+        <div class="col-11 content">
+            <form [formGroup]="form">
+                <mat-tab-group style="height: calc(100vh - 170px);">
+                    <mat-tab *ngFor="let tab of tabs" [label]="tab.title">
+                        <!-- PAGE DETAIL CATALOGUE-->
+                        <div *ngIf="tab.ref == 'detail'">
+                            <div class="row">
+                                <h3>Titre</h3>
+                                <mat-form-field appearance="outline" class="form-field w-25">
+                                    <mat-label>{{'Pictogramme'}}</mat-label>
+                                    <mat-select [value]="tabs[0].elements[0].picto ? 'true' : 'false'" (selectionChange)="setPicto($event)">
+                                        <mat-option *ngFor="let opt of [true, false]" value="{{opt}}">
+                                            {{opt}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field appearance="outline" class="form-field w-75">
+                                    <mat-label>{{'Sélectionner le champ correspondant au titre'}}</mat-label>
+                                    <mat-select formControlName="detailTitre" [value]="tabs[0].elements[0].data">
+                                        <mat-option *ngFor="let ch of mapChamps.get('detail')" value="{{ch.nom}}">
+                                            {{ch.nom}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <h3>Partie Gauche</h3>
+                                    <mat-form-field appearance="outline" class="form-field">
+                                        <mat-label>{{'Sélectionner Images ou Texte'}}</mat-label>
+                                        <mat-select formControlName="detailGauche" value="images" #select>
+                                            <mat-option *ngFor="let opt of ['images', 'texte']" value="{{opt}}">
+                                                {{opt|titlecase}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field><br>
+                                    <mat-form-field appearance="outline" class="form-field"
+                                        *ngIf="select.value == 'texte'">
+                                        <mat-label>{{'Sélectionner le champ correspondant au texte principal'}}</mat-label>
+                                        <mat-select (valueChange)="setChampTexte($event)" [value]="tabs[0].elements[1].data.champ">
+                                            <mat-option *ngFor="let champ of mapChamps.get('detail')"
+                                                value="{{champ.nom}}">
+                                                {{champ.nom}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6">
+                                    <h3>Partie Droite</h3>
+                                    <div class="d-flex mb-2">
+                                        <button mat-raised-button class="btn-primary" (click)="addDetailChamp()">{{'+ champ'|uppercase}}</button>
+                                        <button mat-raised-button class="btn-primary mx-1" (click)="addDetailSeparateur()">{{'+ séparateur'|uppercase}}</button>
+                                        <!-- <button mat-raised-button class="btn-primary" (click)="addDetailEspace()">{{'+ espace'|uppercase}}</button> -->
+                                    </div>
+                                    <div *ngFor="let ch of tab.elements[2].data; let i = index;">
+                                        <div *ngIf="ch=='sep'" class="dr droite-data-sep">
+                                            <hr>
+                                            <mat-icon (click)="removeDroiteData(i)">close</mat-icon>
+                                            <mat-icon class="mat-icon-up" (click)="raiseDroiteData(i)">keyboard_arrow_up</mat-icon>
+                                        </div>
+                                        <div *ngIf="ch!='sep'" class="dr droite-data">
+                                            <mat-icon (click)="removeDroiteData(i)">close</mat-icon>
+                                            <mat-icon class="mat-icon-up" (click)="raiseDroiteData(i)">keyboard_arrow_up</mat-icon>
+                                            <mat-form-field appearance="outline" class="form-field">
+                                                <mat-label>{{'Sélectionner un champ'}}</mat-label>
+                                                <mat-select (valueChange)="setDetailChamp(i, $event)" [value]="ch.champ">
+                                                    <mat-option *ngFor="let champ of mapChamps.get('detail')"
+                                                        value="{{champ.nom}}">
+                                                        {{champ.nom}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline" class="form-field">
+                                                <mat-label>{{'CSS'}}</mat-label>
+                                                <input matInput type="text" placeholder="font-weight: bold; color: #0373bc" (change)="setDetailCSS(i, $event)" [value]="ch.css">
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline" class="form-field">
+                                                <mat-label>{{'Extension'}}</mat-label>
+                                                <input matInput type="text" placeholder="€ HT" (change)="setDetailExtension(i, $event)" [value]="ch.extension">
+                                            </mat-form-field>
+                                            <mat-form-field appearance="outline" class="form-field">
+                                                <mat-label>{{'Label visible'}}</mat-label>
+                                                <mat-select [value]="ch.displayLabel?.toString()" (selectionChange)="setDetailLabel(i, $event)">
+                                                    <mat-option *ngFor="let opt of ['true', 'false']" value="{{opt}}">
+                                                        {{opt}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <h3>Caractéristiques <span class="mx-2"><button mat-raised-button class="btn-primary"
+                                            (click)="addCaracTab()">{{'+ onglet'|uppercase}}</button></span></h3>
+                                <mat-tab-group (selectedTabChange)="addName($event)">
+                                    <mat-tab *ngFor="let onglet of tab.elements[3]?.data; let i = index; trackBy: trackByFn"
+                                        [label]="onglet.onglet" style="position: relative;">
+                                        <ng-template mat-tab-label>
+                                            <mat-icon (click)="moveCaracTab(i)">keyboard_arrow_left</mat-icon>
+                                            <span>{{onglet.onglet}}</span>
+                                            <input type="text" *ngIf="tabInputIndex == i" width="100"
+                                                (focusout)="saveName(i, $event)">
+                                            <mat-icon (click)="tabInputIndex = i">edit</mat-icon>
+                                            <mat-icon (click)="removeCaracTab(i)">close</mat-icon>
+                                        </ng-template>
+                                        <div class="d-flex mb-2">
+                                            <button mat-raised-button class="btn-primary" (click)="addCaracChamp(i)">{{'+ champ'|uppercase}}</button>
+                                            <button mat-raised-button class="btn-primary mx-1" (click)="addCaracSeparateur(i)">{{'+ séparateur'|uppercase}}</button>
+                                        </div>
+                                        <div *ngFor="let ch of tab.elements[3]?.data[i].content; let j = index">
+                                            <div *ngIf="ch=='sep'" class="carac-sep">
+                                                <mat-icon (click)="removeCaracData(i, j)">close</mat-icon>
+                                                <mat-icon (click)="raiseCaracData(i, j)">keyboard_arrow_up</mat-icon>
+                                                <hr width="100%">
+                                            </div>
+                                            <div *ngIf="ch!='sep'" class="carac-ch">
+                                                <mat-icon (click)="removeCaracData(i, j)">close</mat-icon>
+                                                <mat-icon (click)="raiseCaracData(i, j)">keyboard_arrow_up</mat-icon>
+                                                <mat-form-field appearance="outline" class="form-field">
+                                                    <mat-label>{{'Sélectionner un champ'}}</mat-label>
+                                                    <mat-select (valueChange)="setCaracChamp(i, j, $event)" [value]="ch.champ">
+                                                        <mat-option *ngFor="let champ of mapChamps.get('detail')"
+                                                            value="{{champ.nom}}">
+                                                            {{champ.nom}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                                <mat-form-field appearance="outline" class="form-field">
+                                                    <mat-label>{{'CSS'}}</mat-label>
+                                                    <input matInput type="text" placeholder="font-weight: bold; color: #0373bc" (change)="setCaracCSS(i, j, $event)" [value]="ch.css">
+                                                </mat-form-field>
+                                                <mat-form-field appearance="outline" class="form-field">
+                                                    <mat-label>{{'Extension'}}</mat-label>
+                                                    <input matInput type="text" placeholder="€ HT" (change)="setCaracExtension(i, j, $event)" [value]="ch.extension">
+                                                </mat-form-field>
+                                                <mat-form-field appearance="outline" class="form-field">
+                                                    <mat-label>{{'Label visible'}}</mat-label>
+                                                    <mat-select [value]="ch.displayLabel?.toString()" (selectionChange)="setCaracLabel(i, j, $event)">
+                                                        <mat-option *ngFor="let opt of ['true', 'false']" value="{{opt}}">
+                                                            {{opt}}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+                                </mat-tab-group>
+                            </div>
+                        </div>
+
+
+
+                        <!-- COMPOSANT PRODUIT-->
+                        <div *ngIf="tab.ref == 'produit'">
+                            <div class="row">
+                                <div class="col-6 text-start pin">
+                                    <h3>Pictogramme gauche</h3>
+                                    <mat-form-field appearance="outline" class="form-field">
+                                        <mat-label>{{'Pictogramme'}}</mat-label>
+                                        <mat-select [value]="prodPictoValue" (selectionChange)="setProdData(0, $event)">
+                                            <mat-option *ngFor="let opt of [true, false]" value="{{opt}}">
+                                                {{opt}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-6 text-end fav">
+                                    <h3>Favoris</h3>
+                                    <mat-form-field appearance="outline" class="form-field">
+                                        <mat-label>{{'Favoris'}}</mat-label>
+                                        <mat-select [value]="prodFavValue" (selectionChange)="setProdData(1, $event)">
+                                            <mat-option *ngFor="let opt of [true, false]" value="{{opt}}">
+                                                {{opt}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row text-center">
+                                <h3>Image</h3>
+                                <mat-form-field appearance="outline" class="form-field w-25 m-auto">
+                                    <mat-label>{{'Image'}}</mat-label>
+                                    <mat-select [value]="prodImageValue" (selectionChange)="setProdData(2, $event)">
+                                        <mat-option *ngFor="let opt of [true, false]" value="{{opt}}">
+                                            {{opt}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="row">
+                                <h3>Champs</h3>
+                                <div class="d-flex mb-2">
+                                    <button mat-raised-button class="btn-primary" (click)="addDetailChamp(1)">{{'+ champ'|uppercase}}</button>
+                                    <button mat-raised-button class="btn-primary mx-1" (click)="addDetailSeparateur(1)">{{'+ séparateur'|uppercase}}</button>
+                                    <!-- <button mat-raised-button class="btn-primary" (click)="addDetailEspace()">{{'+ espace'|uppercase}}</button> -->
+                                </div>
+                                <div *ngFor="let ch of tab.elements[3]?.data; let i = index;">
+                                    <div *ngIf="ch=='sep'" class="d-flex align-items-center">
+                                        <mat-icon (click)="removeDroiteData(i, 1)">close</mat-icon>
+                                        <mat-icon (click)="raiseDroiteData(i, 1)">keyboard_arrow_up</mat-icon>
+                                        <span>{{'séparateur'|uppercase}}</span>
+                                    </div>
+                                    <div *ngIf="ch!='sep'">
+                                        <mat-icon (click)="removeDroiteData(i, 1)">close</mat-icon>
+                                        <mat-icon (click)="raiseDroiteData(i, 1)">keyboard_arrow_up</mat-icon>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Sélectionner un champ'}}</mat-label>
+                                            <mat-select (valueChange)="setDetailChamp(i, $event, 1)" [value]="ch.champ">
+                                                <mat-option *ngFor="let champ of mapChamps.get('produit')"
+                                                    value="{{champ.nom}}">
+                                                    {{champ.nom}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'CSS'}}</mat-label>
+                                            <input matInput type="text" placeholder="font-weight: bold; color: #0373bc" (change)="setDetailCSS(i, $event, 1)" [value]="ch.css">
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Extension'}}</mat-label>
+                                            <input matInput type="text" placeholder="€ HT" (change)="setDetailExtension(i, $event, 1)" [value]="ch.extension">
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Label visible'}}</mat-label>
+                                            <mat-select [value]="ch.displayLabel?.toString()" (selectionChange)="setDetailLabel(i, $event, 1)">
+                                                <mat-option *ngFor="let opt of ['true', 'false']" value="{{opt}}">
+                                                    {{opt}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- COMPOSANT FOURNISSEUR-->
+                        <div *ngIf="tab.ref == 'fournisseur'">
+                            <div class="row">
+                                <h3>Image</h3>
+                                <mat-form-field appearance="outline" class="form-field">
+                                    <mat-label>{{'Image'}}</mat-label>
+                                    <mat-select [value]="fournisseurImageValue" (selectionChange)="setFournisseurData(0, $event)">
+                                        <mat-option *ngFor="let opt of [true, false]" value="{{opt}}">
+                                            {{opt}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="row">
+                                <h3>Champs</h3>
+                                <div class="d-flex mb-2">
+                                    <button mat-raised-button class="btn-primary" (click)="addDetailChamp(2)">{{'+ champ'|uppercase}}</button>
+                                    <button mat-raised-button class="btn-primary mx-1" (click)="addDetailSeparateur(2)">{{'+ séparateur'|uppercase}}</button>
+                                    <!-- <button mat-raised-button class="btn-primary" (click)="addDetailEspace()">{{'+ espace'|uppercase}}</button> -->
+                                </div>
+                                <div *ngFor="let ch of tab.elements[1]?.data; let i = index;">
+                                    <div *ngIf="ch=='sep'" class="d-flex align-items-center">
+                                        <mat-icon (click)="removeDroiteData(i, 2)">close</mat-icon>
+                                        <mat-icon (click)="raiseDroiteData(i, 2)">keyboard_arrow_up</mat-icon>
+                                        <span>{{'séparateur'|uppercase}}</span>
+                                    </div>
+                                    <div *ngIf="ch!='sep'">
+                                        <mat-icon (click)="removeDroiteData(i, 2)">close</mat-icon>
+                                        <mat-icon (click)="raiseDroiteData(i, 2)">keyboard_arrow_up</mat-icon>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Sélectionner un champ'}}</mat-label>
+                                            <mat-select (valueChange)="setDetailChamp(i, $event, 2)" [value]="ch.champ">
+                                                <mat-option *ngFor="let champ of mapChamps.get('fournisseur')"
+                                                    value="{{champ.nom}}">
+                                                    {{champ.nom}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'CSS'}}</mat-label>
+                                            <input matInput type="text" placeholder="font-weight: bold; color: #0373bc" (change)="setDetailCSS(i, $event, 2)" [value]="ch.css">
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Extension'}}</mat-label>
+                                            <input matInput type="text" placeholder="€ HT" (change)="setDetailExtension(i, $event, 2)" [value]="ch.extension">
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline" class="form-field">
+                                            <mat-label>{{'Label visible'}}</mat-label>
+                                            <mat-select [value]="ch.displayLabel?.toString()" (selectionChange)="setDetailLabel(i, $event, 2)">
+                                                <mat-option *ngFor="let opt of ['true', 'false']" value="{{opt}}">
+                                                    {{opt}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>

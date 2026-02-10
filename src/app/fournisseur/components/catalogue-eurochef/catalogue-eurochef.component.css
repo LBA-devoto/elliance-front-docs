@@ -1,0 +1,37 @@
+.container {
+    display: flex;
+}
+
+.menu {
+    display: block;
+    width: 200px;
+    max-width: 200px;
+    min-width: 200px;
+    margin-right: 20px;
+}
+
+.content {
+    border-left: 1px solid rgba(128, 128, 128, 0.4);
+}
+
+.menu-resp {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .content {
+        border-left: none;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .menu-resp {
+        display: block;
+    }
+}

@@ -1,0 +1,29 @@
+.popup {
+    font-size: large;
+    max-width: 700px;
+    position: relative;
+    z-index: 999;
+}
+
+.element {
+    font-weight: bold;
+    white-space: pre-wrap;
+}
+
+.input-container {
+    cursor: pointer;
+    font-size: 0.9em;
+    
+}
+
+input {
+    outline: none;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}

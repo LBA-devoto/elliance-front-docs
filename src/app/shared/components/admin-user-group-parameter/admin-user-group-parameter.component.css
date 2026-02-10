@@ -1,0 +1,109 @@
+.mat-form-field {
+  width: 400px;
+  font-size: 10px;
+  margin: auto !important;
+  float: left;
+}
+table {
+  width: 100%;
+}
+.droits {
+  width: 90%;
+
+  max-height: 67vh;
+  padding-bottom: 10px;
+}
+.mat-row .mat-cell {
+  /*border-bottom: 1px solid transparent;
+      border-top: 1px solid transparent;
+      background-color: #0373BC;*/
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: rgba(3, 115, 188, 0.3);
+  color: white;
+  border-color: currentColor;
+}
+
+.details {
+  width: 80%;
+  padding-left: 60px;
+  max-height: 67vh;
+  padding-bottom: 10px;
+}
+button {
+  margin: 10px;
+}
+
+.menu a {
+  margin-bottom: 10px;
+}
+ul {
+  list-style: none;
+}
+
+.nav-item {
+  margin: 10px;
+  cursor: pointer;
+}
+
+div.a {
+  line-height: normal;
+}
+
+.title {
+  margin-left: -15px;
+}
+.sub {
+  margin-left: -10px;
+}
+.d-flex {
+  display: flex;
+  gap: 1px !important;
+}
+::ng-deep .cdk-overlay-pane {
+  margin-left: 0px !important;
+  margin-top: 40px !important;
+}
+
+.card {
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(249, 248, 248);
+  float: left;
+
+  margin: 10px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.card.selected {
+  opacity: 1;
+  box-shadow: 0 0 5px gray;
+}
+
+.tiles {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.p10 {
+  padding: 0 10px;
+}
+
+.fnt {
+  margin-left: 10px;
+  font-size: medium;
+}
+
+.tit {
+  color: #047ea4;
+  text-decoration: bold;
+  font-family: "Roboto";
+  font-weight: 500;
+  font-size: 18px;
+}

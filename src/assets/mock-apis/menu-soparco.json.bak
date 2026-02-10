@@ -1,0 +1,208 @@
+[
+  {
+    "text": "Accueil",
+    "icon": "accueil",
+    "routerLink": "/admin/",
+    "is_custom_icon": true,
+    "entityName": "accueil",
+    "listedechamps": [],
+    "filresappliques": {}
+
+  },
+  
+  {
+    "text": "Gestion de l'arborescence",
+    "icon": "arborescence",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "isVisible": true,
+        "text": "Catégories",
+        "entityName": "categorie",
+        "id": "",
+        "filresappliques": [{"champ": "depth", "conditions": [{"id": 0, "type": "NUMBER", "condition": "EQUALS", "valeur": 1}]}],
+        "listedechamps": ["select","code" ,"maplocaletitre","mapdescriptioncourte","mapdescriptionlongue", "perecode","ordre"],
+        "routerLink": "/product/category"
+      },
+      {
+        "isVisible": true,
+        "text": "Sous Catégories",
+        "entityName": "categorie",
+        "id": "",
+        "filter": "depth=22",
+        "filresappliques": [{"champ": "depth", "conditions": [{"id": 0, "type": "NUMBER", "condition": "EQUALS", "valeur": 2}]}],
+        "listedechamps": ["select","code" ,"maplocaletitre","mapdescriptioncourte","mapdescriptionlongue", "perecode","ordre"],
+        "routerLink": "/product/category"
+      },
+      {
+        "isVisible": true,
+        "text": "Sous sous Catégories",
+        "entityName": "categorie",
+        "id": "",
+        "filter": "3",
+        "filresappliques": [{"champ": "depth", "conditions": [{"id": 0, "type": "NUMBER", "condition": "EQUALS", "valeur": 3}]}],
+        "listedechamps": ["select","code" ,"maplocaletitre","mapdescriptioncourte","mapdescriptionlongue", "perecode","ordre"],
+        "routerLink": "/product/category"
+      },
+      {
+        "isVisible": true,
+        "text": "Produits",
+        "entityName": "produit",
+        "filter": "PRODUIT",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "filresappliques": [{"champ": "estProduit", "conditions": [{"id": 0, "type": "UNKNOWN", "condition": "EQUALS", "valeur": true}]}],
+        "routerLink": "/admin/produits"
+      },
+      {
+        "isVisible": true,
+        "text": "Articles",
+        "entityName": "produit",
+        "filter": "ARTICLE",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "filresappliques": [{"champ": "estArticle", "conditions": [{"id": 0, "type": "UNKNOWN", "condition": "EQUALS", "valeur": true}]}],
+        "routerLink": "/admin/produits"
+      },
+      {
+        "isVisible": true,
+        "text": "Conditionnements",
+        "entityName": "variableLogistique",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "routerLink": "/admin/VariableLogistique"
+      },
+      {
+        "isVisible": true,
+        "text": "Picto Catalogue",
+        "entityName": "picto_catalogue",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "routerLink": "/admin/PictoCatalogue"
+      }
+      
+    ]
+  },
+  
+  
+  {
+    "text": "Gestion des tiers",
+    "icon": "pers morale_blc",
+    "is_custom_icon": true,
+    "isVisible": true,
+    "children": [
+      {
+        "text": "Fournisseurs",
+        "entityName": "personnemorale",
+        "typeName": "FOURNISSEUR",
+        "listedechamps": [
+          "select",
+          "nom",
+          "code",
+          "raisonsociale",
+          "tva",
+          "codefour",
+          "statut",
+          "nompays"
+        ],
+        "id": "635b95c6b96fd53d382b5d39",
+        "filresappliques": [{"champ": "isfournisseur", "conditions": [{"id": 0, "type": "UNKNOWN", "condition": "EQUALS", "valeur": true}]}],
+
+        "routerLink": "/purchases/history"
+      }
+    ]
+  },
+  {
+    "text": "Gestion des contenus ",
+    "icon": "sharing",
+    "is_custom_icon": true,
+    "children": [
+     
+      {
+        "text": "Actualités",
+        "entityName": "actualite",
+        "routerLink": "/purchases/history"
+      }
+    ]
+  },
+
+  {
+    "text": "Parametres",
+    "icon": "surface1",
+    "is_custom_icon": true,
+
+    "children": [
+      {
+        "text": "Table de données",
+        "entityName": "datatable",
+        "routerLink": "/purchases/new"
+      },
+      {
+        "text": "Champs",
+        "entityName": "inputs",
+        "routerLink": "/purchases/history"
+      },
+      {
+        "isVisible": true,
+        "listedechamps": ["select","nomTable","valeur","mapLocalLibelle" ],
+        "id": "",
+        "text": "Parametres techniques",
+        "entityName": "parametre",
+        "routerLink": "/admin/parametre-technique"
+      },
+
+      {
+        "text": "Utilisateurs",
+        "listedechamps": ["select", "prénom", "nom", "email", "active"],
+        "entityName": "user",
+        "routerLink": "/purchases/history"
+      },
+      {
+        "text": "Groupe d'utilisateurs ",
+        "listedechamps": ["select", "nom du groupe"],
+        "entityName": "role",
+        "routerLink": "/admin/admin-user-group-parameter"
+      }
+    ]
+  },
+  {
+    "text": "Déconnexion",
+    "icon": "deconnexion",
+    "routerLink": "/logout",
+    "entityName": "deconnexion",
+    "is_custom_icon": true
+  }
+]

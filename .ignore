@@ -1,0 +1,32 @@
+# Node.js files
+node_modules/
+npm-debug.log
+
+# Compiled output
+/dist/
+/tmp/
+
+# Logs
+logs/
+*.log
+
+# Dependency directories
+/bower_components/
+
+# Environment configuration
+/src/environments/environment*.ts
+
+# IDE-specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Miscellaneous
+/.sass-cache/
+/.hg/
+/.svn/
+/CVS/
+Thumbs.db
+.DS_Store
+.json

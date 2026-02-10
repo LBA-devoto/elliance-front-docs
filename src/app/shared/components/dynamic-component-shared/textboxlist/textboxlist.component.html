@@ -1,0 +1,31 @@
+<ng-container *ngIf="config.visible && userService.userHasChampViewPermissionAccess(config.name,typeName)">
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"><strong>{{ config.label }}</strong></label></ng-container><br />
+      <ng-container *ngIf="editMode && userService.userHasChampUpdatePermissionAccess(config.name,typeName)">
+        <div class="d-flex justify-content-end">
+          <mat-icon class="btn:hover,
+          .btn-primary" style="font-size: 15px;" (click)="addItem()">add_circle</mat-icon>
+        </div>
+        <div *ngFor="let input of value; let i = index">
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 95%">
+            <input [type]="config.type" [id]="config.label" [placeholder]="config.label" [name]="config.displayProperty"
+              [(ngModel)]="value[i][config.displayProperty]" [disabled]="config.disabled" matInput />
+
+          </mat-form-field>
+          <div class="d-flex justify-content-end">
+            <mat-icon style="font-size: 15px;" (click)="removeItem(i)">delete</mat-icon>
+          </div>
+        </div>
+
+
+      </ng-container>
+      <ng-container *ngIf="!editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& editMode">
+        <div *ngFor="let input of config?.value">
+          {{ input[config.displayProperty] }}
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container><br />

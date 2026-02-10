@@ -1,0 +1,277 @@
+<div class="row" style="margin-bottom: 20px; margin-top: 30px">
+  <div *ngIf="config.editMode && userService.userHasChampUpdatePermissionAccess(config.name,config.typeName)" class="col-lg-11" style="padding-left: 0px">
+    <ng-container *ngIf="config.label">
+      <label [for]="config.id"><strong>{{ config.label }}</strong></label></ng-container><br />
+    <mat-form-field appearance="outline" appearance="outline" style="font-size: 10px; width: 100%" *ngIf="!onlyOneValue && !hideAutocomplete">
+      <input matInput type="text" [name]="config.label" (ngModelChange)="autocompleteSearch($event)" 
+        [matAutocomplete]="auto" [placeholder]="config.label" [formControl]="searchArticlesCtrl" />
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="570">
+        <mat-option *ngFor="let value of filteredArticles" [value]="getValue(value)" (click)="addItem(value)">
+          <ng-container *ngIf="value?.nom">
+            {{ value?.nom}}
+          </ng-container>
+          <ng-container *ngIf="value?.email">
+            {{ value?.email }}
+          </ng-container>
+          <!-- <ng-container *ngIf="value.titre && !value.nom">
+            {{ value.titre }}
+          </ng-container> -->
+          <ng-container *ngIf="!value?.titre && !value?.nom">
+            {{ value?.reference }}
+          </ng-container>
+          <ng-container *ngIf="value?.code && !value?.maplocaletitre  && !value?.mapdescription">
+            {{ value?.code }}
+          </ng-container>
+          <ng-container *ngIf="value?.code && value?.maplocaletitre">
+          {{ value?.maplocaletitre?.[locales[0]] }}
+          </ng-container>
+          <ng-container *ngIf="value?.label && entite !== 'Picto'">
+            {{ value?.label }}
+          </ng-container>
+          <ng-container *ngIf="value?.label && entite === 'Picto'">
+            {{ value?.label?.[locales[0]] }}
+          </ng-container>
+
+          <ng-container *ngIf="value?.mapDescriptionVl">
+            {{ value?.mapDescriptionVl?.[locales[0]]}}
+          </ng-container>
+          <ng-container *ngIf="value?.mapdescription">
+            {{ value?.mapdescription?.[locales[0]]}}
+          </ng-container>
+          <ng-container *ngIf="value?.maplocaletitre">
+          {{ value?.maplocaletitre?.[locales[0]] }}
+          </ng-container>
+          <ng-container *ngIf="value?.icon">
+            <img src="/assets/images/pictos/{{value.icon.picto}}.png" height="30" />
+          </ng-container>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    <table mat-table [dataSource]="datasource" matSort matSortActive="code" class="mat-elevation-z8">
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container *ngIf="column !== 'delete'" class="test">
+            {{ column | columnRenamePipe |uppercase }}
+          </ng-container>
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+          <a *ngIf="column === 'delete' && !cantDelete" class="mat-raised-button btn-danger" (click)="suprimme(element)">
+            <mat-icon style="vertical-align: middle">delete</mat-icon>
+          </a>
+          <ng-container *ngIf="column === 'icon'">
+            <img src="/assets/images/pictos/{{element[column].picto}}.png" height="30" />
+          </ng-container>
+          <ng-container *ngIf="column === 'mapDescriptionVl'">
+            {{ element[column]?.[locales[0]] }}
+          </ng-container>
+          <ng-container *ngIf="column === 'mapdescription'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+
+          <ng-container *ngIf="column === 'maplocaletitre'">
+            {{ element?.[column]?.[locales[0]] }}
+            
+          </ng-container>
+          <ng-container *ngIf="column === 'couleur'">
+                <span  style="display:inline-block;width:12px;height:12px;border-radius:50%;"
+                  [ngStyle]="{ 'background-color': element?.[column]?.['valeurHexa']}"></span>
+                  {{ element?.[column]?.['valeurHexa']}}
+                 
+          </ng-container>
+          <ng-container *ngIf="column === 'Libellé de la couleur'">
+            <span>{{ element?.couleur?.mapLocalLibelle?.fr_FR }}</span>
+          </ng-container>
+          
+          <ng-container *ngIf="column === 'code produit'">
+           
+            {{ element?.code}}
+         
+      </ng-container>
+      <ng-container *ngIf="column === 'Statuts Minos des articles'">
+        <span > {{ element?.statutMinos?.mapLocalLibelle?.fr_FR}}</span>
+      </ng-container>
+      <ng-container *ngIf="column === 'Tarif catalogue T1 (€)'">
+           
+        {{ element?.prix1}}
+     
+  </ng-container>
+  
+    <ng-container *ngIf="column === 'Tarif catalogue T2 (€)'">
+     
+        {{ element?.prix2}}
+     
+  </ng-container>
+  
+    <ng-container *ngIf="column === 'Tarif catalogue T3 (€)'">
+     
+        {{ element?.prix3}}
+     
+  </ng-container>
+  
+    <ng-container *ngIf="column === 'Tarif catalogue T4 (€)'">
+     
+        {{ element?.prix4}}
+     
+  </ng-container>
+  
+    <ng-container *ngIf="column === 'Tarif catalogue T5 (€)'">
+     
+        {{ element?.prix5}}
+     
+  </ng-container>
+      
+
+          <ng-container *ngIf="entite === 'Picto' && column === 'label'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+          <ng-container *ngIf="column !== 'delete' && column !== 'icon' && column !== 'couleur' && 
+          column !== 'mapDescriptionVl' && column !== 'mapdescription' && 
+          column !== 'maplocaletitre' && column !== 'Libellé de la couleur' && 
+          (entite !== 'Picto' && column !== 'label' 
+          && column !== 'Statuts Minos des articles' 
+          && column !== 'Tarif catalogue T1 (€)' 
+          && column !== 'Tarif catalogue T2 (€)'
+          && column !== 'Tarif catalogue T3 (€)'
+          && column !== 'Tarif catalogue T4 (€)'
+          && column !== 'Tarif catalogue T5 (€)'
+          && column !== 'code produit'
+          )">
+            {{ element?.[column] }}
+          </ng-container>
+          
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
+  <div class="col-lg-11" style="padding-left: 0px" *ngIf="!config.editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+    <ng-container>
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"><strong>{{ config.label }}</strong></label>
+      </ng-container>
+      <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+        <mat-label> Recherche {{ config.label }}</mat-label>
+        <input matInput placeholder="{{ config.label }}" (keyup)="filtreMotCles($event)" [(ngModel)]="recherche" />
+      </mat-form-field>
+    </ng-container>
+
+    <table mat-table [dataSource]="datasource" matSort matSortActive="code" class="mat-elevation-z8">
+      <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          <ng-container *ngIf="column !== 'delete'" class="test">
+            {{ column | columnRenamePipe |uppercase}}
+          </ng-container>
+        </th>
+
+        <td mat-cell *matCellDef="let element">
+          <ng-container *ngIf="column === 'icon'">
+            <img src="/assets/images/pictos/{{element[column].picto}}.png" height="30" />
+          </ng-container>
+          <ng-container *ngIf="column === 'mapDescriptionVl'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+
+          <ng-container 
+            *ngIf="column !== 'Nbre de pots par étage de Roll' &&  column !== 'plaque'  &&  column !== 'produit' &&  column !== 'couleur' &&  column !== 'type d\'adaptation' &&  column !== 'chevauchement' &&
+             column !== 'delete' && column !== 'icon'&& column !== 'mapDescriptionVl'&&
+              column !== 'mapdescription' && column !== 'maplocaletitre' &&
+               (entite !== 'Picto' && column !== 'label'&&
+                column !== 'Statuts Minos des articles'
+                && column !=='Libellé de la couleur'
+                && column !== 'Tarif catalogue T1 (€)' 
+                && column !== 'Tarif catalogue T2 (€)'
+                && column !== 'Tarif catalogue T3 (€)'
+                && column !== 'Tarif catalogue T4 (€)'
+                && column !== 'Tarif catalogue T5 (€)'
+                && column !== 'code produit'
+                )">
+            {{ element?.[column] }}
+          </ng-container>
+          <ng-container *ngIf="column ==='type d\'adaptation'">
+            {{ element?.["typedadaptation"]?.valeur}}
+          </ng-container>
+          <ng-container *ngIf="column === 'Nbre de pots par étage de Roll'">
+            {{ element?.['nombrederoll']}}
+          </ng-container>
+          <ng-container *ngIf="column === 'produit'">
+            {{ element?.[column]}}
+          </ng-container>
+          <ng-container *ngIf="column === 'plaque'">
+            {{ element?.[column]}}
+          </ng-container>
+          <ng-container *ngIf="column === 'chevauchement'">
+            {{ element?.[column]?.valeur}}
+          </ng-container>
+         
+          <ng-container *ngIf="column === 'mapdescription'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+          <ng-container *ngIf="column === 'couleur'">
+                <span  style="display:inline-block;width:12px;height:12px;border-radius:50%;"
+                  [ngStyle]="{ 'background-color': element?.[column]?.['valeurHexa']}"></span>
+                  {{ element?.[column]?.['valeurHexa']}}
+               
+          </ng-container>
+          <ng-container *ngIf="column === 'Libellé de la couleur'">
+            
+              {{ element?.couleur?.mapLocalLibelle?.fr_FR}}
+           
+      </ng-container>
+          <ng-container *ngIf="column === 'Statuts Minos des articles'">
+           
+              {{ element?.statutMinos?.mapLocalLibelle?.fr_FR}}
+           
+      </ng-container>
+      
+     <ng-container *ngIf="column === 'Tarif catalogue T1 (€)'">
+           
+      {{ element?.prix1|number:'1.2-2':'fr' }}
+   
+</ng-container>
+
+  <ng-container *ngIf="column === 'Tarif catalogue T2 (€)'">
+   
+      {{ element?.prix2|number:'1.2-2':'fr'}}
+   
+</ng-container>
+
+  <ng-container *ngIf="column === 'Tarif catalogue T3 (€)'">
+   
+      {{ element?.prix3|number:'1.2-2':'fr'}}
+   
+</ng-container>
+
+  <ng-container *ngIf="column === 'Tarif catalogue T4 (€)'">
+   
+      {{ element?.prix4|number:'1.2-2':'fr'}}
+   
+</ng-container>
+
+  <ng-container *ngIf="column === 'Tarif catalogue T5 (€)'">
+   
+      {{ element?.prix5|number:'1.2-2':'fr'}}
+   
+</ng-container>
+<ng-container *ngIf="column === 'code produit'">
+           
+  {{ element?.code}}
+
+</ng-container>
+          <ng-container *ngIf="column === 'maplocaletitre'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+
+          <ng-container *ngIf="entite === 'Picto' && column === 'label'">
+            {{ element?.[column]?.[locales[0]] }}
+          </ng-container>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" (click)="ouvrirOnglet(row)"></tr>
+    </table>
+  </div>
+</div>

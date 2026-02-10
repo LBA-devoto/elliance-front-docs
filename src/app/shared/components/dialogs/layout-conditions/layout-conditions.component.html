@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row" *ngFor="let condition of conditions">
+    <div class="col">
+      <mat-form-field appearance="outline" style="display:inline-block;width:auto;font-size:10px;">
+        <mat-label>Champs</mat-label>
+        <mat-select [(ngModel)]="condition.key">
+          <mat-option *ngFor="let parameter of allParameters" [value]="parameter.name">{{parameter.label}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="outline" style="display:inline-block;width:auto;margin-left:10px;font-size:10px;">
+        <mat-label>Valeur</mat-label>
+        <input matInput #input [(ngModel)]="condition.value">
+      </mat-form-field>
+      <button class="btn btn-danger" #tooltip="matTooltip" style="height: 36px; margin-left: 5px; margin-top: -5px;"
+        matTooltip="Supprimer" matTooltipPosition="left" (click)="onRemoveCondition(condition.key)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="row my-2">
+    <div class="col text-end">
+      <a class="btn-secondary" mat-raised-button (click)="addCondition()">AJOUTER UNE CONDITION</a>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <button type="button" class="btn-secondary-light" mat-raised-button (click)="onClose()">ANNULER</button>
+    </div>
+    <div class="col-lg-6 text-end">
+      <button type="button" class="btn-secondary" mat-raised-button (click)="onValidate()">VALIDER</button>
+    </div>
+  </div>
+</div>

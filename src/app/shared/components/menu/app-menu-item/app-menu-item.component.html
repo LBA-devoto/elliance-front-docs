@@ -1,0 +1,34 @@
+
+  <div *ngIf="!editMode">
+    <mat-tree [dataSource]="treeFlatDataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- Use node properties and the dataSource to access data -->
+        <mat-checkbox [checked]="node.selected" [disabled]="true"> 
+        </mat-checkbox>
+        <label class="fnt" for="{{node.name}}">
+          <span *ngIf="node.name">{{ node.name }}</span>
+        </label>
+        <mat-icon matTreeNodeToggle *ngIf="hasChild(node)">
+          {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </mat-tree-node>
+    </mat-tree>
+    
+  </div>
+  <div *ngIf="editMode">
+    <mat-tree [dataSource]="treeFlatDataSource" [treeControl]="treeControl">
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+        <!-- Use node properties and the dataSource to access data -->
+        <mat-checkbox [(ngModel)]="node.selected" (change)="onCheckboxChange(node)">
+        </mat-checkbox>
+        <label class="fnt" for="{{node.name}}">
+          <span *ngIf="node.name">{{ node.name }}</span>
+        </label>
+        <mat-icon matTreeNodeToggle *ngIf="hasChild(node)">
+          {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </mat-tree-node>
+    </mat-tree>
+  </div>
+
+

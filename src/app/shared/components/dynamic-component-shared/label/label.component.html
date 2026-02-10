@@ -1,0 +1,23 @@
+<ng-container *ngIf="config.label">
+    <label [for]="config.id"
+      ><strong>{{ config.label }}</strong></label
+    >
+</ng-container ><br />
+<ng-container *ngIf="!config.isMultiLangue">
+    <div>
+      {{ config.value }}
+    </div><br />
+  </ng-container>
+
+  <ng-container *ngIf="config.isMultiLangue">
+    <div *ngIf="!config.entiteClassSelection">
+      <div *ngIf="config.isMultiLangue && config.value?.mapLocalLibelle">
+        <span *ngIf="config.value?.valeurHexa !== null" style="display:inline-block;width:12px;height:12px;border-radius:50%;" [ngStyle]="{ 'background-color': config.value?.valeurHexa }"></span>
+        {{ config.value?.mapLocalLibelle[config.labelLocal] }}
+      </div>
+      <div *ngIf="!config.isMultiLangue">{{ config.value?.valeur }}</div>
+    </div>
+    <div *ngIf="config.entiteClassSelection">
+      <div *ngIf="config.displayProperty">{{ config.value[config.displayProperty] }}</div>
+    </div>
+  </ng-container><br />

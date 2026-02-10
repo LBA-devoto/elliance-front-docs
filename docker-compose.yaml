@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+   web:
+ #   build: .
+    image:  cadre-sur-mesure
+    container_name:  ceanothe-leroymerlin
+    restart: always
+    volumes:
+      - ./nginx_conf/:/etc/nginx/conf.d/
+      - /etc/localtime:/etc/localtime:ro
+      - ./toDelete:/home/test      
+    ports:
+      - '880:80'
+    expose:
+      - 80
+    networks:
+      - spring_app
+networks:
+   spring_app:
+    external: true
+

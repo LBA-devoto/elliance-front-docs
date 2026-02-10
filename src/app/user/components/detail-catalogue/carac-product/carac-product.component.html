@@ -1,0 +1,65 @@
+<div class="container px-0 py-3">
+    <div class="text-center">
+        <div class="titre" #carac>{{'CARACTÉRISTIQUES DU PRODUIT'}}</div>
+    </div>
+    <div class="tab my-2">
+        <mat-tab-group selectedIndex="{{openTabIndex}}">
+            <mat-tab *ngFor="let onglet of onglets; let i = index" [label]="onglet.onglet|uppercase"
+                [disabled]="onglet.content.length==0">
+                <div *ngFor="let ch of getOngletChamps(onglet); let j = index" [style]="getChampCSS(ch)">
+                    <div *ngIf="ch == 'sep'" class="line my-3"></div>
+                    <div *ngIf="ch != 'sep'">
+                        {{getChampLabel(ch)}} : {{getChampValue(ch)}} {{getChampExtension(ch)}}
+                    </div>
+                </div>
+            
+            </mat-tab>
+
+
+            <!-- <mat-tab label="DESCRIPTIF">
+                <ng-container>
+                    <p>{{product.description}}</p>
+                </ng-container>
+            </mat-tab>
+            <mat-tab label="CARACTÉRISTIQUES TECHNIQUES">
+                <ng-container>
+                    <div class="row carac-produit">
+                        <div class="col-12 col-md-4">
+                            <div> <span>{{'Alimentation : '}}</span> {{alim}}</div>
+                            <div> <span>{{'Puissance (W) : '}}</span> {{puissance}}</div>
+                            <div> <span>{{'Poids (KG) : '}}</span> {{product.poidsnet}}</div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div> <span>{{'Longueur (MM) : '}}</span>{{longueur}}</div>
+                            <div> <span>{{'Largeur (MM) : '}}</span>{{largeur}}</div>
+                            <div> <span>{{'Hauteur (MM) : '}}</span>{{hauteur}}</div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div> <span>{{'Caractéristique 1 : '}}</span> {{caracteristique1}}
+                            </div>
+                            <div> <span>{{'Caractéristique 2 : '}}</span> {{caracteristique2}}
+                            </div>
+                            <div> <span>{{'Caractéristique 3 : '}}</span> {{caracteristique3}}
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </mat-tab>
+            <mat-tab label="DOCUMENTS" [disabled]="documents.length==0">
+                <ng-container>
+                    <div class="row">
+                        <div *ngFor="let doc of documents" class="col-12 col-md-6 col-lg-4 col-xl-3">
+                            <a class="doc" [href]="doc.url" download title="Télécharger {{doc.fileName}}">
+                                <mat-icon>{{doc.matIcon}}</mat-icon>
+                                <div>
+                                    <div class="doc-name">{{doc.name}}</div>
+                                    <span class="file-name">{{doc.fileName}}</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </ng-container>
+            </mat-tab> -->
+        </mat-tab-group>
+    </div>
+</div>

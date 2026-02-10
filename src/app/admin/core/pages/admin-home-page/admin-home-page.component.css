@@ -1,0 +1,79 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  width: 160px;
+  height: 160px;
+  padding: 40px;
+  border-radius: 10px;
+  border-color: #0373bc;
+  background-color: rgb(249, 248, 248);
+  cursor: pointer;
+}
+
+.card img {
+  width: 100%;
+  overflow: hidden;
+  min-width: 36px;
+}
+
+.line {
+  border-bottom: 1px solid #0373bc;
+  width: 97%;
+  margin-bottom: 15px;
+}
+
+.hello {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 1.3em;
+  color: #0373bc;
+}
+
+/* 
+.example-container {
+  height: calc(90vh - 42px);
+} */
+
+.mat-tab-label {
+  text-decoration-line: none !important;
+}
+
+.custom-image {
+  width: 300px !important; /* Adjust the width as needed */
+  height: 200px !important; /* Adjust the height as needed */
+}
+::ng-deep .mat-tab-body-wrapper {
+  border: 1px solid #c8c8c8 !important;
+  height: calc(100vh - 110px);
+}
+
+::ng-deep .mat-tab-label-container .mat-tab-label {
+  /* background-color: #e4e4e4 !important; */
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+::ng-deep .mat-tab-label-container .mat-tab-label-active {
+  background-color: #0373bc !important;
+}
+
+::ng-deep
+  .mat-tab-label-container
+  .mat-tab-label-active
+  .mat-tab-label-content {
+  color: white !important;
+}
+
+::ng-deep app-admin-home-page .enr {
+  text-align: start !important;
+}
+
+::ng-deep app-admin-home-page table th div {
+  justify-content: center !important;
+}
+
+::ng-deep app-admin-home-page .menu .btn {
+  width: 48px !important;
+}

@@ -1,0 +1,34 @@
+.records-wrapper {
+  border: 1px solid #01355F;
+  border-radius: 10px;
+  
+  min-width: 600px;
+  height: 200px;
+  
+  padding: 10px;
+  
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.record-ignored {
+  color: #01355F;
+}
+
+
+.record-success {
+  color: green;
+}
+
+
+.record-warning {
+  color: #FD9712;
+}
+
+.record-error {
+  color: #C82121;
+}
+
+::ng-deep .mat-progress-spinner circle, ::ng-deep .mat-spinner circle {
+  stroke: #047ea4 !important;
+}

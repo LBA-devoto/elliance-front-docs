@@ -1,0 +1,58 @@
+.row {
+    margin-bottom: 2rem;
+}
+
+.save-btn {
+    display: flex;
+    width: 50px;
+    margin: auto;
+}
+
+.dr {
+    position: relative;
+}
+
+mat-tab mat-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.droite-data mat-icon,
+.droite-data-sep mat-icon {
+    position: absolute;
+    top: 12px;
+    left: -24px;
+}
+
+.droite-data-sep mat-icon {
+    position: absolute;
+    top: -10px;
+    left: -24px;
+}
+
+.mat-icon-up {
+    left: -48px !important;
+}
+
+mat-icon:hover {
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+mat-form-field {
+    height: 48px;
+}
+
+.carac-ch,
+.carac-sep {
+    display: flex;
+}
+
+.carac-sep mat-icon {
+    margin-top: 4px;
+}
+
+.carac-ch mat-icon {
+    margin-top: 12px;
+}

@@ -1,0 +1,359 @@
+<!-- <app-dynamic-input *ngSwitchCase="'text'" [formName]="formName" [field]="field"></app-dynamic-input> -->
+<div class="container-fluid" style="display: block; height: inherit;">
+  <div class="row" style="height: inherit;">
+    <div class="menu" [ngClass]="isLayoutEditMode ? 'col-3' : 'col-1'">
+      <div class="row" style="height: inherit;">
+        <div class="col">
+          <ng-container *ngIf="lectureMode">
+            <div *ngIf="userService.userHasRight('Modification',tab.droitTitle) && showEditButton()">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left"
+                (click)="modeEdition()">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <br />
+            </div>
+
+
+            <div *ngIf="userService.userHasRight('Suppression unitaire',tab.droitTitle)">
+              <a *ngIf="userService.userHasRight('Suppression unitaire',tab.droitTitle)" class="btn btn-danger"
+                #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left" (click)="supprimer()">
+                <mat-icon>delete</mat-icon>
+              </a>
+              <br />
+            </div>
+
+            <div class="position-relative">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Langues"
+                (click)="onOpenLanguages($event)" matTooltipPosition="left">
+                <mat-icon>language</mat-icon>
+              </a>
+              <br />
+              <a *ngIf="hasAuditLogs()" (click)="onOpenArchive($event)" class="btn btn-outline-warning"
+                #tooltip="matTooltip" matTooltip="Archive des modifications" matTooltipPosition="left">
+                <mat-icon>av_timer</mat-icon>
+              </a>
+              <br *ngIf="hasAuditLogs()" />
+              <div #languagesElementRef class="languages" [ngClass]="{ 'd-none': !isOpenLanguages }">
+                <div class="form-check" *ngFor="let language of languages">
+                  <input class="form-check-input" type="checkbox" [id]="language.key" [(ngModel)]="language.selected"
+                    (change)="onChangeLanguage(language)" />
+                  <label class="form-check-label" [attr.for]="language.key">{{ language.label }}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <ng-container *ngIf="canBePdfDownloaded">
+              <a *ngIf="userService.userHasRight('Génération de PDF',tab.droitTitle)" class="btn btn-outline-warning"
+                #tooltip="matTooltip" matTooltip="PDF" matTooltipPosition="left" (click)="downloadPDF()">
+                <mat-icon>picture_as_pdf</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+            <ng-container *ngIf="tab.entite === 'catalog'">
+              <a class="btn btn-outline-warning" (click)="onExportIdml()" #tooltip="matTooltip" matTooltip="Catalogue" matTooltipPosition="left">
+                <mat-icon>menu_book</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+            <ng-container *ngIf="userService.userHasRight('Modifier le template',tab.droitTitle)">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Editer" matTooltipPosition="left"
+                (click)="editLayout()">
+                <mat-icon>flip_to_back</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+
+
+            <ng-container *ngIf="showIntermediaryApprovalButton">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="valider" matTooltipPosition="left"
+                (click)="validate()">
+                <mat-icon>done</mat-icon>
+              </a>
+              <br />
+            </ng-container>
+            <ng-container *ngIf="showFinalApproverButton()">
+              <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="valider" matTooltipPosition="left"
+                (click)="validate()">
+                <mat-icon>done</mat-icon>
+              </a>
+
+            </ng-container>
+
+          </ng-container>
+
+          <ng-container *ngIf="isLayoutEditMode || isEditMode">
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left"
+              (click)="enrgister()">
+              <mat-icon>save</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="isLayoutEditMode && hasCondition()">
+            <a class="btn btn-danger" #tooltip="matTooltip" matTooltip="Supprimer le template" matTooltipPosition="left"
+              (click)="onRemoveTemplate()">
+              <mat-icon>delete</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="isLayoutEditMode">
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Créer un nouveau template"
+              matTooltipPosition="left" (click)="onAddTemplate()">
+              <mat-icon>add</mat-icon>
+            </a>
+            <br />
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Cloner le template"
+              matTooltipPosition="left" (click)="onCloneTemplate()">
+              <mat-icon>content_copy</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+          <ng-container *ngIf="isLayoutEditMode || isEditMode">
+            <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left"
+              (click)="cancel()">
+              <mat-icon>close</mat-icon>
+            </a>
+            <br />
+          </ng-container>
+        </div>
+        <div class="col-10 px-3"
+          *ngIf="isLayoutEditMode && currentTemplate !== null && currentParametersConnection !== null">
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+            <mat-label>Templates</mat-label>
+            <mat-select [(ngModel)]="templateIdSelected">
+              <mat-option *ngFor="let t of allTemplates | keyvalue" [value]="t.key">{{ t.value }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <label class="mb-2">
+            <strong>Rechercher un champ</strong>
+          </label>
+          <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+            <input matInput (keyup)="onSearch($event)" />
+          </mat-form-field>
+          <div class="items-wrapper">
+            <app-template-parameter id="parameters" [parameters]="currentTemplate.parameters"
+              [parametersConnection]="currentParametersConnection"
+              (parameterDropped)="dropParameter($event)"></app-template-parameter>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col article" style="width: 90%">
+      <div class="row" style="height: inherit;" *ngIf="!isLayoutEditMode">
+        <ng-container *ngIf="currentTemplate !== null && currentTemplate?.layout !== undefined && currentTemplate?.layout !== null">
+          <mat-tab-group style="height: inherit;">
+            <div>
+              <mat-tab [label]="tab.label" *ngFor="let tab of currentTemplate.layout.tabs">
+                <div class="row" *ngFor="let row of tab.rows">
+                  <h5 class="mb-0 title" *ngIf="hasTitleOnRow(row)">
+                    {{ row.title }}
+                  </h5>
+                  <div class="col" *ngFor="let col of row.cols">
+                    <h5 class="mb-0 title" *ngIf="hasTitleOnCols(row.cols)">
+                      {{ col.title === "" ? "&nbsp;" : col.title }}
+                    </h5>
+                    <div *ngFor="let parametre of col.parameters">
+                      <!-- <ng-container *ngIf="parametre.name === 'pictoCatalogue' && data !== undefined && data !== null">
+                      <label><strong>Pictos</strong></label>
+                      <table class="mat-table cdk-table mat-sort mat-elevation-z8 mb-4">
+                        <thead> 
+                          <tr class="mat-header-row cdk-header-row ng-star-inserted">
+                            <th class="mat-sort-header mat-header-cell cdk-header-cell ng-tns-c168-110 cdk-column-delete mat-column-delete ng-star-inserted mat-table-sticky mat-table-sticky-border-elem-top">
+                              LABEL
+                            </th>
+                            <th class="mat-sort-header mat-header-cell cdk-header-cell ng-tns-c168-110 cdk-column-delete mat-column-delete ng-star-inserted mat-table-sticky mat-table-sticky-border-elem-top">
+                              ICON
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="data['pictoCatalogue']">
+                          <tr *ngFor="let picto of data['pictoCatalogue']['pictos']" class="mat-row cdk-row ng-star-inserted">
+                            <td class="mat-cell cdk-cell cdk-column-icon mat-column-icon ng-star-inserted px-2">
+                              {{ picto.label }}
+                            </td>
+                            <td class="mat-cell cdk-cell cdk-column-icon mat-column-icon ng-star-inserted px-2">
+                              <img src="/assets/images/pictos/{{picto.icon.picto}}.png" height="30" />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </ng-container> -->
+
+                      <ng-container>
+                        <app-dynamic-component [formComponent]="parametre" [data]="data" [isEditMode]="isEditMode"
+                          [languages]="languages" #childComponent [typeName]="typeName">
+                        </app-dynamic-component>
+                      </ng-container>
+
+                      <!-- injection point for the component // we are going to pass the parameter to the  -->
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab *ngIf="tab.entite === 'catalog' && !isEditMode && subSubCategoryCatalogCodeSelected !== null">
+                <ng-template mat-tab-label>
+                  Paramétrage des tableaux
+                </ng-template>
+                <div class="row">
+                  <div class="col-3 px-2">
+                    <label><strong>Sous sous categorie</strong></label>
+                    <ul style="list-style: none; padding: 0;">
+                      <li style="border-bottom: 1px solid black; padding: 10px; cursor: pointer;" *ngFor="let category of data.categories" (click)="onSelectSubSubCategoryIdCatalog(category.id, category.code)">{{category.code}}</li>
+                    </ul>
+                  </div>
+                  <div class="col-3 px-2">
+                    <label><strong>Colonnes du tableau</strong></label>
+                    <ul style="list-style: none; padding: 0;">
+                      <li style="border-bottom: 1px solid black; padding: 10px; cursor: pointer;" *ngFor="let column of columnsSelectedCatalog[subSubCategoryCatalogCodeSelected]">{{resolveColumnCatalogLocale(column, allColumnsCatalog[column], true)}}</li>
+                    </ul>
+                  </div>
+                  <div class="col px-2" style="overflow: auto;" *ngIf="catalogPreviewIsReady && hasPreviewCatalog(subSubCategoryCatalogCodeSelected)">
+                    <label><strong>Visualisation</strong></label>
+                    <table class="table w-100">
+                      <thead>
+                        <tr>
+                          <th scope="col" style="background: #F9F2CB;" *ngFor="let column of subSubCategoriesColumnKeysCatalog()">
+                            <div [innerHTML]="resolveColumnCatalogLocale(column, allColumnsCatalog[column], false)"></div>
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let subSubCategoryCatalog of subSubCategoriesCatalog">
+                          <td *ngFor="let column of subSubCategoriesColumnKeysCatalog()">
+                            <ng-container *ngIf="isImageValue(subSubCategoryCatalog[column])">
+                              <img class="color-catalog" [src]="subSubCategoryCatalog[column]" alt="picto" />
+                            </ng-container>
+                            <ng-container *ngIf="!isImageValue(subSubCategoryCatalog[column])">
+                              <span *ngIf="!column.startsWith('couleur_')">{{subSubCategoryCatalog[column]}}</span>
+                              <span *ngIf="column.startsWith('couleur_')" class="color-catalog" [ngStyle]="{ 'background-color': subSubCategoryCatalog[column] }"></span>
+                            </ng-container>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab *ngIf="tab.entite === 'catalog' && isEditMode && subSubCategoryCatalogCodeSelected !== null">
+                <ng-template mat-tab-label>
+                  Paramétrage des tableaux
+                </ng-template>
+                <div class="row">
+                  <div class="col px-2">
+                    <label><strong>Sélectionner une sous sous categorie</strong></label>
+                    <ul style="list-style: none; padding: 0;">
+                      <li style="border-bottom: 1px solid black; padding: 10px; cursor: pointer;" *ngFor="let category of data.categories" (click)="onSelectSubSubCategoryCodeCatalog(category.code)">{{category.code}}</li>
+                    </ul>
+                  </div>
+                  <div class="col px-2">
+                    <label><strong>Colonnes disponible</strong></label>
+                    <div
+                      cdkDropList
+                      #todoList="cdkDropList"
+                      [cdkDropListData]="columnsAvailableCatalog[subSubCategoryCatalogCodeSelected]"
+                      [cdkDropListConnectedTo]="[doneList]"
+                      class="template-editor-wrapper-row" style="border: 1px solid black; padding: 0; height: 400px; overflow-y: auto;"
+                      (cdkDropListDropped)="dropColumnCatalog($event)">
+                      <div class="template-editor-row p-2" style="border-radius: 0;" cdkDrag *ngFor="let column of columnsAvailableCatalog[subSubCategoryCatalogCodeSelected];">{{resolveColumnCatalogLocale(column, allColumnsCatalog[column], true)}}</div>
+                    </div>
+                  </div>
+                  <div class="col px-2">
+                    <label><strong>Champs contenus dans le tableau</strong></label>
+                    <div
+                      cdkDropList
+                      #doneList="cdkDropList"
+                      [cdkDropListData]="columnsSelectedCatalog[subSubCategoryCatalogCodeSelected]"
+                      [cdkDropListConnectedTo]="[todoList]"
+                      class="template-editor-wrapper-row" style="border: 1px solid black; padding: 0; height: 400px; overflow-y: auto;"
+                      (cdkDropListDropped)="dropColumnCatalog($event)">
+                      <div class="template-editor-row p-2" style="border-radius: 0;" cdkDrag *ngFor="let column of columnsSelectedCatalog[subSubCategoryCatalogCodeSelected];">{{resolveColumnCatalogLocale(column, allColumnsCatalog[column], true)}}</div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab>
+            </div>
+          </mat-tab-group>
+        </ng-container>
+      </div>
+      <div class="row" *ngIf="isLayoutEditMode">
+        <ng-container *ngIf="isLayoutEditMode && currentTemplate !== null">
+          <div style="display: flex; justify-content: space-between;">
+            <!-- Les éléments à gauche -->
+            <div style="display: flex; align-items: center;">
+              <mat-form-field appearance="outline" style="width:auto;font-size:10px;">
+                <mat-label>Titre</mat-label>
+                <input matInput type="text" placeholder="Titre" [(ngModel)]="currentTemplate.titre">
+              </mat-form-field>
+              <button mat-raised-button class="btn-danger m-0 ms-2 mb-3" (click)="onClearTemplate()">Vider le
+                template</button>
+            </div>
+
+            <!-- Les éléments à droite -->
+            <div style="display: flex; align-items: center;" *ngIf="hasCondition()">
+              <mat-checkbox [checked]="currentTemplate.layout.hasCondition"
+                [(ngModel)]="currentTemplate.layout.hasCondition" [disabled]="true"> Condition</mat-checkbox>
+              <a class="btn btn-outline-warning ms-2" #tooltip="matTooltip" matTooltip="Conditions"
+                matTooltipPosition="left" (click)="onConditions($event)">
+                <mat-icon class="filter-icon">filter_alt</mat-icon>
+              </a>
+            </div>
+          </div>
+
+          <div class="template-editor" *ngIf="currentTemplate !== null && currentParametersConnection !== null">
+            <mat-tab-group>
+              <mat-tab *ngFor="let tab of currentTemplate.layout.tabs; let i = index">
+                <ng-template mat-tab-label *ngIf="i === 0">
+                  {{ tab.label }}
+                </ng-template>
+                <ng-template mat-tab-label *ngIf="i > 0">
+                  <input type="text" matInput [(ngModel)]="tab.label" />
+                  <button type="button" class="btn-mini-remove" (click)="onRemoveTab(i)">
+                    X
+                  </button>
+                </ng-template>
+                <div cdkDropList class="template-editor-wrapper-row" [cdkDropListData]="tab.rows"
+                  (cdkDropListDropped)="dropRows($event, tab.rows)">
+                  <div class="template-editor-row mb-2" *ngFor="let row of tab.rows" cdkDrag>
+                    <div cdkDropList cdkDropListOrientation="horizontal" [id]="row.id"
+                      class="template-editor-wrapper-col" (cdkDropListDropped)="dropCols($event, row.cols)">
+                      <div class="template-editor-col m-1" *ngFor="let col of row.cols" cdkDrag>
+                        <app-template-parameter [id]="col.id" class="w-100 h-100" [parameters]="col.parameters"
+                          [parametersConnection]="currentParametersConnection"
+                          (parameterDropped)="dropParameter($event)"></app-template-parameter>
+                        <input type="text" class="template-editor-col-title" matInput [(ngModel)]="col.title"
+                          placeholder="Titre" />
+                        <button type="button" class="btn-mini-add" (click)="onAddCol(row.cols, col.id)">
+                          +
+                        </button>
+                        <button type="button" class="btn-mini-remove" (click)="onRemoveCol(row.cols, col.id)" *ngIf="
+                              row.cols.length > 1 ||
+                              (col.parameters !== undefined &&
+                                col.parameters !== null &&
+                                col.parameters.length > 0)
+                            ">
+                          x
+                        </button>
+                      </div>
+                    </div>
+                    <input type="text" class="template-editor-col-title" matInput [(ngModel)]="row.title"
+                      placeholder="Titre" />
+                    <button type="button" class="btn-mini-add" (click)="onAddRow(tab.rows, row.id)">
+                      +
+                    </button>
+                    <button type="button" class="btn-mini-remove" (click)="onRemoveRow(tab.rows, row.id)"
+                      *ngIf="tab.rows.length > 1">
+                      x
+                    </button>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+            <button type="button" class="btn-mini-add-tab" (click)="onAddTab()">
+              +
+            </button>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

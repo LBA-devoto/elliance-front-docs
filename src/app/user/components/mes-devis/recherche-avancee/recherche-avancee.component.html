@@ -1,0 +1,109 @@
+<div class="recherche-container my-2">
+    <div class="title" (click)="displayForm=!displayForm">
+        <span>{{'Recherche avancée'}}</span>
+        <mat-icon>
+            {{displayForm ? 'keyboard_arrow_up':'keyboard_arrow_down'}}
+        </mat-icon>
+    </div>
+    <div class="line" [ngStyle]="{'display': displayForm ? '' : 'none'}"></div>
+
+    <form [formGroup]="searchForm" [ngStyle]="{'display': displayForm ? '' : 'none'}">
+        <!-- RANG 1 -->
+        <div class="row"> 
+            <div class="col-12 col-md-8 col-lg-4 order-1 order-md-1">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Titre / Numéro'}}</mat-label>
+                    <input matInput type="text" formControlName="titre" placeholder="D2300042">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 order-2 order-md-3">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Elaboré par'}}</mat-label>
+                    <input matInput type="text" formControlName="elaborePar" placeholder="Elaboré par">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3 order-3 order-md-4">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Commercial'}}</mat-label>
+                    <input matInput type="text" formControlName="commercial" placeholder="Commercial">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-4 col-lg-2 order-4 order-md-2 order-lg-4">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Etat'}}</mat-label>
+                    <mat-select placeholder="Etat" formControlName="etat">
+                        <mat-option *ngFor="let etat of etats" value="{{etat}}">
+                            {{etat}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <!-- RANG 2&3 -->
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Client'}}</mat-label>
+                    <input matInput type="text" formControlName="client" placeholder="Client">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>{{'Client Facturation'}}</mat-label>
+                    <input matInput type="text" formControlName="clientFacturation" placeholder="Client Facturation">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 compare">
+                <span>{{'Date de création'}}</span>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Contrainte'}}</mat-label>
+                    <mat-select placeholder="18/08/2021" formControlName="dateContrainte">
+                        <mat-option *ngFor="let contr of contraintes" value="{{contr}}">
+                            {{contr}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Valeur'}}</mat-label>
+                    <input matInput type="date" formControlName="dateValeur">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 compare">
+                <span>{{'Prix HT (€)'}}</span>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Contrainte'}}</mat-label>
+                    <mat-select formControlName="prixHTContrainte">
+                        <mat-option *ngFor="let contr of contraintes" value="{{contr}}">
+                            {{contr}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Valeur'}}</mat-label>
+                    <input matInput type="number" placeholder="1699.90" formControlName="prixHTValeur">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 compare">
+                <span>{{'Prix TTC (€)'}}</span>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Contrainte'}}</mat-label>
+                    <mat-select  formControlName="prixTTCContrainte">
+                        <mat-option *ngFor="let contr of contraintes" value="{{contr}}">
+                            {{contr}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="form-field w-50">
+                    <mat-label>{{'Valeur'}}</mat-label>
+                    <input matInput type="number" formControlName="prixTTCValeur" placeholder="2699.90">
+                </mat-form-field>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-end">
+                <div class="controls">
+                    <a class="mx-2" (click)="resetFilter()">{{'Réinitialiser les filtres'}}</a>
+                    <button class="btn-primary" mat-raised-button (click)="emitSearch()">{{'RECHERCHER'}}</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

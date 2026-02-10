@@ -1,0 +1,16 @@
+<div class="container-fluid">
+  <div>
+    <div class="article">
+      <div *ngIf="edition">
+        <ng-container *ngIf="twocolumn">
+          <app-template-edit [tab]="tab" style="display: block; height: inherit;"></app-template-edit>
+        </ng-container>
+      </div>
+      <div *ngIf="lecture">
+        <ng-container *ngIf="viewtwocolumn">
+          <app-template-edit [tab]="tab" style="display: block; height: inherit;"></app-template-edit>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

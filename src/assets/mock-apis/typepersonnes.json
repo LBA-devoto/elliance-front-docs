@@ -1,0 +1,22 @@
+[
+	 {
+		"id": "6363dc3620658c16ed134747",
+		"nom": "CONTACT-CLIENT",
+		"code": null,
+		"commentaire": null,
+		"publishDate": null,
+		"lastUpdatedDate": null,
+		"lastUpdateUserId": null,
+		"addedfields": null
+     },
+  {
+		"id": "6363dc3920658c16ed134792",
+		"nom": "CONTACT-FOURNISSEUR",
+		"code": null,
+		"commentaire": null,
+		"publishDate": null,
+		"lastUpdatedDate": null,
+		"lastUpdateUserId": null,
+		"addedfields": null
+	}
+]

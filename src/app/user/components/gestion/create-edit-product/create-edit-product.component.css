@@ -1,0 +1,110 @@
+/* Title */
+p {
+    font-size: 1.4em;
+    margin-bottom: 2px;
+}
+
+p a {
+    cursor: pointer;
+    color: black;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+.titre {
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: "Poppins";
+}
+
+/* content */
+.form-container {
+    padding: 5px;
+    background-color: #F2F2F2;
+}
+
+.title {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #0373bc;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.line {
+    margin: 5px;
+    border-bottom: 1px solid grey;
+}
+
+.form-field {
+    padding: 0 5px;
+    width: 100%;
+}
+
+.label {
+    color: #0373bc;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-ref {
+    position: relative;
+}
+
+.file-ref span {
+    color: black;
+    position: absolute;
+    bottom: -15px;
+    left: 0;
+    padding: 0 10px;
+    width: 100%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.file-picker-small {
+    display: none;
+}
+
+.ok-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+@media (max-width: 576px) {
+    .file-picker {
+        display: none;
+    }
+
+    .file-picker-small {
+        display: inline;
+    }
+
+    .promo-label {
+        min-width: 200px;
+    }
+}
+
+.accessoires {
+    max-width: 700px;
+}
+
+::ng-deep .form-container .mat-form-field-outline {
+    height: 44px;
+}

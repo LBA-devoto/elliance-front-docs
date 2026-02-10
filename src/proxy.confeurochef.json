@@ -1,0 +1,161 @@
+{
+  "/contrat/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnephysique/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/entite/*": {
+    "target": "http://141.94.163.76:29082",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/categorie/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/personnemorale/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/image/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/images/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/email/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/ville/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/produit/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnemorale/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/typepersonnephysique/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/monnaie/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auth/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/user/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/role/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/w2p/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/api/*": {
+    "target": "http://localhost:8083",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/viewchamps/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+
+  "/view/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/menu/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/droit/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/template/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/actualite/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/auditLog/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  },
+  "/pdf/*": {
+    "target": "http://141.94.163.76:29081",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

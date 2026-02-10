@@ -1,0 +1,414 @@
+<div class="page">
+    <div class="container-fluid">
+        <!--div class="alert alert-success" style="padding: 0px;" *ngIf="succes">
+            <div class="d-flex justify-content-center" >
+                <h3>{{message}} </h3>
+            </div>
+        </div>
+        <div class="alert alert-danger" style="padding: 0px;" *ngIf="errorProcess">
+            <div class="d-flex justify-content-center" >
+                <h3>{{message}} </h3>
+            </div>
+        </div-->
+        <div class="d-flex justify-content-between">
+            <div class="menu">
+                <div *ngIf="!edition">
+                    <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left" (click)="modeEdition()"><mat-icon >edit</mat-icon>
+                    </a><br>
+                    <a class="btn btn-danger" #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left" (click)="supprimer()"><mat-icon>delete</mat-icon>
+                    </a><br>
+                </div>
+                <div *ngIf="edition">
+                    <a class="btn btn-outline-warning"  #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left" (click)="enregistrer()"><mat-icon >save</mat-icon>
+                    </a><br>
+                    <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left" (click)="annuler()"><mat-icon >close</mat-icon>
+                    </a><br>
+                </div>
+                
+            </div>
+            <div class="article">
+                <div class="d-flex justify-content-between" *ngIf="lecture">
+                    <div class="right">
+                        <!-- <div class="card">
+                            <img src="/assets/image/passepartout-30x40-vit-2.jpg" style="height: 300px; background-size: contain; padding: 5px;">
+                            <div class="d-flex justify-content-end">
+                                <mat-icon>add_a_photo</mat-icon>
+                            </div>
+                        </div> -->
+                        <div><strong>Description</strong></div>
+                        <div >
+                            <div *ngFor="let map of produit.mapdescription | keyvalue  ">
+                                                     
+                                <img src="/assets/images/Icones/flag/{{map.key}}.svg" width="20" height="16" loading="lazy">
+                                {{map.value}}
+                              </div>
+                            <!-- <div>
+                                <span>{{produit.mapdescription}} </span>
+                                <span *ngIf="!produit.description"> - </span>
+                            </div> -->
+                        </div>
+                        <!-- <br>
+                        <div><strong>Déscription courte</strong></div>
+                        <span> {{produit.descriptioncourte}} </span><br>
+                        <span *ngIf="!produit.descriptioncourte"> - </span>
+                        <br>
+                        <div><strong>Désignation rapide</strong></div>
+                        <span> {{produit.designationrapide}} </span><br>
+                        <span *ngIf="!produit.designationrapide"> - </span> -->
+                    </div>
+                    <div class="left">
+                        <div class="d-flex justify-content-between">
+                            <div class="inside-r">
+                                <!-- <label><strong>Nom</strong></label>:<br>
+                                <span *ngIf="!produit.nom"> - </span>
+                                <span> {{produit.nom}} </span><br><br> -->
+                                <label><strong>Référence</strong></label>:<br>
+                                <span *ngIf="!produit.reference"> - </span>
+                                 <span> {{produit.reference}} </span><br><br>                                    
+                                <!--<label><strong>Titre</strong></label>:<br>
+                                <span *ngIf="!produit.titre"> - </span>
+                                <span>{{produit.titre}} </span><br><br>
+                                <label><strong>Code</strong></label>:<br>
+                                <span *ngIf="!produit.code"> - </span>
+                                <span> {{produit.code}} </span><br><br>
+                                <label><strong>Code barre EAN</strong></label>:<br>
+                                <span *ngIf="!produit.codebarreean"> - </span>
+                                <span> {{produit.codebarreean}} </span><br><br>
+                                <label><strong>Marque</strong></label>:<br>
+                                <span *ngIf="!produit.marque"> - </span> 
+                                <span>{{produit.marque}} </span><br><br>
+                                <label><strong>Réference Fournisseur</strong></label>:<br>
+                                <span *ngIf="!produit.reffournisseur"> - </span>
+                                <span>{{produit.reffournisseur}} </span><br><br>
+                                <label>Prix(s) :</label><br>
+                                <strong>
+                                    <span *ngFor="let p of produit.prix">
+                                        <span> {{p.nom}} : {{p.valeur}}€</span><br>
+                                    </span>
+                                    </strong><br>
+                                    <label *ngIf="!produit.prix"> - </label> -->
+                                <!--div>
+                                    <label>Prix</label><mat-icon style="font-size: 15px;" (click)="ajoutPrix()" #tooltip="matTooltip" matTooltip="Ajouter Numéro">add_circle</mat-icon><br>
+                                    <div *ngFor="let p of produit.prix; index as i">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Prix {{i+1}}</mat-label>
+                                            <input matInput type="text" name="Tel" [(ngModel)]="p.numero" placeholder="Téléphone" required>
+                                        </mat-form-field>
+                                        <mat-icon (click)="retirerPrix(i)" *ngIf="i > 0" style="font-size: 15px; cursor: pointer;" 
+                                            #tooltip="matTooltip" matTooltip="Rétirer le numéro" >close</mat-icon>
+                                    </div>
+                                </div-->
+                                <!-- <div >
+                                    <div *ngIf="!produit.remises">
+                                        <label><strong>Rémises: </strong></label>:<br>
+                                        <span *ngIf="!produit.remises"> - </span>
+                                    </div>
+                                    <div *ngFor="let remise of produit.remises | keyvalue">
+                                        <label><strong>{{remise.key}} </strong></label> : <br>
+                                        <span *ngIf="!remise.value"> - </span>
+                                        <span>{{remise.value}} </span><br><br>
+                                    </div>
+                                </div>
+                                <div >
+                                    <div *ngIf="!produit.classification">
+                                        <label><strong>Classification: </strong></label>:<br>
+                                        <span *ngIf="!produit.classification"> - </span>
+                                    </div>
+                                    <div *ngFor="let classification of produit.classification | keyvalue">
+                                        <label><strong>{{classification.key}} </strong></label> : <br>
+                                        <span *ngIf="!classification.value"> - </span>
+                                        <span>{{classification.value}} </span><br><br>
+                                    </div>
+                                </div> -->
+    
+                            </div>
+                            <div class="inside-l">
+                                <div>
+                                    <legend>Caractéristiques</legend>
+                                    <br><br>
+                                </div>
+                                <div><strong>Date de production</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.dateProduction"> - </span>
+                                    <span >{{produit.dateFinVie}} </span>
+                                </div>
+                                
+                                <div><strong>Date de début de vie</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.dateDebutVie"> - </span>
+                                    <span >{{produit.dateFinVie}} </span>
+                                </div>
+
+                                <div><strong>Date de fin de vie</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.dateFinVie"> - </span>
+                                    <span >{{produit.dateFinVie}} </span>
+                                </div>
+                                <!-- <div><strong>Poids net</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.poidsnet"> - </span>
+                                        <span >{{produit.poidsnet}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Profondeur</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.profondeur">-</span>
+                                        <span>{{produit.profondeur}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Hauteur</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.hauteur"></span>
+                                        <span >{{produit.hauteur}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Largeur</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.largeur"> - </span>
+                                        <span >{{produit.largeur}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Unité de Poids</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.unitedepoids"> -</span>
+                                        <span>{{produit.unitedepoids}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Unité de dimension</strong></div>
+                                <div >
+                                    <div>
+                                        <span *ngIf="!produit.unitedimension"> -</span>
+                                        <span>{{produit.unitedimension}} </span>
+                                    </div>
+                                </div><br>
+                                <div><strong>Unité de prix</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.unitedeprix"> - </span>
+                                    <span>{{produit.unitedeprix}} </span>
+                                </div><br>
+                                <div><strong>Unité achat</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.uniteachat"> - </span>
+                                    <span>{{produit.uniteachat}} </span>
+                                </div><br>
+                                <div><strong>Prix d'achat</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.prixdachat"> - </span>
+                                    <span>{{produit.prixdachat}} </span>
+                                </div><br>
+                                <div><strong>Prix achat</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.prixachat"> - </span>
+                                    <span>{{produit.prixachat}} </span>
+                                </div><br>
+                                <div><strong>SAV</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.sav"> - </span>
+                                    <span>{{produit.sav}} </span>
+                                </div><br>
+                                <div><strong>Photo noir et blanc</strong></div>
+                                <div>
+                                    <span *ngIf="!produit.photonoiretblanc"> - </span>
+                                    <span> {{produit.photonoiretblanc}} </span>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-between" *ngIf="edition">
+                    <div class="right">
+                        <div class="card">
+                            <img src="/assets/image/passepartout-30x40-vit-2.jpg" style="height: 300px; background-size: contain; padding: 5px;">
+                            <div class="d-flex justify-content-end">
+                                <mat-icon>edit</mat-icon>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Déscription courte</label>:<br>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Déscription courte</mat-label>
+                                <input type="text" matInput name="descriptioncourte" [(ngModel)]="produit.descriptioncourte" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <label>Désignation rapide</label>:<br>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Code</mat-label>
+                                <input type="text" matInput name="designationrapide" [(ngModel)]="produit.designationrapide" required>
+                            </mat-form-field>
+                        </div>
+                        <div>
+                            <label>Description</label>:<br>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Description</mat-label>
+                                <textarea type="text" matInput name="Description" [(ngModel)]="produit.descriptionlongue" required></textarea>
+                            </mat-form-field>
+                        </div>
+                        
+                    </div>
+                    <div class="left">
+                       <form>
+                        <div class="d-flex justify-content-start">
+                            <div class="inside-r" >
+                                <div>
+                                    <label>Nom</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Nom</mat-label>
+                                        <input type="text" matInput name="nom" [(ngModel)]="produit.nom" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div>
+                                    <label>Réference</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Réference</mat-label>
+                                        <input type="text" matInput name="reference" [(ngModel)]="produit.reference" required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <label>Titre</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Code</mat-label>
+                                        <input type="text" matInput name="titre" [(ngModel)]="produit.titre" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                                
+                                <div>
+                                    <label>Code</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Code</mat-label>
+                                        <input type="text" matInput name="code" [(ngModel)]="produit.code" required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <label>Code barre EAN</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Code barre EAN</mat-label>
+                                        <input type="text" matInput name="codebarreean" [(ngModel)]="produit.codebarreean" required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <label>Marque</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Marque</mat-label>
+                                        <input type="text" matInput name="marque" [(ngModel)]="produit.marque" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div>
+                                    <label>Réference Fournisseur</label>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Réference Fournisseur</mat-label>
+                                        <input type="text" matInput name="reffournisseur" [(ngModel)]="produit.reffournisseur" required>
+                                    </mat-form-field>
+                                </div>
+                                <div>
+                                    <label>Prix</label><mat-icon style="font-size: 15px;" (click)="ajoutPrix()" #tooltip="matTooltip" matTooltip="Ajouter Numéro">add_circle</mat-icon><br>
+                                    <div *ngFor="let p of produit.prix ; index as i ">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Nom </mat-label>
+                                            <input matInput type="text" name="nomprix" [(ngModel)]="p.nom" placeholder="nom prix" required>
+                                        </mat-form-field>
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Prix {{i+1}}</mat-label>
+                                            <input matInput type="text" name="prix" [(ngModel)]="p.valeur" placeholder="prix" required>
+                                        </mat-form-field>
+                                        <mat-icon (click)="retirerPrix(i)" *ngIf="i > 0" style="font-size: 15px; cursor: pointer;" 
+                                            #tooltip="matTooltip" matTooltip="Rétirer le numéro" >close</mat-icon>
+                                    </div>
+                                </div>
+                                <div *ngFor="let remise of produit.remises | keyvalue ">
+                                    <label>Rémise</label><mat-icon style="font-size: 15px;"  #tooltip="matTooltip" matTooltip="Ajouter une rémise">add_circle</mat-icon>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Rémise</mat-label>
+                                        <input type="text" matInput name="nom" [(ngModel)]="remise.value" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div>
+                                    <label>Classification</label><mat-icon style="font-size: 15px;"  #tooltip="matTooltip" matTooltip="Ajouter une classification">add_circle</mat-icon>:<br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Classification</mat-label>
+                                        <input type="text" matInput name="code" [(ngModel)]="produit.code" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="inside-l">
+                                <div>
+                                    <legend>Caractéristique de l'article</legend>
+                                    <br><br>
+                                </div>
+                                <div>
+                                    <label>Poids net</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Poids net</mat-label>
+                                        <input type="text" matInput name="poidsnet"  [(ngModel)]="produit.poidsnet">
+                                    </mat-form-field>                                           
+                                </div>
+                                <div><label>Profondeur</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Profondeur</mat-label>
+                                        <input type="text" matInput name="profondeur"  [(ngModel)]="produit.profondeur">
+                                    </mat-form-field>                                             
+                                </div>
+                                <div>
+                                    <label>Hauteur</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Hauteur</mat-label>
+                                        <input type="text" matInput name="hauteur"  [(ngModel)]="produit.hauteur">
+                                    </mat-form-field>                                           
+                                </div>
+                                <div>
+                                    <label>Largeur</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Largeur</mat-label>
+                                        <input type="text" matInput name="largeur"  [(ngModel)]="produit.largeur">
+                                    </mat-form-field>                                                
+                                </div>
+                                <div>
+                                    <label>Unité de Poids</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Unité de Poids</mat-label>
+                                        <input type="text" matInput name="unitedepoids"  [(ngModel)]="produit.unitedepoids">
+                                    </mat-form-field>                                                               
+                                </div>
+                                <div>
+                                    <label>Unité de dimension</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Unité de dimension</mat-label>
+                                        <input type="text" matInput name="unitedimension"  [(ngModel)]="produit.unitedimension">
+                                    </mat-form-field>                                             
+                                </div>
+                                <div>
+                                    <label>Chemin fer</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Chemin fer</mat-label>
+                                        <input type="text" matInput name="cheminfer"  [(ngModel)]="produit.cheminfer">
+                                    </mat-form-field>                                           
+                                </div>
+                                <div>
+                                    <label>Photo noir et blanc</label><br>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Photo noir et blanc</mat-label>
+                                        <input type="text" matInput name="photonoiretblanc"  [(ngModel)]="produit.photonoiretblanc">
+                                    </mat-form-field>  
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                       </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+</div>
+

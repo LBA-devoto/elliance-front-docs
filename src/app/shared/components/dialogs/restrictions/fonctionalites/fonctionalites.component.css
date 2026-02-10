@@ -1,0 +1,36 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #0373bc;
+  color: #f6f6f6;
+  padding-left: 10px;
+  height: 30px;
+}
+
+.card {
+  width: 250px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(249, 248, 248);
+
+  margin: 10px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.card.selected {
+  opacity: 1;
+  box-shadow: 0 0 5px gray;
+}
+
+.tiles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.p10 {
+  padding: 0 10px;
+}

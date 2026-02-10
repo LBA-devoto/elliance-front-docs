@@ -1,0 +1,363 @@
+.lignes-title {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.lignes-title mat-form-field {
+    height: 48px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.insert-btn {
+    color: white;
+    background-color: #0373bc;
+    box-shadow: 0 0 3px white;
+    position: absolute;
+    top: -12px;
+    left: -12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.switch-all-btn {
+    cursor: pointer;
+}
+.switch-all-btn:hover {
+    opacity: 0.4;
+}
+
+.lignes-title button,
+.head-btn {
+    height: 42px;
+    margin: 5px 0 0 5px;
+    min-width: 100px;
+}
+
+.head-btn {
+    max-width: 160px;
+}
+
+#ac-input {
+    position: relative;
+}
+
+.ac-item {
+    padding: 10px;
+    font-weight: bold;
+    color: #0373bc;
+    cursor: pointer;
+}
+
+.ac-item:hover {
+    background-color: #e7e7e7;
+}
+
+#ac-list {
+    padding: 0;
+    position: absolute;
+    left: 0;
+    top: 40px;
+    list-style: none;
+    max-height: 300px;
+    overflow: auto;
+    box-shadow: 0 0 6px grey;
+    background-color: white;
+    z-index: 99;
+}
+
+
+.controls mat-icon,
+.devis-qtt-input {
+    color: #0373bc;
+    box-shadow: 0 0 3px #0373bc;
+    height: 42px;
+    width: 42px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 2px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+}
+
+.devis-qtt-input {
+    font-size: 1.2em;
+    font-weight: 600;
+    width: 60px;
+}
+
+.controls mat-icon {
+    padding: 6px;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.controls mat-icon:hover {
+    opacity: 1;
+}
+
+.add-devis {
+    color: #fff !important;
+    background-color: #0373bc !important;
+    ;
+}
+
+.add-devis:hover {
+    color: #0373bc !important;
+    background-color: #fff !important;
+}
+
+.table-container {
+    overflow: auto;
+    width: 100%;
+    max-width: 100%;
+    max-height: 600px;
+    margin-top: 10px;
+    box-shadow: 0 0 3px grey;
+}
+
+table {
+    width: inherit;
+    margin: 0 !important;
+}
+
+table th,
+table td {
+    padding: 5px;
+    font-weight: bold;
+    color: black;
+    border-right: 1px solid rgba(128, 128, 128, 0.288);
+}
+
+table tr td:first-of-type {
+    width: 36px;
+    max-width: 36px;
+    text-align: center;
+}
+
+.prod {
+    left: 0 !important;
+}
+
+.prod-title {
+    font-weight: bold;
+    color: #0373bc;
+}
+
+.prod-title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+::ng-deep .mat-table tbody {
+    max-height: 600px !important;
+    overflow: auto !important;
+}
+
+::ng-deep .cdk-drag-preview {
+    height: max-content;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    box-shadow: 0 0 6px grey;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f2f2f2;
+}
+
+::ng-deep .devisSeparatorRef,
+::ng-deep .devisSubTotalRef {
+    z-index: 2;
+    position: relative;
+    height: 30px;
+}
+
+::ng-deep .sep-icon,
+::ng-deep .up-icon,
+::ng-deep .down-icon {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    z-index: 2;
+    cursor: pointer;
+    color: white;
+}
+
+::ng-deep .sep-icon:hover,
+::ng-deep .up-icon:hover,
+::ng-deep .down-icon:hover {
+    opacity: 0.4;
+}
+
+::ng-deep .up-icon {
+    left: 3px;
+}
+
+::ng-deep .down-icon {
+    left: 23px;
+}
+
+::ng-deep .devisSeparator,
+::ng-deep .devisSubTotal {
+    text-align: center !important;
+    font-weight: 600;
+    margin: auto !important;
+    background-color: #0373BC;
+    color: white;
+    position: absolute;
+    width: 100%;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+::ng-deep .devisSeparator {
+    background-color: #c9c9c9;
+    color: black;
+}
+
+table th:last-child,
+table td:last-child {
+    border-right: none;
+}
+
+table th .normal-font,
+table td .normal-font {
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+
+table td {
+    text-align: start;
+}
+
+table span {
+    width: auto;
+}
+
+table th input {
+    width: 20px;
+    height: 20px;
+}
+
+table td input {
+    height: 30px;
+}
+
+.num-input {
+    width: 40px !important;
+}
+
+#comment-icon {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    color: #0373BC;
+}
+
+table td img {
+    object-fit: contain;
+    min-width: 50px;
+    margin-right: 5px;
+}
+
+table td .descr {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    white-space: pre-wrap;
+}
+
+.mat-header-row {
+    background-color: #e2e2e2;
+}
+
+.total {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    text-align: start;
+}
+
+.total .row {
+    align-items: center;
+}
+
+.total .main,
+.total .normal,
+.total .small {
+    white-space: nowrap;
+}
+
+.total .main {
+    font-weight: bold;
+    color: #0373bc;
+    font-size: larger;
+}
+
+.total .normal {
+    font-weight: bold;
+}
+
+.total .small {
+    font-style: italic;
+}
+
+::ng-deep .total .mat-form-field-wrapper {
+    padding-bottom: 5px;
+    margin-right: 5px;
+}
+
+/* ::ng-deep .table-container table.mat-table {
+    max-height: 600px !important;
+    height: 600px !important;
+} */
+
+@media (max-width: 1200px) {
+    .lignes-title mat-form-field {
+        max-width: none;
+    }
+
+    .head-btn {
+        margin: 15px auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .form-field {
+        margin-right: 8px;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

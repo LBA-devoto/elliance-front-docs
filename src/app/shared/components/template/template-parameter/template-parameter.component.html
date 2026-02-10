@@ -1,0 +1,8 @@
+<div [id]="id" class="template-parameter-items" [cdkDropListData]="parameters" [cdkDropListConnectedTo]="parametersConnection" (cdkDropListDropped)="onParameterDropped($event)" cdkDropList>
+    <div class="template-parameter-item" *ngFor="let parameter of parameters" cdkDrag>
+        <p class="mb-0">
+            {{parameter.label !== '' ? parameter.label : parameter.name}}<br>
+            <span class="template-parameter-item-name">({{parameter.name}})</span>
+        </p>
+    </div>
+</div>

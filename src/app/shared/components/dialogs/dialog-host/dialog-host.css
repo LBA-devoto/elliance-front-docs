@@ -1,0 +1,67 @@
+:host {
+    height: inherit;
+    display: flex;
+}
+
+.en-tete{
+    height: 50px;
+    max-height: 50px;
+    background-color: #047EA4;
+    padding: 15px;
+    color: white;
+}
+
+p{
+    font-size: 1.2em;
+}
+.description{
+    margin-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1em;
+    border-bottom: 1px solid silver;
+}
+.body{
+    margin-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1em;
+    height: inherit;
+    display: flex;
+    /* border-bottom: 1px solid silver; */
+}
+.mat-form-field{
+    margin-right: 20px;
+    font-size: 12px;
+    width: 200px;
+}
+form{
+    margin-top: 20px;
+}
+.mat-progress-bar{
+    height: 15px;
+    color: white;
+    border-radius: 5px;
+}
+.import-dialog-container .mat-dialog-container {
+    padding: 0;
+    margin: 0px;
+}
+.content{
+    padding: 10px;
+    height: -webkit-fill-available;
+}
+
+.card{
+    max-height: 17vh;
+    height: 17vh;
+    overflow-y: scroll;
+    border: 2px solid #047EA4 ;
+    border-radius: 2px;
+}
+.btn {
+    margin-right: 5px;
+    margin-left: 5px;
+
+}
+.mat-spinner{
+    color: #047EA4;
+}

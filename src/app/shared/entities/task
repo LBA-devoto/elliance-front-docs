@@ -1,0 +1,12 @@
+
+export class ScheduledTask {
+    id: string;
+    name: string;
+    status: boolean;
+    nextExecutionTime: Date;
+    executionTime: Date;
+    resultOfLastExecution: string;
+    scheduleType: string;
+    selectedDays: { [key: string]: boolean };
+    dayOfMonth: number;
+}

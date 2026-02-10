@@ -1,0 +1,145 @@
+.mat-form-field {
+  width: 90%;
+}
+
+ul {
+  list-style: circle;
+  border-radius: 15px;
+}
+
+.menu a {
+  margin-bottom: 10px;
+}
+
+.container {
+  margin-top: 30px;
+  width: 900px;
+  background-color: #F6F6F6;
+
+}
+
+button {
+  margin: 10px 0;
+}
+
+.card {
+  margin-top: 30px;
+  padding: 20px;
+}
+
+.card {
+  margin-top: 30px;
+  padding: 20px;
+  width: 600px;
+  margin-bottom: 60px;
+  background-color: #f6f6f6;
+}
+
+.part {
+  width: 49%;
+  background-color: #f6f6f6;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.part-inside {
+  background-color: #f6f6f6;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.titre {
+  padding-top: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: #fff;
+  border-radius: 5px;
+
+}
+
+.menu .btn {
+  font-size: 8px;
+}
+
+.menu .btn .mat-icon {
+  font-size: 20px;
+}
+
+.btn {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif !important;
+  border-radius: 3px;
+  width: 48px;
+  border-width: thin;
+}
+
+.mat-icon {
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  /*border-bottom: 1px solid transparent;
+    border-top: 1px solid transparent;
+    background-color: #0373BC;*/
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: rgba(3, 115, 188, 0.3);
+  color: white;
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.espace {
+  background-color: white;
+  height: 20px;
+  margin-left: -20px;
+}
+
+.formation {
+  padding: 5px;
+}
+
+.experience {
+  padding: 5px;
+}
+
+/* button{
+    font-size: 0.9em;
+    background-color: #2C2D5B;
+    color: #fff;
+  } */
+.line {
+  width: 100%;
+  margin: 5px;
+  border-bottom: 1px solid #2C2D5B;
+}
+
+/*label{
+    text-transform: capitalize;
+  }*/
+td {
+  cursor: pointer;
+}
+
+.myPanelClass {
+  margin-top: 30px !important;
+}

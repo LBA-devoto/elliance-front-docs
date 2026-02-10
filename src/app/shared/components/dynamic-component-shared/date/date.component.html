@@ -1,0 +1,31 @@
+<ng-container>
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"
+          ><strong>{{ config.label }}</strong></label
+        > </ng-container
+      ><br />
+
+      <ng-container *ngIf="config.editMode && userService.userHasChampUpdatePermissionAccess(config.name,config.typeName)">
+        <mat-form-field
+          appearance="outline"
+          style="font-size: 10px; width: 100%"
+        >
+          <mat-label>{{ config.label }}</mat-label>
+          <input
+            matInput
+            type="date"
+            [name]="config.label"
+            [formControl]="selectedDateControl"
+          />
+        </mat-form-field>
+      </ng-container>
+
+      <ng-container *ngIf="!config.editMode|| (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& config.editMode">
+        <div>{{ selectedDate }}</div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

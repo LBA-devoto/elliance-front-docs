@@ -1,0 +1,25 @@
+<mat-sidenav-container autosize="true">
+    <div class="page">
+        <header>
+            <app-four-header></app-four-header>
+        </header>
+
+        <main>
+            <section class="image-fond" style="position: relative;">
+                <div class="text-center bienvenue">
+                    <p class="mx-auto">Bienvenue {{name}} sur DevisChef V2 !</p>
+                </div>
+                <button mat-raised-button class="btn-primary">{{'IMPORT DE TRAMES PRODUITS'}}</button>
+            </section>
+        </main>
+
+        <div class="container tableau px-0 my-5">
+            <app-four-dashboard></app-four-dashboard>
+        </div>
+
+        <div class="actualites py-3">
+            <app-news></app-news>
+        </div>
+        <app-footer-user></app-footer-user>
+    </div>
+</mat-sidenav-container>

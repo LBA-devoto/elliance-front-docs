@@ -1,0 +1,17 @@
+/* Your component styles or CSS file */
+.custom-button {
+  background-color: #0373bc; /* Green background color */
+  color: white;
+  font-size: 16px;
+  border-radius: 4px;
+  border-color: #0373bc;
+  transition: background-color 0.3s;
+}
+
+.custom-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+.custom-icon {
+  margin-right: 5px; /* Adjust the space between the icon and text */
+}

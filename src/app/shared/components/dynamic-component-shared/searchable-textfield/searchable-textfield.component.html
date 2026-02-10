@@ -1,0 +1,59 @@
+<ng-container *ngIf="config.visible &&  userService.userHasChampViewPermissionAccess(config.name,typeName)" >
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"
+          ><strong>{{ config.label }}</strong></label
+        ></ng-container
+      ><br />
+      <ng-container *ngIf="editMode && userService.userHasChampUpdatePermissionAccess(config.name,typeName)">
+        <mat-form-field
+          appearance="outline"
+          style="font-size: 10px; width: 100%"
+        >
+          <input
+            matInput
+            type="text"
+            [name]="config.label"
+            (ngModelChange)="autocompleteSearch($event)"
+            [matAutocomplete]="auto"
+            [placeholder]="config.label"
+            [formControl]="searchArticlesCtrl"
+         
+          />
+          <mat-autocomplete
+            autoActiveFirstOption
+            #auto="matAutocomplete"
+            [panelWidth]="570"
+          >
+            <ng-container>
+              <mat-option
+                *ngFor="let value of filteredArticles"
+                (click)="onAutocompleteOptionSelected(value)"
+              >
+                <ng-container *ngIf="config.searchableFields[0]">
+                  <div *ngIf="value">
+                    {{ value[config.searchableFields[0]] }}
+                  </div>
+                </ng-container>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </mat-form-field>
+      </ng-container>
+      <ng-container *ngIf="!editMode || (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& editMode">
+        <div *ngIf="config.displayMode !== 'link'">
+          {{ value?.[config.searchableFields[0]
+          ] }}
+        </div>
+        <a
+          *ngIf="config.displayMode === 'link'"
+          class="clickable-label"
+          (click)="ouvrirOnglet(value)"
+        >
+          {{ value?.[config.searchableFields[0]] }}
+        </a>
+      </ng-container>
+    </div>
+  </div> </ng-container
+><br />

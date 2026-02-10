@@ -1,0 +1,8 @@
+<div *ngIf="config?.value">
+    <ul *ngFor="let map of config?.value | keyvalue">
+        <li *ngIf="isVisible(''+map.key+'')">
+          <img src="/assets/images/Icones/flag/{{ map.key }}.svg" width="20" height="16" loading="lazy" />
+          {{map.value}}
+        </li>
+      </ul>
+  </div>

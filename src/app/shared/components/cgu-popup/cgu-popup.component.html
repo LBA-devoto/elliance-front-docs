@@ -1,0 +1,17 @@
+<div class="popup">
+
+    <div class="w-100 p-2 mb-3 d-flex justify-content-between align-items-center" style="background-color: #047EA4;">
+        <div style="color: #fff; font-weight: 500;">{{"Avant d'accéder à DevisChef V2 !"}}</div>
+    </div>
+    <div class="msg p-2">
+        {{message}}
+    </div>
+    <div class="input-container">
+        <label for="inp"><input class="mx-2" id="inp" type="checkbox" [value]="checkValue" [(ngModel)]="checkValue">En cochant cette case, j'accepte les <a href="/" target="_blank" style="color:black">conditions générales d'utilisation</a> de DevisChef V2.</label>
+    </div>
+    <div class="m-3 d-flex justify-content-center align-items-center">
+        <button mat-raised-button class="btn-secondary" (click)="setCGU()" [disabled]="!checkValue">VALIDER</button>
+    </div>
+</div>
+
+<div class="backdrop"></div>

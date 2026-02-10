@@ -1,0 +1,13 @@
+.head {
+  background-color: #f2f2f2;
+  height: 42px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.logo {
+  object-fit: contain;
+  padding: 0 10px;
+}

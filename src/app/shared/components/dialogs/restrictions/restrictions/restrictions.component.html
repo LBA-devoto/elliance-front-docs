@@ -1,0 +1,54 @@
+<div style="position: relative;">
+    <div class="header">
+        <h6 class="my-0">Restrictions pour {{name}}</h6>
+    </div>
+    <div class="container">
+        <h6>{{message}}</h6>
+        <button mat-raised-button class="btn-primary" style="position: absolute; top: 34px; right: 24px;" (click)="save()">ENREGISTRER</button>
+        <mat-tab-group class="mt-2">
+            <mat-tab label="MENU">
+                <mat-form-field appearance="outline" class="w-100 p10">
+                    <mat-label>Menu</mat-label>
+                    <input type="text" matInput [value]="restrictions.menu?.join(' - ')" disabled>
+                </mat-form-field>
+                <!-- GET TOUTES LES REF DE MENU -->
+                <div class="tiles">
+                    <div *ngFor="let m of menu" class="card" [ngClass]="{'selected': isIn('menu', m)}"
+                        (click)="select('menu', m)">{{m}}</div>
+                </div>
+            </mat-tab>
+            <mat-tab label="CHAMPS">
+                <mat-form-field appearance="outline" class="w-100 p10">
+                    <mat-label>Champs</mat-label>
+                    <input type="text" matInput [value]="restrictions.champs?.join(' - ')" disabled>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100 p10">
+                    <mat-label>Entité</mat-label>
+                    <mat-select [(ngModel)]="selectedEntity.entite" (selectionChange)="loadEntite()">
+                        <mat-option *ngFor="let ent of entites" [value]="ent.entite">{{ent.label}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <!-- GET TOUTES LES REF DE CHAMPS (entités produits et fournisseurs) -->
+                <div class="tiles">
+                    <div *ngFor="let c of champs" class="card" [ngClass]="{'selected': isIn('champs', c.nom)}"
+                        (click)="select('champs', c.nom)">{{c?.label?.fr_FR}}</div>
+                </div>
+            </mat-tab>
+            <mat-tab label="FONCTIONNALITES">
+                <mat-form-field appearance="outline" class="w-100 p10">
+                    <mat-label>Fonctionnalités</mat-label>
+                    <input type="text" matInput [value]="restrictions.fonctions?.join(' - ')" disabled>
+                </mat-form-field>
+                <!-- GET TOUTES LES REF DES FONCTIONNALITES -->
+                <div class="tiles" *ngIf="!back">
+                    <div *ngFor="let f of fonctions" class="card" [ngClass]="{'selected': isIn('fonctions', f)}"
+                        (click)="select('fonctions', f)">{{f}}</div>
+                </div>
+                <div class="tiles" *ngIf="back">
+                    <div *ngFor="let f of fonctionsback" class="card" [ngClass]="{'selected': isIn('fonctions', f)}"
+                        (click)="select('fonctions', f)">{{f}}</div>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

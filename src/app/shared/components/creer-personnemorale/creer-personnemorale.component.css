@@ -1,0 +1,73 @@
+.mat-form-field{
+    width: 400px;
+    font-size: 10px;
+}
+ul{
+    list-style: circle;
+    border-radius: 15px;
+}
+
+
+.container{
+    margin-top: 50px;
+    width: 900px;
+    background-color: #F6F6F6;
+    padding-bottom: 30px;
+
+}
+button{
+    margin: 10px;
+}
+.d-flex{
+     justify-content:space-around;
+}
+
+.menu{
+    margin: 30px;
+    width: 5%;
+}
+.menu a{
+    margin-bottom: 10px;
+}
+.article{
+    width: 95%;
+}
+.card{
+    margin-top: 30px;
+    padding: 20px;
+    width: 600px;
+    margin-bottom: 60px;
+    background-color: #f6f6f6;
+}
+label{
+}
+
+.titre{
+    margin-bottom: 10px;
+}
+table{
+    width: 100%;
+    font-size: 9px;
+}
+td{
+    font-size: 11px;
+}
+.example-table-container {
+    position: relative;
+    min-height: 200px;
+    max-height: 60vh;
+    padding: 20px;
+    overflow: auto;
+}
+.btn {
+    font-size: 13px;
+    font-family: "Roboto", sans-serif !important;
+    border-radius: 3px;
+    width: 48px;
+    border-width: thin;
+  }
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline  {
+    background-color: #fff;
+    border-radius: 5px;  
+
+}

@@ -1,0 +1,249 @@
+table {
+  width: 100%;
+  overflow: auto;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.menu a {
+  margin-bottom: 10px;
+}
+
+.modal-header {
+  background-color: #4d3535;
+  color: white;
+  height: 40px;
+}
+
+.tes {
+  max-width: 260px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.modal-tilte {
+  padding-top: 20px;
+}
+
+.mat-form-field {
+  margin: 5px;
+}
+
+.menu .btn {
+  font-size: 8px;
+  margin: 5px auto;
+}
+
+.menu .btn .mat-icon {
+  /*font-size:20px;*/
+  vertical-align: middle;
+}
+
+th .cdk-global-overlay-wrapper,
+.cdk-overlay-container {
+  z-index: 99999 !important;
+}
+
+td {
+  font-size: 12px;
+}
+
+td .mat-icon {
+  font-size: 15px;
+  padding-top: 2px;
+  vertical-align: middle;
+}
+
+.mat-tab-label {
+  min-width: 25px !important;
+  padding: 5px;
+  background-color: transparent;
+  font-weight: 700;
+  border: 1px solid #604c3f;
+}
+
+.btn {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif !important;
+  border-radius: 3px;
+  vertical-align: middle;
+  width: 48px;
+  border-width: thin;
+}
+
+.cree {
+  font-size: 13px;
+  font-family: "Roboto", sans-serif !important;
+  border-radius: 3px;
+  vertical-align: middle;
+  border-width: thin;
+  z-index: 99999 !important;
+}
+
+.del {
+  color: #ff3030;
+}
+
+.del:hover {
+  color: #fff;
+}
+
+.btnedit {
+  font-size: 8px !important;
+  font-family: "Roboto", sans-serif !important;
+  color: inherit;
+}
+
+.btnedit mat-icon {
+  font-size: initial;
+}
+
+.example-container {
+  height: inherit;
+  overflow: auto;
+  min-height: 300px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.demo-table {
+  width: 100%;
+}
+
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: rgba(3, 115, 188, 0.3);
+  color: white;
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.mat-ink-bar {
+  background-color: #0373bc !important;
+}
+
+ul {
+  list-style: none;
+}
+
+.flt {
+  float: right;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.active {
+  color: white !important;
+  background-color: #0373bc !important;
+}
+
+.addElement {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  width: 200px;
+  background: white;
+  border: 1px solid #0373bc;
+  border-radius: 3px;
+  z-index: 9999;
+}
+
+.languages {
+  position: absolute;
+  top: 5px;
+  left: 55px;
+  width: 180px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 20px;
+  background: white;
+  border: 1px solid #0373bc;
+  border-radius: 3px;
+  z-index: 9999;
+}
+
+.filter-btn {
+  margin-left: 10px;
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+  box-shadow: 0 0 2px #0373bc;
+}
+
+.filter-icon {
+  font-size: 14px;
+  width: auto;
+  height: auto
+}
+
+.th-flex {
+  display: flex;
+  align-items: center;
+}
+
+.visu {
+  position: absolute;
+  right: 0;
+}
+
+.form-check {
+  display: flex;
+  color: black;
+  padding: 5px;
+}
+
+.form-check-label {
+  cursor: pointer;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-sort-header-container {
+  border-bottom: none !important;
+  justify-content: start !important;
+}
+
+::ng-deep .mat-sort-header-content {
+  text-align: left !important;
+}
+
+::ng-deep .mat-menu-panel {
+  overflow: auto;
+  box-shadow: inset 0px 0px 2px 0px grey !important;
+}
+
+::ng-deep th.mat-header-cell:not(:first-of-type) {
+  min-width: 120px !important;
+  max-width: 300px !important;
+}
+
+::ng-deep .lang-sub-menu {
+  margin-left: 55px;
+}
+
+@media (max-width: 768px) {
+  .visu {
+    position: relative;
+  }
+
+  .menu {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

@@ -1,0 +1,76 @@
+<div class="head-desktop">
+    <div class="head">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="main-logo mx-2">
+                <img [src]="clientLogo" class="logo">
+            </div>
+            <!-- <div class="associate-logo">
+                <img src="/assets/images/HEADER/Logo CIDS.png" cols="6" class="logo">
+            </div> -->
+            <div class="options d-flex justify-content-around" [ngStyle]="{'visibility':loaded ? '':'hidden'}">
+                <div class="option" *ngFor="let opt of headerOptions" [matTooltip]="opt.title ? opt.title : ''"
+                    (click)="opt.action ? opt.action() : null" [routerLink]="opt.route ? opt.route : null">
+                    <mat-icon>{{opt.icon}}</mat-icon>
+                    <span class="devis-count" *ngIf="opt.icon == 'shopping_cart' && devisLinesCount>0">{{devisLinesCount}}</span>
+                    <span class="additional-text" *ngIf="opt.text">{{opt.text}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="navs">
+        <ul class="row d-flex justify-content-center p-0">
+            <li class="nav-item col-4 col-md-2 text-center mx-0 my-1 p-0 " *ngFor="let nav of navOptions"
+                [ngStyle]="{'position': nav.ref == 'catalogues' || nav.ref == 'gestion' ? 'relative' : '', 'visibility':loaded ? '':'hidden'}"
+                [ngClass]="{'active': (nav.ref == 'catalogues' && isCatalogueActive) || (nav.ref == 'gestion' && isGestionActive)}"
+                [routerLink]="nav.ref == 'gestion' ? null : nav.route" routerLinkActive="active">
+                <!-- [routerLink]="nav.ref == 'catalogues' || nav.ref == 'gestion' ? null : nav.route" routerLinkActive="active"> -->
+                <div>{{nav.title}}</div>
+
+
+                <!-- Invisible div above catalogues section -->
+                <div *ngIf="nav.ref == 'catalogues'" class="catalogue-trigger" mat-button
+                    [matMenuTriggerFor]="catalogue" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()">
+                    <mat-menu #catalogue="matMenu" backdropClass="catalogue" yPosition="below">
+                        <div class="menu" (mouseleave)="menuTrigger.closeMenu()">
+                            <ul style="color: black;" class="p-0 mx-2 w-100 d-flex flex-wrap">
+                                <li class="sub-menu-item" *ngFor="let cat of categories"
+                                    (click)="goTo(cat.titre)"><img [src]="logo(cat)" width="24">
+                                    {{cat.titre}} </li>
+                            </ul>
+                        </div>
+                    </mat-menu>
+                </div>
+                
+                <!-- Invisible div above gestion section -->
+                <div *ngIf="nav.ref == 'gestion'" class="gestion-trigger" mat-button
+                    [matMenuTriggerFor]="gestion" #gestionMenu="matMenuTrigger" (click)="gestionMenu.openMenu()">
+                    <mat-menu #gestion="matMenu" backdropClass="gestion" yPosition="below" xPosition="before">
+                        <div class="menu" (mouseleave)="gestionMenu.closeMenu()">
+                            <ul style="color: black;" class="p-0 mx-2 w-100">
+                                <li class="sub-menu-item" *ngFor="let gest of nav.subMenu"
+                                    [routerLink]="gest.route">{{gest.title}}</li>
+                            </ul>
+                        </div>
+                    </mat-menu>
+                </div>
+
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="head-resp">
+    <div class="head d-flex justify-content-between align-items-center">
+        <div class="burger">
+            <mat-icon (click)="openBurger()">menu</mat-icon>
+        </div>
+        <div class="options d-flex justify-content-around">
+            <div class="option" *ngFor="let opt of headerOptions" [matTooltip]="opt.title ? opt.title : ''"
+                (click)="opt.action ? opt.action() : null" [routerLink]="opt.route ? opt.route : null">
+                <mat-icon>{{opt.icon}}</mat-icon>
+                <span class="additional-text" *ngIf="opt.text">{{opt.text}}</span>
+            </div>
+        </div>
+    </div>
+</div>

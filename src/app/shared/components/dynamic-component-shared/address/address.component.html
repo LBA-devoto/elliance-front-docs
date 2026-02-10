@@ -1,0 +1,65 @@
+<ng-container>
+    <div class="row">
+        <div class="col-lg-11">
+
+            <ng-container *ngIf="config.label">
+                <label [for]="config.id"><strong>Ville</strong></label></ng-container><br />
+                <div *ngIf="!editMode" style="margin-bottom: 20px;">
+                    <div>
+                        {{ vilformCtrl.value }}
+                    </div>
+                </div>
+            <ng-container *ngIf="editMode && userService.userHasChampUpdatePermissionAccess(config.name,config.typeName)">
+                <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+                    <input matInput type="text" [name]="config.label" (ngModelChange)="autocompleteSearch($event)"
+                        [matAutocomplete]="auto" [placeholder]="config.label" [formControl]="vilformCtrl" />
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [panelWidth]="570">
+                        <ng-container>
+                            <mat-option *ngFor="let value of filteredArticles"
+                                (click)="onAutocompleteOptionSelected(value)">
+                                <ng-container *ngIf="config.searchableFields[0]">
+                                    <div *ngIf="value">
+                                        {{ value[config.searchableFields[0]] }}
+                                    </div>
+                                </ng-container>
+                            </mat-option>
+                        </ng-container>
+                    </mat-autocomplete>
+                </mat-form-field>
+                
+            </ng-container>
+
+            <ng-container *ngIf="config.label">
+                <label [for]="config.id"><strong>code postal</strong></label></ng-container><br />
+                <div *ngIf="!editMode" style="margin-bottom: 20px;">
+                    <div>
+                        {{codePostalCtrl.value
+                         }}
+                    </div>
+                </div>
+            <ng-container *ngIf="editMode && userService.userHasChampUpdatePermissionAccess(config.name,typeName)">
+                <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+                    <input matInput type="text" [name]="'code postal'" [placeholder]="'code postal'"
+                        [formControl]="codePostalCtrl" />
+                </mat-form-field>
+               
+            </ng-container>
+            <ng-container *ngIf="config.label">
+                <label [for]="config.id"><strong>Address ligne</strong></label></ng-container><br />
+                <div *ngIf="!editMode" style="margin-bottom: 20px;">
+                    <div>
+                        {{addressligneCtrl.value}}
+                    </div>
+                </div>
+            <ng-container *ngIf="editMode &&  userService.userHasChampViewPermissionAccess(config.name,config.typeName)">
+                <mat-form-field appearance="outline" style="font-size: 10px; width: 100%">
+                    <input matInput type="text" [name]="config.displayProperty" [placeholder]="'Address ligne'"
+                        [formControl]="addressligneCtrl" />
+                </mat-form-field>
+               
+            </ng-container>
+
+           
+        </div>
+    </div>
+</ng-container><br />

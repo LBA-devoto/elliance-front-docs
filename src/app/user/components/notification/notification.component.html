@@ -1,0 +1,23 @@
+<div class="page">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between">
+            <div class="titre">
+                <h5><strong>TOUTES LES NOTIFICATIONS</strong></h5>
+            </div>
+            <div class="titre">
+                <mat-icon>mail_outline</mat-icon>
+                <mat-icon>close</mat-icon>
+            </div>
+        </div>
+        
+        <div>
+            <mat-selection-list #shoes [multiple]="false">
+                <mat-list-option *ngFor="let n of items">
+                    <span>Le fournisseur ACO a mis à ces tarifs</span>
+                    <div class="notification"></div>
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+  <div class="row">
+    <p>Vous allez effectuer un export de la table <b>{{tab.entite}}</b></p>
+    <br><br>
+    <hr>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <mat-form-field appearance="outline" style="display:inline-block;width:auto;font-size:10px;">
+        <mat-label>Type de fichier</mat-label>
+        <mat-select name="selectedType" [(ngModel)]="selectedType">
+          <mat-option *ngFor="let type of types" [value]="type.value">{{ type.label }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <hr>
+  </div>
+
+  <div class="row"> 
+    <div class="col-lg-6">
+      <button type="button" class="btn-secondary-light" mat-raised-button (click)="fermer()">ANNULER</button>
+    </div>
+    <div class="col-lg-6 text-end">
+      <button [disabled]="inProgress" type="button" class="btn-secondary" mat-raised-button (click)="exporterfichier()">
+        <span *ngIf="inProgress"><mat-spinner [diameter]="14" style="display:inline-block;"></mat-spinner>&nbsp;&nbsp;</span>EXPORTER
+      </button>
+    </div>
+  </div>
+</div>

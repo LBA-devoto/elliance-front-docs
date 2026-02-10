@@ -1,0 +1,146 @@
+.stack {
+  position: fixed;
+  bottom: 0;
+}
+
+.mat-list-item {
+  background-color: #ffffff;
+}
+
+/* .mat-list-item.active {
+  background-color: #0373bc;
+
+  /* background-color: #4D3535;*/
+/* } */
+button .mat-icon {
+  font-size: 0.8em;
+}
+
+.mat-list-item-content {
+  background-color: #0373bc;
+  height: 80% !important;
+}
+
+.sidebar-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: all 0.5s ease;
+}
+
+.sidebar-is-mobile .sidebar-toolbar {
+  position: fixed;
+  /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+  z-index: 2;
+}
+
+app-header {}
+
+.loader-container {
+  height: 3px;
+}
+
+.mat-list-base .mat-list-item .mat-list-icon,
+.mat-list-base .mat-list-option .mat-list-icon {
+  height: 32px;
+
+  width: 24px;
+}
+
+h1.sidebar-app-name {
+  margin-left: 8px;
+  width: 185px;
+}
+
+.sidebar-sidenav-container {
+  /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+  flex: 1;
+  background-color: rgb(223, 222, 222) !important;
+}
+
+.sidebar-is-mobile .sidebar-sidenav-container {
+  /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+  flex: 1 0 auto;
+}
+
+.mat-drawer {
+  width: 240px;
+}
+
+.router-container {
+  padding: 5px 20px;
+}
+
+.mat-drawer-inner-container {
+  width: 94% !important;
+  height: 100%;
+}
+
+.mgrn {
+  margin-left: 5%;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+}
+
+
+
+/* .mat-list-item.active{
+  color:#fff; */
+
+/* background-color: #4D3535;*/
+/* background-color: #0373BC; */
+
+/* background-color: #4D3535;*/
+/* background-color: #0373bc;
+} */
+
+.white-icon {
+  background-color: #0373BC;
+}
+
+::ng-deep .mat-menu-panel {
+  background-color: #fff;
+}
+
+::ng-deep .specific-class>.mat-expansion-indicator:after {
+  color: white;
+}
+
+.panel-menu {
+  height: 35px !important;
+  white-space: nowrap;
+}
+
+.mat-expansion-panel-header {
+  align-items: center;
+}
+
+.text {
+  margin: 2%;
+  margin-top: 6%;
+}
+
+.mat-expansion-panel:not([class*='mat-elevation-z']) {
+  box-shadow: none !important;
+}
+
+::ng-deep .menu-children {
+  position: absolute !important;
+  left: 75px !important;
+  top: -55px;
+}
+
+/* @media (min-width: 960px) {
+  ::ng-deep .cdk-overlay-pane {
+    margin-left: 75.3px !important;
+    margin-top: -50px !important;
+
+  }
+} */

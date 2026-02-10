@@ -1,0 +1,63 @@
+<div class="alerts" *ngIf="displayAlerts.length>0">
+    <div class="alert alert-success" role="alert" *ngFor="let al of displayAlerts; let i = index">
+        <div class="row w-100 d-flex justify-content-center align-items-center">
+            <div class="col-10 d-flex justify-content-center align-items-center">{{al}}</div>
+            <div class="col-2 d-flex justify-content-center align-items-center">
+                <mat-icon (click)="closeAlert(i)">close</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row fourn" *ngIf="champs">
+     <div class="col-6 p-4 image d-flex justify-content-center align-items-center" *ngIf="hasImage">
+        <img class="w-100" [src]="logoUrl" (error)="imageError=true">
+    </div>
+    <div class="col-6 p-2 d-flex flex-column justify-content-center">
+        <div *ngFor="let ch of fournisseurChamps" [style]="ch.css">
+            <div *ngIf="ch == 'sep'">
+                <hr class="my-1">
+            </div>
+            <div class="d-flex" *ngIf="ch != 'sep' && !isRestricted(ch)" (click)="copy(getChampValue(ch) + ' ' + (ch.extension ? ch.extension : ''))">
+                <span style="word-break: keep-all; white-space: pre;" *ngIf="ch.displayLabel">{{getChampLabel(ch)}} : </span><span [ngClass]="{'address':ch.champ=='addresses'}">{{getChampValue(ch)}} {{ch.extension}}</span>
+            </div>
+        </div>
+        <div style="position: absolute; bottom: 10px; right: 40px">
+            <button class="btn-primary w-100" mat-raised-button (click)="goToCatalogue()">{{'CATALOGUE'}}</button>
+        </div>
+    </div>
+
+    
+    <!--
+    <div class="col-6 p-2">
+        <div class="infos d-flex flex-column justify-content-around">
+            <div class="titre-f mb-2">{{name}}</div>
+            <div>
+
+                <div class="d-flex">
+                    <label class="label-f">{{'Téléphone : '}}</label>
+                    <span (click)="copy($event)">{{phoneNumber}}</span>
+                </div>
+                <div class="d-flex">
+                    <label class="label-f">{{'Email : '}}</label>
+                    <span (click)="copy($event)">{{email}}</span>
+                </div>
+                <div class="d-flex">
+                    <label class="label-f">{{'Fax : '}}</label>
+                    <span (click)="copy($event)">{{fax}}</span>
+                </div>
+                <div class="d-flex">
+                    <label class="label-f">{{'Ville : '}}</label>
+                    <span class="address" (click)="copy($event)">{{codePostal}}{{city}}{{country | uppercase}}
+                    </span>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn-primary w-100" mat-raised-button (click)="goToCatalogue()">{{'CATALOGUE'}}</button>
+            </div>
+
+
+        </div>
+
+    </div> -->
+</div>

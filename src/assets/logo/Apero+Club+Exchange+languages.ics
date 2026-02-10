@@ -1,0 +1,47 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Meetup//RemoteApi//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-ORIGINAL-URL:https://www.meetup.com/afterwork-paris/events/289135370/ic
+ al/Apero+Club+Exchange+languages.ics
+X-WR-CALNAME:Events - Apero Club Exchange languages.ics
+X-MS-OLK-FORCEINSPECTOROPEN:TRUE
+BEGIN:VTIMEZONE
+TZID:Europe/Paris
+TZURL:http://tzurl.org/zoneinfo-outlook/Europe/Paris
+X-LIC-LOCATION:Europe/Paris
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTAMP:20221103T124510Z
+DTSTART;TZID=Europe/Paris:20221105T200000
+DTEND;TZID=Europe/Paris:20221105T230000
+STATUS:CONFIRMED
+SUMMARY:Apero Club Exchange languages
+DESCRIPTION:Afterwork Paris\nSaturday\, November 5 at 8:00 PM\n\n🍾 Entre
+  20 et 40 participants internationaux 🍷 On se retrouvent pour favoriser
+  les échanges culturelles ou pratiquer une langue étrangère.🥂 Billetter
+ i...\n\nhttps://www.meetup.com/afterwork-paris/events/289135370/
+CLASS:PUBLIC
+CREATED:20220904T181300Z
+GEO:48.86;2.33
+LOCATION:Paris (\, Paris\, France)
+URL:https://www.meetup.com/afterwork-paris/events/289135370/
+LAST-MODIFIED:20220904T181300Z
+UID:event_flbgxsydcpbhb@meetup.com
+END:VEVENT
+END:VCALENDAR

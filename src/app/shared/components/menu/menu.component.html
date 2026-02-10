@@ -1,0 +1,22 @@
+<div class="menu">
+    <div *ngIf="pageMode == pageModes.CREATE || pageModes.EDIT || pageModes.WAIT">
+        <a class="btn btn-outline-warning" #tooltip="matTooltip"
+        matTooltip="Créer" matTooltipPosition="left" (click)="emitMenuAction(menuActions.ADD)">
+        <mat-icon *ngIf="pageMode == pageModes.WAIT || pageModes.VIEW">add</mat-icon>
+      </a>
+        <a *ngIf="pageMode == pageModes.CREATE || pageModes.EDIT" class="btn btn-outline-warning"  #tooltip="matTooltip" matTooltip="Enregistrer"
+        matTooltipPosition="left" (click)="emitMenuAction(menuActions.SAVE)"><mat-icon>save</mat-icon></a>
+        <a (click)="emitMenuAction(menuActions.VIEW)"class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Visualisation en masse"
+              matTooltipPosition="left" >
+              <mat-icon>remove_red_eye</mat-icon>
+            </a><br>
+        <a *ngIf="pageMode == pageModes.WAIT || pageModes.VIEW" class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Rafraichir"
+        matTooltipPosition="left" (click)="emitMenuAction(menuActions.REFRESH)"><mat-icon>refresh</mat-icon></a><br>
+    </div>
+    <div *ngIf="pageMode  == pageModes.VIEW ||pageModes.WAIT">
+        <a  class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Modifier"
+        matTooltipPosition="left" (click)="emitMenuAction(menuActions.EDIT)"><mat-icon>edit</mat-icon></a><br>
+        <a class="btn btn-danger" #tooltip="matTooltip" matTooltip="Supprimer"
+        matTooltipPosition="left" (click)="emitMenuAction(menuActions.DELETE)"><mat-icon>delete</mat-icon></a><br>
+    </div>
+</div>

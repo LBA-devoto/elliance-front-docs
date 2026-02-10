@@ -1,0 +1,56 @@
+<ng-container>
+  <div class="row">
+    <div class="col-lg-11">
+      <ng-container *ngIf="config.label">
+        <label [for]="config.id"><strong>{{ config.label | titlecase }}</strong></label>
+      </ng-container>
+      <br />
+
+      <ng-container *ngIf="config.editMode && userService.userHasChampUpdatePermissionAccess(config.name,config.typeName)">
+        <label for="{{ config.label }}" style="cursor: pointer">
+          <span>{{config.singleImageMode ? 'Importer une image' : 'Importer des images'}}</span>
+          <img class="mx-2" src="/assets/images/Icones/téléchargement.png" width="15" />
+        </label>
+        <input (change)="uploadImageLayout($event)" [name]="config.label" type="file" id="{{ config.label }}"
+          style="display: none" [multiple]="config.singleImageMode ? '' : 'multiple'"><br />
+
+        <div class="d-flex align-items-start" style="margin: 2px">
+          <div *ngIf="!config.singleImageMode">
+            <div *ngFor="let image of imagesMap">
+              <div *ngIf="image">
+                <img [src]="image.url" width="80" />
+                <mat-icon style="font-size: 10px" (click)="removeImageLayout(image)">close</mat-icon>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="config.singleImageMode">
+            <div *ngIf="image.url">
+              <img [src]="image.url" width="80" />
+              <mat-icon style="font-size: 10px" (click)="removeImageLayout(image)">close</mat-icon>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      
+      <ng-container *ngIf="!isEditMode ||( (!userService.userHasChampViewPermissionAccess(config.name,config.typeName))&& isEditMode)">
+        <div class="d-flex align-items-start" style="margin: 2px">
+          <div *ngIf="!config.singleImageMode">
+            <div *ngFor="let image of imagesMap">
+              <div *ngIf="image">
+                <img [src]="image.url" width="80" />
+              </div>
+            </div>
+          </div>
+          <div *ngIf="config.singleImageMode">
+            <div *ngIf="image.url">
+              <img [src]="image.url" width="80" />
+            </div>
+          </div>
+
+
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>
+<br />

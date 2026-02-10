@@ -1,0 +1,37 @@
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+
+    <div class="carousel-inner" *ngIf="!displayProducts" id="{{display}}"
+        [ngStyle]="{'justify-content': hitMax && hitMin ? 'center':''}"> <!-- ACTUS -->
+        <div class="carousel-item card actus" *ngFor="let card of elements; let index = index">
+            <div class="image">
+                <img class="card-img-top" src="{{card.image?card.image.url:defaultImg}}" alt="{{card.titre}}"
+                    (error)="imgErr(index)">
+            </div>
+            <div class="descr">
+                <div class="detail">{{card.titre}}</div>
+                <div class="ref" [innerHTML]="card.content"></div>
+            </div>
+            <a [href]="card.lienExtern" class="read-more" target="_blank">{{'En savoir plus'}}</a>
+        </div>
+        <div id="{{display + '-last'}}" class="invisible-div"></div>
+    </div>
+
+    <div class="carousel-inner" *ngIf="displayProducts" id="{{display}}"
+        [ngStyle]="{'justify-content': hitMax && hitMin ? 'center':''}"> <!-- PRODUITS -->
+        <div *ngFor="let prod of elements; let index = index" class="carousel-item card actus">
+            <app-produit [product]="prod" [champs]="champs"></app-produit>
+        </div>
+        <div id="{{display + '-last'}}" class="invisible-div"></div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+        *ngIf="!hitMin" (click)="clickControl('prev')">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next"
+        *ngIf="!hitMax" (click)="clickControl('next')">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>

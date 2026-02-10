@@ -1,0 +1,415 @@
+[
+  {
+    "text": "Accueil",
+    "selected": true,
+    "icon": "accueil",
+    "is_custom_icon": true,
+    "entityName": "produit",
+    "droitTitle": "Accueil"
+  },
+  {
+    "text": "Gestion de l'arborescence",
+    "selected": true,
+    "icon": "arborescence",
+    "droitTitle": "Gestion de l'arborescence",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Catégories",
+        "droitTitle": "Catégories",
+        "entityName": "categorie",
+        "parentId": "Gestion de l'arborescence",
+        "selected": true,
+        "filresappliques": {
+          "depth": {
+            "champ": "depth",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "NUMBER",
+                "condition": "EQUALS",
+                "valeur": 1
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "listedechamps": [
+          "select",
+          "code",
+          "maplocaletitre",
+          "mapdescriptioncourte",
+          "mapdescriptionlongue",
+          "perecode",
+          "ordre"
+        ],
+        "routerLink": "/product/category",
+        "children": []
+      },
+      {
+        "text": "Sous Catégories",
+        "selected": true,
+        "droitTitle": "Sous Catégories",
+        "entityName": "categorie",
+        "parentId": "Gestion de l'arborescence",
+        "id": "",
+        "filter": "depth=22",
+        "filresappliques": {
+          "depth": {
+            "champ": "depth",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "NUMBER",
+                "condition": "EQUALS",
+                "valeur": 2
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "listedechamps": [
+          "select",
+          "code",
+          "maplocaletitre",
+          "mapdescriptioncourte",
+          "mapdescriptionlongue",
+          "perecode",
+          "ordre"
+        ],
+        "routerLink": "/product/category",
+        "children": []
+      },
+      {
+        "text": "Sous sous Catégories",
+        "selected": true,
+        "children": [],
+        "droitTitle": "Sous sous Catégories",
+        "entityName": "categorie",
+        "parentId": "Gestion de l'arborescence",
+        "id": "",
+        "filter": "3",
+        "filresappliques": {
+          "depth": {
+            "champ": "depth",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "NUMBER",
+                "condition": "EQUALS",
+                "valeur": 3
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "listedechamps": [
+          "select",
+          "code",
+          "maplocaletitre",
+          "mapdescriptioncourte",
+          "mapdescriptionlongue",
+          "perecode",
+          "ordre"
+        ],
+        "routerLink": "/product/category"
+      },
+      {
+        "text": "Produits",
+        "selected": true,
+        "children": [],
+        "entityName": "produit",
+        "parentId": "Gestion de l'arborescence",
+        "droitTitle": "Produits",
+        "filter": "PRODUIT",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "filresappliques": {
+          "estProduit": {
+            "champ": "estProduit",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "routerLink": "/admin/produits"
+      },
+      {
+        "text": "Articles",
+        "selected": true,
+        "children": [],
+        "entityName": "produit",
+        "droitTitle": "Articles",
+        "parentId": "Gestion de l'arborescence",
+        "filter": "ARTICLE",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "filresappliques": {
+          "estArticle": {
+            "champ": "estArticle",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "routerLink": "/admin/produits"
+      },
+      {
+        "text": "Conditionnements",
+        "selected": true,
+        "droitTitle": "Conditionnements",
+        "entityName": "variablelogistique",
+        "parentId": "Gestion de l'arborescence",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "routerLink": "/admin/VariableLogistique",
+        "children": []
+      },
+      {
+        "text": "Picto Catalogue",
+        "selected": true,
+        "droitTitle": "Picto Catalogue",
+        "entityName": "pictocatalogue",
+        "parentId": "Gestion de l'arborescence",
+        "listedechamps": [
+          "select",
+          "code",
+          "descriptioncourte",
+          "designationrapide",
+          "marque",
+          "reffournisseur",
+          "codebarreean"
+        ],
+        "id": "",
+        "routerLink": "/admin/PictoCatalogue",
+        "children": []
+      },
+      {
+        "text": "Pictos",
+        "selected": true,
+        "droitTitle": "Pictos",
+        "entityName": "picto",
+        "parentId": "Gestion de l'arborescence",
+        "listedechamps": ["label", "description", "numStars", "icon"],
+        "id": "",
+        "routerLink": "/admin/Picto",
+        "children": []
+      }
+    ]
+  },
+  {
+    "text": "Gestion des tiers",
+    "selected": true,
+    "icon": "pers morale_blc",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Fournisseurs",
+        "parentId": "Gestion des tiers",
+        "selected": true,
+        "droitTitle": "Fournisseurs",
+        "entityName": "personnemorale",
+        "typeName": "FOURNISSEUR",
+        "listedechamps": [
+          "select",
+          "nom",
+          "code",
+          "raisonsociale",
+          "tva",
+          "codefour",
+          "statut",
+          "nompays"
+        ],
+        "filresappliques": {
+          "isfournisseur": {
+            "champ": "isfournisseur",
+            "conditions": [
+              {
+                "id": 0,
+                "type": "UNKNOWN",
+                "condition": "EQUALS",
+                "valeur": true
+              }
+            ],
+            "defaultValue": true
+          }
+        },
+        "routerLink": "/purchases/history",
+        "children": []
+      }
+    ]
+  },
+  {
+    "text": "Gestion des contenus",
+    "selected": true,
+    "icon": "sharing",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Actualités",
+        "parentId": "Gestion des contenus",
+        "selected": true,
+        "children": []
+      }
+    ]
+  },
+  {
+    "text": "Gestion des contacts",
+    "selected": true,
+    "icon": "003-research_blc",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Contacts Fournisseurs",
+        "parentId": "Gestion des contacts",
+        "selected": true,
+        "droitTitle": "Gestion des contacts",
+        "entityName": "personnephysique",
+        "listedechamps": ["select", "nom", "prenom", "tier", "tels", "emails"],
+        "routerLink": "/purchases/new",
+        "children": []
+      },
+      {
+        "text": "Contacts Clients",
+        "selected": true,
+        "droitTitle": "Contacts Clients",
+        "parentId": "Gestion des contacts",
+        "entityName": "personnephysique",
+        "id": "6363dc3620658c16ed134747",
+        "listedechamps": ["select", "nom", "prenom", "tels", "emails"],
+        "routerLink": "/purchases/history",
+        "children": []
+      },
+      {
+        "text": "Contacts Associés",
+        "selected": true,
+        "droitTitle": "Contacts Associés",
+        "parentId": "Gestion des contacts",
+        "entityName": "personnephysique",
+        "id": "636a35d5fcdb7366fd7ab1ce",
+        "listedechamps": ["select", "nom", "prenom", "tels", "emails"],
+        "routerLink": "/purchases/history",
+        "children": []
+      }
+    ]
+  },
+  {
+    "text": "Parametres",
+    "selected": true,
+    "icon": "surface1",
+    "is_custom_icon": true,
+    "children": [
+      {
+        "text": "Table de données",
+        "parentId": "Parametres",
+        "droitTitle": "Table de données",
+        "entityName": "datatable",
+        "selected": true,
+        "children": []
+      },
+      {
+        "text": "Champs",
+        "selected": true,
+        "droitTitle": "Champs",
+        "parentId": "Parametres",
+        "entityName": "inputs",
+        "routerLink": "/purchases/history",
+        "children": []
+      },
+      {
+        "text": "Parametres techniques",
+        "selected": true,
+        "listedechamps": ["select", "nomTable", "valeur", "mapLocalLibelle"],
+        "id": "",
+        "parentId": "Parametres",
+        "droitTitle": "Parametres techniques",
+        "entityName": "parametre",
+        "routerLink": "/admin/parametre-technique",
+        "children": []
+      },
+      {
+        "text": "Utilisateurs",
+        "droitTitle": "Utilisateurs",
+        "listedechamps": ["select", "prénom", "nom", "email", "active"],
+        "entityName": "user",
+        "parentId": "Parametres",
+        "routerLink": "/purchases/history",
+        "selected": true,
+        "children": []
+      },
+      {
+        "text": "Rôles et profils",
+        "selected": true,
+        "droitTitle": "Rôles et profils",
+        "parentId": "Parametres",
+        "listedechamps": ["select", "nom du groupe"],
+        "entityName": "role",
+        "routerLink": "/admin/admin-user-group-parameter",
+        "children": []
+      },
+      {
+        "text": "Extranet",
+        "selected": true,
+        "droitTitle": "Extranet",
+        "parentId": "Parametres",
+        "listedechamps": [],
+        "entityName": "extranet",
+        "routerLink": "/admin/extranet-parameter",
+        "children": []
+      },
+      {
+        "text": "Planificateur de tâches",
+        "selected": true,
+        "droitTitle": "Planificateur de tâches",
+        "parentId": "Parametres",
+        "listedechamps": [],
+        "entityName": "TachePlanifiee",
+        "routerLink": "/admin/planificateur-tache",
+        "children": []
+      }
+    ]
+  },
+  {
+    "text": "Déconnexion",
+    "selected": true,
+    "icon": "deconnexion",
+    "is_custom_icon": true,
+    "entityName": "deconnexion"
+  }
+]

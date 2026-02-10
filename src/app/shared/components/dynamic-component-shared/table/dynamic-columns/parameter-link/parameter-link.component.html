@@ -1,0 +1,14 @@
+<!-- <ng-container *ngIf="!config?.isList">
+    <span *ngIf="config?.labelLocal">
+        {{ config?.value?.[config?.displayProperty] }}-{{ config?.value?.mapLocalLibelle?.[config.labelLocal] }}
+    </span>
+    <span *ngIf="!config?.labelLocal"> {{ config?.value?.[config?.displayProperty] }}</span>
+   
+</ng-container> -->
+<ng-container>
+    <div>
+       
+        <span> {{ config.value?.mapLocalLibelle?.['fr_FR'] }}</span>
+    </div>
+   
+</ng-container>

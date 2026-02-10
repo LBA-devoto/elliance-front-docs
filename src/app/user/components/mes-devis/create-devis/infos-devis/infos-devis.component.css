@@ -1,0 +1,60 @@
+.info-bloc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.info-bloc a {
+    color: black;
+    text-decoration: underline;
+    cursor: pointer;
+    z-index: 9;
+    font-style: oblique;
+}
+
+.ac-list {
+    position: absolute;
+    top: 50px;
+    left: 5;
+    box-shadow: 0 0 4px grey;
+    background-color: white;
+    list-style: none;
+    z-index: 5000;
+    padding: 0;
+}
+
+.ac-item {
+    font-weight: bold;
+    color: #0373bc;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ac-item:hover {
+    background-color: #F2F2F2;
+}
+
+.form-field {
+    height: 48px;
+}
+
+.info-container {
+    padding: 5px;
+    background-color: #F2F2F2;
+}
+
+.title {
+    margin: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: #0373bc;
+    font-weight: 600;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+.line {
+    margin: 5px;
+    border-bottom: 1px solid grey;
+}

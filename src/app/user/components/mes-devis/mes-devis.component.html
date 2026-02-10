@@ -1,0 +1,109 @@
+<div>
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <!---------------------------- recherche ---------------------------------->
+    <app-search-product (result)="displayResult($event)"></app-search-product>
+
+
+    <div class="container">
+        <p>
+            <a routerLink="/accueil">{{'Accueil'}}</a> >
+            <span>{{'Mes devis'}}</span>
+        </p>
+        <div class="title-row d-flex justify-content-between">
+            <span class="titre">{{'MES DEVIS'}}</span>
+            <div>
+                <button class="btn-primary mx-1" mat-raised-button [routerLink]="createRoute">{{'CREER UN DEVIS'}}</button>
+                <button class="btn-primary" mat-raised-button (click)="export()">{{'EXPORTER'}}</button>
+            </div>
+        </div>
+        <div class="line"></div>
+        <app-recherche-avancee (search)="rechercheDevis($event)"></app-recherche-avancee>
+
+        <mat-paginator [length]="dataSource.length" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"
+            aria-label="Select page" [pageIndex]="0">
+        </mat-paginator>
+        <section class="table-container">
+
+            <table mat-table [dataSource]="dataSource">
+                <!-- Name Column -->
+                <ng-container matColumnDef="titre" sticky>
+                    <th mat-header-cell *matHeaderCellDef>{{'Titre / Numéro'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="creationDate">
+                    <th mat-header-cell *matHeaderCellDef>{{'Date de création'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.creationDate|date:'yyyy/MM/dd HH:mm'}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="elaborePar">
+                    <th mat-header-cell *matHeaderCellDef>{{'é'|uppercase}}{{'laboré par'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.elaborePar}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="commercial">
+                    <th mat-header-cell *matHeaderCellDef>{{'Commercial'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.commercial}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="etat">
+                    <th mat-header-cell *matHeaderCellDef>{{'état'|titlecase}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.etat}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="client">
+                    <th mat-header-cell *matHeaderCellDef>{{'Client'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="clientFacturation">
+                    <th mat-header-cell *matHeaderCellDef>{{'Client Facturation'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.clientFacturation}} </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="prixHT">
+                    <th mat-header-cell *matHeaderCellDef>{{'Prix HT'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.prixHT|number:'0.2'}}€ </td>
+                </ng-container>
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="prixTTC">
+                    <th mat-header-cell *matHeaderCellDef>{{'Prix TTC'}}</th>
+                    <td mat-cell *matCellDef="let element"> {{element.prixTTC|number:'0.2'}}€ </td>
+                </ng-container>
+
+                <!-- Star Column -->
+                <ng-container matColumnDef="actions" stickyEnd>
+                    <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                    <td mat-cell *matCellDef="let element">
+                        <mat-icon class="action-icon" [matMenuTriggerFor]="actions">more_vert</mat-icon>
+                        <button class="action-btn btn-primary" mat-raised-button
+                            [matMenuTriggerFor]="actions">{{'ACTIONS'}}</button>
+                        <mat-menu #actions="matMenu" backdropClass="actions-bd">
+                            <div class="menu">
+                                <ul>
+                                    <li *ngFor="let act of getActions" (click)="act.action()">{{act.actionTitle}}</li>
+                                </ul>
+                            </div>
+                        </mat-menu>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+        </section>
+        <mat-paginator [length]="dataSource.length" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"
+            aria-label="Select page" [pageIndex]="0">
+        </mat-paginator>
+
+
+
+    </div>
+</div>
+<app-footer-user></app-footer-user>

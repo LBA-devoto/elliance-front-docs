@@ -1,0 +1,467 @@
+<div class="container-fluid">
+  <app-loading-spinner></app-loading-spinner>
+  <div class="row">
+    <div class="menu col-lg-1">
+      <div *ngIf="edition">
+        <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Enregistrer" matTooltipPosition="left"
+          (click)="enregistrer()">
+          <mat-icon>save</mat-icon> </a><br />
+        <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Rafraichir" matTooltipPosition="left"
+          (click)="rafraichir()">
+          <mat-icon>refresh</mat-icon> </a><br />
+        <a class="btn btn-outline-warning" #tooltip="matTooltip" matTooltip="Annuler" matTooltipPosition="left"
+          (click)="annuler()">
+          <mat-icon>close</mat-icon> </a><br />
+      </div>
+      <div *ngIf="lecture">
+        <a *ngIf="userService.userHasRight('Modification',tab.droitTitle)" class="btn btn-outline-warning"
+          #tooltip="matTooltip" matTooltip="Modifier" matTooltipPosition="left" (click)="modeEdition()">
+          <mat-icon>edit</mat-icon> </a><br />
+        <a *ngIf="userService.userHasRight('Suppression unitaire',tab.droitTitle)" class="btn btn-danger"
+          #tooltip="matTooltip" matTooltip="Supprimer" matTooltipPosition="left" (click)="suppressiondemasse()">
+          <mat-icon>delete</mat-icon> </a><br />
+      </div>
+    </div>
+
+    <div class="col-lg-11">
+      <div *ngIf="lecture" class="container-fluid" style="margin-bottom: 50px">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="titre">
+              <label><strong> Nom :</strong></label><br />
+              <label *ngIf="role.name">{{ role.name }}</label>
+              <label *ngIf="!role.name"> - </label>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="titre">
+              <label><strong> Description :</strong></label><br />
+              <label *ngIf="role.description">{{ role.description }}</label>
+              <label *ngIf="!role.description"> - </label>
+            </div>
+            <br />
+          </div>
+          <div class="col-lg-4">
+            <label><strong> Statut:</strong></label><br />
+            <label>{{ role.statut }} </label>
+            <label *ngIf="!role.statut"> - </label>
+            <br />
+          </div>
+        </div>
+
+        <div class="container">
+          <form ngNativeValidate #form>
+            <div>
+              <tr mat-header-row *matHeaderRowDef="listedechamps"></tr>
+              <tr mat-row *matRowDef="let elelment; columns: listedechamps"></tr>
+            </div>
+
+            <mat-tab-group>
+              <!-- <mat-tab label="Droit d'accès">
+                <div class="">
+                  <div class="">
+                    <div class="">
+                      <div class="mat-elevation-z8">
+                        <table
+                          mat-table
+                          [dataSource]="datasourceEntities"
+                          mat-Sort
+                        >
+                          <ng-container matColumnDef="Table">
+                            <th mat-header-cell *matHeaderCellDef>Table</th>
+                            <td mat-cell *matCellDef="let element">
+                              <label>
+                                {{ element.nom | extractEntityName }}</label
+                              >
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Lecture">
+                            <th mat-header-cell *matHeaderCellDef>Lecture</th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                                (change)="$event ? masterToggle() : null"
+                                [checked]="element.lecture"
+                                [disabled]="true"
+                                [indeterminate]="
+                                  selection.hasValue() && !isAllSelected()
+                                "
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Modification">
+                            <th mat-header-cell *matHeaderCellDef>
+                              Modification
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                                (change)="$event ? masterToggle() : null"
+                                [checked]="element.modification"
+                                [disabled]="true"
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Création">
+                            <th mat-header-cell *matHeaderCellDef>Création</th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                                (change)="$event ? masterToggle() : null"
+                                [checked]="element.creation"
+                                [disabled]="true"
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Suppression">
+                            <th mat-header-cell *matHeaderCellDef>
+                              Suppression
+                            </th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                                (change)="$event ? masterToggle() : null"
+                                [checked]="element.suppression"
+                                [disabled]="true"
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+                          <ng-container matColumnDef="Archivage">
+                            <th mat-header-cell *matHeaderCellDef>Archivage</th>
+                            <td mat-cell *matCellDef="let element">
+                              <mat-checkbox
+                                (change)="$event ? masterToggle() : null"
+                                [checked]="element.archivage"
+                                [disabled]="true"
+                                [aria-label]="checkboxLabel()"
+                              >
+                              </mat-checkbox>
+                            </td>
+                          </ng-container>
+
+                          <tr
+                            mat-header-row
+                            *matHeaderRowDef="nomsDeChamps"
+                          ></tr>
+                          <tr
+                            mat-row
+                            *matRowDef="let elelment; columns: nomsDeChamps"
+                          ></tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </mat-tab> -->
+              <mat-tab label="Utilisateurs">
+                <table mat-table [dataSource]="datasource" matSort matSortActive="code" class="mat-elevation-z8">
+                  <ng-container *ngFor="let column of listedechamps" [matColumnDef]="column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by code">
+                      <div *ngIf="column === 'select'" class="test">
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="roleHasUser && isAllSelected()" [indeterminate]="
+                        roleHasUser && !isAllSelected()
+                        " [disabled]="true" [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                      </div>
+                      <div *ngIf="column === 'select'" class="test">
+                        <!-- {{column| uppercase}} -->
+                      </div>
+                      <div *ngIf="column === 'tels'" class="test">
+                        TELEPHONES
+                      </div>
+                      <div *ngIf="column != 'select' && column != 'tels'" class="test">
+                        {{ column | uppercase }}
+                      </div>
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+                      <div *ngIf="column === 'select'" class="test">
+                        <mat-checkbox (click)="$event.stopPropagation()" #selectAfterAdding
+                          (change)="handleSelectUser($event, element)" [checked]="isSelected(element)" [disabled]="true"
+                          [aria-label]="checkboxLabel(element)">
+                        </mat-checkbox>
+                      </div>
+                      <div *ngIf="column === 'fonction'">
+                        <span *ngIf="element.fonction.libelle">{{ element.fonction.libelle }}
+                        </span>
+                      </div>
+                      <div *ngIf="column === 'emails'">
+                        <ul *ngFor="let email of element.emails">
+                          <li>{{ email.valeur }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="column === 'emails'">
+                        <ul *ngFor="let email of element.emails">
+                          <li>{{ email.valeur }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="column === 'tels'">
+                        <ul *ngFor="let email of element.tels">
+                          <li>{{ email.numero }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="
+                          column != 'select' &&
+                          column != 'emails' &&
+                          column != 'tels'
+                        " class="tes">
+                        <!-- {{element[column] | uppercase}} -->
+                        {{ element[column] }}
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="listedechamps; sticky: true"></tr>
+                  <tr mat-row (click)="clickSelection.add(row)" (click)="ouvrirOnglet(row)"
+                    *matRowDef="let row; columns: listedechamps"></tr>
+                </table>
+              </mat-tab>
+              <mat-tab label="Droits d'accès menu et fonctions">
+                <div class="details">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <div><span class="tit">Droits d'accès sur les menus</span></div>
+                      <!-- <label><strong>Droits d'accès sur les menus </strong></label><br /> -->
+                      <app-menu-item [editMode]="edition" [treeFlatDataSource]="treeFlatDataSource" [treeControl]="treeControl" [treeFlattener]="treeFlattener"></app-menu-item>
+                      <br />
+                    </div>
+
+
+                    <div>
+                      <div style="cursor: pointer;" (click)="selectAllDroits()"><span class="tit">Droits d'accès sur les
+                          fontionalites</span></div>
+                      <!-- <label style="cursor: pointer;" (click)="selectAllDroits()"><strong>Droits d'accès sur les
+                        fontionalites
+                        </strong></label><br /> -->
+                        <app-droit-item [editMode]="edition" [treeFlatDataSource]="droitTreeFlatDataSource" [treeControl]="droittreeControl" [treeFlattener]="droittreeFlattener"></app-droit-item>
+                      <br />
+                    </div>
+
+                  </div>
+
+                </div>
+              </mat-tab>
+              <mat-tab label="Droits d'accès champ">
+                <!-- <mat-form-field appearance="outline" class="w-100 p10">
+                    <mat-label>Champs</mat-label>
+                    <input type="text" matInput [value]="backofficeRestrictions.champs.join(' - ')" disabled>
+                </mat-form-field> -->
+                <mat-form-field appearance="outline" class="w-100 p10">
+                  <mat-label>Entité</mat-label>
+                  <mat-select [(ngModel)]="selectedEntity.entite" (selectionChange)="loadEntite()"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let ent of entites" [value]="ent.entite">{{ent.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- GET TOUTES LES REF DE CHAMPS (entités produits et fournisseurs) -->
+                <div class="tiles">
+                  <div *ngFor="let c of champs" class="card" [ngClass]="{'selected': isIn(c.nom)}">{{c?.label?.fr_FR}}
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Restrictions Extranet">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Menu</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.menu.join(' - ')" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Champs</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.champs.join(' - ')" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Fonctionnalités</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.fonctions.join(' - ')" disabled>
+                  </mat-form-field>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </form>
+        </div>
+      </div>
+
+      <div *ngIf="edition" class="container-fluid" style="margin-bottom: 50px">
+        <div class="row">
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Nom du groupe</mat-label>
+              <input type="text" matInput name="nomdugroup" placeholder="Nom du groupe" autocomplete="off"
+                [(ngModel)]="role.name" />
+            </mat-form-field>
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline">
+              <mat-label>Description</mat-label>
+              <input type="text" matInput name="Description" placeholder="Description" autocomplete="off"
+                [(ngModel)]="role.description" /> </mat-form-field><br />
+          </div>
+          <div class="col-lg-4">
+            <mat-form-field appearance="outline" style="width: 390px">
+              <mat-label>Statut</mat-label>
+              <mat-select name="Statut" [(ngModel)]="role.statut" required>
+                <mat-option *ngFor="let statut of status" [value]="statut">{{ statut }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="container">
+          <form ngNativeValidate #form>
+            <div>
+              <tr mat-header-row *matHeaderRowDef="listedechamps"></tr>
+              <tr mat-row *matRowDef="let elelment; columns: listedechamps"></tr>
+            </div>
+
+            <mat-tab-group>
+              <mat-tab label="Utilisateurs">
+                <table mat-table [dataSource]="datasource" matSort matSortActive="code" class="mat-elevation-z8">
+                  <ng-container *ngFor="let column of listedechamps" [matColumnDef]="column">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by code">
+                      <div *ngIf="column === 'select'" class="test">
+                        <mat-checkbox (change)="$event ? masterToggle() : null"
+                          [checked]="roleHasUser && isAllSelected()" [indeterminate]="
+                          roleHasUser && !isAllSelected()
+                          " [aria-label]="checkboxLabel()">
+                        </mat-checkbox>
+                      </div>
+                      <div *ngIf="column === 'select'" class="test">
+                        <!-- {{column| uppercase}} -->
+                      </div>
+                      <div *ngIf="column === 'tels'" class="test">
+                        TELEPHONES
+                      </div>
+                      <div *ngIf="column != 'select' && column != 'tels'" class="test">
+                        {{ column | uppercase }}
+                      </div>
+                    </th>
+
+                    <td mat-cell *matCellDef="let element">
+                      <div *ngIf="column === 'select'" class="test">
+                        <mat-checkbox (click)="$event.stopPropagation()" #selectAfterAdding
+                          (change)="handleSelectUser($event, element)" [checked]="isSelected(element)"
+                          [aria-label]="checkboxLabel(element)">
+                        </mat-checkbox>
+                      </div>
+                      <div *ngIf="column === 'fonction'">
+                        <span *ngIf="element.fonction.libelle">{{ element.fonction.libelle }}
+                        </span>
+                      </div>
+                      <div *ngIf="column === 'emails'">
+                        <ul *ngFor="let email of element.emails">
+                          <li>{{ email.valeur }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="column === 'emails'">
+                        <ul *ngFor="let email of element.emails">
+                          <li>{{ email.valeur }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="column === 'tels'">
+                        <ul *ngFor="let email of element.tels">
+                          <li>{{ email.numero }}</li>
+                        </ul>
+                      </div>
+                      <div *ngIf="
+                          column != 'select' &&
+                          column != 'emails' &&
+                          column != 'tels'
+                        " class="tes">
+                        <!-- {{element[column] | uppercase}} -->
+                        {{ element[column] }}
+                      </div>
+                    </td>
+                  </ng-container>
+
+                  <tr mat-header-row *matHeaderRowDef="listedechamps; sticky: true"></tr>
+                  <tr mat-row (click)="clickSelection.add(row)" (click)="ouvrirOnglet(row)"
+                    *matRowDef="let row; columns: listedechamps"></tr>
+                </table>
+              </mat-tab>
+              <mat-tab label="Droits d'accès menu et fonctions">
+                <div class="details">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <div style="cursor: pointer;" (click)="selectAll('droits-menu')"><span class="tit">Droits d'accès
+                          sur les
+                          menus</span></div>
+                      <div>
+                        <app-menu-item [editMode]="edition" (selectedCheckboxesChange) ="onSelectedCheckboxesChange($event)" [treeFlatDataSource]="treeFlatDataSource" [treeControl]="treeControl" [treeFlattener]="treeFlattener"></app-menu-item>
+                      </div>
+
+
+                    </div>
+
+                    <div>
+                      <div style="cursor: pointer;"><span class="tit">Droits d'accès sur les
+                          fontionalites</span></div>
+                    <div>
+                   
+                      <app-droit-item [editMode]="edition"  [treeFlatDataSource]="droitTreeFlatDataSource" (selecteddroitChange)="selectedDroitChange($event)" [treeControl]="droittreeControl" [treeFlattener]="droittreeFlattener"></app-droit-item>
+                    </div>
+                      <br />
+                    </div>
+
+                  </div>
+
+                </div>
+              </mat-tab>
+              <mat-tab label="Droits d'accès champ">
+                <mat-form-field appearance="outline" class="w-100 p10">
+                  <mat-label>Champs</mat-label>
+                  <input type="text" matInput [value]="backofficeRestrictions.champs.join(' - ')" disabled>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="w-100 p10">
+                  <mat-label>Entité</mat-label>
+                  <mat-select [(ngModel)]="selectedEntity.entite" (selectionChange)="loadEntite()"
+                    [ngModelOptions]="{standalone: true}">
+                    <mat-option *ngFor="let ent of entites" [value]="ent.entite">{{ent.label}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <!-- GET TOUTES LES REF DE CHAMPS (entités produits et fournisseurs) -->
+                <div class="tiles">
+                  <div *ngFor="let c of champs" class="card" [ngClass]="{'selected': isIn(c.nom)}"
+                    (click)="select(c.nom)">{{c?.label?.fr_FR}}</div>
+                </div>
+              </mat-tab>
+
+              <mat-tab label="Restrictions Extranet">
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Menu</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.menu.join(' - ')"
+                      (keyup)="setExtranetRestrictions('menu', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Champs</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.champs.join(' - ')"
+                      (keyup)="setExtranetRestrictions('champs', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>Fonctionnalités</mat-label>
+                    <input matInput type="text" [value]="extranetRestrictions.fonctions.join(' - ')"
+                      (keyup)="setExtranetRestrictions('fonctions', $event)" disabled>
+                  </mat-form-field>
+                </div>
+                <a style="cursor: pointer;" (click)="openRestrictions()">Modifier les restrictions</a>
+              </mat-tab>
+            </mat-tab-group>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

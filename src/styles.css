@@ -1,0 +1,594 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ngx-chart/styles.scss";
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+@font-face {
+  font-family: "Poppins";
+  src: url("/assets/font/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+
+.Poppins {
+  font-family: Poppins;
+}
+
+html {
+  height: 100%;
+}
+
+/* @font-face {
+    font-family: "Karumbi-Regular";
+    src: url("src\assets\fonts\Karumbi-Regular.ttf");
+  }
+  @font-face {
+    font-family: "DestinySignature";
+    src: url("src\assets\fonts\FontsFree-Net-Destiny-Signature.ttf");
+  } */
+
+body {
+  margin: 0;
+  margin-bottom: 100px !important;
+  clear: both;
+  font-size: 12px !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.logout {
+  margin-left: 10px;
+  color: #4d3535;
+  cursor: pointer;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-flex {
+  height: 20px !important;
+}
+
+.mat-form-field-appearance-outline {
+  font-size: 12px;
+}
+
+.mat-form-field-appearance-outline .mat-fooutlinerm-field- {
+  color: #0373bc;
+}
+
+.import-dialog-container .mat-dialog-container {
+  padding: 0px;
+}
+
+.filtre-dialog-component .mat-dialog-container {
+  padding: 0px;
+}
+
+.visualisation-container .mat-dialog-container {
+  padding: 0px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: #fff;
+  border-radius: 5px;
+}
+
+.pg-title {
+  font-size: 18px !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.onglet {
+  font-size: 13px !important;
+}
+
+.content-size {
+  font-size: 12px !important;
+}
+
+.padding {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+.btn-outline-warning {
+  color: #0373bc !important;
+  border-color: #0373bc !important;
+  background-color: inherit;
+}
+
+.btn-outline-warning:hover {
+  color: #0373bc !important;
+  border-color: #0373bc !important;
+}
+
+.btn-outline-danger {
+  color: rgb(155, 29, 25) !important;
+  border-color: rgb(155, 29, 25) !important;
+  background-color: inherit;
+}
+
+.btn-outline-danger:hover {
+  color: rgb(155, 29, 25) !important;
+  border-color: rgb(155, 29, 25) !important;
+}
+
+.btn.btn-outline-danger:hover {
+  color: #fff !important;
+  background-color: rgb(233, 13, 13) !important;
+}
+
+.str {
+  padding-top: 2px;
+  float: left;
+}
+
+.part {
+  width: 49%;
+  background-color: #f6f6f6;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  color: #fff !important;
+  background-color: #0373bc !important;
+}
+
+.mat-tab-label {
+  font-size: 13px !important;
+  padding: 0 10px !important;
+  height: 36px !important;
+}
+
+.head {
+  padding-bottom: 5px;
+  border-bottom: 2px solid silver;
+}
+
+.vis {
+  color: white;
+  border-width: 1px;
+  border-color: #0373bc;
+  border-style: solid;
+  border-radius: 3px;
+  background-color: #0373bc;
+}
+
+.vis:hover {
+  color: #fff !important;
+  background-color: #0373bc !important;
+}
+
+.mat-tab-body {
+  margin-bottom: 50px !important;
+}
+
+.footer {
+  /*position:absolute;*/
+  /* position: fixed !important;*/
+  bottom: 0 !important;
+  width: 100% !important;
+  left: 0;
+  font-size: 0.8em;
+  /*width: 100%;*/
+  background-color: #604c3f;
+  z-index: 1;
+}
+
+.mat-tab-nav-bar,
+.mat-tab-header {
+  border-bottom-style: none !important;
+}
+
+mat-tab-body.mat-tab-body-active {
+  margin-top: 20px !important;
+}
+
+mat-tab-body .mat-tab-body-content {
+  overflow-x: hidden;
+}
+
+.full-page {
+  height: 100% !important;
+  min-height: 100% !important;
+  background-color: white;
+  overflow: hidden;
+  /*add*/
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* spinner animation - source: loading.io */
+body {
+  margin: 0;
+  margin-bottom: 100px !important;
+  clear: both;
+  font-size: 12px !important;
+  font-family: "Roboto", sans-serif !important;
+}
+
+.cdk-overlay-container {
+  /* disable for onglet */
+ /* z-index: 9999999;*/
+}
+
+.cdk-overlay-pane {
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-width: none !important;
+
+}
+
+.myPanelClass {
+  margin-top: 80px !important;
+  /* margin-right: 100px !important; */
+  right: 85px !important;
+}
+
+
+.no-radius .mat-dialog-container {
+  border-radius: 0;
+}
+
+.row {
+  --bs-gutter-x: none;
+}
+
+.logout {
+  margin-left: 10px;
+  color: #4d3535;
+  cursor: pointer;
+}
+
+.mat-form-field-appearance-outline {
+  font-size: 12px;
+}
+
+.mat-form-field-appearance-outline .mat-fooutlinerm-field- {
+  color: #0373bc;
+}
+
+.mat-form-field-invalid {
+  color: #ff3030 !important;
+}
+
+.mat-form-field-invalid:not(.ng-pristine) .mat-form-field-outline-thick {
+  color: #ff3030 !important;
+}
+
+.import-dialog-container .mat-dialog-container {
+  padding: 0px;
+}
+
+.filtre-dialog-component .mat-dialog-container {
+  padding: 0px;
+  overflow: hidden;
+}
+
+.visualisation-container .mat-dialog-container {
+  padding: 0px;
+}
+
+.mat-dialog-container {
+  padding: 0px !important;
+}
+
+.pg-title {
+  font-size: 18px !important;
+  font-family: "Poppins", sans-serif !important;
+}
+
+.onglet {
+  font-size: 13px !important;
+}
+
+.content-size {
+  font-size: 12px !important;
+}
+
+.padding {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
+.btn-outline-warning {
+  color: #0373bc !important;
+  border-color: #0373bc !important;
+  background-color: inherit;
+}
+
+.btn-outline-warning:hover {
+  color: #0373bc !important;
+  border-color: #0373bc !important;
+}
+
+.str {
+  padding-top: 2px;
+  float: left;
+}
+
+.part {
+  width: 49%;
+  background-color: #f6f6f6;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+}
+
+
+
+/* BUTTONS / BTN */
+.btn:hover,
+.btn-primary {
+  color: #fff !important;
+  background-color: #0373bc !important;
+}
+
+.btn,
+.btn-primary:hover {
+  color: #0373bc !important;
+  background-color: #fff !important;
+}
+
+.btn-danger {
+  color: #ff3030 !important;
+  background-color: #fff !important;
+}
+
+.btn-danger:hover {
+  color: #fff !important;
+  background-color: #ff3030 !important;
+}
+
+.btn-secondary, .btn-secondary-light:hover {
+  background-color: #047ea4;
+  color: #fff;
+}
+
+.btn-secondary:hover, .btn-secondary-light {
+  background-color: #fff;
+  color: #047ea4;
+}
+
+
+.btn:disabled,
+.btn-primary:disabled,
+.btn-danger:disabled {
+  opacity: 0.4 !important;
+  color: white !important;
+  background-color: lightgray !important;
+}
+
+.head {
+  padding-bottom: 5px;
+  border-bottom: 2px solid silver;
+}
+
+.vis {
+  color: white;
+  border-width: 1px;
+  border-color: #0373bc;
+  border-style: solid;
+  border-radius: 3px;
+  background-color: #0373bc;
+}
+
+.vis:hover {
+  color: #fff !important;
+  background-color: #0373bc !important;
+}
+
+.mat-tab-body {
+  margin-bottom: 50px !important;
+}
+
+.footer {
+  /*position:absolute;*/
+  /* position: fixed !important;*/
+  bottom: 0 !important;
+  width: 100% !important;
+  left: 0;
+  font-size: 0.8em;
+  /*width: 100%;*/
+  background-color: #604c3f;
+  z-index: 1;
+}
+
+.mat-tab-nav-bar,
+.mat-tab-header {
+  border-bottom-style: none !important;
+}
+
+mat-tab-body.mat-tab-body-active {
+  margin-top: 20px !important;
+}
+
+.full-page {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow: hidden;
+  /*add*/
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/* spinner animation - source: loading.io */
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #0373bc;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #0373bc transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(19, 6, 6, 0.3);
+  z-index: 999;
+}
+/* LoadingDirective overlay styles */
+.loading-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: white;
+  opacity: 0.7;
+  z-index: 10000;
+}
+
+.mat-checkbox-checked.mat-accent .mat-checkbox-background {
+  background-color: #0373bc !important;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+}
+
+::ng-deep .mat-form-field-underline,
+::ng-deep .mat-form-field-ripple {
+  background-color: #0373bc !important;
+}
+
+.mat-tab-body {
+  margin-bottom: 10px !important;
+}
+
+.mat-tab-body-wrapper {
+  border: 1px solid #0373bcbd;
+  padding: 10px;
+  border-radius: 0 0 10px 10px;
+  margin-bottom: 1rem;
+}
+
+.mat-tab-label-content {
+  color: #0373bc;
+  font-size: 1.4;
+  font-weight: 600;
+}
+
+.mat-ink-bar {
+  visibility: hidden !important
+}
+
+.mat-paginator-container {
+  justify-content: space-between !important;
+}
+
+.mat-paginator-page-size-label,
+.mat-paginator-range-label,
+.mat-select-value,
+.mat-paginator-container .mat-focus-indicator {
+  color: #0373bcbd !important;
+}
+
+.mat-paginator-container .mat-button-disabled {
+  opacity: 0.4 !important;
+}
+
+.mat-sort-header-content {
+  text-align: left !important;
+}
+
+.alert {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+/* SCROLLBAR */
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 6px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+@media (max-width: 992px) {
+  .main-image {
+    display: none;
+  }
+}

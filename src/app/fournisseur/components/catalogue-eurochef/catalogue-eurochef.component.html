@@ -1,0 +1,35 @@
+<div>
+    <app-loading-spinner></app-loading-spinner>
+    <header>
+        <app-four-header></app-four-header>
+    </header>
+    <!---------------------------- recherche ---------------------------------->
+    <app-search-product (result)="displayResult($event)"></app-search-product>
+
+
+    <div class="container d-flex">
+        <div class="menu-resp">
+            <app-catalogue-menu-resp *ngIf="fourId" [filtres]="filtres" (filterOut)="saveFilter($event)" [extranetFournisseur]="true" [vueFournisseur]="true"></app-catalogue-menu-resp>
+
+        </div>
+        <div class="menu">
+            <app-catalogue-menu *ngIf="fourId" [filtres]="filtres" (filterOut)="saveFilter($event)" [extranetFournisseur]="true" [vueFournisseur]="true"></app-catalogue-menu>
+        </div>
+
+        <div class="content my-2">
+            <mat-paginator *ngIf="loaded && displayedProducts.length>0" [length]="paginatorLength" [pageSize]="paginatorValues[0]" [pageIndex]="paginatorIndex"
+                [pageSizeOptions]="paginatorValues" aria-label="Select page" (page)="paginatorChange($event)">
+            </mat-paginator>
+            <div *ngIf="loaded && displayedProducts.length==0" class="text-center my-4">Pas de résultat</div>
+            <div class="d-flex align-content-around flex-wrap justify-content-around">
+                <div class="cat px-2 my-4"
+                    *ngFor="let it of displayedProducts">
+                    <app-produit [product]="it"></app-produit>
+                </div>
+            </div>
+            <div *ngIf="productsError" (click)="loadProducts(2)" class="text-center mt-3">
+               <button mat-raised-button>{{'UNE ERREUR EST SURVENUE, VEUILLEZ RESSAYER EN CLIQUANT ICI'}}</button> 
+            </div>
+        </div>
+    </div>
+</div>

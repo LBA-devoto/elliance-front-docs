@@ -1,0 +1,58 @@
+[
+    {
+        "ref": "accueil",
+        "title": "Accueil",
+        "route": "/accueil"
+    },
+    {
+        "ref": "catalogues",
+        "title": "Catalogues",
+        "route": "/catalogues/products&search:"
+    },
+    {
+        "ref": "fournisseurs",
+        "title": "Fournisseurs",
+        "route": "/fournisseurs"
+    },
+    {
+        "ref": "associes",
+        "title": "Associés",
+        "route": "/associes"
+    },
+    {
+        "ref": "devis",
+        "title": "Mes devis",
+        "route": "/devis"
+    },
+    {
+        "ref": "gestion",
+        "title": "Gestion",
+        "route": "/gestion/articles",
+        "subMenu": [
+            {
+                "ref": "gestion-articles",
+                "title": "Mes articles",
+                "route": "/gestion/articles"
+            },            {
+                "ref": "gestion-marques",
+                "title": "Mes marques",
+                "route": "/gestion/marques"
+            },
+            {
+                "ref": "gestion-fournisseurs",
+                "title": "Mes fournisseurs",
+                "route": "/gestion/fournisseurs"
+            },
+            {
+                "ref": "gestion-associe",
+                "title": "Ma fiche « associé »",
+                "route": "/gestion/associe"
+            },
+            {
+                "ref": "gestion-clients",
+                "title": "Mes clients prospects",
+                "route": "/gestion/clients"
+            }
+        ]
+    }
+]

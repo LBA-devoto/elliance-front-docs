@@ -1,0 +1,232 @@
+.loading-err {
+    position: absolute;
+    width: 100%;
+    top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+}
+
+p {
+    font-size: 1.4em;
+}
+
+p span {
+    cursor: pointer;
+}
+
+p span:hover {
+    text-decoration: underline;
+}
+
+
+.titre {
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: "Poppins";
+}
+
+.line {
+    width: 100%;
+    border-bottom: 2px solid #b9b9b9;
+    margin: 10px auto;
+}
+
+.images {
+    min-width: 315px;
+}
+
+.main-image {
+    padding: 0 10px;
+    text-align: center;
+    display: flex;
+}
+
+.main-image .img:hover {
+    cursor: none;
+}
+
+.mini {
+    box-shadow: 0 0 3px #b9b9b9;
+    min-width: 75px;
+    max-width: 75px;
+    min-height: 75px;
+    max-height: 75px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+.mini:hover {
+    opacity: 1;
+}
+
+.mini img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 75px;
+}
+
+
+.main-image .img {
+    width: 100%;
+    max-height: 330px;
+    max-width: 330px;
+    border: 1px solid #b9b9b9;
+}
+
+.mini img,
+.main-image .img {
+    height: auto;
+    object-fit: contain;
+    display: flex;
+}
+
+/* mainImage container */
+::ng-deep .ngxImageZoomContainer {
+    height: inherit !important;
+    width: inherit !important;
+    max-height: 328px !important;
+    max-width: 328px !important;
+    margin: 0 !important;
+    display: flex;
+}
+
+/* mainImage img */
+::ng-deep .ngxImageZoomThumbnail {
+    width: 100% !important;
+    height: 328px;
+    max-height: 328px !important;
+    max-width: 328px !important;
+    object-fit: contain;
+}
+
+::ng-deep .ngxImageZoomFull {
+    background-color: #fff;
+}
+
+
+
+.tarif {
+    font-size: 1.3em;
+    color: #0373bc;
+    font: var(--unnamed-font-style-normal) normal bold 14px/19px var(--unnamed-font-family-roboto);
+    font: normal normal bold 14px/19px Roboto;
+}
+
+.carac {
+    color: #0373bc;
+    font-weight: bold;
+    font-size: 1.1em;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+
+/* btn devis */
+
+
+.controls {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.controls mat-icon,
+.devis-input {
+    color: #0373bc;
+    box-shadow: 0 0 3px #0373bc;
+    height: 36px;
+    width: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 2px;
+    outline: none;
+}
+
+.devis-input {
+    font-size: 1.2em;
+    font-weight: 600;
+    min-width: 60px;
+}
+
+.controls mat-icon {
+    padding: 6px;
+    width: 36px;
+    opacity: 0.4;
+    cursor: pointer;
+}
+
+.controls mat-icon:hover {
+    opacity: 1;
+}
+
+.selected {
+    opacity: 1;
+}
+
+.add-devis {
+    color: #fff !important;
+    background-color: #0373bc !important;
+    box-shadow: 0 0 3px #0373bc;
+}
+
+.add-devis:hover {
+    color: #0373bc !important;
+    background-color: #fff !important;
+}
+
+.car-content:nth-child(2n) {
+    background-color: #f2f2f2;
+}
+
+@media (max-width: 460px) {
+    .num-controls {
+        display: none;
+    }
+
+    .miniatures {
+        width: 100% !important;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: space-around !important;
+    }
+
+    .main-image {
+        width: 100%;
+        min-height: 250px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .description {
+        margin-top: 20px;
+    }
+
+    /* mainImage container */
+    ::ng-deep .ngxImageZoomContainer {
+        width: inherit !important;
+        height: inherit !important;
+        max-height: 250px !important;
+        max-width: 328px !important;
+        display: flex;
+        margin: 0 !important;
+    }
+
+    /* mainImage img */
+    ::ng-deep .ngxImageZoomThumbnail {
+        width: 100% !important;
+        max-height: 328px !important;
+        max-width: 328px !important;
+        object-fit: contain;
+    }
+
+    ::ng-deep .ngxImageZoomFull {
+        background-color: #fff;
+    }
+}

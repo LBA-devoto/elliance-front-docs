@@ -1,0 +1,46 @@
+<div>
+    <app-loading-spinner></app-loading-spinner>
+    <header>
+        <app-header-user></app-header-user>
+    </header>
+    <!---------------------------- recherche ---------------------------------->
+    <app-search-product></app-search-product>
+
+
+    <div class="container">
+        <!------------------------ title -------------------------->
+        <p><a routerLink="/accueil">{{'Accueil'}}</a>
+            > {{'Gestion'}} > {{'Mes articles'}}
+        </p>
+        <div style="height: 50px;" class="d-flex align-items-center justify-content-between">
+            <p style="font-weight: 700;">MES ARTICLES</p>
+            <button mat-raised-button class="btn-primary" [routerLink]="newArticleRoute">{{'CREER UN ARTICLE'}}</button>
+        </div>
+        <div class="line my-2"></div>
+
+        <div class="cat-container">
+            <!------------------------ filter(s) -------------------------->
+            <div class="menu-resp">
+                <app-catalogue-menu-resp [filtres]="filtres" (filterOut)="saveFilter($event)"></app-catalogue-menu-resp>
+            </div>
+            <div class="menu">
+                <app-catalogue-menu [filtres]="filtres" (filterOut)="saveFilter($event)"></app-catalogue-menu>
+            </div>
+            <!------------------------ contenu catalogue -------------------------->
+            <div class="content my-2">
+                <mat-paginator [length]="paginatorLength" [pageSize]="paginatorValues[0]"
+                    [pageIndex]="paginatorIndex" [pageSizeOptions]="paginatorValues" aria-label="Select page"
+                    (page)="paginatorChange($event)">
+                </mat-paginator>
+                <div class="d-flex align-content-around flex-wrap justify-content-around">
+                    <div class="cat px-2 my-4"
+                        *ngFor="let it of products">
+                        <app-produit [product]="it"></app-produit>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-footer-user></app-footer-user>

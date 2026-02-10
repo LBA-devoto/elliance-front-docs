@@ -1,0 +1,5 @@
+<div class="text-center" *ngIf="!noNews">
+    <h4 class="title">{{'Actualités'|uppercase}}</h4>
+</div>
+
+<app-carousel [elements]="newsCards" [display]="enum" *ngIf="!noNews"></app-carousel>

@@ -1,0 +1,48 @@
+<div class="info-container my-3">
+    <div class="title align-items-center" (click)="displayForm=!displayForm">
+        <span>{{'Informations générales'}}</span>
+        <mat-icon>
+            {{displayForm ? 'keyboard_arrow_up':'keyboard_arrow_down'}}
+        </mat-icon>
+    </div>
+
+    <div class="line" [ngStyle]="{'display': displayForm ? '' : 'none'}"></div>
+    <div *ngIf="displayForm">
+        <form [formGroup]="infosForm">
+            <!-- RANG 1 -->
+            <div class="row">
+                <div class="col-12 col-lg-4 info-bloc">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>{{'Client prestation'}}</mat-label>
+                        <input matInput type="text" formControlName="client"
+                            placeholder="Saisissez la raison sociale du client" (keyup)="prestationAC($event)">
+                    </mat-form-field>
+                    <a>{{'Recherche avancée ou ajouter un client'}}</a>
+                    <ul *ngIf="prestaAClist" class="ac-list">
+                        <li class="ac-item" *ngFor="let item of prestaAClist" (click)="selectPresta(item.nom)">{{item.nom}}</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 info-bloc">
+                    <mat-form-field appearance="outline" class="form-field">
+                        <mat-label>{{'Client facturation'}}</mat-label>
+                        <input matInput type="text" formControlName="clientFacturation" autocomplete="nope"
+                            placeholder="Saisissez la raison sociale du client" (keyup)="facturationAC($event)">
+                    </mat-form-field>
+                    <a>{{'Recherche avancée ou ajouter un client'}}</a>
+                    <ul *ngIf="factuAClist" class="ac-list">
+                        <li class="ac-item" *ngFor="let item of factuAClist" (click)="selectFactu(item.nom)">{{item.nom}}</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-4 info-bloc">
+                    <mat-form-field appearance="outline" >
+                        <mat-label>{{'Commercial'}}</mat-label>
+                        <input matInput type="text" formControlName="commercial"
+                            placeholder="Saisissez le nom du commercial" (keyup)="commercialAC($event)">
+                    </mat-form-field>
+                    <a>{{'Recherche avancée ou ajouter un commercial'}}</a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div>
+    <ng-container *ngIf="!isString(config.value)" >
+      <span  style="display:inline-block;width:12px;height:12px;border-radius:50%;"
+        [ngStyle]="{ 'background-color': config.value?.[config.displayProperty]}"></span>
+      {{ config.value?.[config.displayProperty]}}
+    </ng-container>
+    <ng-container *ngIf="isString(config.value)">
+      <span *ngIf="config.value" style="display:inline-block;width:12px;height:12px;border-radius:50%;"
+        [ngStyle]="{ 'background-color': config.value}"></span>
+      {{ config.value}}
+
+    </ng-container>
+  </div>
+
+  

@@ -1,0 +1,130 @@
+<div class="container p-2">
+    <form [formGroup]="printForm" class="print-form">
+        <div class="print-form-section">
+            <h2>{{"Informations de l'associé"}}</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Associé"}}</mat-label>
+                <input matInput formControlName="associe">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Interlocuteur"}}</mat-label>
+                <input matInput formControlName="interlocuteur">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Numéro de devis"}}</mat-label>
+                <input matInput formControlName="numero">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Message"}}</mat-label>
+                <textarea matInput formControlName="message" [rows]="1"></textarea>
+            </mat-form-field>
+        </div>
+
+
+        <div class="print-form-section">
+            <h2>{{"Coordonnées du destinataire"}}</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Code client"}}</mat-label>
+                <input matInput formControlName="client">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Recherche du contact"}}</mat-label>
+                <input matInput formControlName="recherche">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Civilité"}}</mat-label>
+                <mat-select formControlName="civilite">
+                    <mat-option value="Monsieur">{{"Monsieur"}}</mat-option>
+                    <mat-option value="Madame">{{"Madame"}}</mat-option>
+                    <mat-option value="Mademoiselle">{{"Mademoiselle"}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Nom"}}</mat-label>
+                <input matInput formControlName="nom">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Prénom"}}</mat-label>
+                <input matInput formControlName="prenom">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Société"}}</mat-label>
+                <input matInput formControlName="societe">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Adresse"}}</mat-label>
+                <input matInput formControlName="adresse">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Code Postal"}}</mat-label>
+                <input matInput formControlName="codePostal">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Ville"}}</mat-label>
+                <input matInput formControlName="ville">
+            </mat-form-field>
+
+        </div>
+
+        <div class="print-form-section">
+            <h2>{{"Options du devis"}}</h2>
+            <mat-checkbox formControlName="pageGarde">{{"Insérer une page de garde"}}</mat-checkbox>
+            <mat-checkbox formControlName="conditionsGenerales">{{"Insérer les conditions générales"}}</mat-checkbox>
+            <mat-checkbox formControlName="devisDetail">{{"Générer un devis détaillé"}}</mat-checkbox>
+            <mat-checkbox formControlName="cacherRef">{{"Cacher les références et remises des produits"}}</mat-checkbox>
+            <mat-checkbox formControlName="cacherMarques">{{"Cacher les marques des produits"}}</mat-checkbox>
+            <mat-checkbox formControlName="docTechnique">{{"Insérer les documents techniques en annexe"}}</mat-checkbox>
+            <mat-radio-group formControlName="ficheTechnique" *ngIf="docTechniqueActive">
+                <mat-radio-button value="Eurochef" [checked]="true">{{"Fiche technique Eurochef"}}</mat-radio-button>
+                <mat-radio-button value="Fournisseur">{{"Fiche technique fournisseur"}}</mat-radio-button>
+              </mat-radio-group>
+            <mat-checkbox formControlName="masquerPrix">{{"Masquer les prix dans les documents techniques"}}</mat-checkbox>
+            <mat-checkbox formControlName="afficherImages">{{"Afficher les images"}}</mat-checkbox>
+        </div>
+
+        <div class="print-form-section">
+            <h2>{{"Conditions particulières"}}</h2>
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Conditions de règlement"}}</mat-label>
+                <textarea matInput formControlName="conditionsReglement" [rows]="1"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Conditions de facturation"}}</mat-label>
+                <textarea matInput formControlName="conditionsFacturation" [rows]="1"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Garanties"}}</mat-label>
+                <textarea matInput formControlName="garanties" [rows]="1"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Autres notions à préciser"}}</mat-label>
+                <textarea matInput formControlName="autres" [rows]="1"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>{{"Coordonnées Bancaires"}}</mat-label>
+                <textarea matInput formControlName="coordonneesBancaires" [rows]="1"></textarea>
+            </mat-form-field>
+
+        </div>
+    </form>
+
+    <div class="row text-center my-2">
+        <button class="btn-primary" mat-raised-button (click)="save()">{{'Enregistrer'|uppercase}}</button>
+    </div>
+    
+</div>

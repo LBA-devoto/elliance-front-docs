@@ -1,0 +1,28 @@
+<div class="container-fluid" >
+    <div class="container" #searchContainer>
+        <div style="margin-top: 15px;">
+            <div class="search-input">
+                <mat-form-field appearance="outline" class="w-100">
+                    <mat-label>{{'Rechercher un produit'}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="searchTerm" (keyup.enter)="onSearch()"
+                        (keyup)="onSearchInput()" placeholder="Rechercher une référence, un nom de produit">
+                </mat-form-field>
+    
+                <div class="search-btn-div">
+                    <button class="btn-primary w-100 p-0" (click)="onSearch()" mat-raised-button>
+                        <mat-icon>search</mat-icon>
+                    </button>
+                </div>
+    
+    
+                <div class="autocomplete-list" *ngIf="autocompleteList.length>0">
+                    <ul class="p-0">
+                        <li class="ac-li" *ngFor="let item of autocompleteList" (click)="selectItem(item)">
+                            {{item.nom}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
